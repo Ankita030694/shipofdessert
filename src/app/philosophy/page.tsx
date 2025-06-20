@@ -89,9 +89,9 @@ export default function Philosophy() {
   return (
     <>
       <Navbar />
-      <main className="pt-24">
+      <main>
         {/* Hero Section */}
-        <section className="relative h-[70vh] w-full overflow-hidden">
+        <section className="relative h-[100vh] w-full overflow-hidden z-10 mb-8 md:mb-16">
           <div className="absolute inset-0 ">
             <Image 
               src="/hero-philosophy.jpg" 
@@ -103,7 +103,7 @@ export default function Philosophy() {
             <div className="absolute inset-0 bg-black/40"></div>
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-            <h1 className="text-5xl md:text-7xl font-light mb-4 tracking-widest">OUR PHILOSOPHY</h1>
+            <h1 className="text-5xl md:text-7xl font-light mb-4 tracking-widest text-center">OUR PHILOSOPHY</h1>
             <div className="w-20 h-0.5 bg-white"></div>
             <p className="mt-6 max-w-2xl text-center px-4 text-base md:text-lg">
               The essence of luxury lies not in opulence, but in the perfect harmony between form and function.
@@ -112,10 +112,10 @@ export default function Philosophy() {
         </section>
 
         {/* Scroll-driven reveal sections */}
-        <div ref={sectionsRef} className="reveal-container">
+        <div ref={sectionsRef} className="reveal-container relative z-20 bg-white">
           
           {/* Brand Values Section */}
-          <div className="reveal-section">
+          <div className="reveal-section mt-8 md:mt-16">
             <div className="reveal-content">
               <motion.section 
                 ref={ref1}
