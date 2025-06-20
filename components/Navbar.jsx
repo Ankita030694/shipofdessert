@@ -23,7 +23,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full h-24 bg-white opacity-100 flex justify-between items-center mx-4 z-50">
+      <nav className="fixed top-0 left-0 w-full h-24 bg-white opacity-100 flex justify-between items-center z-50">
         {/* Burger Menu Button */}
         <button 
           onClick={toggleMenu}

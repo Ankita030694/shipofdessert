@@ -122,35 +122,35 @@ export default function Philosophy() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={inView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
                 transition={{ duration: 0.8 }}
-                className="py-16 md:py-20 px-4 md:px-6"
+                className="py-8 md:py-12 px-4 md:px-6"
               >
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords("I - Brand Values")}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Order is the shape upon which beauty depends" - Pearl S Buck')}
                     </blockquote>
 
-                    <p className="text-base md:text-lg leading-relaxed text-center mb-12">
+                    <p className="text-base md:text-lg leading-relaxed text-center mb-6">
                       {splitTextIntoWords('In a world that trades speed for substance, we anchor ourselves in order, discipline and restraint. At ship of desert our values are not seasonal - they are eternal')}
                     </p>
 
-                    <div className="text-center mb-8">
-                      <p className="text-base md:text-lg font-medium mb-6">
+                    <div className="text-center mb-4">
+                      <p className="text-base md:text-lg font-medium mb-3">
                         {splitTextIntoWords('We believe in:')}
                       </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8">
-                      <div className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="space-y-4">
                         <div>
-                          <h3 className="font-medium tracking-wide mb-2">
+                          <h3 className="font-medium tracking-wide mb-1">
                             {splitTextIntoWords('QUIET POWER')}
                           </h3>
                           <p className="text-sm leading-relaxed">
@@ -159,7 +159,7 @@ export default function Philosophy() {
                         </div>
                         
                         <div>
-                          <h3 className="font-medium tracking-wide mb-2">
+                          <h3 className="font-medium tracking-wide mb-1">
                             {splitTextIntoWords('LEGACY OVER TREND')}
                           </h3>
                           <p className="text-sm leading-relaxed">
@@ -168,7 +168,7 @@ export default function Philosophy() {
                         </div>
 
                         <div>
-                          <h3 className="font-medium tracking-wide mb-2">
+                          <h3 className="font-medium tracking-wide mb-1">
                             {splitTextIntoWords('CRAFT OVER COMMERCE')}
                           </h3>
                           <p className="text-sm leading-relaxed">
@@ -177,9 +177,9 @@ export default function Philosophy() {
                         </div>
                       </div>
 
-                      <div className="space-y-6">
+                      <div className="space-y-4">
                         <div>
-                          <h3 className="font-medium tracking-wide mb-2">
+                          <h3 className="font-medium tracking-wide mb-1">
                             {splitTextIntoWords('MEMORY OVER NOVELTY')}
                           </h3>
                           <p className="text-sm leading-relaxed">
@@ -188,7 +188,7 @@ export default function Philosophy() {
                         </div>
 
                         <div>
-                          <h3 className="font-medium tracking-wide mb-2">
+                          <h3 className="font-medium tracking-wide mb-1">
                             {splitTextIntoWords('LINEAGE OVER PERSONA')}
                           </h3>
                           <p className="text-sm leading-relaxed">
@@ -206,17 +206,17 @@ export default function Philosophy() {
           {/* Craftsmanship Section */}
           <div className="reveal-section">
             <div className="reveal-content">
-              <section className="py-16 md:py-20 px-4 md:px-6">
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+              <section className="py-8 md:py-12 px-4 md:px-6">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords('II - Craftsmanship')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"We are what we repeatedly do, Excellence then it is not an act but a habit" - Aristotle (Greece)')}
                     </blockquote>
 
@@ -236,21 +236,21 @@ export default function Philosophy() {
           {/* Cultural and Historical Foundations */}
           <div className="reveal-section">
             <div className="reveal-content">
-              <section className="py-16 md:py-20 px-4 md:px-6">
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+              <section className="py-8 md:py-12 px-4 md:px-6">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords('III - Cultural and Historical Foundations')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"To know nothing of what happened before you were born is to remain forever a child" - Cicero (Rome)')}
                     </blockquote>
 
-                    <div className="space-y-6 text-base md:text-lg leading-relaxed">
+                    <div className="space-y-3 text-base md:text-lg leading-relaxed">
                       <p>{splitTextIntoWords('We do not draw from mood-boards')}</p>
                       <p>{splitTextIntoWords('We draw from empires.')}</p>
                       <p>{splitTextIntoWords('We believe civilisation is couture')}</p>
@@ -266,17 +266,17 @@ export default function Philosophy() {
           {/* Philosophy of Dress */}
           <div className="reveal-section">
             <div className="reveal-content">
-              <section className="py-16 md:py-20 px-4 md:px-6">
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+              <section className="py-8 md:py-12 px-4 md:px-6">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords('IV - Philosophy of Dress')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Clothing is but a symbol of the soul made visible" - Hazrat Ali (7th century) caliph, Persia')}
                     </blockquote>
 
@@ -296,17 +296,17 @@ export default function Philosophy() {
           {/* Aesthetic Ethos */}
           <div className="reveal-section">
             <div className="reveal-content">
-              <section className="py-16 md:py-20 px-4 md:px-6">
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+              <section className="py-8 md:py-12 px-4 md:px-6">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords('V - Aesthetic Ethos')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Simplicity is the final achievement. After one has played a vast quantity of notes, it is simplicity that emerges as the crowning reward" - Frédéric Chopin (Poland)')}
                     </blockquote>
 
@@ -326,17 +326,17 @@ export default function Philosophy() {
           {/* Legacy and Lineage */}
           <div className="reveal-section">
             <div className="reveal-content">
-              <section className="py-16 md:py-20 px-4 md:px-6">
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+              <section className="py-8 md:py-12 px-4 md:px-6">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords('VI - Legacy and Lineage')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"A man does not plant a tree for himself, he plants it for his Children and his children\'s children" - Cicero (Rome)')}
                     </blockquote>
 
@@ -360,17 +360,17 @@ export default function Philosophy() {
           {/* What We Reject */}
           <div className="reveal-section">
             <div className="reveal-content">
-              <section className="py-16 md:py-20 px-4 md:px-6">
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+              <section className="py-8 md:py-12 px-4 md:px-6">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords('VII - What We Reject')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Give me a place to stand and I will move the earth" - Archimedes (Greece)')}
                     </blockquote>
 
@@ -394,17 +394,17 @@ export default function Philosophy() {
           {/* Philosophy of Time */}
           <div className="reveal-section">
             <div className="reveal-content">
-              <section className="py-16 md:py-20 px-4 md:px-6">
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+              <section className="py-8 md:py-12 px-4 md:px-6">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords('VIII - Philosophy of Time')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Time is a created thing to say I don\'t have time is like saying I don\'t want to" - Lao Tzu (China)')}
                     </blockquote>
 
@@ -420,17 +420,17 @@ export default function Philosophy() {
           {/* The Sacred Textile */}
           <div className="reveal-section">
             <div className="reveal-content">
-              <section className="py-16 md:py-20 px-4 md:px-6">
-                <div className="container mx-auto max-w-4xl">
-                  <div className="text-center mb-16">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-8 uppercase text-black">
+              <section className="py-8 md:py-12 px-4 md:px-6">
+                <div className="mx-4 md:mx-auto max-w-4xl">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-black mt-0 pt-0">
                       {splitTextIntoWords('IX - The Sacred Textile')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-black mx-auto mb-12"></div>
+                    <div className="w-20 h-0.5 bg-black mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-8 text-black">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-12">
+                  <div className="space-y-4 text-black">
+                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Clothes are the second skin, the first being our flesh" - Proverb from ancient India')}
                     </blockquote>
 
@@ -450,12 +450,12 @@ export default function Philosophy() {
         </div>
 
         {/* Final Quote Section */}
-        <section className="py-20 md:py-24 px-4 bg-black text-white text-center">
-          <div className="container mx-auto max-w-4xl">
+        <section className="py-12 md:py-16 px-4 bg-black text-white text-center">
+          <div className="mx-4 md:mx-auto max-w-4xl">
             <p className="text-xl md:text-3xl font-light italic">
               "In the end, style fades but houses remain."
             </p>
-            <div className="w-20 h-0.5 bg-white mx-auto my-8"></div>
+            <div className="w-20 h-0.5 bg-white mx-auto my-4"></div>
             <p className="uppercase tracking-widest">Ship of Desert</p>
           </div>
         </section>

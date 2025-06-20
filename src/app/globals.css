@@ -31,6 +31,7 @@ body {
 .reveal-container {
   position: relative;
   width: 100%;
+  z-index: 1; /* Ensure it stays below navbar */
 }
 
 /* 
@@ -46,6 +47,7 @@ body {
   min-height: 300vh;
   /* overflow: visible is important so the sticky content isn't clipped. */
   overflow: visible;
+  z-index: 1; /* Keep sections below navbar */
 }
 
 /* Alternate section background colors */
@@ -80,6 +82,14 @@ body {
   color: #ffffff !important;
 }
 
+.reveal-section:nth-child(even) h3 {
+  color: #ffffff !important;
+}
+
+.reveal-section:nth-child(even) span {
+  color: #ffffff !important;
+}
+
 /* 
   The content that gets pinned.
   `position: sticky` makes it stick to the `top` offset within its parent (.reveal-section).
@@ -93,6 +103,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2; /* Keep content above section backgrounds but below navbar */
 }
 
 /* Individual word elements that will be revealed */
@@ -114,6 +125,14 @@ body {
   .reveal-section {
     min-height: 250vh; /* A bit shorter on mobile, but still long. */
   }
+  
+  .reveal-content {
+    /* Adjust top position for mobile to prevent content from being cut off */
+    top: 60vh;
+    transform: translateY(-50%);
+    /* Add some padding to ensure content doesn't touch screen edges */
+    padding: 1rem 0;
+  }
 }
 
 /* Performance optimizations */
@@ -134,5 +153,44 @@ html {
 @media (max-width: 768px) {
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Ensure navbar stays on top */
+nav {
+  z-index: 9999 !important;
+}
+
+/* Remove unnecessary margins from sections */
+.reveal-content section {
+  margin: 0;
+  padding: 0;
+}
+
+.reveal-content .container {
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Clean up spacing in text blocks */
+.reveal-content .space-y-8 > *:first-child {
+  margin-top: 0;
+}
+
+.reveal-content .space-y-8 > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Additional mobile-specific adjustments */
+@media (max-width: 768px) {
+  .reveal-content section {
+    /* Ensure sections have proper padding on mobile */
+    padding: 1rem 0;
+  }
+  
+  .reveal-content h2 {
+    /* Ensure headings are fully visible on mobile */
+    margin-top: 0;
+    padding-top: 0;
   }
 }
