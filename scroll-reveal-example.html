@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll-Driven Pin & Reveal Text Effect - Word by Word</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Scroll-driven Pin & Reveal Text Effect Styles */
+
+        /* Container for all reveal sections */
+        .reveal-container {
+            position: relative;
+            width: 100%;
+        }
+
+        /* Individual reveal section wrapper */
+        .reveal-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh; /* Ensure each section takes at least full viewport height */
+            background-color: #f8f8f8; /* Light grey background */
+            overflow: hidden;
+        }
+
+        /* Content within each reveal section */
+        .reveal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        /* Individual word elements that will be revealed */
+        .reveal-word {
+            opacity: 0.2; /* Start with low opacity (20%) */
+            transition: opacity 0.1s ease-out; /* Smooth transition for opacity changes */
+            will-change: opacity; /* Optimize for opacity animations */
+            display: inline-block; /* Ensure words are inline but can be styled individually */
+            margin-right: 0.25em; /* Add small spacing between words */
+        }
+
+        /* Remove margin from last word in each container to avoid extra spacing */
+        .reveal-word:last-child {
+            margin-right: 0;
+        }
+
+        /* Pinned state - when section is being revealed */
+        .reveal-section.pinned .reveal-content {
+            position: sticky;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        /* Enhanced pinning with stronger positioning */
+        .reveal-section.pinned {
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Scroll resistance when section is being revealed */
+        .reveal-section.scroll-resistance {
+            /* Add visual feedback that scrolling is resisted */
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Add a subtle indicator when scroll is resisted */
+        .reveal-section.scroll-resistance::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Section content styling */
+        .section-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .section-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .section-content blockquote {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .section-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .reveal-section {
+                min-height: 80vh; /* Slightly smaller on mobile */
+            }
+            
+            .reveal-content {
+                padding: 1rem 0;
+            }
+
+            .section-content h2 {
+                font-size: 2rem;
+            }
+
+            .section-content blockquote {
+                font-size: 1.1rem;
+            }
+
+            .section-content p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Performance optimizations */
+        .reveal-section {
+            contain: layout style paint; /* CSS containment for better performance */
+        }
+
+        .reveal-word {
+            contain: layout style; /* Contain word elements */
+        }
+
+        /* Smooth scrolling for better animation experience */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Disable smooth scrolling on mobile for better performance */
+        @media (max-width: 768px) {
+            html {
+                scroll-behavior: auto;
+            }
+        }
+
+        /* Final section */
+        .final-section {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .final-section p {
+            font-size: 2rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .final-section .divider {
+            width: 80px;
+            height: 2px;
+            background: white;
+            margin: 2rem auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Word-by-Word Reveal</h1>
+            <p>Scroll-driven pin & reveal text effect - one word at a time</p>
+        </div>
+    </section>
+
+    <!-- Scroll-driven reveal sections -->
+    <div class="reveal-container">
+        
+        <!-- Section 1 -->
+        <div class="reveal-section">
+            <div class="reveal-content">
+                <div class="section-content">
+                    <h2 class="reveal-text">Section One</h2>
+                    <blockquote class="reveal-text">
+                        "The journey of a thousand miles begins with one step." - Lao Tzu
+                    </blockquote>
+                    <p class="reveal-text">
+                        This is the first section that demonstrates the scroll-driven pin & reveal text effect. 
+                        As you scroll, the text will gradually become more visible, starting from a low opacity 
+                        and transitioning to full visibility.
+                    </p>
+                    <p class="reveal-text">
+                        The effect creates an engaging reading experience where content reveals itself 
+                        in proportion to the user's scroll progress through each section.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="reveal-section">
+            <div class="reveal-content">
+                <div class="section-content">
+                    <h2 class="reveal-text">Section Two</h2>
+                    <blockquote class="reveal-text">
+                        "Simplicity is the ultimate sophistication." - Leonardo da Vinci
+                    </blockquote>
+                    <p class="reveal-text">
+                        Each section is designed to take up at least the full viewport height, ensuring 
+                        that the pinning effect has enough space to work properly. The text remains 
+                        centered in the viewport during the reveal animation.
+                    </p>
+                    <p class="reveal-text">
+                        This creates a smooth, cinematic experience that draws attention to the content 
+                        and encourages users to engage with the text at their own pace.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="reveal-section">
+            <div class="reveal-content">
+                <div class="section-content">
+                    <h2 class="reveal-text">Section Three</h2>
+                    <blockquote class="reveal-text">
+                        "Design is not just what it looks like and feels like. Design is how it works." - Steve Jobs
+                    </blockquote>
+                    <p class="reveal-text">
+                        The implementation uses vanilla JavaScript with performance optimizations like 
+                        requestAnimationFrame and throttling to ensure smooth animations even on 
+                        lower-end devices.
+                    </p>
+                    <p class="reveal-text">
+                        CSS containment and will-change properties help the browser optimize the 
+                        rendering performance for these animations.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="reveal-section">
+            <div class="reveal-content">
+                <div class="section-content">
+                    <h2 class="reveal-text">Section Four</h2>
+                    <blockquote class="reveal-text">
+                        "The best way to predict the future is to invent it." - Alan Kay
+                    </blockquote>
+                    <p class="reveal-text">
+                        This effect can be easily adapted for use in modern frameworks like React, 
+                        Vue, or Angular by extracting the scroll logic into custom hooks or composables.
+                    </p>
+                    <p class="reveal-text">
+                        The modular approach allows for easy customization of timing, colors, 
+                        and animation curves to match your design requirements.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="reveal-section">
+            <div class="reveal-content">
+                <div class="section-content">
+                    <h2 class="reveal-text">Section Five</h2>
+                    <blockquote class="reveal-text">
+                        "Less is more." - Ludwig Mies van der Rohe
+                    </blockquote>
+                    <p class="reveal-text">
+                        The effect gracefully degrades on mobile devices and smaller screens, 
+                        ensuring a good user experience across all devices.
+                    </p>
+                    <p class="reveal-text">
+                        By using CSS sticky positioning and JavaScript for progress calculation, 
+                        we achieve smooth animations without expensive layout thrashing.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Final Section -->
+    <section class="final-section">
+        <p>"In the end, simplicity wins."</p>
+        <div class="divider"></div>
+        <p style="font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase;">Word-by-Word Animation</p>
+    </section>
+
+    <script>
+        // Scroll-driven Pin & Reveal Text Effect JavaScript - Word by Word
+        
+        class ScrollRevealEffect {
+            constructor() {
+                this.sections = [];
+                this.ticking = false;
+                this.isScrolling = false;
+                this.init();
+            }
+
+            init() {
+                // Get all reveal sections
+                this.sections = Array.from(document.querySelectorAll('.reveal-section'));
+                
+                // Split text into words for each section
+                this.sections.forEach(section => {
+                    this.splitTextIntoWords(section);
+                });
+                
+                // Add event listeners
+                window.addEventListener('scroll', this.updateScrollProgress.bind(this), { passive: true });
+                window.addEventListener('wheel', this.handleScroll.bind(this), { passive: false });
+                window.addEventListener('resize', this.updateScrollProgress.bind(this), { passive: true });
+                
+                // Initial call to set up initial state
+                this.updateScrollProgress();
+            }
+
+            // Split text content into individual word spans
+            splitTextIntoWords(section) {
+                const textElements = section.querySelectorAll('.reveal-text');
+                
+                textElements.forEach(element => {
+                    const text = element.textContent;
+                    const words = text.split(' ');
+                    
+                    // Clear the element and add word spans
+                    element.innerHTML = '';
+                    words.forEach((word, index) => {
+                        const wordSpan = document.createElement('span');
+                        wordSpan.className = 'reveal-word';
+                        wordSpan.textContent = word;
+                        element.appendChild(wordSpan);
+                        
+                        // Add space after each word except the last one
+                        if (index < words.length - 1) {
+                            element.appendChild(document.createTextNode(' '));
+                        }
+                    });
+                });
+            }
+
+            // Enhanced scroll handling with resistance
+            handleScroll(e) {
+                if (this.isScrolling) return;
+                
+                const pinnedSection = document.querySelector('.reveal-section.pinned.scroll-resistance');
+                if (pinnedSection) {
+                    // Add resistance to scrolling when a section is pinned and being revealed
+                    const delta = e.deltaY;
+                    if (Math.abs(delta) > 50) { // Only allow significant scroll movements
+                        this.isScrolling = true;
+                        setTimeout(() => {
+                            this.isScrolling = false;
+                        }, 100);
+                    } else {
+                        e.preventDefault();
+                        return;
+                    }
+                }
+                
+                this.updateScrollProgress();
+            }
+
+            updateScrollProgress() {
+                // Throttle scroll events for performance
+                if (this.ticking) return;
+                this.ticking = true;
+
+                requestAnimationFrame(() => {
+                    const viewportHeight = window.innerHeight;
+                    const scrollY = window.scrollY;
+
+                    this.sections.forEach((section, index) => {
+                        const rect = section.getBoundingClientRect();
+                        const sectionTop = rect.top + scrollY;
+                        const sectionHeight = rect.height;
+                        
+                        // Calculate when section enters viewport center
+                        const sectionCenter = sectionTop + sectionHeight / 2;
+                        const viewportCenter = scrollY + viewportHeight / 2;
+                        
+                        // Calculate progress (0 to 1) as section moves through viewport center
+                        // Use a larger transition zone to slow down the reveal
+                        const transitionZone = sectionHeight + viewportHeight * 2; // Increased transition zone
+                        const progress = Math.max(0, Math.min(1, 
+                            (viewportCenter - sectionTop) / transitionZone
+                        ));
+
+                        // Update word opacity based on progress - words reveal one by one
+                        const wordElements = section.querySelectorAll('.reveal-word');
+                        wordElements.forEach((wordEl, wordIndex) => {
+                            const element = wordEl;
+                            const totalWords = wordElements.length;
+                            
+                            // Calculate individual word progress with slower reveal
+                            // Each word gets revealed over a portion of the total progress
+                            const wordProgressStart = wordIndex / totalWords;
+                            const wordProgressEnd = (wordIndex + 1) / totalWords;
+                            
+                            // Calculate this word's individual progress
+                            const wordProgress = Math.max(0, Math.min(1, 
+                                (progress - wordProgressStart) / (wordProgressEnd - wordProgressStart)
+                            ));
+                            
+                            // Apply opacity based on word progress
+                            const opacity = 0.2 + (wordProgress * 0.8); // Start at 20%, go to 100%
+                            element.style.opacity = opacity.toString();
+                        });
+
+                        // Enhanced pinning logic - pin when section is in view and not fully revealed
+                        const isInView = rect.top < viewportHeight && rect.bottom > 0;
+                        const isFullyRevealed = progress >= 0.95; // Consider fully revealed at 95%
+                        
+                        if (isInView && !isFullyRevealed) {
+                            section.classList.add('pinned');
+                            
+                            // Add scroll resistance when pinned
+                            if (progress > 0.1 && progress < 0.9) {
+                                section.classList.add('scroll-resistance');
+                            } else {
+                                section.classList.remove('scroll-resistance');
+                            }
+                        } else {
+                            section.classList.remove('pinned');
+                            section.classList.remove('scroll-resistance');
+                        }
+                    });
+
+                    this.ticking = false;
+                });
+            }
+
+            // Cleanup method for framework integration
+            destroy() {
+                window.removeEventListener('scroll', this.updateScrollProgress);
+                window.removeEventListener('wheel', this.handleScroll);
+                window.removeEventListener('resize', this.updateScrollProgress);
+            }
+        }
+
+        // Initialize the effect when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ScrollRevealEffect();
+        });
+
+        // Alternative: Initialize immediately if DOM is already loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                new ScrollRevealEffect();
+            });
+        } else {
+            new ScrollRevealEffect();
+        }
+    </script>
+</body>
+</html> 

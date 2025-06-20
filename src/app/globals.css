@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #ffffff;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Scroll-driven Pin & Reveal Text Effect Styles */
+
+/* Container for all reveal sections */
+.reveal-container {
+  position: relative;
+  width: 100%;
+}
+
+/* 
+  Individual reveal section wrapper.
+  This is the key to the effect. By making this container much taller than the viewport,
+  we create a long "scroll runway". The .reveal-content inside will be sticky,
+  meaning it stays pinned while the user scrolls through this tall container.
+*/
+.reveal-section {
+  position: relative;
+  width: 100%;
+  /* A height of 300vh means the user scrolls for 3x the viewport height while this section is active. */
+  min-height: 300vh;
+  /* overflow: visible is important so the sticky content isn't clipped. */
+  overflow: visible;
+}
+
+/* Alternate section background colors */
+.reveal-section:nth-child(odd) {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.reveal-section:nth-child(even) {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Override tailwind utility classes for dark sections */
+.reveal-section:nth-child(even) .text-black {
+  color: #ffffff !important;
+}
+
+.reveal-section:nth-child(even) .bg-black {
+  background-color: #ffffff !important;
+}
+
+.reveal-section:nth-child(even) h2 {
+  color: #ffffff !important;
+}
+
+.reveal-section:nth-child(even) p {
+  color: #ffffff !important;
+}
+
+.reveal-section:nth-child(even) blockquote {
+  color: #ffffff !important;
+}
+
+/* 
+  The content that gets pinned.
+  `position: sticky` makes it stick to the `top` offset within its parent (.reveal-section).
+*/
+.reveal-content {
+  position: sticky;
+  /* Pin the content to the vertical center of the viewport. */
+  top: 50vh;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Individual word elements that will be revealed */
+.reveal-word {
+  opacity: 0.2; /* Start with low opacity (20%) */
+  transition: opacity 0.2s ease-out; /* Smooth transition for opacity changes */
+  will-change: opacity; /* Optimize for opacity animations */
+  display: inline-block; /* Ensure words are inline but can be styled individually */
+  margin-right: 0.25em; /* Add small spacing between words */
+}
+
+/* Remove margin from last word in each container to avoid extra spacing */
+.reveal-word:last-child {
+  margin-right: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .reveal-section {
+    min-height: 250vh; /* A bit shorter on mobile, but still long. */
+  }
+}
+
+/* Performance optimizations */
+.reveal-section {
+  contain: layout style paint; /* CSS containment for better performance */
+}
+
+.reveal-word {
+  contain: layout style; /* Contain word elements */
+}
+
+/* Smooth scrolling for better animation experience */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Disable smooth scrolling on mobile for better performance */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: auto;
+  }
+}
