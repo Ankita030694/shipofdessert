@@ -66,12 +66,12 @@ const Navbar = () => {
         <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
           <Link href="/" className="inline-flex items-center justify-center hover:opacity-85 transition-opacity">
             <Image 
-              src="/sodlogo.svg" 
-              alt="Ship of Desert" 
+              src="/KSHAUM.svg" 
+              alt="KSHAUM" 
               width={260} 
-              height={28} 
+              height={36} 
               priority
-              className="h-6 sm:h-7 w-auto object-contain"
+              className="h-5 sm:h-6 md:h-7 w-auto object-contain"
             />
           </Link>
         </div>
