@@ -86,7 +86,7 @@ const Navbar = () => {
           </button>
 
           <Link 
-            href="/innercircle" 
+            href="/login" 
             className="text-black hover:opacity-60 transition-opacity"
           >
             Login
@@ -229,7 +229,7 @@ const Navbar = () => {
         <div className="p-6 sm:p-8 border-t border-gray-100 bg-gray-50/50">
           <ul className="space-y-2 text-xs sm:text-[13px] text-gray-600">
             <li>
-              <Link href="/innercircle" onClick={toggleMenu} className="text-black underline hover:opacity-75">
+              <Link href="/login" onClick={toggleMenu} className="text-black underline hover:opacity-75">
                 Sign In / Register
               </Link>
             </li>

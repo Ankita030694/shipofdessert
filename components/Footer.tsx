@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useLanguage } from '../src/context/LanguageContext';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Footer = () => {
   const [email, setEmail] = useState('');

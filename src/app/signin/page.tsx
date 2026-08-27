@@ -1,1 +1,1 @@
-export { default } from '../innercircle/page';
+export { default } from '../login/page';
