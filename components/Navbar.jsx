@@ -186,35 +186,45 @@ const Navbar = () => {
           </div>
 
           {/* Main Navigation Links */}
-          <ul className="space-y-4 text-base sm:text-lg font-light text-[#1c1c1a]">
+          <ul className="space-y-3.5 text-sm sm:text-base font-light text-[#1c1c1a]">
             <li>
-              <Link href="/collection" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                The Lady
+              <Link href="/" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 font-normal">
+                The Quiet Choice
+              </Link>
+            </li>
+            <li>
+              <Link href="/the-quiet-choice/philosophy" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
+                Philosophy
+              </Link>
+            </li>
+            <li>
+              <Link href="/the-quiet-choice/journals" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
+                Journals
+              </Link>
+            </li>
+            <li>
+              <Link href="/shop" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link href="/women" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 pl-3 text-xs sm:text-sm text-gray-700">
+                — Women&apos;s
               </Link>
             </li>
             <li>
               <Link href="/collection" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                The Gentleman
+                The Collection
               </Link>
             </li>
             <li>
-              <Link href="/collection" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                Accessories
+              <Link href="/collection/the-inheritance-01" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 pl-3 text-xs sm:text-sm text-gray-700">
+                — The Inheritance 01
               </Link>
             </li>
             <li>
-              <Link href="/philosophy" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                Our Philosophy
-              </Link>
-            </li>
-            <li>
-              <Link href="/innercircle" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                The Inner Circle
-              </Link>
-            </li>
-            <li>
-              <Link href="/journal" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                Journal
+              <Link href="/archives" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
+                Archives
               </Link>
             </li>
             <li>
