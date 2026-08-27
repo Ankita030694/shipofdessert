@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Product from '@/models/Product';
 
-export const INITIAL_PRODUCTS = [
+const INITIAL_PRODUCTS = [
   {
     name: 'Kaddy Top in Cotton',
     slug: 'kaddy-top-in-cotton',
