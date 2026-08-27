@@ -1,124 +1,109 @@
-'use client';
-
-import { useState } from 'react';
+import React from 'react';
+import Link from 'next/link';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 
-export default function Contact() {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+export const metadata = {
+  title: 'Concierge & Contact — KSHAUM',
+  description: 'Connect with the KSHAUM concierge for inquiries regarding orders, sizing, bespoke textile requests, and appointments.',
+};
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Contact form submitted with:', { name, phone, email, message });
-    setSubmitted(true);
-    setName('');
-    setPhone('');
-    setEmail('');
-    setMessage('');
-    setTimeout(() => setSubmitted(false), 5000);
-  };
-
+export default function ContactPage() {
   return (
     <div className="min-h-screen flex flex-col bg-[#f5f5f5] text-[#1c1c1a]">
       <Navbar />
 
-      <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 flex items-center justify-center">
-        <div className="w-full max-w-lg mx-auto">
-          <div className="text-center mb-8">
-            <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#bdb2a1] block mb-2">
-              Get in Touch
+      <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="text-xs uppercase tracking-[0.25em] font-semibold text-[#bdb2a1] block mb-3">
+            Atelier & Concierge
+          </span>
+          <h1 className="text-2xl sm:text-3xl font-serif tracking-widest uppercase text-[#1c1c1a]">
+            CONNECT WITH KSHAUM
+          </h1>
+          <p className="mt-4 text-xs sm:text-sm text-[#1c1c1a]/70 max-w-md mx-auto leading-relaxed">
+            Our concierge team is available to assist with styling consultations, bespoke requests, and order assistance.
+          </p>
+        </div>
+
+        {/* Contact Information Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {/* Direct Concierge Inquiries */}
+          <div className="bg-white p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
+            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#bdb2a1] block mb-2">
+              Customer Care & Concierge
             </span>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-widest uppercase text-[#1c1c1a]">
-              CONTACT US
-            </h1>
-            <p className="mt-3 text-sm text-[#1c1c1a]/80">
-              Please leave your details and we will respond promptly:
+            <h2 className="text-lg font-serif text-[#1c1c1a] mb-3">Client Services</h2>
+            <p className="text-xs text-[#1c1c1a]/70 leading-relaxed mb-6">
+              For order inquiries, garment measurements, and textile consultations:
             </p>
+            <div className="space-y-2 text-xs">
+              <div>
+                <span className="text-[#1c1c1a]/50 uppercase tracking-wider text-[10px] block">Email</span>
+                <a
+                  href="mailto:concierge@thekshaum.com"
+                  className="font-medium text-[#1c1c1a] hover:underline"
+                >
+                  concierge@thekshaum.com
+                </a>
+              </div>
+              <div className="pt-2">
+                <span className="text-[#1c1c1a]/50 uppercase tracking-wider text-[10px] block">Hours</span>
+                <span className="text-[#1c1c1a]/80">Monday – Friday: 10:00 AM – 7:00 PM IST</span>
+              </div>
+            </div>
           </div>
 
-          {submitted && (
-            <div className="p-4 mb-6 text-xs sm:text-sm bg-green-50 text-green-800 border border-green-200 rounded">
-              Thank you. Your message has been sent successfully.
+          {/* Press, Wholesale & Partnerships */}
+          <div className="bg-white p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
+            <span className="text-[10px] uppercase tracking-[0.2em] font-bold text-[#bdb2a1] block mb-2">
+              Editorial & Press
+            </span>
+            <h2 className="text-lg font-serif text-[#1c1c1a] mb-3">Press & Partnerships</h2>
+            <p className="text-xs text-[#1c1c1a]/70 leading-relaxed mb-6">
+              For editorial loans, press features, and curated stockist inquiries:
+            </p>
+            <div className="space-y-2 text-xs">
+              <div>
+                <span className="text-[#1c1c1a]/50 uppercase tracking-wider text-[10px] block">Press Contact</span>
+                <a
+                  href="mailto:press@thekshaum.com"
+                  className="font-medium text-[#1c1c1a] hover:underline"
+                >
+                  press@thekshaum.com
+                </a>
+              </div>
+              <div className="pt-2">
+                <span className="text-[#1c1c1a]/50 uppercase tracking-wider text-[10px] block">Atelier</span>
+                <span className="text-[#1c1c1a]/80">By private appointment only</span>
+              </div>
             </div>
-          )}
-          
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="name" className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1">
-                Name* :
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
-                placeholder="Your Full Name"
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="phone" className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1">
-                Phone Number :
-              </label>
-              <input
-                id="phone"
-                name="phone"
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
-                placeholder="Phone Number"
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="email" className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1">
-                Email Address* :
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
-                placeholder="Email Address"
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="message" className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1">
-                Message* :
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                required
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none resize-none"
-                placeholder="Your Message"
-              />
-            </div>
-            
-            <div className="pt-4">
-              <button
-                type="submit"
-                className="w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors cursor-pointer"
-              >
-                Submit Message
-              </button>
-            </div>
-          </form>
+          </div>
+        </div>
+
+        {/* Member Invitation */}
+        <div className="bg-[#e8e4dc]/30 border border-[#dcd8cf] p-8 text-center rounded-sm">
+          <h3 className="text-base font-serif uppercase tracking-wider mb-2">
+            Become a Registered Member
+          </h3>
+          <p className="text-xs text-[#1c1c1a]/70 max-w-md mx-auto mb-6">
+            Join the KSHAUM Inner Circle for early collection previews, priority allocations, and personalized styling services.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Link
+              href="/signup"
+              className="px-6 py-2.5 bg-[#1c1c1a] text-white text-xs uppercase tracking-widest hover:bg-[#333330] transition-colors"
+            >
+              Sign Up
+            </Link>
+            <Link
+              href="/collection"
+              className="px-6 py-2.5 border border-[#1c1c1a]/30 text-xs uppercase tracking-widest hover:bg-[#1c1c1a] hover:text-white transition-colors"
+            >
+              Explore Collection
+            </Link>
+          </div>
         </div>
       </main>
 
