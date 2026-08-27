@@ -205,7 +205,7 @@ const Footer = () => {
         {/* Centered Copyright Notice */}
         <div className="mt-24 sm:mt-32 text-center">
           <p className="text-xs sm:text-[13px] text-black tracking-normal font-normal">
-            A.PRESSE © 2026
+            KSHAUM © 2026
           </p>
         </div>
       </div>

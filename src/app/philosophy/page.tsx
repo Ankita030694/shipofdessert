@@ -138,7 +138,7 @@ export default function Philosophy() {
                     </blockquote>
 
                     <p className="text-base md:text-lg leading-relaxed text-center mb-6">
-                      {splitTextIntoWords('In a world that trades speed for substance, we anchor ourselves in order, discipline and restraint. At ship of desert our values are not seasonal - they are eternal')}
+                      {splitTextIntoWords('In a world that trades speed for substance, we anchor ourselves in order, discipline and restraint. At KSHAUM our values are not seasonal - they are eternal')}
                     </p>
 
                     <div className="text-center mb-4">
@@ -192,7 +192,7 @@ export default function Philosophy() {
                             {splitTextIntoWords('LINEAGE OVER PERSONA')}
                           </h3>
                           <p className="text-sm leading-relaxed">
-                            {splitTextIntoWords('one does not wear ship of desert to be seen one wears it to belong')}
+                            {splitTextIntoWords('one does not wear KSHAUM to be seen one wears it to belong')}
                           </p>
                         </div>
                       </div>
@@ -221,7 +221,7 @@ export default function Philosophy() {
                     </blockquote>
 
                     <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('At ship of desert we use only what breathes with body and listens to soul. Linen, cotton, silk - fibers that hold frequency absorb intention and age with nobility. In Ayurveda these are "JEEVAN VASTRA" life bearing cloth.')}
+                      {splitTextIntoWords('At KSHAUM we use only what breathes with body and listens to soul. Linen, cotton, silk - fibers that hold frequency absorb intention and age with nobility. In Ayurveda these are "JEEVAN VASTRA" life bearing cloth.')}
                     </p>
 
                     <p className="text-base md:text-lg leading-relaxed">
@@ -281,7 +281,7 @@ export default function Philosophy() {
                     </blockquote>
 
                     <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('At ship of desert attire is not decoration - it is declaration. They belong to those who carry burden without display grace without audience.')}
+                      {splitTextIntoWords('At KSHAUM attire is not decoration - it is declaration. They belong to those who carry burden without display grace without audience.')}
                     </p>
 
                     <p className="text-base md:text-lg leading-relaxed">
@@ -341,7 +341,7 @@ export default function Philosophy() {
                     </blockquote>
 
                     <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('We design for the house the heir and the history yet to be written. Ship of desert belongs to the families who build slowly, suffer quietly, and endure without applause. Those who know that luxury is not ownership - it is inheritance.')}
+                      {splitTextIntoWords('We design for the house the heir and the history yet to be written. KSHAUM belongs to the families who build slowly, suffer quietly, and endure without applause. Those who know that luxury is not ownership - it is inheritance.')}
                     </p>
 
                     <p className="text-base md:text-lg leading-relaxed">
@@ -439,7 +439,7 @@ export default function Philosophy() {
                     </p>
 
                     <p className="text-base md:text-lg leading-relaxed font-medium">
-                      {splitTextIntoWords('To wear ship of desert is to wrap oneself in history, energy and sanctity.')}
+                      {splitTextIntoWords('To wear KSHAUM is to wrap oneself in history, energy and sanctity.')}
                     </p>
                   </div>
                 </div>
@@ -456,7 +456,7 @@ export default function Philosophy() {
               "In the end, style fades but houses remain."
             </p>
             <div className="w-20 h-0.5 bg-white mx-auto my-4"></div>
-            <p className="uppercase tracking-widest">Ship of Desert</p>
+            <p className="uppercase tracking-widest">KSHAUM</p>
           </div>
         </section>
       </main>

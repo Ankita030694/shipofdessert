@@ -26,7 +26,7 @@ export default function Home() {
               marginTop: '-400px'
             }}
           >
-            SHIP OF DESERT
+            KSHAUM
           </h1> */}
         </div>
       </div>
@@ -43,7 +43,7 @@ export default function Home() {
             />
             <div className="absolute top-6 left-6 flex flex-col text-white">
               <span className="text-lg font-light mb-1">Women's Re-Nylon for Elegant Look</span>
-              <span className="text-xl font-medium mb-2">Ship Of Desert's Circular Revolution</span>
+              <span className="text-xl font-medium mb-2">KSHAUM's Circular Revolution</span>
               <span className="text-sm font-bold tracking-wider mt-2">DISCOVER</span>
             </div>
           </div>

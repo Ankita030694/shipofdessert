@@ -14,10 +14,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ship of Desert | Luxury Fashion",
-  description: "Ship of Desert - Luxury Fashion and Heritage",
+  title: "KSHAUM | Luxury Fashion",
+  description: "KSHAUM - Luxury Fashion and Heritage",
   icons: {
-    icon: "/favicon.ico",
+    icon: '/favicon.ico',
   },
 };
 
