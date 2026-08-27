@@ -78,17 +78,17 @@ export default function ReturnPolicy() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF9F6] text-black">
+    <div className="min-h-screen flex flex-col bg-[#f5f5f5] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
-          <div className="border-b border-gray-200 pb-10 mb-12 text-center md:text-left">
-            <div className="inline-block uppercase tracking-[0.25em] text-xs font-semibold text-gray-500 mb-3">
+          <div className="border-b border-[#dcd8cf] pb-10 mb-12 text-center md:text-left">
+            <div className="inline-block uppercase tracking-[0.25em] text-xs font-semibold text-[#bdb2a1] mb-3">
               Customer Services & Orders
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-black mb-4 font-serif">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#1c1c1a] mb-4 font-serif">
               Return Policy
             </h1>
             <p className="text-base sm:text-lg text-gray-700 max-w-2xl">

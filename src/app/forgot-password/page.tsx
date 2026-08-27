@@ -34,29 +34,29 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black">
+    <div className="min-h-screen flex flex-col bg-[#f5f5f5] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 flex items-center justify-center">
         <div className="w-full max-w-lg mx-auto">
           
           {/* Header Title */}
-          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-black mb-8">
+          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#1c1c1a] mb-8">
             RESET YOUR PASSWORD
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm font-normal text-black mb-8 text-center sm:text-left">
+          <p className="text-sm font-normal text-[#1c1c1a] mb-8 text-center sm:text-left">
             We will send you an email to reset your password.
           </p>
 
           {/* Feedback message banner */}
           {message && (
             <div
-              className={`p-3.5 mb-6 text-xs sm:text-sm rounded ${
+              className={`p-3.5 mb-6 text-xs sm:text-sm rounded border ${
                 message.type === 'success'
-                  ? 'bg-green-50 text-green-800 border border-green-200'
-                  : 'bg-red-50 text-red-800 border border-red-200'
+                  ? 'bg-green-50 text-green-800 border-green-200'
+                  : 'bg-red-50 text-red-800 border-red-200'
               }`}
             >
               {message.text}
@@ -68,7 +68,7 @@ export default function ForgotPasswordPage() {
             <div>
               <label 
                 htmlFor="reset-email" 
-                className="block font-bold text-xs sm:text-sm text-black mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Email* :
               </label>
@@ -79,7 +79,7 @@ export default function ForgotPasswordPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full bg-transparent text-sm text-black placeholder-gray-500 border-b border-black py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
               />
             </div>
 
@@ -88,14 +88,14 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-black text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-gray-800 transition-colors disabled:opacity-50 cursor-pointer"
+                className="w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors disabled:opacity-50 cursor-pointer"
               >
                 {loading ? 'Submitting...' : 'Submit'}
               </button>
 
               <Link
                 href="/login"
-                className="block w-full text-center text-xs sm:text-sm text-black underline hover:opacity-75 py-2"
+                className="block w-full text-center text-xs sm:text-sm text-[#1c1c1a] underline hover:opacity-75 py-2"
               >
                 Cancel
               </Link>

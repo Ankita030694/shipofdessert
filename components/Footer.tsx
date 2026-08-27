@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-white text-black pt-16 pb-20 px-6 sm:px-12 md:px-16 lg:px-24 border-t border-gray-100">
+    <footer className="w-full bg-[#f5f5f5] text-[#1c1c1a] pt-16 pb-20 px-6 sm:px-12 md:px-16 lg:px-24 border-t border-[#dcd8cf]">
       <div className="max-w-7xl mx-auto">
         {/* Main Grid: Newsletter + 3 Columns */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12">
@@ -32,19 +32,19 @@ const Footer = () => {
           {/* Newsletter Column (Left) */}
           <div className="md:col-span-5 lg:col-span-5 pr-0 md:pr-6">
             <form onSubmit={handleSubscribe} className="max-w-sm">
-              <div className="relative border-b border-gray-400 pb-2 focus-within:border-black transition-colors flex items-center justify-between">
+              <div className="relative border-b border-[#bdb2a1] pb-2 focus-within:border-[#1c1c1a] transition-colors flex items-center justify-between">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Subscribe to our Newsletter"
                   required
-                  className="w-full bg-transparent text-xs sm:text-[13px] text-black placeholder-gray-800 focus:outline-none pr-6"
+                  className="w-full bg-transparent text-xs sm:text-[13px] text-[#1c1c1a] placeholder-[#1c1c1a]/70 focus:outline-none pr-6"
                 />
                 <button
                   type="submit"
                   aria-label="Subscribe"
-                  className="text-gray-700 hover:text-black transition-colors text-sm font-light pl-2"
+                  className="text-[#1c1c1a] hover:text-[#bdb2a1] transition-colors text-sm font-light pl-2 cursor-pointer"
                 >
                   &gt;
                 </button>
@@ -58,14 +58,14 @@ const Footer = () => {
                   checked={agreed}
                   onChange={(e) => setAgreed(e.target.checked)}
                   required
-                  className="mt-0.5 h-3.5 w-3.5 rounded-none border-gray-400 text-black focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                  className="mt-0.5 h-3.5 w-3.5 rounded-none border-[#bdb2a1] text-[#1c1c1a] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                 />
                 <label
                   htmlFor="footer-privacy-consent"
-                  className="text-[11px] sm:text-xs text-gray-800 leading-snug cursor-pointer select-none"
+                  className="text-[11px] sm:text-xs text-[#1c1c1a]/90 leading-snug cursor-pointer select-none"
                 >
                   I have read and understood the{' '}
-                  <Link href="/privacy-policy" className="hover:underline text-black">
+                  <Link href="/privacy-policy" className="hover:underline text-[#1c1c1a] font-medium">
                     Privacy Policy
                   </Link>
                   .

@@ -76,16 +76,16 @@ export default function CollectionPage() {
   }
 
   return (
-    <>
+    <div className="bg-[#f5f5f5] text-[#1c1c1a] min-h-screen">
       <Navbar />
-      <main className="pt-16">
+      <main className="pt-20">
         {/* Filters and View Options */}
         <div className="container mx-auto px-4 py-8">
-          <div className="flex justify-between items-center border-b border-gray-200 pb-4">
+          <div className="flex justify-between items-center border-b border-[#dcd8cf] pb-4">
             {/* Left side - Category and Items count */}
-            <div className="flex items-center gap-4 text-black">
-              <h1 className="text-lg font-normal">Women</h1>
-              <span className="text-sm">•</span>
+            <div className="flex items-center gap-4 text-[#1c1c1a]">
+              <h1 className="text-lg font-medium">Collection</h1>
+              <span className="text-sm text-[#bdb2a1]">•</span>
               <span className="text-sm">New Arrivals</span>
               <span className="text-sm text-gray-500">(24 items)</span>
             </div>
@@ -93,14 +93,14 @@ export default function CollectionPage() {
             {/* Right side - View options and Filter */}
             <div className="flex items-center gap-6">
               {/* View options */}
-              <div className="flex items-center gap-4 text-black">
+              <div className="flex items-center gap-4 text-[#1c1c1a]">
                 <span className="text-sm">View:</span>
-                <button className="underline text-sm">One</button>
-                <button className="text-sm">Two</button>
+                <button className="underline text-sm font-medium">One</button>
+                <button className="text-sm hover:opacity-75">Two</button>
               </div>
 
               {/* Filter button */}
-              <button className="flex items-center gap-2 text-black">
+              <button className="flex items-center gap-2 text-[#1c1c1a] cursor-pointer">
                 <span className="text-sm">Filter By</span>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M5 4a1 1 0 0 1 1-1h8a1 1 0 0 1 0 2H6a1 1 0 0 1-1-1zm2 5a1 1 0 0 1 1-1h4a1 1 0 0 1 0 2H8a1 1 0 0 1-1-1zm2 5a1 1 0 0 1 1-1h0a1 1 0 1 1 0 2h0a1 1 0 0 1-1-1z"/>
@@ -111,19 +111,19 @@ export default function CollectionPage() {
 
           {/* Active Filters */}
           <div className="flex gap-2 py-4">
-            <button className="px-3 py-1 text-sm border border-black text-black flex items-center gap-1">
+            <button className="px-3 py-1 text-sm border border-[#1c1c1a] text-[#1c1c1a] flex items-center gap-1">
               Size: M
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </button>
-            <button className="px-3 py-1 text-sm border border-black text-black flex items-center gap-1">
+            <button className="px-3 py-1 text-sm border border-[#1c1c1a] text-[#1c1c1a] flex items-center gap-1">
               Color: Black
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </button>
-            <button className="px-3 py-1 text-sm text-black underline">
+            <button className="px-3 py-1 text-sm text-[#1c1c1a] underline cursor-pointer">
               Clear all
             </button>
           </div>
@@ -200,6 +200,6 @@ export default function CollectionPage() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

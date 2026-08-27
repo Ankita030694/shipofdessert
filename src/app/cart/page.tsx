@@ -7,7 +7,7 @@ import Footer from '../../../components/Footer';
 
 export default function CartPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF9F6] text-black">
+    <div className="min-h-screen flex flex-col bg-[#f5f5f5] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full text-center">

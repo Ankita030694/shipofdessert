@@ -40,29 +40,29 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black">
+    <div className="min-h-screen flex flex-col bg-[#f5f5f5] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 flex items-center justify-center">
         <div className="w-full max-w-lg mx-auto">
           
           {/* Header Title */}
-          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-black mb-8">
+          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#1c1c1a] mb-8">
             LOGIN
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm font-normal text-black mb-8">
+          <p className="text-sm font-normal text-[#1c1c1a] mb-8">
             Enter your email and password to login:
           </p>
 
           {/* Feedback message banner */}
           {message && (
             <div
-              className={`p-3.5 mb-6 text-xs sm:text-sm rounded ${
+              className={`p-3.5 mb-6 text-xs sm:text-sm rounded border ${
                 message.type === 'success'
-                  ? 'bg-green-50 text-green-800 border border-green-200'
-                  : 'bg-red-50 text-red-800 border border-red-200'
+                  ? 'bg-green-50 text-green-800 border-green-200'
+                  : 'bg-red-50 text-red-800 border-red-200'
               }`}
             >
               {message.text}
@@ -75,7 +75,7 @@ export default function LoginPage() {
             <div>
               <label 
                 htmlFor="login-email" 
-                className="block font-bold text-xs sm:text-sm text-black mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Email* :
               </label>
@@ -86,7 +86,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full bg-transparent text-sm text-black placeholder-gray-500 border-b border-black py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
               />
             </div>
 
@@ -94,7 +94,7 @@ export default function LoginPage() {
             <div className="pt-2">
               <label 
                 htmlFor="login-password" 
-                className="block font-bold text-xs sm:text-sm text-black mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Password* :
               </label>
@@ -106,12 +106,12 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
-                  className="w-full bg-transparent text-sm text-black placeholder-gray-500 border-b border-black py-2 pr-10 focus:outline-none"
+                  className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 pr-10 focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-black focus:outline-none p-1"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-[#1c1c1a] focus:outline-none p-1 cursor-pointer"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? 'Hide' : 'Show'}
@@ -123,7 +123,7 @@ export default function LoginPage() {
             <div className="text-right pt-1 pb-2">
               <Link
                 href="/forgot-password"
-                className="text-xs sm:text-sm text-black underline hover:opacity-70 transition-opacity"
+                className="text-xs sm:text-sm text-[#1c1c1a] underline hover:opacity-70 transition-opacity"
               >
                 Forgot your password?
               </Link>
@@ -133,7 +133,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-black text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-gray-800 transition-colors disabled:opacity-50 cursor-pointer"
+              className="w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors disabled:opacity-50 cursor-pointer"
             >
               {loading ? 'Logging in...' : 'Login'}
             </button>
@@ -141,12 +141,12 @@ export default function LoginPage() {
 
           {/* Create an Account Section */}
           <div className="mt-14 text-center">
-            <h2 className="font-bold text-xs sm:text-sm tracking-widest uppercase text-black mb-4">
+            <h2 className="font-bold text-xs sm:text-sm tracking-widest uppercase text-[#1c1c1a] mb-4">
               CREATE AN ACCOUNT
             </h2>
             <Link
               href="/signup"
-              className="block w-full bg-black text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-gray-800 transition-colors text-center cursor-pointer"
+              className="block w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors text-center cursor-pointer"
             >
               Sign Up
             </Link>

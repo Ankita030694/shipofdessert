@@ -63,29 +63,29 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-black">
+    <div className="min-h-screen flex flex-col bg-[#f5f5f5] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 flex items-center justify-center">
         <div className="w-full max-w-lg mx-auto">
           
           {/* Header Title */}
-          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-black mb-8">
+          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#1c1c1a] mb-8">
             CREATE AN ACCOUNT
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm font-normal text-black mb-8">
+          <p className="text-sm font-normal text-[#1c1c1a] mb-8">
             Please enter your details to create an account:
           </p>
 
           {/* Feedback message banner */}
           {message && (
             <div
-              className={`p-3.5 mb-6 text-xs sm:text-sm rounded ${
+              className={`p-3.5 mb-6 text-xs sm:text-sm rounded border ${
                 message.type === 'success'
-                  ? 'bg-green-50 text-green-800 border border-green-200'
-                  : 'bg-red-50 text-red-800 border border-red-200'
+                  ? 'bg-green-50 text-green-800 border-green-200'
+                  : 'bg-red-50 text-red-800 border-red-200'
               }`}
             >
               {message.text}
@@ -99,7 +99,7 @@ export default function SignupPage() {
             <div>
               <label 
                 htmlFor="signup-firstName" 
-                className="block font-bold text-xs sm:text-sm text-black mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 First Name* :
               </label>
@@ -111,7 +111,7 @@ export default function SignupPage() {
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder="First Name"
-                className="w-full bg-transparent text-sm text-black placeholder-gray-500 border-b border-black py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
               />
             </div>
 
@@ -119,7 +119,7 @@ export default function SignupPage() {
             <div>
               <label 
                 htmlFor="signup-lastName" 
-                className="block font-bold text-xs sm:text-sm text-black mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Last Name :
               </label>
@@ -130,7 +130,7 @@ export default function SignupPage() {
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="w-full bg-transparent text-sm text-black placeholder-gray-500 border-b border-black py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
               />
             </div>
 
@@ -138,7 +138,7 @@ export default function SignupPage() {
             <div>
               <label 
                 htmlFor="signup-email" 
-                className="block font-bold text-xs sm:text-sm text-black mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Email* :
               </label>
@@ -150,7 +150,7 @@ export default function SignupPage() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email"
-                className="w-full bg-transparent text-sm text-black placeholder-gray-500 border-b border-black py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
               />
             </div>
 
@@ -158,7 +158,7 @@ export default function SignupPage() {
             <div className="pt-2">
               <label 
                 htmlFor="signup-password" 
-                className="block font-bold text-xs sm:text-sm text-black mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Password* :
               </label>
@@ -171,12 +171,12 @@ export default function SignupPage() {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Password"
-                  className="w-full bg-transparent text-sm text-black placeholder-gray-500 border-b border-black py-2 pr-10 focus:outline-none"
+                  className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 pr-10 focus:outline-none"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-black focus:outline-none p-1"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-[#1c1c1a] focus:outline-none p-1 cursor-pointer"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? 'Hide' : 'Show'}
@@ -188,7 +188,7 @@ export default function SignupPage() {
             <div className="pt-2">
               <label 
                 htmlFor="signup-confirmPassword" 
-                className="block font-bold text-xs sm:text-sm text-black mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Confirm Password* :
               </label>
@@ -200,7 +200,7 @@ export default function SignupPage() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm Password"
-                className="w-full bg-transparent text-sm text-black placeholder-gray-500 border-b border-black py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
               />
             </div>
 
@@ -209,7 +209,7 @@ export default function SignupPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-black text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-gray-800 transition-colors disabled:opacity-50 cursor-pointer"
+                className="w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors disabled:opacity-50 cursor-pointer"
               >
                 {loading ? 'Creating Account...' : 'Sign Up'}
               </button>
@@ -218,12 +218,12 @@ export default function SignupPage() {
 
           {/* Already have an account Section */}
           <div className="mt-14 text-center">
-            <h2 className="font-bold text-xs sm:text-sm tracking-widest uppercase text-black mb-4">
+            <h2 className="font-bold text-xs sm:text-sm tracking-widest uppercase text-[#1c1c1a] mb-4">
               ALREADY HAVE AN ACCOUNT?
             </h2>
             <Link
               href="/login"
-              className="block w-full bg-black text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-gray-800 transition-colors text-center cursor-pointer"
+              className="block w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors text-center cursor-pointer"
             >
               Login
             </Link>
