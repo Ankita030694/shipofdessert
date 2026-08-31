@@ -47,9 +47,9 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="fixed top-0 left-0 w-full h-20 bg-[#f5f5f5]/95 backdrop-blur-sm border-b border-[#dcd8cf] flex justify-between items-center px-6 sm:px-10 lg:px-16 z-40 transition-all">
+      <nav className="fixed top-0 left-0 w-full h-20 bg-[#f5f5f5]/95 backdrop-blur-sm border-b border-[#dcd8cf] flex justify-between items-center px-4 sm:px-8 lg:px-16 z-40 transition-all">
         
-        {/* Left: Hamburger Menu Only */}
+        {/* Left: Category Hamburger */}
         <div className="flex items-center">
           <button 
             onClick={toggleMenu}
@@ -63,7 +63,7 @@ const Navbar = () => {
         </div>
         
         {/* Center: Brand Logo */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center pointer-events-auto">
           <Link href="/" className="inline-flex items-center justify-center hover:opacity-85 transition-opacity">
             <Image 
               src="/KSHAUM.svg" 
@@ -76,27 +76,27 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Right: Only Search, Login, Cart */}
-        <div className="flex items-center gap-5 sm:gap-8 text-xs sm:text-[13px] text-black font-normal">
+        {/* Right: Search, Cart, Login */}
+        <div className="flex items-center gap-3.5 sm:gap-6 lg:gap-8 text-xs sm:text-[13px] text-black font-normal">
           <button 
             onClick={toggleSearch}
-            className="text-black hover:opacity-60 transition-opacity cursor-pointer focus:outline-none"
+            className="text-black hover:opacity-60 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap"
           >
             Search
           </button>
 
           <Link 
-            href="/login" 
-            className="text-black hover:opacity-60 transition-opacity"
+            href="/cart" 
+            className="text-black hover:opacity-60 transition-opacity whitespace-nowrap"
           >
-            Login
+            Cart ({cartCount})
           </Link>
 
           <Link 
-            href="/cart" 
-            className="text-black hover:opacity-60 transition-opacity"
+            href="/login" 
+            className="text-black hover:opacity-60 transition-opacity whitespace-nowrap"
           >
-            Cart ({cartCount})
+            Login
           </Link>
         </div>
       </nav>
@@ -173,7 +173,7 @@ const Navbar = () => {
         {/* Drawer Header & Close Button */}
         <div className="p-6 sm:p-8">
           <div className="flex justify-between items-center mb-8 border-b border-[#dcd8cf] pb-4">
-            <span className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] font-semibold">Menu</span>
+            <span className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] font-semibold">Categories</span>
             <button 
               onClick={toggleMenu}
               className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#dcd8cf]/50 transition-colors cursor-pointer"
