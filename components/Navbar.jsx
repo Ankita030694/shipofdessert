@@ -51,14 +51,25 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="fixed top-0 left-0 w-full h-20 bg-[#f5f5f5]/95 backdrop-blur-sm border-b border-[#dcd8cf] flex justify-between items-center px-4 sm:px-8 lg:px-16 z-40 transition-all">
+      <nav className="fixed top-0 left-0 w-full h-16 sm:h-20 bg-[#f5f5f5]/95 backdrop-blur-sm border-b border-[#dcd8cf] flex justify-between items-center px-4 sm:px-8 lg:px-16 z-40 transition-all">
         
-        {/* Left: Category Hamburger */}
+        {/* Left: Hamburger Button (2-line on mobile, 3-line on desktop) */}
         <div className="flex items-center">
+          {/* Mobile 2-line hamburger */}
           <button 
             onClick={toggleMenu}
             aria-label="Open Navigation Menu"
-            className="flex flex-col justify-center items-center gap-1.5 p-1 group cursor-pointer focus:outline-none"
+            className="flex md:hidden flex-col justify-center items-start gap-[6px] p-2 -ml-2 group cursor-pointer focus:outline-none"
+          >
+            <span className="w-5 sm:w-6 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
+            <span className="w-5 sm:w-6 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
+          </button>
+
+          {/* Desktop 3-line hamburger */}
+          <button 
+            onClick={toggleMenu}
+            aria-label="Open Navigation Menu"
+            className="hidden md:flex flex-col justify-center items-center gap-1.5 p-1 group cursor-pointer focus:outline-none"
           >
             <span className="w-5 sm:w-6 h-0.5 bg-[#1c1c1a] transition-transform duration-200"></span>
             <span className="w-5 sm:w-6 h-0.5 bg-[#1c1c1a] transition-transform duration-200"></span>
@@ -75,13 +86,42 @@ const Navbar = () => {
               width={260} 
               height={36} 
               priority
-              className="h-5 sm:h-6 md:h-7 w-auto object-contain"
+              className="h-4 sm:h-5 md:h-7 w-auto object-contain"
             />
           </Link>
         </div>
         
-        {/* Right: Search, Login / Sign Out, Cart */}
-        <div className="flex items-center gap-3.5 sm:gap-6 lg:gap-8 text-xs sm:text-[13px] text-black font-normal">
+        {/* Right Section: Mobile (Icons) vs Desktop (Text Links) */}
+        {/* Mobile: Search Icon + Bag Icon */}
+        <div className="flex md:hidden items-center gap-3 sm:gap-4 text-[#1c1c1a]">
+          <button 
+            onClick={toggleSearch}
+            aria-label="Search"
+            className="p-1.5 hover:opacity-60 transition-opacity cursor-pointer focus:outline-none"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </button>
+
+          <button 
+            onClick={openCart}
+            aria-label="Shopping Bag"
+            className="p-1.5 hover:opacity-60 transition-opacity cursor-pointer focus:outline-none relative"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119.993z" />
+            </svg>
+            {totalCount > 0 && (
+              <span className="absolute 0 top-0.5 right-0.5 bg-[#1c1c1a] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-medium leading-none">
+                {totalCount}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* Desktop: Search, Login / Sign Out, Cart (Text Links) */}
+        <div className="hidden md:flex items-center gap-6 lg:gap-8 text-xs sm:text-[13px] text-black font-normal">
           <button 
             onClick={toggleSearch}
             className="text-black hover:opacity-60 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap"
