@@ -53,7 +53,7 @@ const Navbar = () => {
       {/* Navbar Header */}
       <nav className="fixed top-0 left-0 w-full h-16 sm:h-20 bg-[#f5f5f5]/95 backdrop-blur-sm border-b border-[#dcd8cf] flex justify-between items-center px-4 sm:px-8 lg:px-16 z-40 transition-all">
         
-        {/* Left: Hamburger Button (2-line on mobile, 3-line on desktop) */}
+        {/* Left: Mobile (2-line Hamburger) vs Desktop (Category Link) */}
         <div className="flex items-center">
           {/* Mobile 2-line hamburger */}
           <button 
@@ -65,15 +65,13 @@ const Navbar = () => {
             <span className="w-5 sm:w-6 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
           </button>
 
-          {/* Desktop 3-line hamburger */}
+          {/* Desktop Category Link */}
           <button 
             onClick={toggleMenu}
-            aria-label="Open Navigation Menu"
-            className="hidden md:flex flex-col justify-center items-center gap-1.5 p-1 group cursor-pointer focus:outline-none"
+            aria-label="Open Category Menu"
+            className="hidden md:inline-block text-xs sm:text-[13px] text-black font-normal hover:opacity-60 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap"
           >
-            <span className="w-5 sm:w-6 h-0.5 bg-[#1c1c1a] transition-transform duration-200"></span>
-            <span className="w-5 sm:w-6 h-0.5 bg-[#1c1c1a] transition-transform duration-200"></span>
-            <span className="w-5 sm:w-6 h-0.5 bg-[#1c1c1a] transition-transform duration-200"></span>
+            Category
           </button>
         </div>
         
