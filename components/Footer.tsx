@@ -89,6 +89,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/care" className="hover:opacity-70 transition-opacity">
+                  Care for a Lifetime
+                </Link>
+              </li>
+              <li>
                 <Link href="/contact" className="hover:opacity-70 transition-opacity">
                   Contact Us
                 </Link>
