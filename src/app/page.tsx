@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -27,14 +26,35 @@ export default function Home() {
       <main className="relative flex-1 w-full min-h-[90vh] flex flex-col justify-end items-center px-4 sm:px-8 pb-12 pt-24">
         {/* Full-Page Architectural Hero Visual */}
         <div className="relative w-full h-[82vh] max-h-[920px] rounded-sm overflow-hidden bg-[#dcd8cf]/30">
-          <Image
-            src="/sodhero.jpg"
-            alt="Minimal architectural interior reflecting the quiet design language of KSHAUM"
-            fill
-            priority
-            className="object-cover object-center filter brightness-[0.98]"
-            sizes="(max-width: 1200px) 100vw, 1200px"
-          />
+          {/* Desktop Video (Screen width >= 768px) */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster="/sodhero.jpg"
+            className="hidden md:block w-full h-full object-cover filter brightness-[0.98]"
+            aria-label="KSHAUM architectural desktop campaign video"
+          >
+            <source src="/Kshaum%20Desktop.webm" type="video/webm" />
+            <source src="/Kshaum Desktop.webm" type="video/webm" />
+          </video>
+
+          {/* Mobile Video (Screen width < 768px) */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            poster="/sodhero.jpg"
+            className="block md:hidden w-full h-full object-cover filter brightness-[0.98]"
+            aria-label="KSHAUM architectural mobile campaign video"
+          >
+            <source src="/KSHAUM%20mobile%20.webm" type="video/webm" />
+            <source src="/KSHAUM mobile .webm" type="video/webm" />
+          </video>
 
           {/* Minimalist Visual Overlay & Semantic H1 */}
           <div className="absolute inset-0 bg-black/10 flex flex-col justify-end p-8 sm:p-14">
