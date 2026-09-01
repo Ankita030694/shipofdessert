@@ -33,7 +33,6 @@ export default function Home() {
             muted
             playsInline
             preload="auto"
-            poster="/sodhero.jpg"
             className="hidden md:block w-full h-full object-cover filter brightness-[0.98]"
             aria-label="KSHAUM architectural desktop campaign video"
           >
@@ -48,7 +47,6 @@ export default function Home() {
             muted
             playsInline
             preload="auto"
-            poster="/sodhero.jpg"
             className="block md:hidden w-full h-full object-cover filter brightness-[0.98]"
             aria-label="KSHAUM architectural mobile campaign video"
           >

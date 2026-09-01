@@ -40,7 +40,6 @@ export default function ShopPage() {
             loop
             muted
             playsInline
-            poster="/sodhero.jpg"
             className="w-full h-full object-cover"
             aria-label="KSHAUM women's collection video showcase"
           >
