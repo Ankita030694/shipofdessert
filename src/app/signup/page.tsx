@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 
@@ -26,7 +27,6 @@ export default function SignupPage() {
     });
   };
 
-  // Mock Form Submit Handler (Ready for Firebase Auth createUserWithEmailAndPassword integration)
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage(null);
@@ -48,18 +48,52 @@ export default function SignupPage() {
 
     setLoading(true);
 
-    // Mock Registration Delay
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      // 1. Call Register API
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to create account.');
+      }
+
       setMessage({
         type: 'success',
-        text: 'Account created successfully! (Frontend UI Mock - Firebase Auth will be connected here)'
+        text: 'Account created successfully! Logging you in...',
       });
-      // Future Firebase logic:
-      // const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      // await updateProfile(userCredential.user, { displayName: `${formData.firstName} ${formData.lastName}` });
-      // router.push('/login');
-    }, 800);
+
+      // 2. Automatically sign in with NextAuth
+      const loginRes = await signIn('credentials', {
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password,
+        redirect: false,
+      });
+
+      if (loginRes?.error) {
+        // If auto-login fails, redirect to login page
+        router.push('/login');
+      } else {
+        router.push('/');
+        router.refresh();
+      }
+    } catch (err: unknown) {
+      setMessage({
+        type: 'error',
+        text: err instanceof Error ? err.message : 'An unexpected error occurred during signup.',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -68,14 +102,13 @@ export default function SignupPage() {
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 flex items-center justify-center">
         <div className="w-full max-w-lg mx-auto">
-          
           {/* Header Title */}
-          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#1c1c1a] mb-8">
+          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#1c1c1a] mb-8 font-serif">
             CREATE AN ACCOUNT
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm font-normal text-[#1c1c1a] mb-8">
+          <p className="text-sm font-normal text-[#1c1c1a]/80 mb-8">
             Please enter your details to create an account:
           </p>
 
@@ -84,7 +117,7 @@ export default function SignupPage() {
             <div
               className={`p-3.5 mb-6 text-xs sm:text-sm rounded border ${
                 message.type === 'success'
-                  ? 'bg-green-50 text-green-800 border-green-200'
+                  ? 'bg-stone-100 text-[#1c1c1a] border-[#bdb2a1]'
                   : 'bg-red-50 text-red-800 border-red-200'
               }`}
             >
@@ -94,11 +127,10 @@ export default function SignupPage() {
 
           {/* Signup Form */}
           <form onSubmit={handleSignup} className="space-y-6">
-            
             {/* First Name Field */}
             <div>
-              <label 
-                htmlFor="signup-firstName" 
+              <label
+                htmlFor="signup-firstName"
                 className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 First Name* :
@@ -108,17 +140,18 @@ export default function SignupPage() {
                 name="firstName"
                 type="text"
                 required
+                disabled={loading}
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder="First Name"
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none disabled:opacity-50"
               />
             </div>
 
             {/* Last Name Field */}
             <div>
-              <label 
-                htmlFor="signup-lastName" 
+              <label
+                htmlFor="signup-lastName"
                 className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Last Name :
@@ -127,17 +160,18 @@ export default function SignupPage() {
                 id="signup-lastName"
                 name="lastName"
                 type="text"
+                disabled={loading}
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none disabled:opacity-50"
               />
             </div>
 
             {/* Email Field */}
             <div>
-              <label 
-                htmlFor="signup-email" 
+              <label
+                htmlFor="signup-email"
                 className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Email* :
@@ -147,17 +181,18 @@ export default function SignupPage() {
                 name="email"
                 type="email"
                 required
+                disabled={loading}
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Email"
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
+                placeholder="Email Address"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none disabled:opacity-50"
               />
             </div>
 
             {/* Password Field */}
             <div className="pt-2">
-              <label 
-                htmlFor="signup-password" 
+              <label
+                htmlFor="signup-password"
                 className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Password* :
@@ -168,10 +203,11 @@ export default function SignupPage() {
                   name="password"
                   type={showPassword ? 'text' : 'password'}
                   required
+                  disabled={loading}
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Password"
-                  className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 pr-10 focus:outline-none"
+                  placeholder="Password (minimum 6 characters)"
+                  className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 pr-10 focus:outline-none disabled:opacity-50"
                 />
                 <button
                   type="button"
@@ -186,8 +222,8 @@ export default function SignupPage() {
 
             {/* Confirm Password Field */}
             <div className="pt-2">
-              <label 
-                htmlFor="signup-confirmPassword" 
+              <label
+                htmlFor="signup-confirmPassword"
                 className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
               >
                 Confirm Password* :
@@ -197,10 +233,11 @@ export default function SignupPage() {
                 name="confirmPassword"
                 type={showPassword ? 'text' : 'password'}
                 required
+                disabled={loading}
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm Password"
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none disabled:opacity-50"
               />
             </div>
 
@@ -209,7 +246,7 @@ export default function SignupPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors disabled:opacity-50 cursor-pointer"
+                className="w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
               >
                 {loading ? 'Creating Account...' : 'Sign Up'}
               </button>
@@ -228,7 +265,6 @@ export default function SignupPage() {
               Login
             </Link>
           </div>
-
         </div>
       </main>
 

@@ -3,12 +3,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
+import { useCart } from '@/context/CartContext';
+import CartDrawer from './CartDrawer';
 
 const Navbar = () => {
+  const { data: session } = useSession();
+  const { totalCount, openCart } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [cartCount, setCartCount] = useState(0);
   const searchInputRef = useRef(null);
 
   const toggleMenu = () => {
@@ -76,7 +80,7 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Right: Search, Cart, Login */}
+        {/* Right: Search, Login / Sign Out, Cart */}
         <div className="flex items-center gap-3.5 sm:gap-6 lg:gap-8 text-xs sm:text-[13px] text-black font-normal">
           <button 
             onClick={toggleSearch}
@@ -85,21 +89,34 @@ const Navbar = () => {
             Search
           </button>
 
-          <Link 
-            href="/cart" 
-            className="text-black hover:opacity-60 transition-opacity whitespace-nowrap"
-          >
-            Cart ({cartCount})
-          </Link>
+          {session?.user ? (
+            <button
+              onClick={() => signOut({ callbackUrl: '/' })}
+              className="text-black hover:opacity-60 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap"
+            >
+              Sign Out
+            </button>
+          ) : (
+            <Link 
+              href="/login" 
+              className="text-black hover:opacity-60 transition-opacity whitespace-nowrap"
+            >
+              Login
+            </Link>
+          )}
 
-          <Link 
-            href="/login" 
-            className="text-black hover:opacity-60 transition-opacity whitespace-nowrap"
+          <button 
+            onClick={openCart}
+            className="text-black hover:opacity-60 transition-opacity cursor-pointer focus:outline-none flex items-center gap-1 whitespace-nowrap"
           >
-            Login
-          </Link>
+            <span>Cart</span>
+            <span>({totalCount})</span>
+          </button>
         </div>
       </nav>
+
+      {/* Shopping Bag Sliding Drawer */}
+      <CartDrawer />
 
       {/* Right-Side Full-Height Search Drawer */}
       <div 
@@ -151,7 +168,7 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Search Results Preview (When User Types) */}
+          {/* Search Results Preview */}
           {searchQuery.trim() && (
             <div className="mt-8 pt-6 border-t border-[#dcd8cf] flex-1 overflow-y-auto">
               <span className="text-xs text-gray-500 uppercase tracking-widest block mb-3">
@@ -238,11 +255,37 @@ const Navbar = () => {
         {/* Drawer Footer / Account section */}
         <div className="p-6 sm:p-8 border-t border-[#dcd8cf] bg-[#dcd8cf]/30">
           <ul className="space-y-2 text-xs sm:text-[13px] text-gray-700">
-            <li>
-              <Link href="/login" onClick={toggleMenu} className="text-[#1c1c1a] underline hover:opacity-75 font-medium">
-                Sign In / Register
-              </Link>
-            </li>
+            {session?.user ? (
+              <>
+                <li className="text-[#1c1c1a] font-medium text-xs">
+                  Signed in as: <span className="font-semibold">{session.user.name || session.user.email}</span>
+                </li>
+                {session.user.role === 'admin' && (
+                  <li>
+                    <Link href="/admin" onClick={toggleMenu} className="text-amber-800 hover:underline font-medium block">
+                      ⚙ Admin Dashboard
+                    </Link>
+                  </li>
+                )}
+                <li>
+                  <button
+                    onClick={() => {
+                      toggleMenu();
+                      signOut({ callbackUrl: '/' });
+                    }}
+                    className="text-[#1c1c1a] underline hover:opacity-75 font-medium cursor-pointer"
+                  >
+                    Sign Out
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link href="/login" onClick={toggleMenu} className="text-[#1c1c1a] underline hover:opacity-75 font-medium">
+                  Sign In / Register
+                </Link>
+              </li>
+            )}
             <li>
               <Link href="/contact" onClick={toggleMenu} className="text-[#1c1c1a] hover:opacity-75">
                 Customer Care
