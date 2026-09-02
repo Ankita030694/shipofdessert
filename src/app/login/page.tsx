@@ -16,6 +16,7 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get('callbackUrl') || '/';
+  const isAdminLogin = callbackUrl.includes('/admin');
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,13 +59,15 @@ function LoginForm() {
   return (
     <div className="w-full max-w-lg mx-auto">
       {/* Header Title */}
-      <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#1c1c1a] mb-8 font-serif">
-        LOGIN
+      <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#1c1c1a] mb-3 font-serif">
+        {isAdminLogin ? 'ADMIN LOGIN' : 'LOGIN'}
       </h1>
 
       {/* Subtitle */}
-      <p className="text-sm font-normal text-[#1c1c1a]/80 mb-8">
-        Enter your email and password to access your account:
+      <p className="text-sm font-normal text-[#1c1c1a]/80 mb-8 text-center sm:text-left">
+        {isAdminLogin
+          ? 'Enter your verified administrator credentials to access management:'
+          : 'Enter your email and password to access your account:'}
       </p>
 
       {/* Feedback message banner */}
@@ -148,22 +151,33 @@ function LoginForm() {
           disabled={loading}
           className="w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
         >
-          {loading ? 'Authenticating...' : 'Login'}
+          {loading ? 'Authenticating...' : isAdminLogin ? 'Access Admin Portal' : 'Login'}
         </button>
       </form>
 
-      {/* Create an Account Section */}
-      <div className="mt-14 text-center">
-        <h2 className="font-bold text-xs sm:text-sm tracking-widest uppercase text-[#1c1c1a] mb-4">
-          CREATE AN ACCOUNT
-        </h2>
-        <Link
-          href="/signup"
-          className="block w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors text-center cursor-pointer"
-        >
-          Sign Up
-        </Link>
-      </div>
+      {/* Conditional Create an Account Section (Only shown for customer login, hidden on admin login) */}
+      {!isAdminLogin ? (
+        <div className="mt-14 text-center">
+          <h2 className="font-bold text-xs sm:text-sm tracking-widest uppercase text-[#1c1c1a] mb-4">
+            CREATE AN ACCOUNT
+          </h2>
+          <Link
+            href="/signup"
+            className="block w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors text-center cursor-pointer"
+          >
+            Sign Up
+          </Link>
+        </div>
+      ) : (
+        <div className="mt-10 text-center pt-6 border-t border-[#1c1c1a]/10">
+          <Link
+            href="/"
+            className="text-xs uppercase tracking-widest text-[#1c1c1a]/60 hover:text-[#1c1c1a] underline transition-colors"
+          >
+            ← Return to Storefront
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
