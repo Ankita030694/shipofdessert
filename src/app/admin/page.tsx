@@ -33,14 +33,33 @@ export interface ProductItem {
   inStock: boolean;
   stockQuantity: number;
   featured: boolean;
+  
+  // Rich Attributes
+  rating?: number;
+  reviewsCount?: number;
+  fitNote?: string;
+  fitType?: string;
+  modelStats?: string;
   fabric?: string;
-  care?: string;
+  fit?: string;
+  designDetails?: string[];
   details?: string[];
+  care?: string;
+  
+  // Trust Signals
+  estimatedDelivery?: string;
+  codAvailable?: boolean;
+  freeShipping?: boolean;
+  easyReturns?: string;
+  
+  // Companion
+  completeTheSet?: string[];
+
   createdAt: string;
 }
 
 const CATEGORIES = ['Tops', 'Dresses', 'Skirts', 'Pants', 'Footwear', 'Accessories'];
-const AVAILABLE_SIZES = ['XS', 'S', 'M', 'L', 'XL'];
+const AVAILABLE_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 export default function AdminPage() {
   const { data: session, status } = useSession();
@@ -85,8 +104,26 @@ export default function AdminPage() {
     inStock: true,
     stockQuantity: '50',
     featured: false,
-    fabric: '100% Handcrafted Organic Cotton',
-    care: 'Dry clean or gentle hand wash in cold water.',
+    
+    // Rich Attributes
+    rating: '4.9',
+    reviewsCount: '18',
+    fitNote: 'Relaxed Fit · Model is 6\'0" and wears M',
+    fitType: 'Relaxed Fit',
+    modelStats: 'Model is 6\'0" (183cm) and wears size M',
+    fabric: '100% Handcrafted Organic Cotton. Breathable, textured natural drape.',
+    fit: 'Relaxed silhouette with dropped shoulder seam and clean tailored hems.',
+    designDetailsStr: 'Relaxed architectural silhouette\nDropped shoulder seam detail\nNaturally breathable handwoven texture\nConcealed French seams for durability',
+    care: 'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.',
+    
+    // Trust Signals
+    estimatedDelivery: '3–5 Business Days',
+    codAvailable: true,
+    freeShipping: true,
+    easyReturns: '7-Day Complimentary Returns & Exchanges',
+    
+    // Companion pieces
+    completeTheSetStr: '',
   });
 
   // Fetch Users
@@ -180,13 +217,25 @@ export default function AdminPage() {
       collectionName: 'The Inheritance 01',
       description: '',
       images: ['/image1.jpg'],
-      colorsStr: 'Black, Grey',
+      colorsStr: 'Black, Grey, Stone',
       sizes: ['XS', 'S', 'M', 'L', 'XL'],
       inStock: true,
       stockQuantity: '50',
       featured: false,
-      fabric: '100% Handcrafted Organic Cotton',
-      care: 'Dry clean or gentle hand wash in cold water.',
+      rating: '4.9',
+      reviewsCount: '18',
+      fitNote: 'Relaxed Fit · Model is 6\'0" and wears M',
+      fitType: 'Relaxed Fit',
+      modelStats: 'Model is 6\'0" (183cm) and wears size M',
+      fabric: '100% Handcrafted Organic Cotton. Breathable, textured natural drape.',
+      fit: 'Relaxed silhouette with dropped shoulder seam and clean tailored hems.',
+      designDetailsStr: 'Relaxed architectural silhouette\nDropped shoulder seam detail\nNaturally breathable handwoven texture\nConcealed French seams for durability',
+      care: 'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.',
+      estimatedDelivery: '3–5 Business Days',
+      codAvailable: true,
+      freeShipping: true,
+      easyReturns: '7-Day Complimentary Returns & Exchanges',
+      completeTheSetStr: '',
     });
     setIsProductModalOpen(true);
   };
@@ -209,8 +258,24 @@ export default function AdminPage() {
       inStock: product.inStock,
       stockQuantity: product.stockQuantity.toString(),
       featured: product.featured,
-      fabric: product.fabric || '100% Handcrafted Organic Cotton',
+      rating: (product.rating || 4.9).toString(),
+      reviewsCount: (product.reviewsCount || 18).toString(),
+      fitNote: product.fitNote || 'Relaxed Fit · Model is 6\'0" and wears M',
+      fitType: product.fitType || 'Relaxed Fit',
+      modelStats: product.modelStats || 'Model is 6\'0" and wears M',
+      fabric: product.fabric || '100% Handcrafted Organic Cotton. Breathable, textured natural drape.',
+      fit: product.fit || 'Relaxed silhouette with dropped shoulder seam and clean tailored hems.',
+      designDetailsStr: product.designDetails && product.designDetails.length > 0
+        ? product.designDetails.join('\n')
+        : product.details && product.details.length > 0
+        ? product.details.join('\n')
+        : 'Relaxed architectural silhouette\nDropped shoulder seam detail',
       care: product.care || 'Dry clean or gentle hand wash in cold water.',
+      estimatedDelivery: product.estimatedDelivery || '3–5 Business Days',
+      codAvailable: product.codAvailable !== false,
+      freeShipping: product.freeShipping !== false,
+      easyReturns: product.easyReturns || '7-Day Complimentary Returns & Exchanges',
+      completeTheSetStr: product.completeTheSet ? product.completeTheSet.join(', ') : '',
     });
     setIsProductModalOpen(true);
   };
@@ -333,6 +398,16 @@ export default function AdminPage() {
         .map((s) => s.trim())
         .filter(Boolean);
 
+      const designDetails = productForm.designDetailsStr
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean);
+
+      const completeTheSet = productForm.completeTheSetStr
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean);
+
       const payload = {
         name: productForm.name.trim(),
         slug: productForm.slug.trim(),
@@ -347,8 +422,27 @@ export default function AdminPage() {
         inStock: productForm.inStock,
         stockQuantity: parseInt(productForm.stockQuantity || '50', 10),
         featured: productForm.featured,
-        fabric: productForm.fabric,
-        care: productForm.care,
+        
+        // Rich Attributes
+        rating: parseFloat(productForm.rating || '4.9'),
+        reviewsCount: parseInt(productForm.reviewsCount || '18', 10),
+        fitNote: productForm.fitNote.trim(),
+        fitType: productForm.fitType.trim(),
+        modelStats: productForm.modelStats.trim(),
+        fabric: productForm.fabric.trim(),
+        fit: productForm.fit.trim(),
+        designDetails,
+        details: designDetails,
+        care: productForm.care.trim(),
+        
+        // Trust Signals
+        estimatedDelivery: productForm.estimatedDelivery.trim(),
+        codAvailable: productForm.codAvailable,
+        freeShipping: productForm.freeShipping,
+        easyReturns: productForm.easyReturns.trim(),
+        
+        // Companion pieces
+        completeTheSet,
       };
 
       if (editingProduct) {
@@ -491,7 +585,6 @@ export default function AdminPage() {
   // AUTHENTICATION & AUTHORIZATION GUARDS
   // ---------------------------------------------------------------------------
 
-  // 1. Loading State
   if (status === 'loading') {
     return (
       <div className="min-h-screen bg-[#f5f5f5] text-[#1c1c1a] flex flex-col items-center justify-center p-4">
@@ -507,7 +600,6 @@ export default function AdminPage() {
     );
   }
 
-  // 2. Unauthenticated Gate (Not Logged In)
   if (status === 'unauthenticated' || !session?.user) {
     return (
       <div className="min-h-screen bg-[#f5f5f5] text-[#1c1c1a] flex flex-col items-center justify-center p-4">
@@ -543,7 +635,6 @@ export default function AdminPage() {
     );
   }
 
-  // 3. Unauthorized Gate (Logged In as Customer, Not Admin)
   if (session.user.role !== 'admin') {
     return (
       <div className="min-h-screen bg-[#f5f5f5] text-[#1c1c1a] flex flex-col items-center justify-center p-4">
@@ -584,7 +675,7 @@ export default function AdminPage() {
   }
 
   // ---------------------------------------------------------------------------
-  // 4. Authenticated Admin Dashboard
+  // Authenticated Admin Dashboard
   // ---------------------------------------------------------------------------
   return (
     <div className="min-h-screen bg-[#f5f5f5] text-[#1c1c1a] font-sans antialiased">
@@ -819,11 +910,11 @@ export default function AdminPage() {
                     <thead className="bg-[#f9f9f9] border-b border-[#1c1c1a]/10 uppercase tracking-widest text-[#1c1c1a]/70 text-[10px]">
                       <tr>
                         <th className="py-3 px-4">Item</th>
+                        <th className="py-3 px-4">Rating</th>
                         <th className="py-3 px-4">Category</th>
-                        <th className="py-3 px-4">Collection</th>
                         <th className="py-3 px-4">Price</th>
+                        <th className="py-3 px-4">Fit Note</th>
                         <th className="py-3 px-4">Stock</th>
-                        <th className="py-3 px-4">Colors & Sizes</th>
                         <th className="py-3 px-4 text-right">Actions</th>
                       </tr>
                     </thead>
@@ -850,21 +941,23 @@ export default function AdminPage() {
                               </div>
                             </div>
                           </td>
+                          <td className="py-3.5 px-4 whitespace-nowrap">
+                            <span className="text-amber-700 font-medium">★ {prod.rating || 4.9}</span>
+                            <span className="text-[10px] text-stone-400 ml-1">({prod.reviewsCount || 18})</span>
+                          </td>
                           <td className="py-3.5 px-4 whitespace-nowrap text-[#1c1c1a]/80">
                             {prod.category}
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap text-[#1c1c1a]/70 text-[11px]">
-                            {prod.collectionName}
                           </td>
                           <td className="py-3.5 px-4 whitespace-nowrap">
                             <div className="font-medium text-[#1c1c1a]">
                               ₹{prod.price.toLocaleString()}
                             </div>
-                            {prod.compareAtPrice && (
-                              <div className="text-[10px] text-stone-400 line-through">
-                                ₹{prod.compareAtPrice.toLocaleString()}
-                              </div>
-                            )}
+                            <div className="text-[9px] text-[#1c1c1a]/50">
+                              Incl. of taxes
+                            </div>
+                          </td>
+                          <td className="py-3.5 px-4 text-[11px] text-[#1c1c1a]/70 max-w-xs truncate">
+                            {prod.fitNote || 'Relaxed Fit'}
                           </td>
                           <td className="py-3.5 px-4 whitespace-nowrap">
                             <span
@@ -876,18 +969,6 @@ export default function AdminPage() {
                             >
                               {prod.inStock ? `In Stock (${prod.stockQuantity})` : 'Out of Stock'}
                             </span>
-                          </td>
-                          <td className="py-3.5 px-4">
-                            <div className="flex flex-wrap gap-1 max-w-xs">
-                              {prod.colors?.map((c, i) => (
-                                <span
-                                  key={i}
-                                  className="text-[10px] bg-stone-100 px-1.5 py-0.2 rounded-xs border border-stone-200"
-                                >
-                                  {c}
-                                </span>
-                              ))}
-                            </div>
                           </td>
                           <td className="py-3.5 px-4 whitespace-nowrap text-right space-x-2">
                             <Link
@@ -922,7 +1003,7 @@ export default function AdminPage() {
         )}
 
         {/* ========================================================================= */}
-        {/* REGISTERED USERS & SIGNED-UP LEADS TAB */}
+        {/* REGISTERED USERS TAB */}
         {/* ========================================================================= */}
         {activeTab === 'users' && (
           <div>
@@ -1101,11 +1182,11 @@ export default function AdminPage() {
       </main>
 
       {/* ========================================================================= */}
-      {/* ADD / EDIT PRODUCT MODAL WITH IMAGE UPLOAD & REMOVAL */}
+      {/* ADD / EDIT PRODUCT MODAL WITH ALL LUXURY ATTRIBUTES */}
       {/* ========================================================================= */}
       {isProductModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white w-full max-w-2xl rounded-sm border border-[#1c1c1a]/20 shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white w-full max-w-3xl rounded-sm border border-[#1c1c1a]/20 shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-start border-b border-[#1c1c1a]/10 pb-4 mb-6">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#bdb2a1] font-bold">
@@ -1124,343 +1205,494 @@ export default function AdminPage() {
             </div>
 
             <form onSubmit={handleProductSubmit} className="space-y-6 text-xs">
-              {/* Product Title & Slug */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                    Garment Name*
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={productForm.name}
-                    onChange={(e) => {
-                      const name = e.target.value;
-                      setProductForm((prev) => ({
-                        ...prev,
-                        name,
-                        slug: editingProduct ? prev.slug : name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
-                      }));
-                    }}
-                    placeholder="e.g. Kaddy Top in Cotton"
-                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
-                  />
+              {/* SECTION 1: Basic Info */}
+              <div className="space-y-4">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1">
+                  1. General Information
                 </div>
 
-                <div>
-                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                    URL Slug*
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={productForm.slug}
-                    onChange={(e) => setProductForm({ ...productForm, slug: e.target.value })}
-                    placeholder="e.g. kaddy-top-in-cotton"
-                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
-                  />
-                </div>
-              </div>
-
-              {/* Price, Compare Price, Category, Collection */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div>
-                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                    Price (₹)*
-                  </label>
-                  <input
-                    type="number"
-                    required
-                    min="0"
-                    value={productForm.price}
-                    onChange={(e) => setProductForm({ ...productForm, price: e.target.value })}
-                    placeholder="1650"
-                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                    Compare Price (₹)
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={productForm.compareAtPrice}
-                    onChange={(e) => setProductForm({ ...productForm, compareAtPrice: e.target.value })}
-                    placeholder="1950"
-                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                    Category*
-                  </label>
-                  <select
-                    value={productForm.category}
-                    onChange={(e) => setProductForm({ ...productForm, category: e.target.value })}
-                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a] bg-white cursor-pointer"
-                  >
-                    {CATEGORIES.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                    Stock Qty
-                  </label>
-                  <input
-                    type="number"
-                    min="0"
-                    value={productForm.stockQuantity}
-                    onChange={(e) => setProductForm({ ...productForm, stockQuantity: e.target.value })}
-                    placeholder="50"
-                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
-                  />
-                </div>
-              </div>
-
-              {/* Collection Name */}
-              <div>
-                <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                  Collection Name
-                </label>
-                <input
-                  type="text"
-                  value={productForm.collectionName}
-                  onChange={(e) => setProductForm({ ...productForm, collectionName: e.target.value })}
-                  placeholder="The Inheritance 01"
-                  className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
-                />
-              </div>
-
-              {/* ================================================================= */}
-              {/* IMAGE UPLOAD & GALLERY MANAGER */}
-              {/* ================================================================= */}
-              <div className="bg-[#f9f9f9] p-4 rounded-sm border border-[#1c1c1a]/15">
-                <div className="flex justify-between items-center mb-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <span className="font-semibold uppercase tracking-wider text-[11px] text-[#1c1c1a]">
-                      Garment Photos & Gallery
-                    </span>
-                    <span className="text-[10px] text-[#1c1c1a]/60 block">
-                      First photo is used as the cover on catalog pages.
-                    </span>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Garment Name*
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={productForm.name}
+                      onChange={(e) => {
+                        const name = e.target.value;
+                        setProductForm((prev) => ({
+                          ...prev,
+                          name,
+                          slug: editingProduct ? prev.slug : name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
+                        }));
+                      }}
+                      placeholder="e.g. Kaddy Top in Cotton"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
                   </div>
 
-                  {/* Hidden File Input */}
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleImageFileUpload}
-                    accept="image/jpeg,image/png,image/webp,image/avif"
-                    className="hidden"
-                  />
-
-                  {/* Upload Button */}
-                  <button
-                    type="button"
-                    disabled={uploadingImage}
-                    onClick={() => fileInputRef.current?.click()}
-                    className="px-3 py-1.5 bg-[#1c1c1a] text-white text-[11px] uppercase tracking-wider hover:bg-[#333330] transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
-                  >
-                    {uploadingImage ? (
-                      <>
-                        <svg className="animate-spin h-3.5 w-3.5 text-white" viewBox="0 0 24 24" fill="none">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                        </svg>
-                        <span>Uploading...</span>
-                      </>
-                    ) : (
-                      <span>+ Upload Photo</span>
-                    )}
-                  </button>
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      URL Slug*
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={productForm.slug}
+                      onChange={(e) => setProductForm({ ...productForm, slug: e.target.value })}
+                      placeholder="e.g. kaddy-top-in-cotton"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
                 </div>
 
-                {/* Thumbnails List */}
-                <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-3">
-                  {productForm.images.map((imgUrl, idx) => (
-                    <div
-                      key={idx}
-                      className="relative group aspect-[3/4] bg-stone-200 rounded-xs overflow-hidden border border-[#1c1c1a]/10"
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Price (₹)*
+                    </label>
+                    <input
+                      type="number"
+                      required
+                      min="0"
+                      value={productForm.price}
+                      onChange={(e) => setProductForm({ ...productForm, price: e.target.value })}
+                      placeholder="1650"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                    <span className="text-[9px] text-stone-400 mt-0.5 block">Incl. of all taxes</span>
+                  </div>
+
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Compare Price (₹)
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={productForm.compareAtPrice}
+                      onChange={(e) => setProductForm({ ...productForm, compareAtPrice: e.target.value })}
+                      placeholder="1950"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Category*
+                    </label>
+                    <select
+                      value={productForm.category}
+                      onChange={(e) => setProductForm({ ...productForm, category: e.target.value })}
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a] bg-white cursor-pointer"
                     >
-                      <Image
-                        src={imgUrl}
-                        alt={`Photo ${idx + 1}`}
-                        fill
-                        unoptimized={Boolean(imgUrl?.startsWith('data:'))}
-                        className="object-cover"
-                        sizes="120px"
-                      />
+                      {CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                      {/* Primary Cover Badge */}
-                      {idx === 0 && (
-                        <div className="absolute top-1.5 left-1.5 bg-black/80 text-white text-[9px] uppercase px-1.5 py-0.5 rounded-xs font-bold tracking-wider">
-                          Cover
-                        </div>
-                      )}
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Stock Qty
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={productForm.stockQuantity}
+                      onChange={(e) => setProductForm({ ...productForm, stockQuantity: e.target.value })}
+                      placeholder="50"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+                </div>
 
-                      {/* Hover Overlay with Actions */}
-                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-1.5">
-                        <div className="flex justify-end">
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveImage(idx)}
-                            className="bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center hover:bg-red-700 cursor-pointer"
-                            title="Remove Photo"
-                          >
-                            ✕
-                          </button>
-                        </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Collection Name
+                    </label>
+                    <input
+                      type="text"
+                      value={productForm.collectionName}
+                      onChange={(e) => setProductForm({ ...productForm, collectionName: e.target.value })}
+                      placeholder="The Inheritance 01"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
 
-                        {idx !== 0 && (
-                          <button
-                            type="button"
-                            onClick={() => handleMakeImagePrimary(idx)}
-                            className="bg-white text-black text-[9px] uppercase font-bold py-1 px-1.5 rounded-xs hover:bg-stone-100 cursor-pointer tracking-wider text-center"
-                          >
-                            Make Cover
-                          </button>
-                        )}
-                      </div>
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Product Rating (1 - 5)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      min="1"
+                      max="5"
+                      value={productForm.rating}
+                      onChange={(e) => setProductForm({ ...productForm, rating: e.target.value })}
+                      placeholder="4.9"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Reviews Count
+                    </label>
+                    <input
+                      type="number"
+                      min="0"
+                      value={productForm.reviewsCount}
+                      onChange={(e) => setProductForm({ ...productForm, reviewsCount: e.target.value })}
+                      placeholder="18"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* SECTION 2: Photos Gallery */}
+              <div className="space-y-4">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1">
+                  2. Garment Photos & Gallery
+                </div>
+
+                <div className="bg-[#f9f9f9] p-4 rounded-sm border border-[#1c1c1a]/15">
+                  <div className="flex justify-between items-center mb-3">
+                    <div>
+                      <span className="font-semibold uppercase tracking-wider text-[11px] text-[#1c1c1a]">
+                        Photo Gallery
+                      </span>
+                      <span className="text-[10px] text-[#1c1c1a]/60 block">
+                        First photo is used as the cover on catalog pages.
+                      </span>
                     </div>
-                  ))}
-                </div>
 
-                {/* Add Custom/External Image URL */}
-                <div className="flex gap-2 pt-2 border-t border-[#1c1c1a]/10">
-                  <input
-                    type="text"
-                    value={manualImageUrl}
-                    onChange={(e) => setManualImageUrl(e.target.value)}
-                    placeholder="Or enter image URL/path (e.g. /image2.jpg or https://...)"
-                    className="flex-1 border border-[#1c1c1a]/20 px-2.5 py-1.5 rounded-xs text-[11px] focus:outline-none focus:border-[#1c1c1a] bg-white"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleAddManualImage}
-                    className="px-3 py-1.5 border border-[#1c1c1a]/30 text-[11px] uppercase tracking-wider hover:bg-[#1c1c1a] hover:text-white transition-colors cursor-pointer"
-                  >
-                    Add URL
-                  </button>
-                </div>
-              </div>
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleImageFileUpload}
+                      accept="image/jpeg,image/png,image/webp,image/avif"
+                      className="hidden"
+                    />
 
-              {/* Colors (Comma Separated) */}
-              <div>
-                <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                  Colors (comma separated)
-                </label>
-                <input
-                  type="text"
-                  value={productForm.colorsStr}
-                  onChange={(e) => setProductForm({ ...productForm, colorsStr: e.target.value })}
-                  placeholder="Black, Grey, Stone"
-                  className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
-                />
-              </div>
+                    <button
+                      type="button"
+                      disabled={uploadingImage}
+                      onClick={() => fileInputRef.current?.click()}
+                      className="px-3 py-1.5 bg-[#1c1c1a] text-white text-[11px] uppercase tracking-wider hover:bg-[#333330] transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
+                    >
+                      {uploadingImage ? 'Uploading...' : '+ Upload Photo'}
+                    </button>
+                  </div>
 
-              {/* Sizes Selection */}
-              <div>
-                <label className="block font-semibold uppercase tracking-wider text-[11px] mb-2">
-                  Available Sizes
-                </label>
-                <div className="flex gap-4">
-                  {AVAILABLE_SIZES.map((size) => {
-                    const isChecked = productForm.sizes.includes(size);
-                    return (
-                      <label key={size} className="flex items-center gap-1.5 cursor-pointer">
-                        <input
-                          type="checkbox"
-                          checked={isChecked}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setProductForm((prev) => ({ ...prev, sizes: [...prev.sizes, size] }));
-                            } else {
-                              setProductForm((prev) => ({
-                                ...prev,
-                                sizes: prev.sizes.filter((s) => s !== size),
-                              }));
-                            }
-                          }}
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-3">
+                    {productForm.images.map((imgUrl, idx) => (
+                      <div
+                        key={idx}
+                        className="relative group aspect-[3/4] bg-stone-200 rounded-xs overflow-hidden border border-[#1c1c1a]/10"
+                      >
+                        <Image
+                          src={imgUrl}
+                          alt={`Photo ${idx + 1}`}
+                          fill
+                          unoptimized={Boolean(imgUrl?.startsWith('data:'))}
+                          className="object-cover"
+                          sizes="120px"
                         />
-                        <span>{size}</span>
-                      </label>
-                    );
-                  })}
+                        {idx === 0 && (
+                          <div className="absolute top-1.5 left-1.5 bg-black/80 text-white text-[9px] uppercase px-1.5 py-0.5 rounded-xs font-bold tracking-wider">
+                            Cover
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-1.5">
+                          <div className="flex justify-end">
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveImage(idx)}
+                              className="bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center hover:bg-red-700 cursor-pointer"
+                              title="Remove Photo"
+                            >
+                              ✕
+                            </button>
+                          </div>
+                          {idx !== 0 && (
+                            <button
+                              type="button"
+                              onClick={() => handleMakeImagePrimary(idx)}
+                              className="bg-white text-black text-[9px] uppercase font-bold py-1 px-1.5 rounded-xs hover:bg-stone-100 cursor-pointer tracking-wider text-center"
+                            >
+                              Make Cover
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-2 pt-2 border-t border-[#1c1c1a]/10">
+                    <input
+                      type="text"
+                      value={manualImageUrl}
+                      onChange={(e) => setManualImageUrl(e.target.value)}
+                      placeholder="Or enter image URL/path (e.g. /image2.jpg or https://...)"
+                      className="flex-1 border border-[#1c1c1a]/20 px-2.5 py-1.5 rounded-xs text-[11px] focus:outline-none focus:border-[#1c1c1a] bg-white"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddManualImage}
+                      className="px-3 py-1.5 border border-[#1c1c1a]/30 text-[11px] uppercase tracking-wider hover:bg-[#1c1c1a] hover:text-white transition-colors cursor-pointer"
+                    >
+                      Add URL
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Fabric & Care */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* SECTION 3: Sizing & Fit Note */}
+              <div className="space-y-4">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1">
+                  3. Colors, Sizing & Fit Specifications
+                </div>
+
                 <div>
                   <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                    Fabric Composition
+                    Colors (comma separated swatches)
                   </label>
                   <input
                     type="text"
-                    value={productForm.fabric}
-                    onChange={(e) => setProductForm({ ...productForm, fabric: e.target.value })}
-                    placeholder="100% Handcrafted Organic Cotton"
+                    value={productForm.colorsStr}
+                    onChange={(e) => setProductForm({ ...productForm, colorsStr: e.target.value })}
+                    placeholder="Black, Grey, Stone"
                     className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                   />
                 </div>
+
+                <div>
+                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-2">
+                    Available Sizes
+                  </label>
+                  <div className="flex flex-wrap gap-4">
+                    {AVAILABLE_SIZES.map((size) => {
+                      const isChecked = productForm.sizes.includes(size);
+                      return (
+                        <label key={size} className="flex items-center gap-1.5 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={(e) => {
+                              if (e.target.checked) {
+                                setProductForm((prev) => ({ ...prev, sizes: [...prev.sizes, size] }));
+                              } else {
+                                setProductForm((prev) => ({
+                                  ...prev,
+                                  sizes: prev.sizes.filter((s) => s !== size),
+                                }));
+                              }
+                            }}
+                          />
+                          <span>{size}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Short Fit Note (Displayed prominently near size picker)
+                    </label>
+                    <input
+                      type="text"
+                      value={productForm.fitNote}
+                      onChange={(e) => setProductForm({ ...productForm, fitNote: e.target.value })}
+                      placeholder="e.g. Relaxed Fit · Model is 6'0&quot; and wears M"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Model Dimensions / Height
+                    </label>
+                    <input
+                      type="text"
+                      value={productForm.modelStats}
+                      onChange={(e) => setProductForm({ ...productForm, modelStats: e.target.value })}
+                      placeholder="e.g. Model is 6'0&quot; (183cm) and wears size M"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* SECTION 4: Product Details & Accordions */}
+              <div className="space-y-4">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1">
+                  4. Product Narrative & Accordion Content
+                </div>
+
                 <div>
                   <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                    Care Instructions
+                    Editorial Description*
+                  </label>
+                  <textarea
+                    rows={3}
+                    required
+                    value={productForm.description}
+                    onChange={(e) => setProductForm({ ...productForm, description: e.target.value })}
+                    placeholder="Architectural silhouette tailored with refined dropped shoulder seam..."
+                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a] resize-none"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Fabric & Feel (Composition & Texture)
+                    </label>
+                    <input
+                      type="text"
+                      value={productForm.fabric}
+                      onChange={(e) => setProductForm({ ...productForm, fabric: e.target.value })}
+                      placeholder="100% Handcrafted Organic Cotton. Soft brushed texture."
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Fit Description
+                    </label>
+                    <input
+                      type="text"
+                      value={productForm.fit}
+                      onChange={(e) => setProductForm({ ...productForm, fit: e.target.value })}
+                      placeholder="Relaxed silhouette with dropped shoulders."
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                    Design Details (Enter one pointer per line)
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={productForm.designDetailsStr}
+                    onChange={(e) => setProductForm({ ...productForm, designDetailsStr: e.target.value })}
+                    placeholder="Relaxed architectural silhouette&#10;Dropped shoulder seam detail&#10;Naturally breathable handwoven texture&#10;Concealed French seams"
+                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a] resize-none font-mono text-[11px]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                    Wash Care Guidelines
                   </label>
                   <input
                     type="text"
                     value={productForm.care}
                     onChange={(e) => setProductForm({ ...productForm, care: e.target.value })}
-                    placeholder="Dry clean or gentle hand wash."
+                    placeholder="Dry clean or gentle hand wash in cold water with mild detergent."
                     className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                   />
                 </div>
               </div>
 
-              {/* Description */}
-              <div>
-                <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                  Product Description*
-                </label>
-                <textarea
-                  rows={3}
-                  required
-                  value={productForm.description}
-                  onChange={(e) => setProductForm({ ...productForm, description: e.target.value })}
-                  placeholder="Architectural silhouette tailored with refined dropped shoulder seam..."
-                  className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a] resize-none"
-                />
+              {/* SECTION 5: Trust Signals & Companion Set */}
+              <div className="space-y-4">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1">
+                  5. Trust Signals & Companion Pieces
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Estimated Delivery
+                    </label>
+                    <input
+                      type="text"
+                      value={productForm.estimatedDelivery}
+                      onChange={(e) => setProductForm({ ...productForm, estimatedDelivery: e.target.value })}
+                      placeholder="3–5 Business Days"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                      Return Policy
+                    </label>
+                    <input
+                      type="text"
+                      value={productForm.easyReturns}
+                      onChange={(e) => setProductForm({ ...productForm, easyReturns: e.target.value })}
+                      placeholder="7-Day Complimentary Returns & Exchanges"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-6 pt-1">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={productForm.codAvailable}
+                      onChange={(e) => setProductForm({ ...productForm, codAvailable: e.target.checked })}
+                    />
+                    <span className="uppercase tracking-wider text-[11px]">COD Available</span>
+                  </label>
+
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={productForm.freeShipping}
+                      onChange={(e) => setProductForm({ ...productForm, freeShipping: e.target.checked })}
+                    />
+                    <span className="uppercase tracking-wider text-[11px]">Free Express Shipping</span>
+                  </label>
+
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={productForm.inStock}
+                      onChange={(e) => setProductForm({ ...productForm, inStock: e.target.checked })}
+                    />
+                    <span className="uppercase tracking-wider text-[11px]">In Stock</span>
+                  </label>
+
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={productForm.featured}
+                      onChange={(e) => setProductForm({ ...productForm, featured: e.target.checked })}
+                    />
+                    <span className="uppercase tracking-wider text-[11px]">Featured Piece</span>
+                  </label>
+                </div>
+
+                <div>
+                  <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
+                    Complete the Set (Companion product slugs, comma-separated)
+                  </label>
+                  <input
+                    type="text"
+                    value={productForm.completeTheSetStr}
+                    onChange={(e) => setProductForm({ ...productForm, completeTheSetStr: e.target.value })}
+                    placeholder="e.g. alfidis-pant-in-cotton, stella-slipper-in-leather"
+                    className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                  />
+                </div>
               </div>
 
-              {/* Flags */}
-              <div className="flex gap-6 pt-2">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={productForm.inStock}
-                    onChange={(e) => setProductForm({ ...productForm, inStock: e.target.checked })}
-                  />
-                  <span className="uppercase tracking-wider text-[11px]">In Stock</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={productForm.featured}
-                    onChange={(e) => setProductForm({ ...productForm, featured: e.target.checked })}
-                  />
-                  <span className="uppercase tracking-wider text-[11px]">Featured Garment</span>
-                </label>
-              </div>
-
-              {/* Actions */}
+              {/* Modal Bottom Actions */}
               <div className="mt-8 pt-4 border-t border-[#1c1c1a]/10 flex justify-end gap-3">
                 <button
                   type="button"

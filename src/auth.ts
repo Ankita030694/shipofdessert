@@ -13,34 +13,44 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            console.log('[Auth] Missing email or password in request');
+            return null;
+          }
+
+          await connectToDatabase();
+
+          const email = (credentials.email as string).trim().toLowerCase();
+          const user = await User.findOne({ email });
+
+          if (!user || !user.password) {
+            console.log('[Auth] No user found with email:', email);
+            return null;
+          }
+
+          const isValid = await bcrypt.compare(
+            credentials.password as string,
+            user.password
+          );
+
+          if (!isValid) {
+            console.log('[Auth] Password comparison failed for email:', email);
+            return null;
+          }
+
+          console.log('[Auth] Login successful for user:', email, 'Role:', user.role);
+
+          return {
+            id: user._id.toString(),
+            name: user.name || `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Admin User',
+            email: user.email,
+            role: user.role || 'customer',
+          };
+        } catch (error) {
+          console.error('[Auth Exception in authorize]:', error);
           return null;
         }
-
-        await connectToDatabase();
-
-        const email = (credentials.email as string).trim().toLowerCase();
-        const user = await User.findOne({ email });
-
-        if (!user || !user.password) {
-          return null;
-        }
-
-        const isValid = await bcrypt.compare(
-          credentials.password as string,
-          user.password
-        );
-
-        if (!isValid) {
-          return null;
-        }
-
-        return {
-          id: user._id.toString(),
-          name: user.name || `${user.firstName} ${user.lastName}`.trim(),
-          email: user.email,
-          role: user.role || 'customer',
-        };
       },
     }),
   ],
@@ -51,7 +61,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.role = user.role || 'customer';
+        token.role = (user as unknown as { role?: string }).role || 'customer';
       }
       return token;
     },

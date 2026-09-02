@@ -15,9 +15,28 @@ export interface IProduct extends Document {
   inStock: boolean;
   stockQuantity: number;
   featured: boolean;
-  details?: string[];
+  
+  // Rich Attributes
+  rating: number;
+  reviewsCount: number;
+  fitNote?: string;
+  fitType?: string;
+  modelStats?: string;
   fabric?: string;
+  fit?: string;
+  designDetails?: string[];
+  details?: string[];
   care?: string;
+  
+  // Trust Signals
+  estimatedDelivery?: string;
+  codAvailable: boolean;
+  freeShipping: boolean;
+  easyReturns?: string;
+  
+  // Companion / Cross-sell
+  completeTheSet?: string[];
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -98,17 +117,87 @@ const ProductSchema = new Schema<IProduct>(
       type: Boolean,
       default: false,
     },
+
+    // Rich Attributes
+    rating: {
+      type: Number,
+      default: 4.9,
+      min: 1,
+      max: 5,
+    },
+    reviewsCount: {
+      type: Number,
+      default: 18,
+      min: 0,
+    },
+    fitNote: {
+      type: String,
+      default: 'Relaxed Fit · Model is 6\'0" and wears M',
+      trim: true,
+    },
+    fitType: {
+      type: String,
+      default: 'Relaxed Fit',
+      trim: true,
+    },
+    modelStats: {
+      type: String,
+      default: 'Model is 6\'0" and wears M',
+      trim: true,
+    },
+    fabric: {
+      type: String,
+      default: '100% Handcrafted Organic Cotton. Breathable, textured natural drape.',
+      trim: true,
+    },
+    fit: {
+      type: String,
+      default: 'Relaxed silhouette with dropped shoulder seam and clean tailored hems.',
+      trim: true,
+    },
+    designDetails: {
+      type: [String],
+      default: [
+        'Relaxed architectural silhouette',
+        'Dropped shoulder seam detail',
+        'Naturally breathable handwoven texture',
+        'Concealed French seams for durability',
+      ],
+    },
     details: {
       type: [String],
       default: [],
     },
-    fabric: {
-      type: String,
-      default: '100% Handloom Organic Cotton',
-    },
     care: {
       type: String,
-      default: 'Dry clean or gentle hand wash in cold water.',
+      default: 'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.',
+      trim: true,
+    },
+
+    // Trust Signals
+    estimatedDelivery: {
+      type: String,
+      default: '3–5 Business Days',
+      trim: true,
+    },
+    codAvailable: {
+      type: Boolean,
+      default: true,
+    },
+    freeShipping: {
+      type: Boolean,
+      default: true,
+    },
+    easyReturns: {
+      type: String,
+      default: '7-Day Complimentary Returns & Exchanges',
+      trim: true,
+    },
+
+    // Companion pieces
+    completeTheSet: {
+      type: [String],
+      default: [],
     },
   },
   {

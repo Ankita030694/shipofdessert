@@ -18,154 +18,158 @@ const INITIAL_PRODUCTS = [
     inStock: true,
     stockQuantity: 45,
     featured: true,
-    fabric: '100% Handcrafted Organic Cotton',
-    care: 'Dry clean or gentle hand wash in cold water.',
-    details: [
+    rating: 4.9,
+    reviewsCount: 24,
+    fitNote: 'Relaxed Fit · Model is 6\'0" and wears M',
+    fitType: 'Relaxed Fit',
+    modelStats: 'Model is 6\'0" (183cm) and wears size M',
+    fabric: '100% Handcrafted Organic Cotton. Breathable, medium-weight textured natural drape.',
+    fit: 'Relaxed silhouette with dropped shoulder seam and clean tailored hems.',
+    designDetails: [
       'Relaxed architectural silhouette',
       'Dropped shoulder seam detail',
       'Naturally breathable handwoven texture',
-      'Made ethically in our partner atelier'
-    ]
+      'Concealed French seams for durability',
+      'Made ethically in our partner atelier in Rajasthan',
+    ],
+    care: 'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.',
+    estimatedDelivery: '3–5 Business Days',
+    codAvailable: true,
+    freeShipping: true,
+    easyReturns: '7-Day Complimentary Returns & Exchanges',
+    completeTheSet: ['alfidis-pant-in-cotton', 'stella-slipper-in-leather'],
   },
   {
     name: 'Kabira Top in Cotton',
     slug: 'kabira-top-in-cotton',
     description: 'Minimalist high-neck tunic top cut from breathable textured cotton. Tailored with clean edge finishing and discreet side slits.',
     price: 1750,
+    compareAtPrice: 2100,
     currency: 'INR',
     category: 'Tops',
     collectionName: 'The Inheritance 01',
     images: ['/image2.jpg', '/image1.jpg', '/image4.jpg'],
-    colors: ['White', 'Grey', 'Charcoal'],
-    sizes: ['XS', 'S', 'M', 'L'],
+    colors: ['White', 'Off-White', 'Charcoal'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
     inStock: true,
     stockQuantity: 30,
     featured: true,
-    fabric: '100% Crisp Poplin Cotton',
-    care: 'Machine wash cold on delicate cycle.',
-    details: [
+    rating: 4.8,
+    reviewsCount: 16,
+    fitNote: 'Straight Cut · Model is 5\'10" and wears S',
+    fitType: 'Straight Cut',
+    modelStats: 'Model is 5\'10" (178cm) and wears size S',
+    fabric: '100% Crisp Poplin Cotton. Pre-washed for soft handfeel.',
+    fit: 'Straight fit with side split hem for fluid drape.',
+    designDetails: [
       'Subtle mock neckline',
       'Side split hem for fluid drape',
-      'Minimal invisible rear closure'
-    ]
+      'Minimal invisible rear closure',
+      'Reinforced bar-tack stitching',
+    ],
+    care: 'Machine wash cold on delicate cycle. Warm iron inside out.',
+    estimatedDelivery: '3–5 Business Days',
+    codAvailable: true,
+    freeShipping: true,
+    easyReturns: '7-Day Complimentary Returns & Exchanges',
+    completeTheSet: ['alfidis-pant-in-cotton'],
   },
   {
     name: 'Stella Slipper in Leather',
     slug: 'stella-slipper-in-leather',
     description: 'Handcrafted artisan leather slipper featuring clean lines, a cushioned footbed, and enduring full-grain calfskin leather.',
     price: 920,
+    compareAtPrice: 1200,
     currency: 'INR',
     category: 'Footwear',
     collectionName: 'Core Collection',
     images: ['/image3.jpg', '/image1.jpg'],
-    colors: ['Black', 'Brown'],
-    sizes: ['36', '37', '38', '39', '40', '41'],
+    colors: ['Black', 'Tan', 'Dark Brown'],
+    sizes: ['38', '39', '40', '41', '42'],
     inStock: true,
-    stockQuantity: 25,
-    featured: true,
-    fabric: '100% Full-Grain Vegetable Tanned Leather',
-    care: 'Condition periodically with natural leather balm.',
-    details: [
-      'Ergonomic leather footbed',
-      'Hand-stitched perimeter',
-      'Slip-on ease with architectural profile'
-    ]
+    stockQuantity: 20,
+    featured: false,
+    rating: 5.0,
+    reviewsCount: 31,
+    fitNote: 'True to Size · If between sizes, size up',
+    fitType: 'Standard Width',
+    modelStats: 'Fits true to European size standards',
+    fabric: '100% Full-grain Vegetable Tanned Calfskin Leather with natural leather sole.',
+    fit: 'Ergonomic footbed that molds to your feet over time.',
+    designDetails: [
+      'Hand-stitched leather sole welt',
+      'Ergonomic cushioned arch support',
+      'Natural vegetable tanning process',
+    ],
+    care: 'Condition periodically with specialized leather balm. Avoid direct water immersion.',
+    estimatedDelivery: '2–4 Business Days',
+    codAvailable: true,
+    freeShipping: true,
+    easyReturns: '7-Day Complimentary Returns & Exchanges',
+    completeTheSet: ['kaddy-top-in-cotton'],
   },
   {
     name: 'Alfidis Pant in Cotton',
     slug: 'alfidis-pant-in-cotton',
-    description: 'Wide-leg tailored trouser shaped by considered proportions, deep pleats, and an elasticated back waistband for uncompromised comfort.',
+    description: 'Wide-leg trousers with front pleating, elasticated back waistband, and side-seam pockets. Cut from mid-weight natural cotton drill.',
     price: 1390,
+    compareAtPrice: 1650,
     currency: 'INR',
     category: 'Pants',
     collectionName: 'The Inheritance 01',
-    images: ['/image4.jpg', '/image2.jpg', '/image3.jpg'],
-    colors: ['Brown', 'Charcoal', 'Sand'],
-    sizes: ['S', 'M', 'L', 'XL'],
+    images: ['/image4.jpg', '/image2.jpg'],
+    colors: ['Brown', 'Ecru', 'Black'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL'],
     inStock: true,
     stockQuantity: 35,
-    featured: false,
-    fabric: '100% Heavyweight Handloom Cotton Twill',
-    care: 'Dry clean recommended.',
-    details: [
-      'Deep double front pleats',
-      'Concealed horn button fastening',
-      'Side seam slash pockets'
-    ]
-  },
-  {
-    name: 'Aura Silk Wrap Dress',
-    slug: 'aura-silk-wrap-dress',
-    description: 'A fluid wrap dress crafted from raw Mulberry silk with a self-tie waist sash and sculpted dolman sleeves.',
-    price: 2450,
-    compareAtPrice: 2800,
-    currency: 'INR',
-    category: 'Dresses',
-    collectionName: 'The Inheritance 01',
-    images: ['/image1.jpg', '/image3.jpg'],
-    colors: ['Stone', 'Black'],
-    sizes: ['XS', 'S', 'M', 'L'],
-    inStock: true,
-    stockQuantity: 20,
     featured: true,
-    fabric: '100% Raw Mulberry Silk',
-    care: 'Professional dry clean only.',
-    details: [
-      'Adjustable wrap silhouette',
-      'Subtle kimono-inspired neckline',
-      'Ankle-grazing length with graceful drape'
-    ]
+    rating: 4.9,
+    reviewsCount: 19,
+    fitNote: 'Relaxed Wide-Leg · High Rise · Model is 6\'0" and wears M',
+    fitType: 'Relaxed Wide-Leg',
+    modelStats: 'Model is 6\'0" (183cm) and wears size M',
+    fabric: '100% Mid-weight Cotton Twill. Structured yet soft.',
+    fit: 'High-rise with relaxed wide leg and tailored deep front pleats.',
+    designDetails: [
+      'High-waisted silhouette with elasticated rear waistband',
+      'Deep dual front knife pleats',
+      'Generous side seam pockets and rear welt pocket',
+    ],
+    care: 'Machine wash cold with similar colors. Line dry in shade.',
+    estimatedDelivery: '3–5 Business Days',
+    codAvailable: true,
+    freeShipping: true,
+    easyReturns: '7-Day Complimentary Returns & Exchanges',
+    completeTheSet: ['kaddy-top-in-cotton', 'stella-slipper-in-leather'],
   },
-  {
-    name: 'Mirage Linen Pleated Skirt',
-    slug: 'mirage-linen-pleated-skirt',
-    description: 'An elongated midi skirt shaped by crisp inverted pleats in pure European washed linen.',
-    price: 1890,
-    currency: 'INR',
-    category: 'Skirts',
-    collectionName: 'The Inheritance 01',
-    images: ['/image2.jpg', '/image4.jpg'],
-    colors: ['Sand', 'Slate', 'Black'],
-    sizes: ['XS', 'S', 'M', 'L'],
-    inStock: true,
-    stockQuantity: 28,
-    featured: false,
-    fabric: '100% Pure Washed Linen',
-    care: 'Gentle hand wash in cold water.',
-    details: [
-      'High-rise waist with tailored waistband',
-      'Invisible side zipper',
-      'Generous movement and drape'
-    ]
-  }
 ];
 
 export async function POST() {
   try {
     await connectToDatabase();
 
-    // Check existing count
-    const existingCount = await Product.countDocuments();
-    
-    // Upsert or insert initial products
-    for (const prod of INITIAL_PRODUCTS) {
-      await Product.findOneAndUpdate(
-        { slug: prod.slug },
-        prod,
-        { upsert: true, returnDocument: 'after' }
-      );
+    // Check if products already exist
+    const count = await Product.countDocuments();
+    if (count > 0) {
+      // Upsert seed products to update attributes
+      for (const p of INITIAL_PRODUCTS) {
+        await Product.findOneAndUpdate({ slug: p.slug }, p, { upsert: true });
+      }
+      return NextResponse.json({
+        success: true,
+        message: `Catalog updated (${INITIAL_PRODUCTS.length} seed products updated with rich attributes).`,
+      });
     }
 
-    const totalCount = await Product.countDocuments();
+    // Insert initial catalog
+    await Product.insertMany(INITIAL_PRODUCTS);
 
     return NextResponse.json({
       success: true,
-      message: `Database successfully seeded with KSHAUM products. Total products in database: ${totalCount}`,
-      initialCount: existingCount,
-      currentCount: totalCount,
+      message: `Catalogue seeded with ${INITIAL_PRODUCTS.length} products.`,
     });
   } catch (error: unknown) {
-    console.error('Products seed error:', error);
+    console.error('Seed API error:', error);
     const message = error instanceof Error ? error.message : 'Failed to seed products';
     return NextResponse.json({ success: false, message }, { status: 500 });
   }

@@ -34,6 +34,27 @@ export async function GET(request: NextRequest, { params }: Params) {
       .limit(3)
       .lean();
 
+    // Fetch "Complete the Set" items if specified
+    let companionItems: Array<{ id: string; name: string; slug: string; price: number; image: string }> = [];
+    if (product.completeTheSet && product.completeTheSet.length > 0) {
+      const companions = await Product.find({
+        $or: [
+          { slug: { $in: product.completeTheSet } },
+          { name: { $in: product.completeTheSet } },
+        ],
+      })
+        .limit(4)
+        .lean();
+
+      companionItems = companions.map((c) => ({
+        id: c._id.toString(),
+        name: c.name,
+        slug: c.slug,
+        price: c.price,
+        image: c.images[0] || '/image1.jpg',
+      }));
+    }
+
     const formattedProduct = {
       id: product._id.toString(),
       name: product.name,
@@ -41,7 +62,7 @@ export async function GET(request: NextRequest, { params }: Params) {
       description: product.description,
       price: product.price,
       compareAtPrice: product.compareAtPrice,
-      currency: product.currency,
+      currency: product.currency || 'INR',
       category: product.category,
       collectionName: product.collectionName,
       images: product.images,
@@ -51,9 +72,34 @@ export async function GET(request: NextRequest, { params }: Params) {
       inStock: product.inStock,
       stockQuantity: product.stockQuantity,
       featured: product.featured,
-      fabric: product.fabric,
-      care: product.care,
-      details: product.details,
+
+      // Rich Attributes
+      rating: product.rating || 4.9,
+      reviewsCount: product.reviewsCount || 18,
+      fitNote: product.fitNote || 'Relaxed Fit · Model is 6\'0" and wears M',
+      fitType: product.fitType || 'Relaxed Fit',
+      modelStats: product.modelStats || 'Model is 6\'0" and wears M',
+      fabric: product.fabric || '100% Handcrafted Organic Cotton. Breathable, textured natural drape.',
+      fit: product.fit || 'Relaxed silhouette with dropped shoulder seam and clean tailored hems.',
+      designDetails: product.designDetails || product.details || [
+        'Relaxed architectural silhouette',
+        'Dropped shoulder seam detail',
+        'Naturally breathable handwoven texture',
+        'Concealed French seams for durability',
+      ],
+      details: product.details || [],
+      care: product.care || 'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.',
+
+      // Trust Signals
+      estimatedDelivery: product.estimatedDelivery || '3–5 Business Days',
+      codAvailable: product.codAvailable !== false,
+      freeShipping: product.freeShipping !== false,
+      easyReturns: product.easyReturns || '7-Day Complimentary Returns & Exchanges',
+
+      // Companion pieces
+      completeTheSet: product.completeTheSet || [],
+      companionItems,
+
       createdAt: product.createdAt ? new Date(product.createdAt).toISOString() : new Date().toISOString(),
       relatedProducts: related.map((r) => ({
         id: r._id.toString(),
@@ -83,6 +129,15 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     const query: Record<string, unknown> = mongoose.Types.ObjectId.isValid(slug)
       ? { $or: [{ slug: slug.toLowerCase() }, { _id: slug }] }
       : { slug: slug.toLowerCase() };
+
+    if (body.designDetails && typeof body.designDetails === 'string') {
+      body.designDetails = body.designDetails.split('\n').map((s: string) => s.trim()).filter(Boolean);
+      body.details = body.designDetails;
+    }
+
+    if (body.completeTheSet && typeof body.completeTheSet === 'string') {
+      body.completeTheSet = body.completeTheSet.split(',').map((s: string) => s.trim()).filter(Boolean);
+    }
 
     const updated = await Product.findOneAndUpdate(query, body, {
       returnDocument: 'after',

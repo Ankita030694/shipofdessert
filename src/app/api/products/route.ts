@@ -44,6 +44,8 @@ export async function GET(request: NextRequest) {
         { category: regex },
         { collectionName: regex },
         { colors: regex },
+        { fabric: regex },
+        { fit: regex },
       ];
     }
 
@@ -83,9 +85,33 @@ export async function GET(request: NextRequest) {
       inStock: p.inStock,
       stockQuantity: p.stockQuantity,
       featured: p.featured,
-      fabric: p.fabric,
-      care: p.care,
-      details: p.details,
+      
+      // Rich Attributes
+      rating: p.rating || 4.9,
+      reviewsCount: p.reviewsCount || 18,
+      fitNote: p.fitNote || 'Relaxed Fit · Model is 6\'0" and wears M',
+      fitType: p.fitType || 'Relaxed Fit',
+      modelStats: p.modelStats || 'Model is 6\'0" and wears M',
+      fabric: p.fabric || '100% Handcrafted Organic Cotton. Breathable, textured natural drape.',
+      fit: p.fit || 'Relaxed silhouette with dropped shoulder seam and clean tailored hems.',
+      designDetails: p.designDetails || p.details || [
+        'Relaxed architectural silhouette',
+        'Dropped shoulder seam detail',
+        'Naturally breathable handwoven texture',
+        'Concealed French seams for durability',
+      ],
+      details: p.details || [],
+      care: p.care || 'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.',
+      
+      // Trust Signals
+      estimatedDelivery: p.estimatedDelivery || '3–5 Business Days',
+      codAvailable: p.codAvailable !== false,
+      freeShipping: p.freeShipping !== false,
+      easyReturns: p.easyReturns || '7-Day Complimentary Returns & Exchanges',
+      
+      // Companion pieces
+      completeTheSet: p.completeTheSet || [],
+
       createdAt: p.createdAt ? new Date(p.createdAt).toISOString() : new Date().toISOString(),
     }));
 
@@ -130,6 +156,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const designDetailsArray = Array.isArray(body.designDetails)
+      ? body.designDetails
+      : typeof body.designDetails === 'string'
+      ? body.designDetails.split('\n').map((s: string) => s.trim()).filter(Boolean)
+      : Array.isArray(body.details)
+      ? body.details
+      : [];
+
+    const completeTheSetArray = Array.isArray(body.completeTheSet)
+      ? body.completeTheSet
+      : typeof body.completeTheSet === 'string'
+      ? body.completeTheSet.split(',').map((s: string) => s.trim()).filter(Boolean)
+      : [];
+
     const newProduct = await Product.create({
       name: name.trim(),
       slug,
@@ -145,9 +185,27 @@ export async function POST(request: NextRequest) {
       inStock: body.inStock !== false,
       stockQuantity: body.stockQuantity !== undefined ? Number(body.stockQuantity) : 50,
       featured: Boolean(body.featured),
-      fabric: body.fabric || '100% Handcrafted Organic Cotton',
-      care: body.care || 'Dry clean or gentle hand wash.',
-      details: Array.isArray(body.details) ? body.details : [],
+      
+      // Rich Attributes
+      rating: body.rating ? Number(body.rating) : 4.9,
+      reviewsCount: body.reviewsCount ? Number(body.reviewsCount) : 18,
+      fitNote: body.fitNote || 'Relaxed Fit · Model is 6\'0" and wears M',
+      fitType: body.fitType || 'Relaxed Fit',
+      modelStats: body.modelStats || 'Model is 6\'0" and wears M',
+      fabric: body.fabric || '100% Handcrafted Organic Cotton. Breathable, textured natural drape.',
+      fit: body.fit || 'Relaxed silhouette with dropped shoulder seam and clean tailored hems.',
+      designDetails: designDetailsArray,
+      details: designDetailsArray,
+      care: body.care || 'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.',
+      
+      // Trust Signals
+      estimatedDelivery: body.estimatedDelivery || '3–5 Business Days',
+      codAvailable: body.codAvailable !== false,
+      freeShipping: body.freeShipping !== false,
+      easyReturns: body.easyReturns || '7-Day Complimentary Returns & Exchanges',
+      
+      // Complete the set
+      completeTheSet: completeTheSetArray,
     });
 
     return NextResponse.json(
