@@ -1898,11 +1898,18 @@ export default function AdminPage() {
                         <div className="flex-1">
                           <div className="flex justify-between items-center">
                             <span className="font-semibold text-[#1c1c1a]">{ev.title}</span>
-                            <span className="text-[10px] text-stone-400">
-                              {new Date(ev.createdAt).toLocaleTimeString([], {
-                                hour: '2-digit',
-                                minute: '2-digit',
-                              })}
+                            <span className="text-[10px] text-stone-500 font-mono">
+                              {(() => {
+                                const d = ev.createdAt ? new Date(ev.createdAt) : new Date();
+                                return !isNaN(d.getTime())
+                                  ? d.toLocaleDateString('en-US', {
+                                      month: 'short',
+                                      day: 'numeric',
+                                      hour: '2-digit',
+                                      minute: '2-digit',
+                                    })
+                                  : 'Recent';
+                              })()}
                             </span>
                           </div>
                           {ev.description && (

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 
 export interface CartItem {
@@ -62,6 +62,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState<boolean>(true);
   const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [hasInitialized, setHasInitialized] = useState<boolean>(false);
+  const previousUserIdRef = useRef<string | undefined>(undefined);
 
   const openCart = useCallback(() => setIsCartOpen(true), []);
   const closeCart = useCallback(() => setIsCartOpen(false), []);
@@ -95,6 +96,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       setLoading(true);
       const sessionId = getOrCreateSessionId();
+      const currentUserId = session?.user?.id || session?.user?.email || undefined;
+
+      // Detect account switch
+      const isAccountSwitch = previousUserIdRef.current !== undefined && previousUserIdRef.current !== currentUserId;
+      previousUserIdRef.current = currentUserId;
+
+      if (isAccountSwitch && typeof window !== 'undefined') {
+        // Clear old local cache when switching accounts
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+      }
 
       const res = await fetch(`/api/cart?sessionId=${sessionId}`, {
         headers: { 'x-session-id': sessionId },
@@ -105,47 +116,65 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (res.ok && data.success && data.data?.items) {
         if (data.data.items.length > 0) {
           setItems(data.data.items);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data.data.items));
+          }
         } else {
-          // If server is empty, check localStorage for any offline guest items and merge
-          const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-          if (saved) {
-            try {
-              const localItems: CartItem[] = JSON.parse(saved);
-              if (localItems.length > 0) {
-                setItems(localItems);
-                // Send local items to server
-                await fetch('/api/cart', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json', 'x-session-id': sessionId },
-                  body: JSON.stringify({ mergeItems: localItems }),
-                });
+          // Server has 0 items
+          if (!session?.user && typeof window !== 'undefined') {
+            // Only guest mode checks localStorage
+            const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+            if (saved) {
+              try {
+                const localItems: CartItem[] = JSON.parse(saved);
+                if (localItems.length > 0) {
+                  setItems(localItems);
+                  // Sync to server
+                  await fetch('/api/cart', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'x-session-id': sessionId },
+                    body: JSON.stringify({ mergeItems: localItems }),
+                  });
+                } else {
+                  setItems([]);
+                }
+              } catch {
+                setItems([]);
               }
-            } catch (err) {
-              console.error('Error parsing local cart:', err);
+            } else {
+              setItems([]);
+            }
+          } else {
+            // Logged-in user with empty server cart gets empty cart
+            setItems([]);
+            if (typeof window !== 'undefined') {
+              localStorage.setItem(LOCAL_STORAGE_KEY, '[]');
             }
           }
         }
       }
     } catch (err) {
       console.error('Failed to sync cart from backend:', err);
-      // Fallback to localStorage
-      const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (saved) {
-        try {
-          setItems(JSON.parse(saved));
-        } catch {
-          // ignore
+      // Fallback
+      if (typeof window !== 'undefined') {
+        const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (saved) {
+          try {
+            setItems(JSON.parse(saved));
+          } catch {
+            setItems([]);
+          }
         }
       }
     } finally {
       setLoading(false);
       setHasInitialized(true);
     }
-  }, [status]);
+  }, [status, session?.user]);
 
   useEffect(() => {
     fetchBackendCart();
-  }, [fetchBackendCart, session?.user]);
+  }, [fetchBackendCart]);
 
   // Add Item to Cart
   const addToCart = async (input: AddToCartInput) => {
@@ -163,12 +192,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           i.color.toLowerCase() === targetColor.toLowerCase()
       );
 
+      let updated: CartItem[];
       if (existingIndex > -1) {
-        const updated = [...prev];
-        updated[existingIndex].quantity += addQty;
-        return updated;
+        updated = [...prev];
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          quantity: updated[existingIndex].quantity + addQty,
+        };
       } else {
-        return [
+        updated = [
           ...prev,
           {
             id: tempId,
@@ -183,6 +215,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           },
         ];
       }
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated));
+      }
+      return updated;
     });
 
     // Auto open drawer to confirm addition to customer
@@ -209,6 +246,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       const data = await res.json();
       if (res.ok && data.success && data.data?.items) {
         setItems(data.data.items);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data.data.items));
+        }
       }
     } catch (err) {
       console.error('Error syncing add-to-cart with server:', err);
@@ -219,10 +259,29 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const updateQuantity = async (itemId: string, quantity: number) => {
     // Optimistic update
     setItems((prev) => {
+      let updated: CartItem[];
       if (quantity <= 0) {
-        return prev.filter((i) => i.id !== itemId);
+        updated = prev.filter(
+          (i) =>
+            i.id !== itemId &&
+            `${i.slug}-${i.size}-${i.color}`.toLowerCase() !== itemId.toLowerCase()
+        );
+      } else {
+        updated = prev.map((i) => {
+          if (
+            i.id === itemId ||
+            `${i.slug}-${i.size}-${i.color}`.toLowerCase() === itemId.toLowerCase()
+          ) {
+            return { ...i, quantity };
+          }
+          return i;
+        });
       }
-      return prev.map((i) => (i.id === itemId ? { ...i, quantity } : i));
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated));
+      }
+      return updated;
     });
 
     // Sync with backend
@@ -237,6 +296,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       const data = await res.json();
       if (res.ok && data.success && data.data?.items) {
         setItems(data.data.items);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data.data.items));
+        }
       }
     } catch (err) {
       console.error('Error syncing update-quantity with server:', err);
@@ -245,11 +307,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   // Remove item
   const removeItem = async (itemId: string) => {
-    setItems((prev) => prev.filter((i) => i.id !== itemId));
+    setItems((prev) => {
+      const updated = prev.filter(
+        (i) =>
+          i.id !== itemId &&
+          `${i.slug}-${i.size}-${i.color}`.toLowerCase() !== itemId.toLowerCase()
+      );
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated));
+      }
+      return updated;
+    });
 
     try {
       const sessionId = getOrCreateSessionId();
-      const res = await fetch(`/api/cart?itemId=${itemId}`, {
+      const res = await fetch(`/api/cart?itemId=${encodeURIComponent(itemId)}`, {
         method: 'DELETE',
         headers: { 'x-session-id': sessionId },
       });
@@ -257,6 +329,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       const data = await res.json();
       if (res.ok && data.success && data.data?.items) {
         setItems(data.data.items);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data.data.items));
+        }
       }
     } catch (err) {
       console.error('Error syncing remove-item with server:', err);
@@ -266,6 +341,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Clear cart
   const clearCart = async () => {
     setItems([]);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(LOCAL_STORAGE_KEY);
+      localStorage.setItem(LOCAL_STORAGE_KEY, '[]');
+    }
 
     try {
       const sessionId = getOrCreateSessionId();

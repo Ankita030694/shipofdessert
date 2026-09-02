@@ -3,6 +3,8 @@ import connectToDatabase from '@/lib/mongodb';
 import Cart, { ICartItem } from '@/models/Cart';
 import { auth } from '@/auth';
 
+export const dynamic = 'force-dynamic';
+
 // Helper to determine user identity (either session user or guest sessionId)
 async function getCartIdentifier(request: NextRequest) {
   const session = await auth();
@@ -72,28 +74,28 @@ export async function POST(request: NextRequest) {
 
     const { productId, slug, name, image, price, color, size, quantity = 1, mergeItems } = body;
 
+    if (!userId && !sessionId) {
+      return NextResponse.json(
+        { success: false, message: 'Cart owner identification required.' },
+        { status: 400 }
+      );
+    }
+
+    const query = userId ? { userId } : { sessionId };
+    let cart = await Cart.findOne(query);
+
+    if (!cart) {
+      cart = new Cart({ ...(userId ? { userId } : { sessionId }), items: [] });
+    }
+
     // Check if user is sending a full guest migration array
     if (mergeItems && Array.isArray(mergeItems)) {
-      if (!userId && !sessionId) {
-        return NextResponse.json(
-          { success: false, message: 'Cart owner identification required.' },
-          { status: 400 }
-        );
-      }
-
-      const query = userId ? { userId } : { sessionId };
-      let cart = await Cart.findOne(query);
-
-      if (!cart) {
-        cart = new Cart({ ...(userId ? { userId } : { sessionId }), items: [] });
-      }
-
       for (const item of mergeItems) {
         const existingIndex = cart.items.findIndex(
           (i: ICartItem) =>
             i.slug === item.slug &&
-            i.size === (item.size || 'M') &&
-            i.color === (item.color || 'Standard')
+            i.size?.toLowerCase() === (item.size || 'M').toLowerCase() &&
+            i.color?.toLowerCase() === (item.color || 'Standard').toLowerCase()
         );
 
         if (existingIndex > -1) {
@@ -144,31 +146,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!userId && !sessionId) {
-      return NextResponse.json(
-        { success: false, message: 'Cart owner identification required.' },
-        { status: 400 }
-      );
-    }
-
-    const query = userId ? { userId } : { sessionId };
-    let cart = await Cart.findOne(query);
-
-    if (!cart) {
-      cart = new Cart({
-        ...(userId ? { userId } : { sessionId }),
-        items: [],
-      });
-    }
-
     const targetSize = size || 'M';
     const targetColor = color || 'Standard';
 
     const existingIndex = cart.items.findIndex(
       (i: ICartItem) =>
         i.slug === slug &&
-        i.size.toLowerCase() === targetSize.toLowerCase() &&
-        i.color.toLowerCase() === targetColor.toLowerCase()
+        i.size?.toLowerCase() === targetSize.toLowerCase() &&
+        i.color?.toLowerCase() === targetColor.toLowerCase()
     );
 
     if (existingIndex > -1) {
@@ -245,14 +230,16 @@ export async function PATCH(request: NextRequest) {
       // Remove item
       cart.items = cart.items.filter((i: ICartItem) => {
         if (itemId && i._id?.toString() === itemId) return false;
-        if (slug && i.slug === slug && i.size === size && i.color === color) return false;
+        if (itemId && `${i.slug}-${i.size}-${i.color}`.toLowerCase() === itemId.toLowerCase()) return false;
+        if (slug && i.slug === slug && i.size?.toLowerCase() === size?.toLowerCase() && i.color?.toLowerCase() === color?.toLowerCase()) return false;
         return true;
       });
     } else {
       // Update quantity
       const item = cart.items.find((i: ICartItem) => {
         if (itemId && i._id?.toString() === itemId) return true;
-        if (slug && i.slug === slug && i.size === size && i.color === color) return true;
+        if (itemId && `${i.slug}-${i.size}-${i.color}`.toLowerCase() === itemId.toLowerCase()) return true;
+        if (slug && i.slug === slug && i.size?.toLowerCase() === size?.toLowerCase() && i.color?.toLowerCase() === color?.toLowerCase()) return true;
         return false;
       });
 
@@ -305,7 +292,7 @@ export async function DELETE(request: NextRequest) {
     const clearAll = searchParams.get('clearAll') === 'true';
 
     if (!userId && !sessionId) {
-      return NextResponse.json({ success: false, message: 'Cart identification required.' }, { status: 400 });
+      return NextResponse.json({ success: true, data: { items: [], totalCount: 0, subtotal: 0 } });
     }
 
     const query = userId ? { userId } : { sessionId };
@@ -318,7 +305,11 @@ export async function DELETE(request: NextRequest) {
     if (clearAll) {
       cart.items = [];
     } else if (itemId) {
-      cart.items = cart.items.filter((i: ICartItem) => i._id?.toString() !== itemId);
+      cart.items = cart.items.filter((i: ICartItem) => {
+        const matchesMongoId = i._id?.toString() === itemId;
+        const matchesComposite = `${i.slug}-${i.size}-${i.color}`.toLowerCase() === itemId.toLowerCase();
+        return !matchesMongoId && !matchesComposite;
+      });
     }
 
     await cart.save();
