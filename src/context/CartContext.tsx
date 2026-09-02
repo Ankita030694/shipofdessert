@@ -120,36 +120,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
             localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data.data.items));
           }
         } else {
-          // Server has 0 items
-          if (!session?.user && typeof window !== 'undefined') {
-            // Only guest mode checks localStorage
-            const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-            if (saved) {
-              try {
-                const localItems: CartItem[] = JSON.parse(saved);
-                if (localItems.length > 0) {
-                  setItems(localItems);
-                  // Sync to server
-                  await fetch('/api/cart', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'x-session-id': sessionId },
-                    body: JSON.stringify({ mergeItems: localItems }),
-                  });
-                } else {
-                  setItems([]);
-                }
-              } catch {
-                setItems([]);
-              }
-            } else {
-              setItems([]);
-            }
-          } else {
-            // Logged-in user with empty server cart gets empty cart
-            setItems([]);
-            if (typeof window !== 'undefined') {
-              localStorage.setItem(LOCAL_STORAGE_KEY, '[]');
-            }
+          // Server cart is empty - authoritative
+          setItems([]);
+          if (typeof window !== 'undefined') {
+            localStorage.setItem(LOCAL_STORAGE_KEY, '[]');
           }
         }
       }
