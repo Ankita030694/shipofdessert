@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Product, { generateSlug } from '@/models/Product';
 
+export const dynamic = 'force-dynamic';
+
 // GET /api/products - List products with rich filtering, searching, sorting & pagination
 export async function GET(request: NextRequest) {
   try {
@@ -21,7 +23,14 @@ export async function GET(request: NextRequest) {
     const query: Record<string, unknown> = {};
 
     if (category) {
-      query.category = { $regex: new RegExp(`^${category}$`, 'i') };
+      if (category.toLowerCase() === 'sets') {
+        query.$or = [
+          { category: { $regex: /^sets$/i } },
+          { 'setPieces.isSet': true },
+        ];
+      } else {
+        query.category = { $regex: new RegExp(`^${category}$`, 'i') };
+      }
     }
 
     if (collectionName) {
@@ -80,6 +89,14 @@ export async function GET(request: NextRequest) {
       collectionName: p.collectionName,
       images: p.images,
       image: p.images[0] || '/image1.jpg',
+      classifiedImages: p.classifiedImages || [],
+      setPieces: p.setPieces || {
+        isSet: p.category?.toLowerCase() === 'sets',
+        topName: 'Top / Vest',
+        topPrice: 0,
+        bottomName: 'Skirt / Trouser',
+        bottomPrice: 0,
+      },
       colors: p.colors,
       sizes: p.sizes,
       inStock: p.inStock,
@@ -136,7 +153,7 @@ export async function POST(request: NextRequest) {
     await connectToDatabase();
 
     const body = await request.json();
-    const { name, price, description, category, collectionName, images, colors, sizes } = body;
+    const { name, price, description, category, collectionName, images, colors, sizes, setPieces, classifiedImages } = body;
 
     if (!name || price === undefined || !description || !category) {
       return NextResponse.json(
@@ -170,6 +187,8 @@ export async function POST(request: NextRequest) {
       ? body.completeTheSet.split(',').map((s: string) => s.trim()).filter(Boolean)
       : [];
 
+    const isSetCategory = category.trim().toLowerCase() === 'sets' || Boolean(setPieces?.isSet);
+
     const newProduct = await Product.create({
       name: name.trim(),
       slug,
@@ -180,6 +199,14 @@ export async function POST(request: NextRequest) {
       category: category.trim(),
       collectionName: collectionName || 'The Inheritance 01',
       images: Array.isArray(images) && images.length > 0 ? images : ['/image1.jpg'],
+      classifiedImages: Array.isArray(classifiedImages) ? classifiedImages : [],
+      setPieces: setPieces || {
+        isSet: isSetCategory,
+        topName: 'Top / Vest',
+        topPrice: 0,
+        bottomName: 'Skirt / Trouser',
+        bottomPrice: 0,
+      },
       colors: Array.isArray(colors) && colors.length > 0 ? colors : ['Black'],
       sizes: Array.isArray(sizes) && sizes.length > 0 ? sizes : ['XS', 'S', 'M', 'L', 'XL'],
       inStock: body.inStock !== false,

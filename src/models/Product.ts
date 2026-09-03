@@ -1,5 +1,22 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
+export interface IClassifiedImage {
+  url: string;
+  tag: 'full_set' | 'top' | 'bottom' | 'detail' | 'general';
+  caption?: string;
+  sortOrder?: number;
+}
+
+export interface ISetPieces {
+  isSet: boolean;
+  topName?: string;
+  topPrice?: number;
+  bottomName?: string;
+  bottomPrice?: number;
+  additionalName?: string;
+  additionalPrice?: number;
+}
+
 export interface IProduct extends Document {
   name: string;
   slug: string;
@@ -10,6 +27,8 @@ export interface IProduct extends Document {
   category: string;
   collectionName: string;
   images: string[];
+  classifiedImages?: IClassifiedImage[];
+  setPieces?: ISetPieces;
   colors: string[];
   sizes: string[];
   inStock: boolean;
@@ -40,6 +59,33 @@ export interface IProduct extends Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+const ClassifiedImageSchema = new Schema<IClassifiedImage>(
+  {
+    url: { type: String, required: true },
+    tag: {
+      type: String,
+      enum: ['full_set', 'top', 'bottom', 'detail', 'general'],
+      default: 'general',
+    },
+    caption: { type: String },
+    sortOrder: { type: Number, default: 0 },
+  },
+  { _id: false }
+);
+
+const SetPiecesSchema = new Schema<ISetPieces>(
+  {
+    isSet: { type: Boolean, default: false },
+    topName: { type: String, default: 'Top / Vest' },
+    topPrice: { type: Number, default: 0 },
+    bottomName: { type: String, default: 'Skirt / Trouser' },
+    bottomPrice: { type: Number, default: 0 },
+    additionalName: { type: String },
+    additionalPrice: { type: Number },
+  },
+  { _id: false }
+);
 
 const ProductSchema = new Schema<IProduct>(
   {
@@ -95,6 +141,14 @@ const ProductSchema = new Schema<IProduct>(
         validator: (v: string[]) => Array.isArray(v) && v.length > 0,
         message: 'Product must have at least one image',
       },
+    },
+    classifiedImages: {
+      type: [ClassifiedImageSchema],
+      default: [],
+    },
+    setPieces: {
+      type: SetPiecesSchema,
+      default: () => ({ isSet: false }),
     },
     colors: {
       type: [String],

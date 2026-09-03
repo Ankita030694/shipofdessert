@@ -25,6 +25,23 @@ interface CompanionItem {
   image: string;
 }
 
+export interface ClassifiedImage {
+  url: string;
+  tag: 'full_set' | 'top' | 'bottom' | 'detail' | 'general';
+  caption?: string;
+  sortOrder?: number;
+}
+
+export interface SetPieces {
+  isSet: boolean;
+  topName?: string;
+  topPrice?: number;
+  bottomName?: string;
+  bottomPrice?: number;
+  additionalName?: string;
+  additionalPrice?: number;
+}
+
 interface ProductData {
   id: string;
   name: string;
@@ -37,6 +54,8 @@ interface ProductData {
   collectionName: string;
   images: string[];
   image?: string;
+  classifiedImages?: ClassifiedImage[];
+  setPieces?: SetPieces;
   colors: string[];
   sizes: string[];
   inStock: boolean;
@@ -78,6 +97,7 @@ export default function ProductDetailPage({
   const [selectedImage, setSelectedImage] = useState<string>('/image1.jpg');
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [selectedSize, setSelectedSize] = useState<string>('');
+  const [selectedPieceOption, setSelectedPieceOption] = useState<'full' | 'top' | 'bottom' | 'additional'>('full');
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
@@ -114,19 +134,94 @@ export default function ProductDetailPage({
     fetchProduct();
   }, [slug]);
 
+  // Set-Specific Computed Properties
+  const isSet = product?.category?.toLowerCase() === 'sets' || Boolean(product?.setPieces?.isSet);
+  const topName = product?.setPieces?.topName?.trim() || 'Top / Upper Piece';
+  const bottomName = product?.setPieces?.bottomName?.trim() || 'Skirt / Trouser';
+  const additionalName = product?.setPieces?.additionalName?.trim() || '';
+
+  // Smart Individual Price Fallbacks
+  const rawTopPrice = product?.setPieces?.topPrice;
+  const rawBottomPrice = product?.setPieces?.bottomPrice;
+  const rawAdditionalPrice = product?.setPieces?.additionalPrice;
+
+  const defaultTopPrice =
+    rawTopPrice && rawTopPrice > 0
+      ? rawTopPrice
+      : product
+      ? Math.round(product.price * 0.48)
+      : 0;
+
+  const defaultBottomPrice =
+    rawBottomPrice && rawBottomPrice > 0
+      ? rawBottomPrice
+      : product
+      ? product.price - defaultTopPrice
+      : 0;
+
+  const defaultAdditionalPrice = rawAdditionalPrice || 0;
+
+  // Active Price based on selected piece
+  const activePrice = !isSet || selectedPieceOption === 'full'
+    ? product?.price || 0
+    : selectedPieceOption === 'top'
+    ? defaultTopPrice
+    : selectedPieceOption === 'bottom'
+    ? defaultBottomPrice
+    : defaultAdditionalPrice;
+
+  const handleSelectPiece = (option: 'full' | 'top' | 'bottom' | 'additional') => {
+    setSelectedPieceOption(option);
+
+    if (!product) return;
+
+    if (option === 'top') {
+      const topImg = product.classifiedImages?.find((c) => c.tag === 'top')?.url;
+      if (topImg) setSelectedImage(topImg);
+    } else if (option === 'bottom') {
+      const bottomImg = product.classifiedImages?.find((c) => c.tag === 'bottom')?.url;
+      if (bottomImg) setSelectedImage(bottomImg);
+    } else if (option === 'full') {
+      const fullImg =
+        product.classifiedImages?.find((c) => c.tag === 'full_set')?.url || product.images?.[0];
+      if (fullImg) setSelectedImage(fullImg);
+    }
+  };
+
   const handleAddToCart = async () => {
     if (!product) return;
 
     const chosenColor = selectedColor || product.colors?.[0] || 'Standard';
     const chosenSize = selectedSize || product.sizes?.[0] || 'M';
 
+    const itemName = !isSet || selectedPieceOption === 'full'
+      ? `${product.name} (Full Set)`
+      : selectedPieceOption === 'top'
+      ? `${product.name} — ${topName}`
+      : selectedPieceOption === 'bottom'
+      ? `${product.name} — ${bottomName}`
+      : `${product.name} — ${additionalName}`;
+
+    const itemSlug = !isSet || selectedPieceOption === 'full'
+      ? product.slug
+      : `${product.slug}-${selectedPieceOption}`;
+
+    let itemImage = selectedImage || product.images?.[0] || '/image1.jpg';
+    if (selectedPieceOption === 'top') {
+      const topImg = product.classifiedImages?.find((c) => c.tag === 'top')?.url;
+      if (topImg) itemImage = topImg;
+    } else if (selectedPieceOption === 'bottom') {
+      const btmImg = product.classifiedImages?.find((c) => c.tag === 'bottom')?.url;
+      if (btmImg) itemImage = btmImg;
+    }
+
     setAdded(true);
     await addToCart({
       productId: product.id,
-      slug: product.slug,
-      name: product.name,
-      image: selectedImage || product.images?.[0] || '/image1.jpg',
-      price: product.price,
+      slug: itemSlug,
+      name: itemName,
+      image: itemImage,
+      price: activePrice,
       color: chosenColor,
       size: chosenSize,
       quantity: 1,
@@ -141,12 +236,33 @@ export default function ProductDetailPage({
     const chosenColor = selectedColor || product.colors?.[0] || 'Standard';
     const chosenSize = selectedSize || product.sizes?.[0] || 'M';
 
+    const itemName = !isSet || selectedPieceOption === 'full'
+      ? `${product.name} (Full Set)`
+      : selectedPieceOption === 'top'
+      ? `${product.name} — ${topName}`
+      : selectedPieceOption === 'bottom'
+      ? `${product.name} — ${bottomName}`
+      : `${product.name} — ${additionalName}`;
+
+    const itemSlug = !isSet || selectedPieceOption === 'full'
+      ? product.slug
+      : `${product.slug}-${selectedPieceOption}`;
+
+    let itemImage = selectedImage || product.images?.[0] || '/image1.jpg';
+    if (selectedPieceOption === 'top') {
+      const topImg = product.classifiedImages?.find((c) => c.tag === 'top')?.url;
+      if (topImg) itemImage = topImg;
+    } else if (selectedPieceOption === 'bottom') {
+      const btmImg = product.classifiedImages?.find((c) => c.tag === 'bottom')?.url;
+      if (btmImg) itemImage = btmImg;
+    }
+
     await addToCart({
       productId: product.id,
-      slug: product.slug,
-      name: product.name,
-      image: selectedImage || product.images?.[0] || '/image1.jpg',
-      price: product.price,
+      slug: itemSlug,
+      name: itemName,
+      image: itemImage,
+      price: activePrice,
       color: chosenColor,
       size: chosenSize,
       quantity: 1,
@@ -225,26 +341,45 @@ export default function ProductDetailPage({
             {/* Thumbnail Column */}
             {product.images && product.images.length > 1 && (
               <div className="flex sm:flex-col gap-3 order-2 sm:order-1 overflow-x-auto sm:overflow-visible pb-2 sm:pb-0 flex-shrink-0">
-                {product.images.map((img, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(img)}
-                    className={`relative aspect-[3/4] w-16 sm:w-20 bg-[#e8e4dc]/40 border transition-all cursor-pointer flex-shrink-0 ${
-                      selectedImage === img
-                        ? 'border-[#1c1c1a] ring-1 ring-[#1c1c1a]'
-                        : 'border-transparent opacity-70 hover:opacity-100'
-                    }`}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${product.name} view ${index + 1}`}
-                      fill
-                      unoptimized={Boolean(img?.startsWith('data:'))}
-                      className="object-cover object-center"
-                      sizes="80px"
-                    />
-                  </button>
-                ))}
+                {product.images.map((img, index) => {
+                  const classified = (product.classifiedImages || [])[index];
+                  const tagLabel =
+                    classified?.tag === 'top'
+                      ? 'Top'
+                      : classified?.tag === 'bottom'
+                      ? 'Bottom'
+                      : classified?.tag === 'detail'
+                      ? 'Detail'
+                      : index === 0
+                      ? 'Look'
+                      : '';
+
+                  return (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImage(img)}
+                      className={`relative aspect-[3/4] w-16 sm:w-20 bg-[#e8e4dc]/40 border transition-all cursor-pointer flex-shrink-0 ${
+                        selectedImage === img
+                          ? 'border-[#1c1c1a] ring-1 ring-[#1c1c1a]'
+                          : 'border-transparent opacity-70 hover:opacity-100'
+                      }`}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${product.name} view ${index + 1}`}
+                        fill
+                        unoptimized={Boolean(img?.startsWith('data:'))}
+                        className="object-cover object-center"
+                        sizes="80px"
+                      />
+                      {tagLabel && (
+                        <span className="absolute bottom-1 right-1 bg-black/75 text-white text-[8px] font-mono px-1 py-0.2 rounded-xs uppercase">
+                          {tagLabel}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
               </div>
             )}
 
@@ -259,6 +394,19 @@ export default function ProductDetailPage({
                 className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 55vw"
               />
+              {isSet && (
+                <div className="absolute top-3 left-3">
+                  <span className="bg-[#1c1c1a]/90 text-white text-[10px] uppercase tracking-widest px-2.5 py-1 font-mono font-medium backdrop-blur-xs">
+                    {selectedPieceOption === 'full'
+                      ? '✨ Full Set Ensemble'
+                      : selectedPieceOption === 'top'
+                      ? `👚 ${topName}`
+                      : selectedPieceOption === 'bottom'
+                      ? `👖 ${bottomName}`
+                      : 'Individual Piece'}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -289,15 +437,15 @@ export default function ProductDetailPage({
               <div className="border-b border-[#dcd8cf] pb-4">
                 <div className="flex items-baseline gap-3">
                   <span className="text-xl sm:text-2xl font-serif font-light text-[#1c1c1a]">
-                    ₹{product.price.toLocaleString()}
+                    ₹{activePrice.toLocaleString()}
                   </span>
-                  {product.compareAtPrice && (
+                  {selectedPieceOption === 'full' && product.compareAtPrice && (
                     <span className="text-sm text-[#1c1c1a]/40 line-through">
                       ₹{product.compareAtPrice.toLocaleString()}
                     </span>
                   )}
                   {product.inStock ? (
-                    <span className="text-[10px] uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 border border-emerald-200 ml-auto">
+                    <span className="text-[10px] uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 border border-emerald-200 ml-auto font-medium">
                       In Stock
                     </span>
                   ) : (
@@ -306,11 +454,133 @@ export default function ProductDetailPage({
                     </span>
                   )}
                 </div>
-                <p className="text-[11px] text-[#1c1c1a]/60 font-light mt-1">
-                  Inclusive of all taxes. Complimentary express shipping across India.
-                </p>
+
+                {isSet && selectedPieceOption !== 'full' ? (
+                  <p className="text-[11px] text-amber-800 font-medium mt-1 flex items-center gap-1.5">
+                    <span>🏷️</span>
+                    <span>
+                      Purchasing individual piece: <strong>{selectedPieceOption === 'top' ? topName : bottomName}</strong>
+                    </span>
+                  </p>
+                ) : (
+                  <p className="text-[11px] text-[#1c1c1a]/60 font-light mt-1">
+                    Inclusive of all taxes. Complimentary express shipping across India.
+                  </p>
+                )}
               </div>
             </div>
+
+            {/* SET PIECE SELECTOR (BUY FULL SET OR SEPARATES) */}
+            {isSet && (
+              <div className="bg-[#f9f9f9] border border-[#1c1c1a]/15 p-4 rounded-xs space-y-3 shadow-xs">
+                <div className="flex justify-between items-center border-b border-[#1c1c1a]/10 pb-2">
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-[#1c1c1a]">
+                    Purchase Selection
+                  </span>
+                  <span className="text-[10px] uppercase font-mono tracking-wider text-stone-500">
+                    Buy Ensemble or Separates
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  {/* Option 1: Full Ensemble */}
+                  <button
+                    type="button"
+                    onClick={() => handleSelectPiece('full')}
+                    className={`p-3 text-left border rounded-xs transition-all cursor-pointer relative ${
+                      selectedPieceOption === 'full'
+                        ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white shadow-xs'
+                        : 'border-stone-300 bg-white hover:border-[#1c1c1a] text-[#1c1c1a]'
+                    }`}
+                  >
+                    <span
+                      className={`text-[9px] uppercase tracking-wider block font-bold font-mono ${
+                        selectedPieceOption === 'full' ? 'text-amber-300' : 'text-stone-500'
+                      }`}
+                    >
+                      ✨ Full Set
+                    </span>
+                    <span className="text-xs font-serif font-medium block mt-1">
+                      Complete Ensemble
+                    </span>
+                    <span className="text-xs font-mono font-bold block mt-1">
+                      ₹{product.price.toLocaleString()}
+                    </span>
+                  </button>
+
+                  {/* Option 2: Upper Garment */}
+                  <button
+                    type="button"
+                    onClick={() => handleSelectPiece('top')}
+                    className={`p-3 text-left border rounded-xs transition-all cursor-pointer relative ${
+                      selectedPieceOption === 'top'
+                        ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white shadow-xs'
+                        : 'border-stone-300 bg-white hover:border-[#1c1c1a] text-[#1c1c1a]'
+                    }`}
+                  >
+                    <span
+                      className={`text-[9px] uppercase tracking-wider block font-bold font-mono ${
+                        selectedPieceOption === 'top' ? 'text-amber-300' : 'text-stone-500'
+                      }`}
+                    >
+                      👚 Upper Only
+                    </span>
+                    <span className="text-xs font-serif font-medium block mt-1 truncate" title={topName}>
+                      {topName}
+                    </span>
+                    <span className="text-xs font-mono font-bold block mt-1">
+                      ₹{defaultTopPrice.toLocaleString()}
+                    </span>
+                  </button>
+
+                  {/* Option 3: Lower Garment */}
+                  <button
+                    type="button"
+                    onClick={() => handleSelectPiece('bottom')}
+                    className={`p-3 text-left border rounded-xs transition-all cursor-pointer relative ${
+                      selectedPieceOption === 'bottom'
+                        ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white shadow-xs'
+                        : 'border-stone-300 bg-white hover:border-[#1c1c1a] text-[#1c1c1a]'
+                    }`}
+                  >
+                    <span
+                      className={`text-[9px] uppercase tracking-wider block font-bold font-mono ${
+                        selectedPieceOption === 'bottom' ? 'text-amber-300' : 'text-stone-500'
+                      }`}
+                    >
+                      👖 Lower Only
+                    </span>
+                    <span className="text-xs font-serif font-medium block mt-1 truncate" title={bottomName}>
+                      {bottomName}
+                    </span>
+                    <span className="text-xs font-mono font-bold block mt-1">
+                      ₹{defaultBottomPrice.toLocaleString()}
+                    </span>
+                  </button>
+                </div>
+
+                {additionalName && defaultAdditionalPrice > 0 && (
+                  <div className="pt-2 border-t border-stone-200">
+                    <button
+                      type="button"
+                      onClick={() => handleSelectPiece('additional')}
+                      className={`w-full p-2.5 text-left border rounded-xs transition-all cursor-pointer flex justify-between items-center ${
+                        selectedPieceOption === 'additional'
+                          ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white shadow-xs'
+                          : 'border-stone-300 bg-white hover:border-[#1c1c1a] text-[#1c1c1a]'
+                      }`}
+                    >
+                      <span className="text-xs font-medium">
+                        🧣 Add-on: {additionalName}
+                      </span>
+                      <span className="text-xs font-mono font-bold">
+                        ₹{defaultAdditionalPrice.toLocaleString()}
+                      </span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Short Fit Note & Model Stats */}
             {product.fitNote && (
@@ -375,7 +645,7 @@ export default function ProductDetailPage({
                       onClick={() => setSelectedSize(size)}
                       className={`py-2.5 text-xs uppercase tracking-wider border transition-all cursor-pointer font-mono ${
                         selectedSize === size
-                          ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white'
+                          ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white font-bold'
                           : 'border-[#1c1c1a]/20 bg-white text-[#1c1c1a] hover:border-[#1c1c1a]'
                       }`}
                     >
@@ -392,7 +662,13 @@ export default function ProductDetailPage({
                 onClick={handleAddToCart}
                 className="w-full bg-[#1c1c1a] text-white py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#333330] transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
-                <span>{added ? 'Added to Bag ✓' : 'Add to Shopping Bag'}</span>
+                <span>
+                  {added
+                    ? 'Added to Bag ✓'
+                    : isSet && selectedPieceOption !== 'full'
+                    ? `Add ${selectedPieceOption === 'top' ? topName : bottomName} to Bag · ₹${activePrice.toLocaleString()}`
+                    : 'Add to Shopping Bag'}
+                </span>
               </button>
 
               <button
@@ -450,308 +726,257 @@ export default function ProductDetailPage({
               </div>
             </div>
 
-            {/* Product Narrative & Detail Accordions */}
-            <div className="border-t border-[#dcd8cf] divide-y divide-[#dcd8cf] text-xs pt-2">
-              {/* Description */}
-              <div className="py-3.5">
+            {/* Editorial Accordion Tabs */}
+            <div className="border-t border-[#dcd8cf] pt-4 divide-y divide-[#dcd8cf] text-xs">
+              {/* 1. Description */}
+              <div className="py-3">
                 <button
                   onClick={() =>
                     setExpandedSection(expandedSection === 'description' ? null : 'description')
                   }
-                  className="flex justify-between items-center w-full text-[#1c1c1a] uppercase tracking-wider font-semibold cursor-pointer"
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#1c1c1a] cursor-pointer"
                 >
-                  <span>Description & Silhouette</span>
+                  <span>Editorial Description</span>
                   <span>{expandedSection === 'description' ? '−' : '+'}</span>
                 </button>
                 {expandedSection === 'description' && (
-                  <div className="mt-2.5 text-[#1c1c1a]/80 leading-relaxed pt-1">
+                  <div className="pt-3 text-[#1c1c1a]/80 leading-relaxed font-light">
                     <p>{product.description}</p>
                   </div>
                 )}
               </div>
 
-              {/* Fabric & Feel */}
-              {product.fabric && (
-                <div className="py-3.5">
-                  <button
-                    onClick={() =>
-                      setExpandedSection(expandedSection === 'fabric' ? null : 'fabric')
-                    }
-                    className="flex justify-between items-center w-full text-[#1c1c1a] uppercase tracking-wider font-semibold cursor-pointer"
-                  >
-                    <span>Fabric & Feel</span>
-                    <span>{expandedSection === 'fabric' ? '−' : '+'}</span>
-                  </button>
-                  {expandedSection === 'fabric' && (
-                    <div className="mt-2.5 text-[#1c1c1a]/80 leading-relaxed pt-1">
-                      <p>{product.fabric}</p>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Fit */}
-              {product.fit && (
-                <div className="py-3.5">
-                  <button
-                    onClick={() =>
-                      setExpandedSection(expandedSection === 'fit' ? null : 'fit')
-                    }
-                    className="flex justify-between items-center w-full text-[#1c1c1a] uppercase tracking-wider font-semibold cursor-pointer"
-                  >
-                    <span>Fit & Tailoring</span>
-                    <span>{expandedSection === 'fit' ? '−' : '+'}</span>
-                  </button>
-                  {expandedSection === 'fit' && (
-                    <div className="mt-2.5 text-[#1c1c1a]/80 leading-relaxed pt-1">
-                      <p>{product.fit}</p>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Design Details (Pointers) */}
-              <div className="py-3.5">
+              {/* 2. Fabric & Material */}
+              <div className="py-3">
                 <button
-                  onClick={() =>
-                    setExpandedSection(expandedSection === 'details' ? null : 'details')
-                  }
-                  className="flex justify-between items-center w-full text-[#1c1c1a] uppercase tracking-wider font-semibold cursor-pointer"
+                  onClick={() => setExpandedSection(expandedSection === 'fabric' ? null : 'fabric')}
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#1c1c1a] cursor-pointer"
                 >
-                  <span>Design Details</span>
-                  <span>{expandedSection === 'details' ? '−' : '+'}</span>
+                  <span>Fabric & Drape</span>
+                  <span>{expandedSection === 'fabric' ? '−' : '+'}</span>
                 </button>
-                {expandedSection === 'details' && (
-                  <div className="mt-2.5 text-[#1c1c1a]/80 space-y-1.5 pt-1 leading-relaxed">
-                    {designPointers.map((detail, idx) => (
-                      <p key={idx} className="flex items-start gap-2">
-                        <span className="text-[#1c1c1a]/40">•</span>
-                        <span>{detail}</span>
-                      </p>
-                    ))}
+                {expandedSection === 'fabric' && (
+                  <div className="pt-3 text-[#1c1c1a]/80 leading-relaxed font-light">
+                    <p>{product.fabric || '100% Handcrafted Natural Fiber.'}</p>
                   </div>
                 )}
               </div>
 
-              {/* Wash Care */}
-              {product.care && (
-                <div className="py-3.5">
-                  <button
-                    onClick={() =>
-                      setExpandedSection(expandedSection === 'care' ? null : 'care')
-                    }
-                    className="flex justify-between items-center w-full text-[#1c1c1a] uppercase tracking-wider font-semibold cursor-pointer"
-                  >
-                    <span>Wash Care</span>
-                    <span>{expandedSection === 'care' ? '−' : '+'}</span>
-                  </button>
-                  {expandedSection === 'care' && (
-                    <div className="mt-2.5 text-[#1c1c1a]/80 leading-relaxed pt-1">
-                      <p>{product.care}</p>
-                    </div>
-                  )}
-                </div>
-              )}
+              {/* 3. Silhouette & Fit */}
+              <div className="py-3">
+                <button
+                  onClick={() => setExpandedSection(expandedSection === 'fit' ? null : 'fit')}
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#1c1c1a] cursor-pointer"
+                >
+                  <span>Silhouette & Fit</span>
+                  <span>{expandedSection === 'fit' ? '−' : '+'}</span>
+                </button>
+                {expandedSection === 'fit' && (
+                  <div className="pt-3 text-[#1c1c1a]/80 leading-relaxed font-light">
+                    <p>{product.fit || product.fitNote || 'Relaxed architectural fit.'}</p>
+                    {product.modelStats && (
+                      <p className="mt-2 text-[11px] text-stone-500 font-mono">
+                        Model note: {product.modelStats}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* 4. Craft & Design Details */}
+              <div className="py-3">
+                <button
+                  onClick={() =>
+                    setExpandedSection(expandedSection === 'details' ? null : 'details')
+                  }
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#1c1c1a] cursor-pointer"
+                >
+                  <span>Craft & Tailoring Details</span>
+                  <span>{expandedSection === 'details' ? '−' : '+'}</span>
+                </button>
+                {expandedSection === 'details' && (
+                  <ul className="pt-3 space-y-1.5 text-[#1c1c1a]/80 list-disc list-inside font-light">
+                    {designPointers.map((detail, index) => (
+                      <li key={index} className="leading-relaxed">
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              {/* 5. Care Instructions */}
+              <div className="py-3">
+                <button
+                  onClick={() => setExpandedSection(expandedSection === 'care' ? null : 'care')}
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#1c1c1a] cursor-pointer"
+                >
+                  <span>Care Guidelines</span>
+                  <span>{expandedSection === 'care' ? '−' : '+'}</span>
+                </button>
+                {expandedSection === 'care' && (
+                  <div className="pt-3 text-[#1c1c1a]/80 leading-relaxed font-light">
+                    <p>
+                      {product.care ||
+                        'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.'}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Complete the Set / Pair With Section */}
+        {/* Complete the Look / Companion Pieces */}
         {product.companionItems && product.companionItems.length > 0 && (
-          <div className="border-t border-[#dcd8cf] pt-14 mb-20">
-            <div className="flex flex-col sm:flex-row justify-between sm:items-end mb-8">
-              <div>
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] font-semibold block mb-1">
-                  Styling Curation
-                </span>
-                <h2 className="text-xl sm:text-2xl font-serif text-[#1c1c1a] uppercase tracking-wide">
-                  Complete The Set
-                </h2>
-              </div>
-              <p className="text-xs text-[#1c1c1a]/60 mt-1 sm:mt-0">
-                Considered combinations designed to be worn together.
-              </p>
+          <div className="border-t border-[#dcd8cf] pt-16 mb-24">
+            <div className="text-center mb-10">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#bdb2a1] font-semibold block mb-1">
+                Curated Ensemble
+              </span>
+              <h2 className="text-xl sm:text-2xl font-serif text-[#1c1c1a]">Complete The Look</h2>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-              {product.companionItems.map((comp) => (
-                <div key={comp.id} className="group">
-                  <Link href={`/product/${comp.slug}`}>
-                    <div className="relative aspect-[3/4] mb-3 bg-[#e8e4dc]/40 overflow-hidden border border-[#1c1c1a]/10">
-                      <Image
-                        src={comp.image || '/image1.jpg'}
-                        alt={comp.name}
-                        fill
-                        unoptimized={Boolean(comp.image?.startsWith('data:'))}
-                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 50vw, 25vw"
-                      />
-                    </div>
-                    <div className="text-xs">
-                      <h3 className="font-normal text-[#1c1c1a] group-hover:opacity-60 transition-opacity">
-                        {comp.name}
-                      </h3>
-                      <span className="text-[#1c1c1a]/80 mt-1 block">
-                        ₹{comp.price.toLocaleString()}
-                      </span>
-                    </div>
-                  </Link>
-                </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {product.companionItems.map((item) => (
+                <Link key={item.id} href={`/product/${item.slug}`} className="group block">
+                  <div className="relative aspect-[3/4] bg-[#e8e4dc]/40 rounded-xs overflow-hidden mb-2.5">
+                    <Image
+                      src={item.image || '/image1.jpg'}
+                      alt={item.name}
+                      fill
+                      unoptimized={Boolean(item.image?.startsWith('data:'))}
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
+                  </div>
+                  <h4 className="text-xs font-medium text-[#1c1c1a] group-hover:underline truncate">
+                    {item.name}
+                  </h4>
+                  <span className="text-xs text-stone-500 font-mono mt-0.5 block">
+                    ₹{item.price.toLocaleString()}
+                  </span>
+                </Link>
               ))}
             </div>
           </div>
         )}
 
-        {/* Related Products */}
+        {/* Related Garments */}
         {product.relatedProducts && product.relatedProducts.length > 0 && (
-          <div className="border-t border-[#dcd8cf] pt-14">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.25em] text-[#1c1c1a] mb-8 text-center sm:text-left">
-              You May Also Like
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
+          <div className="border-t border-[#dcd8cf] pt-16">
+            <div className="text-center mb-10">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-[#bdb2a1] font-semibold block mb-1">
+                More From {product.category}
+              </span>
+              <h2 className="text-xl sm:text-2xl font-serif text-[#1c1c1a]">You May Also Consider</h2>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {product.relatedProducts.map((rel) => (
-                <div key={rel.id} className="group">
-                  <Link href={`/product/${rel.slug}`}>
-                    <div className="relative aspect-[3/4] mb-3 bg-[#e8e4dc]/40 overflow-hidden border border-[#1c1c1a]/10">
-                      <Image
-                        src={rel.image || '/image1.jpg'}
-                        alt={rel.name}
-                        fill
-                        unoptimized={Boolean(rel.image?.startsWith('data:'))}
-                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 50vw, 33vw"
-                      />
-                    </div>
-                    <div className="flex justify-between items-start text-xs">
-                      <h3 className="font-normal text-[#1c1c1a] group-hover:opacity-60 transition-opacity">
-                        {rel.name}
-                      </h3>
-                      <span className="text-[#1c1c1a]/80 ml-2">₹{rel.price.toLocaleString()}</span>
-                    </div>
-                  </Link>
-                </div>
+                <Link key={rel.id} href={`/product/${rel.slug}`} className="group block">
+                  <div className="relative aspect-[3/4] bg-[#e8e4dc]/40 rounded-xs overflow-hidden mb-2.5">
+                    <Image
+                      src={rel.image || '/image1.jpg'}
+                      alt={rel.name}
+                      fill
+                      unoptimized={Boolean(rel.image?.startsWith('data:'))}
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                    />
+                  </div>
+                  <div className="flex justify-between items-start">
+                    <h4 className="text-xs font-medium text-[#1c1c1a] group-hover:underline">
+                      {rel.name}
+                    </h4>
+                    <span className="text-xs text-[#1c1c1a] font-mono ml-2">
+                      ₹{rel.price.toLocaleString()}
+                    </span>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
         )}
       </main>
 
-      {/* ========================================================================= */}
-      {/* INTERACTIVE SIZE GUIDE MODAL */}
-      {/* ========================================================================= */}
+      {/* Size Guide Modal */}
       {isSizeGuideOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white w-full max-w-2xl rounded-sm border border-[#1c1c1a]/20 shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-start border-b border-[#1c1c1a]/10 pb-4 mb-6">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white max-w-lg w-full p-6 sm:p-8 rounded-sm shadow-2xl relative max-h-[90vh] overflow-y-auto border border-[#1c1c1a]/15">
+            <div className="flex justify-between items-start border-b border-[#1c1c1a]/10 pb-4 mb-5">
               <div>
-                <span className="text-[10px] uppercase tracking-[0.2em] text-[#bdb2a1] font-bold">
-                  KSHAUM Fit Standard
+                <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] font-bold">
+                  Sizing Guide
                 </span>
-                <h2 className="text-xl font-serif text-[#1c1c1a] mt-1">
-                  Size Guide & Garment Measurements
-                </h2>
+                <h3 className="text-lg font-serif uppercase tracking-wider text-[#1c1c1a] mt-0.5">
+                  Body Measurements & Fit
+                </h3>
               </div>
               <button
                 onClick={() => setIsSizeGuideOpen(false)}
-                className="text-stone-400 hover:text-stone-900 text-lg leading-none p-1 cursor-pointer"
+                className="text-stone-400 hover:text-stone-900 text-lg p-1 cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            <div className="space-y-6 text-xs text-[#1c1c1a]/80">
-              <p className="text-xs text-[#1c1c1a]/70 leading-relaxed">
-                All measurements are in <strong className="text-[#1c1c1a]">inches</strong> and represent the actual garment dimensions laid flat. Compare these with your own measurements or a favorite garment for your preferred fit.
-              </p>
+            <p className="text-xs text-[#1c1c1a]/70 mb-4 leading-relaxed">
+              All measurements are indicated in inches. Our garments are cut with relaxed ease to
+              honor natural movement and fabric breathability.
+            </p>
 
-              {/* Garment Measurements Table */}
-              <div className="overflow-x-auto border border-[#1c1c1a]/15 rounded-sm">
-                <table className="w-full text-left text-xs">
-                  <thead className="bg-[#f9f9f9] border-b border-[#1c1c1a]/15 uppercase tracking-widest text-[#1c1c1a] text-[10px]">
-                    <tr>
-                      <th className="py-2.5 px-3.5">Size</th>
-                      <th className="py-2.5 px-3.5">Chest (in)</th>
-                      <th className="py-2.5 px-3.5">Shoulder (in)</th>
-                      <th className="py-2.5 px-3.5">Length (in)</th>
-                      <th className="py-2.5 px-3.5">Sleeve (in)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#1c1c1a]/10 font-mono">
-                    <tr className="hover:bg-stone-50">
-                      <td className="py-2 px-3.5 font-sans font-semibold text-[#1c1c1a]">XS</td>
-                      <td className="py-2 px-3.5">38.0</td>
-                      <td className="py-2 px-3.5">17.5</td>
-                      <td className="py-2 px-3.5">27.0</td>
-                      <td className="py-2 px-3.5">24.5</td>
-                    </tr>
-                    <tr className="hover:bg-stone-50">
-                      <td className="py-2 px-3.5 font-sans font-semibold text-[#1c1c1a]">S</td>
-                      <td className="py-2 px-3.5">40.0</td>
-                      <td className="py-2 px-3.5">18.0</td>
-                      <td className="py-2 px-3.5">27.5</td>
-                      <td className="py-2 px-3.5">25.0</td>
-                    </tr>
-                    <tr className="hover:bg-stone-50 bg-[#f9f9f9]/50">
-                      <td className="py-2 px-3.5 font-sans font-semibold text-[#1c1c1a]">M (Sample)</td>
-                      <td className="py-2 px-3.5">42.0</td>
-                      <td className="py-2 px-3.5">18.5</td>
-                      <td className="py-2 px-3.5">28.0</td>
-                      <td className="py-2 px-3.5">25.5</td>
-                    </tr>
-                    <tr className="hover:bg-stone-50">
-                      <td className="py-2 px-3.5 font-sans font-semibold text-[#1c1c1a]">L</td>
-                      <td className="py-2 px-3.5">44.0</td>
-                      <td className="py-2 px-3.5">19.0</td>
-                      <td className="py-2 px-3.5">28.5</td>
-                      <td className="py-2 px-3.5">26.0</td>
-                    </tr>
-                    <tr className="hover:bg-stone-50">
-                      <td className="py-2 px-3.5 font-sans font-semibold text-[#1c1c1a]">XL</td>
-                      <td className="py-2 px-3.5">46.5</td>
-                      <td className="py-2 px-3.5">19.5</td>
-                      <td className="py-2 px-3.5">29.0</td>
-                      <td className="py-2 px-3.5">26.5</td>
-                    </tr>
-                    <tr className="hover:bg-stone-50">
-                      <td className="py-2 px-3.5 font-sans font-semibold text-[#1c1c1a]">XXL</td>
-                      <td className="py-2 px-3.5">49.0</td>
-                      <td className="py-2 px-3.5">20.0</td>
-                      <td className="py-2 px-3.5">29.5</td>
-                      <td className="py-2 px-3.5">27.0</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs text-left">
+                <thead className="border-b border-[#1c1c1a]/20 uppercase tracking-widest text-[10px] text-[#1c1c1a]/70">
+                  <tr>
+                    <th className="py-2.5">Size</th>
+                    <th className="py-2.5">Bust/Chest</th>
+                    <th className="py-2.5">Waist</th>
+                    <th className="py-2.5">Hip</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[#1c1c1a]/10 font-mono text-[11px]">
+                  <tr>
+                    <td className="py-2 font-bold">XS</td>
+                    <td className="py-2">32 - 34&quot;</td>
+                    <td className="py-2">26 - 28&quot;</td>
+                    <td className="py-2">34 - 36&quot;</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 font-bold">S</td>
+                    <td className="py-2">35 - 37&quot;</td>
+                    <td className="py-2">29 - 31&quot;</td>
+                    <td className="py-2">37 - 39&quot;</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 font-bold">M</td>
+                    <td className="py-2">38 - 40&quot;</td>
+                    <td className="py-2">32 - 34&quot;</td>
+                    <td className="py-2">40 - 42&quot;</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 font-bold">L</td>
+                    <td className="py-2">41 - 43&quot;</td>
+                    <td className="py-2">35 - 37&quot;</td>
+                    <td className="py-2">43 - 45&quot;</td>
+                  </tr>
+                  <tr>
+                    <td className="py-2 font-bold">XL</td>
+                    <td className="py-2">44 - 46&quot;</td>
+                    <td className="py-2">38 - 40&quot;</td>
+                    <td className="py-2">46 - 48&quot;</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
 
-              {/* How to Measure Guide */}
-              <div className="bg-[#f9f9f9] p-4 rounded-xs border border-[#1c1c1a]/10 space-y-2">
-                <h4 className="font-semibold uppercase tracking-wider text-[11px] text-[#1c1c1a]">
-                  How to Measure
-                </h4>
-                <ul className="space-y-1.5 text-[11px] text-[#1c1c1a]/75 leading-relaxed">
-                  <li>
-                    <strong className="text-[#1c1c1a]">1. Chest:</strong> Measure straight across the fullest part of the chest, 1 inch below the armhole.
-                  </li>
-                  <li>
-                    <strong className="text-[#1c1c1a]">2. Shoulder:</strong> Measure horizontally from one shoulder seam point to the other across the back.
-                  </li>
-                  <li>
-                    <strong className="text-[#1c1c1a]">3. Length:</strong> Measure vertically from the highest shoulder point next to the collar down to the bottom hem.
-                  </li>
-                  <li>
-                    <strong className="text-[#1c1c1a]">4. Sleeve:</strong> Measure from the shoulder seam point down to the edge of the cuff.
-                  </li>
-                </ul>
-              </div>
-
-              <div className="pt-2 flex justify-end">
-                <button
-                  onClick={() => setIsSizeGuideOpen(false)}
-                  className="px-6 py-2.5 bg-[#1c1c1a] text-white text-xs uppercase tracking-wider hover:bg-[#333330] cursor-pointer"
-                >
-                  Close Guide
-                </button>
-              </div>
+            <div className="mt-6 pt-4 border-t border-[#1c1c1a]/10 text-[11px] text-stone-500">
+              Need custom tailoring? Reach out to our atelier team via{' '}
+              <a href="mailto:atelier@thekshaum.com" className="underline text-black">
+                atelier@thekshaum.com
+              </a>
+              .
             </div>
           </div>
         </div>

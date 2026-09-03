@@ -36,6 +36,7 @@ const Navbar = () => {
   }, [searchOpen]);
 
   const highlights = [
+    'Sets',
     'Leather',
     'Denim',
     'Sweatshirt',
@@ -270,6 +271,11 @@ const Navbar = () => {
             <li>
               <Link href="/collection" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
                 The Collection
+              </Link>
+            </li>
+            <li>
+              <Link href="/collection?category=Sets" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 pl-3 text-xs sm:text-sm text-gray-700">
+                — Sets & Ensembles
               </Link>
             </li>
             <li>

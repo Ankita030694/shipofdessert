@@ -16,6 +16,25 @@ export interface RegisteredUser {
   createdAt: string;
 }
 
+export type PhotoTag = 'full_set' | 'top' | 'bottom' | 'detail' | 'general';
+
+export interface ClassifiedImageItem {
+  url: string;
+  tag: PhotoTag;
+  caption?: string;
+  sortOrder: number;
+}
+
+export interface SetPiecesItem {
+  isSet: boolean;
+  topName?: string;
+  topPrice?: number;
+  bottomName?: string;
+  bottomPrice?: number;
+  additionalName?: string;
+  additionalPrice?: number;
+}
+
 export interface ProductItem {
   id: string;
   name: string;
@@ -28,6 +47,8 @@ export interface ProductItem {
   collectionName: string;
   images: string[];
   image: string;
+  classifiedImages?: ClassifiedImageItem[];
+  setPieces?: SetPiecesItem;
   colors: string[];
   sizes: string[];
   inStock: boolean;
@@ -138,12 +159,12 @@ export interface AdminOrder {
   updatedAt: string;
 }
 
-const DEFAULT_CATEGORIES = ['Tops', 'Dresses', 'Skirts', 'Pants', 'Footwear', 'Accessories'];
+const DEFAULT_CATEGORIES = ['Sets', 'Tops', 'Dresses', 'Skirts', 'Pants', 'Footwear', 'Accessories'];
 const DEFAULT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 export default function AdminPage() {
   const { data: session, status } = useSession();
-  const [activeTab, setActiveTab] = useState<'orders' | 'products' | 'users'>('orders');
+  const [activeTab, setActiveTab] = useState<'orders' | 'products' | 'users'>('products');
 
   // Custom Categories & Sizes State
   const [customCategories, setCustomCategories] = useState<string[]>([]);
@@ -196,10 +217,11 @@ export default function AdminPage() {
   const [productSubmitting, setProductSubmitting] = useState(false);
   const [productActionId, setProductActionId] = useState<string | null>(null);
 
-  // Image Upload & Reshuffle State
+  // Image Upload, Classification & Reshuffle State
   const [uploadingImage, setUploadingImage] = useState(false);
   const [manualImageUrl, setManualImageUrl] = useState('');
   const [draggedImageIdx, setDraggedImageIdx] = useState<number | null>(null);
+  const [galleryFilterTag, setGalleryFilterTag] = useState<PhotoTag | 'all'>('all');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Product Form State
@@ -208,11 +230,22 @@ export default function AdminPage() {
     slug: '',
     price: '',
     compareAtPrice: '',
-    category: 'Tops',
+    category: 'Sets',
     collectionName: 'The Inheritance 01',
     description: '',
     images: ['/image1.jpg'],
-    colorsStr: 'Black, Grey',
+    classifiedImages: [{ url: '/image1.jpg', tag: 'full_set' as PhotoTag, sortOrder: 0 }],
+    
+    // Sets Piece-Level Pricing
+    isSet: true,
+    setTopName: 'Top / Vest',
+    setTopPrice: '',
+    setBottomName: 'Skirt / Trouser',
+    setBottomPrice: '',
+    setAdditionalName: '',
+    setAdditionalPrice: '',
+
+    colorsStr: 'Black, Stone, Ivory',
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     inStock: true,
     stockQuantity: '50',
@@ -307,7 +340,8 @@ export default function AdminPage() {
     if (!allCategories.includes(formatted)) {
       setCustomCategories((prev) => [...prev, formatted]);
     }
-    setProductForm((prev) => ({ ...prev, category: formatted }));
+    const isSet = formatted.toLowerCase() === 'sets';
+    setProductForm((prev) => ({ ...prev, category: formatted, isSet: isSet ? true : prev.isSet }));
     setNewCategoryInput('');
     setIsAddingNewCategory(false);
   };
@@ -332,6 +366,17 @@ export default function AdminPage() {
     }
     setNewSizeInput('');
     setIsAddingNewSize(false);
+  };
+
+  // Auto-sum sets price helper
+  const handleAutoSumSetPrice = () => {
+    const top = parseFloat(productForm.setTopPrice) || 0;
+    const bottom = parseFloat(productForm.setBottomPrice) || 0;
+    const additional = parseFloat(productForm.setAdditionalPrice) || 0;
+    const sum = top + bottom + additional;
+    if (sum > 0) {
+      setProductForm((prev) => ({ ...prev, price: sum.toString() }));
+    }
   };
 
   // ---------------------------------------------------------------------------
@@ -440,16 +485,25 @@ export default function AdminPage() {
     setNewCategoryInput('');
     setIsAddingNewSize(false);
     setNewSizeInput('');
+    setGalleryFilterTag('all');
     setProductForm({
       name: '',
       slug: '',
       price: '',
       compareAtPrice: '',
-      category: allCategories[0] || 'Tops',
+      category: 'Sets',
       collectionName: 'The Inheritance 01',
       description: '',
       images: ['/image1.jpg'],
-      colorsStr: 'Black, Grey, Stone',
+      classifiedImages: [{ url: '/image1.jpg', tag: 'full_set', sortOrder: 0 }],
+      isSet: true,
+      setTopName: 'Top / Vest',
+      setTopPrice: '',
+      setBottomName: 'Skirt / Trouser',
+      setBottomPrice: '',
+      setAdditionalName: '',
+      setAdditionalPrice: '',
+      colorsStr: 'Black, Stone, Ivory',
       sizes: ['XS', 'S', 'M', 'L', 'XL'],
       inStock: true,
       stockQuantity: '50',
@@ -479,6 +533,24 @@ export default function AdminPage() {
     setNewCategoryInput('');
     setIsAddingNewSize(false);
     setNewSizeInput('');
+    setGalleryFilterTag('all');
+
+    const isSetCategory = product.category?.toLowerCase() === 'sets' || Boolean(product.setPieces?.isSet);
+    const existingImages = product.images && product.images.length > 0 ? product.images : [product.image || '/image1.jpg'];
+    
+    // Construct classified images
+    const classified: ClassifiedImageItem[] = product.classifiedImages && product.classifiedImages.length > 0
+      ? product.classifiedImages.map((c, idx) => ({
+          url: c.url,
+          tag: c.tag || 'general',
+          sortOrder: c.sortOrder ?? idx,
+        }))
+      : existingImages.map((url, idx) => ({
+          url,
+          tag: idx === 0 ? 'full_set' : 'general',
+          sortOrder: idx,
+        }));
+
     setProductForm({
       name: product.name,
       slug: product.slug,
@@ -487,7 +559,15 @@ export default function AdminPage() {
       category: product.category,
       collectionName: product.collectionName,
       description: product.description,
-      images: product.images && product.images.length > 0 ? product.images : [product.image || '/image1.jpg'],
+      images: existingImages,
+      classifiedImages: classified,
+      isSet: isSetCategory,
+      setTopName: product.setPieces?.topName || 'Top / Vest',
+      setTopPrice: product.setPieces?.topPrice ? product.setPieces.topPrice.toString() : '',
+      setBottomName: product.setPieces?.bottomName || 'Skirt / Trouser',
+      setBottomPrice: product.setPieces?.bottomPrice ? product.setPieces.bottomPrice.toString() : '',
+      setAdditionalName: product.setPieces?.additionalName || '',
+      setAdditionalPrice: product.setPieces?.additionalPrice ? product.setPieces.additionalPrice.toString() : '',
       colorsStr: product.colors ? product.colors.join(', ') : 'Black',
       sizes: product.sizes || ['XS', 'S', 'M', 'L', 'XL'],
       inStock: product.inStock,
@@ -559,7 +639,15 @@ export default function AdminPage() {
     try {
       setUploadingImage(true);
       const base64Url = await compressAndConvertToBase64(file);
-      setProductForm((prev) => ({ ...prev, images: [...prev.images, base64Url] }));
+      const newTag: PhotoTag = productForm.category.toLowerCase() === 'sets' ? 'full_set' : 'general';
+      setProductForm((prev) => ({
+        ...prev,
+        images: [...prev.images, base64Url],
+        classifiedImages: [
+          ...(prev.classifiedImages || []),
+          { url: base64Url, tag: newTag, sortOrder: prev.images.length },
+        ],
+      }));
     } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Error converting image to Base64');
     } finally {
@@ -571,45 +659,93 @@ export default function AdminPage() {
   const handleAddManualImage = () => {
     const url = manualImageUrl.trim();
     if (!url) return;
-    setProductForm((prev) => ({ ...prev, images: [...prev.images, url] }));
+    const newTag: PhotoTag = productForm.category.toLowerCase() === 'sets' ? 'full_set' : 'general';
+    setProductForm((prev) => ({
+      ...prev,
+      images: [...prev.images, url],
+      classifiedImages: [
+        ...(prev.classifiedImages || []),
+        { url, tag: newTag, sortOrder: prev.images.length },
+      ],
+    }));
     setManualImageUrl('');
+  };
+
+  const handleUpdateImageTag = (index: number, newTag: PhotoTag) => {
+    setProductForm((prev) => {
+      const updatedClassified = [...(prev.classifiedImages || [])];
+      if (updatedClassified[index]) {
+        updatedClassified[index] = { ...updatedClassified[index], tag: newTag };
+      } else {
+        updatedClassified[index] = { url: prev.images[index], tag: newTag, sortOrder: index };
+      }
+      return { ...prev, classifiedImages: updatedClassified };
+    });
   };
 
   const handleMoveImage = (index: number, direction: 'left' | 'right') => {
     const targetIndex = direction === 'left' ? index - 1 : index + 1;
     if (targetIndex < 0 || targetIndex >= productForm.images.length) return;
     setProductForm((prev) => {
-      const updated = [...prev.images];
-      const temp = updated[index];
-      updated[index] = updated[targetIndex];
-      updated[targetIndex] = temp;
-      return { ...prev, images: updated };
+      const updatedImages = [...prev.images];
+      const tempImg = updatedImages[index];
+      updatedImages[index] = updatedImages[targetIndex];
+      updatedImages[targetIndex] = tempImg;
+
+      const updatedClassified = [...(prev.classifiedImages || [])];
+      if (updatedClassified[index] && updatedClassified[targetIndex]) {
+        const tempClass = updatedClassified[index];
+        updatedClassified[index] = updatedClassified[targetIndex];
+        updatedClassified[targetIndex] = tempClass;
+      }
+
+      return { ...prev, images: updatedImages, classifiedImages: updatedClassified };
     });
   };
 
   const handleImageDrop = (targetIndex: number) => {
     if (draggedImageIdx === null || draggedImageIdx === targetIndex) return;
     setProductForm((prev) => {
-      const updated = [...prev.images];
-      const [movedItem] = updated.splice(draggedImageIdx, 1);
-      updated.splice(targetIndex, 0, movedItem);
-      return { ...prev, images: updated };
+      const updatedImages = [...prev.images];
+      const [movedImg] = updatedImages.splice(draggedImageIdx, 1);
+      updatedImages.splice(targetIndex, 0, movedImg);
+
+      const updatedClassified = [...(prev.classifiedImages || [])];
+      if (updatedClassified.length > draggedImageIdx) {
+        const [movedClass] = updatedClassified.splice(draggedImageIdx, 1);
+        updatedClassified.splice(targetIndex, 0, movedClass);
+      }
+
+      return { ...prev, images: updatedImages, classifiedImages: updatedClassified };
     });
     setDraggedImageIdx(null);
   };
 
   const handleRemoveImage = (indexToRemove: number) => {
     setProductForm((prev) => {
-      const updated = prev.images.filter((_, idx) => idx !== indexToRemove);
-      return { ...prev, images: updated.length > 0 ? updated : ['/image1.jpg'] };
+      const updatedImages = prev.images.filter((_, idx) => idx !== indexToRemove);
+      const updatedClassified = (prev.classifiedImages || []).filter((_, idx) => idx !== indexToRemove);
+      return {
+        ...prev,
+        images: updatedImages.length > 0 ? updatedImages : ['/image1.jpg'],
+        classifiedImages: updatedClassified.length > 0 ? updatedClassified : [{ url: '/image1.jpg', tag: 'full_set', sortOrder: 0 }],
+      };
     });
   };
 
   const handleMakeImagePrimary = (indexToPrimary: number) => {
     setProductForm((prev) => {
-      const selected = prev.images[indexToPrimary];
-      const rest = prev.images.filter((_, idx) => idx !== indexToPrimary);
-      return { ...prev, images: [selected, ...rest] };
+      const selectedImg = prev.images[indexToPrimary];
+      const restImgs = prev.images.filter((_, idx) => idx !== indexToPrimary);
+
+      const selectedClass = (prev.classifiedImages || [])[indexToPrimary] || { url: selectedImg, tag: 'full_set', sortOrder: 0 };
+      const restClass = (prev.classifiedImages || []).filter((_, idx) => idx !== indexToPrimary);
+
+      return {
+        ...prev,
+        images: [selectedImg, ...restImgs],
+        classifiedImages: [selectedClass, ...restClass],
+      };
     });
   };
 
@@ -626,6 +762,28 @@ export default function AdminPage() {
       const designDetails = productForm.designDetailsStr.split('\n').map((s) => s.trim()).filter(Boolean);
       const completeTheSet = productForm.completeTheSetStr.split(',').map((s) => s.trim()).filter(Boolean);
 
+      const isSet = productForm.category.toLowerCase() === 'sets' || productForm.isSet;
+
+      const setPieces = {
+        isSet,
+        topName: productForm.setTopName.trim() || 'Top / Vest',
+        topPrice: productForm.setTopPrice ? parseFloat(productForm.setTopPrice) : 0,
+        bottomName: productForm.setBottomName.trim() || 'Skirt / Trouser',
+        bottomPrice: productForm.setBottomPrice ? parseFloat(productForm.setBottomPrice) : 0,
+        additionalName: productForm.setAdditionalName.trim() || undefined,
+        additionalPrice: productForm.setAdditionalPrice ? parseFloat(productForm.setAdditionalPrice) : undefined,
+      };
+
+      // Ensure classifiedImages match images count
+      const classifiedImages = productForm.images.map((url, idx) => {
+        const existing = (productForm.classifiedImages || [])[idx];
+        return {
+          url,
+          tag: existing?.tag || (idx === 0 ? 'full_set' : 'general'),
+          sortOrder: idx,
+        };
+      });
+
       const payload = {
         name: productForm.name.trim(),
         slug: productForm.slug.trim(),
@@ -635,6 +793,8 @@ export default function AdminPage() {
         collectionName: productForm.collectionName,
         description: productForm.description.trim(),
         images: productForm.images,
+        classifiedImages,
+        setPieces,
         colors: colors.length > 0 ? colors : ['Black'],
         sizes: productForm.sizes,
         inStock: productForm.inStock,
@@ -899,7 +1059,7 @@ export default function AdminPage() {
                   onClick={openAddProductModal}
                   className="text-xs uppercase tracking-widest px-3.5 py-1.5 bg-[#1c1c1a] text-white hover:bg-[#333330] transition-all cursor-pointer flex items-center gap-1.5"
                 >
-                  <span>+ Add Product</span>
+                  <span>+ Add Product / Set</span>
                 </button>
               </>
             )}
@@ -918,6 +1078,20 @@ export default function AdminPage() {
         {/* Main Tabs Navigation */}
         <div className="flex border-b border-[#1c1c1a]/15 mb-8">
           <button
+            onClick={() => setActiveTab('products')}
+            className={`pb-3 px-4 text-xs uppercase tracking-[0.2em] font-medium transition-all cursor-pointer border-b-2 -mb-px flex items-center gap-2 ${
+              activeTab === 'products'
+                ? 'border-[#1c1c1a] text-[#1c1c1a]'
+                : 'border-transparent text-[#1c1c1a]/50 hover:text-[#1c1c1a]'
+            }`}
+          >
+            <span>🛍️ Products & Sets</span>
+            <span className="text-[10px] bg-stone-200 text-stone-800 px-1.5 py-0.5 rounded-full font-bold">
+              {products.length}
+            </span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('orders')}
             className={`pb-3 px-4 text-xs uppercase tracking-[0.2em] font-medium transition-all cursor-pointer border-b-2 -mb-px flex items-center gap-2 ${
               activeTab === 'orders'
@@ -928,20 +1102,6 @@ export default function AdminPage() {
             <span>📦 Orders</span>
             <span className="text-[10px] bg-stone-900 text-white px-2 py-0.5 rounded-full font-bold">
               {orders.length}
-            </span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('products')}
-            className={`pb-3 px-4 text-xs uppercase tracking-[0.2em] font-medium transition-all cursor-pointer border-b-2 -mb-px flex items-center gap-2 ${
-              activeTab === 'products'
-                ? 'border-[#1c1c1a] text-[#1c1c1a]'
-                : 'border-transparent text-[#1c1c1a]/50 hover:text-[#1c1c1a]'
-            }`}
-          >
-            <span>🛍️ Products & Inventory</span>
-            <span className="text-[10px] bg-stone-200 text-stone-800 px-1.5 py-0.5 rounded-full font-bold">
-              {products.length}
             </span>
           </button>
 
@@ -961,7 +1121,233 @@ export default function AdminPage() {
         </div>
 
         {/* ========================================================================= */}
-        {/* TAB 1: SHOPIFY-STYLE ORDERS DASHBOARD */}
+        {/* TAB 1: PRODUCTS & INVENTORY (WITH SETS SUPPORT) */}
+        {/* ========================================================================= */}
+        {activeTab === 'products' && (
+          <div>
+            {/* Products KPI Cards */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#1c1c1a]/60">
+                  Total Products & Sets
+                </span>
+                <div className="text-2xl font-serif mt-2 text-[#1c1c1a]">{productStats.total}</div>
+              </div>
+              <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
+                <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
+                  In Stock
+                </span>
+                <div className="text-2xl font-serif mt-2 text-emerald-900">
+                  {productStats.inStock}
+                </div>
+              </div>
+              <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
+                <span className="text-xs font-semibold uppercase tracking-wider text-purple-700">
+                  Featured Ensembles
+                </span>
+                <div className="text-2xl font-serif mt-2 text-purple-900">
+                  {productStats.featured}
+                </div>
+              </div>
+              <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#1c1c1a]/60">
+                  Categories
+                </span>
+                <div className="text-2xl font-serif mt-2 text-[#1c1c1a]">
+                  {productStats.categoriesCount}
+                </div>
+              </div>
+            </div>
+
+            {/* Filter and Search Bar (with SETS pill) */}
+            <div className="bg-white p-4 rounded-sm border border-[#1c1c1a]/10 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="flex flex-wrap gap-1">
+                {['All', ...allCategories].map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setProductCategoryFilter(cat)}
+                    className={`px-3 py-1 text-xs uppercase tracking-wider font-medium rounded-xs transition-colors cursor-pointer ${
+                      productCategoryFilter === cat
+                        ? 'bg-[#1c1c1a] text-white shadow-xs'
+                        : 'bg-[#f9f9f9] border border-[#1c1c1a]/15 text-[#1c1c1a]/70 hover:text-[#1c1c1a]'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              <div className="relative flex-1 max-w-md">
+                <input
+                  type="text"
+                  placeholder="Search products by title, slug, collection..."
+                  value={productSearchQuery}
+                  onChange={(e) => setProductSearchQuery(e.target.value)}
+                  className="w-full text-xs bg-[#f9f9f9] border border-[#1c1c1a]/15 px-3 py-2 rounded-sm focus:outline-none focus:border-[#1c1c1a]"
+                />
+                {productSearchQuery && (
+                  <button
+                    onClick={() => setProductSearchQuery('')}
+                    className="absolute right-2.5 top-2 text-xs text-stone-400 hover:text-stone-700 cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Products Table */}
+            <div className="bg-white rounded-sm border border-[#1c1c1a]/10 overflow-hidden shadow-xs">
+              {productsLoading && products.length === 0 ? (
+                <div className="py-20 text-center text-xs uppercase tracking-widest text-[#1c1c1a]/60">
+                  Loading catalogue from MongoDB...
+                </div>
+              ) : productsError ? (
+                <div className="py-12 text-center text-sm text-red-600">
+                  {productsError}
+                  <div className="mt-2">
+                    <button
+                      onClick={fetchProducts}
+                      className="text-xs uppercase underline tracking-wider cursor-pointer"
+                    >
+                      Try again
+                    </button>
+                  </div>
+                </div>
+              ) : filteredProducts.length === 0 ? (
+                <div className="py-20 text-center">
+                  <p className="text-sm text-[#1c1c1a]/60 font-light">
+                    {productSearchQuery || productCategoryFilter !== 'All'
+                      ? 'No items matching your search criteria.'
+                      : 'No products or sets in database yet.'}
+                  </p>
+                  <div className="mt-4">
+                    <button
+                      onClick={openAddProductModal}
+                      className="px-4 py-2 bg-[#1c1c1a] text-white text-xs uppercase tracking-wider cursor-pointer hover:bg-[#333330]"
+                    >
+                      + Add First Product / Set
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-[#f9f9f9] border-b border-[#1c1c1a]/10 uppercase tracking-widest text-[#1c1c1a]/70 text-[10px]">
+                      <tr>
+                        <th className="py-3 px-4">Item</th>
+                        <th className="py-3 px-4">Category / Type</th>
+                        <th className="py-3 px-4">Price Breakdown</th>
+                        <th className="py-3 px-4">Fit Note</th>
+                        <th className="py-3 px-4">Stock</th>
+                        <th className="py-3 px-4 text-right">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-[#1c1c1a]/5">
+                      {filteredProducts.map((prod) => {
+                        const isSet = prod.category.toLowerCase() === 'sets' || prod.setPieces?.isSet;
+
+                        return (
+                          <tr key={prod.id} className="hover:bg-[#faf9f6] transition-colors">
+                            <td className="py-3.5 px-4">
+                              <div className="flex items-center gap-3">
+                                <div className="relative w-12 h-14 bg-[#e8e4dc]/40 rounded-xs overflow-hidden flex-shrink-0">
+                                  <Image
+                                    src={prod.image || '/image1.jpg'}
+                                    alt={prod.name}
+                                    fill
+                                    unoptimized={Boolean(prod.image?.startsWith('data:'))}
+                                    className="object-cover"
+                                    sizes="48px"
+                                  />
+                                </div>
+                                <div>
+                                  <div className="font-medium text-[#1c1c1a] flex items-center gap-1.5">
+                                    <span>{prod.name}</span>
+                                    {isSet && (
+                                      <span className="bg-black text-white text-[9px] uppercase px-1.5 py-0.2 rounded-xs font-bold font-mono">
+                                        Set
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="text-[10px] text-[#1c1c1a]/50 font-mono">
+                                    /{prod.slug}
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <span className="font-medium text-[#1c1c1a]">{prod.category}</span>
+                              <div className="text-[10px] text-stone-400">
+                                ★ {prod.rating || 4.9} ({prod.reviewsCount || 18})
+                              </div>
+                            </td>
+                            <td className="py-3.5 px-4">
+                              <div className="font-bold text-sm text-[#1c1c1a]">
+                                ₹{prod.price.toLocaleString()}
+                              </div>
+                              {isSet && (prod.setPieces?.topPrice || prod.setPieces?.bottomPrice) ? (
+                                <div className="text-[10px] text-stone-600 mt-0.5 font-mono space-y-0.5">
+                                  {prod.setPieces?.topPrice ? (
+                                    <div>{prod.setPieces.topName || 'Top'}: ₹{prod.setPieces.topPrice.toLocaleString()}</div>
+                                  ) : null}
+                                  {prod.setPieces?.bottomPrice ? (
+                                    <div>{prod.setPieces.bottomName || 'Bottom'}: ₹{prod.setPieces.bottomPrice.toLocaleString()}</div>
+                                  ) : null}
+                                </div>
+                              ) : (
+                                <div className="text-[9px] text-[#1c1c1a]/50">Incl. of all taxes</div>
+                              )}
+                            </td>
+                            <td className="py-3.5 px-4 text-[11px] text-[#1c1c1a]/70 max-w-xs truncate">
+                              {prod.fitNote || 'Relaxed Fit'}
+                            </td>
+                            <td className="py-3.5 px-4 whitespace-nowrap">
+                              <span
+                                className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-xs border font-medium ${
+                                  prod.inStock
+                                    ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                                    : 'bg-red-50 border-red-300 text-red-800'
+                                }`}
+                              >
+                                {prod.inStock ? `In Stock (${prod.stockQuantity})` : 'Out of Stock'}
+                              </span>
+                            </td>
+                            <td className="py-3.5 px-4 whitespace-nowrap text-right space-x-2">
+                              <Link
+                                href={`/product/${prod.slug}`}
+                                target="_blank"
+                                className="inline-block px-2 py-1 text-[11px] border border-[#1c1c1a]/20 hover:bg-[#1c1c1a] hover:text-white transition-colors uppercase tracking-wider"
+                              >
+                                View ↗
+                              </Link>
+                              <button
+                                onClick={() => openEditProductModal(prod)}
+                                className="inline-block px-2.5 py-1 text-[11px] bg-[#1c1c1a] text-white hover:bg-[#333330] transition-colors uppercase tracking-wider cursor-pointer"
+                              >
+                                Edit
+                              </button>
+                              <button
+                                onClick={() => handleProductDelete(prod.slug, prod.name)}
+                                disabled={productActionId === prod.slug}
+                                className="inline-block px-2 py-1 text-[11px] border border-red-200 text-red-700 hover:bg-red-700 hover:text-white transition-colors uppercase tracking-wider cursor-pointer disabled:opacity-50"
+                              >
+                                {productActionId === prod.slug ? 'Deleting...' : 'Delete'}
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================================= */}
+        {/* TAB 2: ORDERS DASHBOARD (SHOPIFY STYLE) */}
         {/* ========================================================================= */}
         {activeTab === 'orders' && (
           <div className="space-y-6">
@@ -1249,214 +1635,6 @@ export default function AdminPage() {
                           </tr>
                         );
                       })}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* ========================================================================= */}
-        {/* TAB 2: PRODUCTS & INVENTORY */}
-        {/* ========================================================================= */}
-        {activeTab === 'products' && (
-          <div>
-            {/* Products KPI Cards */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#1c1c1a]/60">
-                  Total Products
-                </span>
-                <div className="text-2xl font-serif mt-2 text-[#1c1c1a]">{productStats.total}</div>
-              </div>
-              <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
-                <span className="text-xs font-semibold uppercase tracking-wider text-emerald-700">
-                  In Stock
-                </span>
-                <div className="text-2xl font-serif mt-2 text-emerald-900">
-                  {productStats.inStock}
-                </div>
-              </div>
-              <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
-                <span className="text-xs font-semibold uppercase tracking-wider text-purple-700">
-                  Featured Items
-                </span>
-                <div className="text-2xl font-serif mt-2 text-purple-900">
-                  {productStats.featured}
-                </div>
-              </div>
-              <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#1c1c1a]/60">
-                  Categories
-                </span>
-                <div className="text-2xl font-serif mt-2 text-[#1c1c1a]">
-                  {productStats.categoriesCount}
-                </div>
-              </div>
-            </div>
-
-            {/* Filter and Search Bar */}
-            <div className="bg-white p-4 rounded-sm border border-[#1c1c1a]/10 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="flex flex-wrap gap-1">
-                {['All', ...allCategories].map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setProductCategoryFilter(cat)}
-                    className={`px-3 py-1 text-xs uppercase tracking-wider font-medium rounded-xs transition-colors cursor-pointer ${
-                      productCategoryFilter === cat
-                        ? 'bg-[#1c1c1a] text-white'
-                        : 'bg-[#f9f9f9] border border-[#1c1c1a]/15 text-[#1c1c1a]/70 hover:text-[#1c1c1a]'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-
-              <div className="relative flex-1 max-w-md">
-                <input
-                  type="text"
-                  placeholder="Search products by title, slug, collection..."
-                  value={productSearchQuery}
-                  onChange={(e) => setProductSearchQuery(e.target.value)}
-                  className="w-full text-xs bg-[#f9f9f9] border border-[#1c1c1a]/15 px-3 py-2 rounded-sm focus:outline-none focus:border-[#1c1c1a]"
-                />
-                {productSearchQuery && (
-                  <button
-                    onClick={() => setProductSearchQuery('')}
-                    className="absolute right-2.5 top-2 text-xs text-stone-400 hover:text-stone-700 cursor-pointer"
-                  >
-                    ✕
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Products Table */}
-            <div className="bg-white rounded-sm border border-[#1c1c1a]/10 overflow-hidden shadow-xs">
-              {productsLoading && products.length === 0 ? (
-                <div className="py-20 text-center text-xs uppercase tracking-widest text-[#1c1c1a]/60">
-                  Loading catalogue from MongoDB...
-                </div>
-              ) : productsError ? (
-                <div className="py-12 text-center text-sm text-red-600">
-                  {productsError}
-                  <div className="mt-2">
-                    <button
-                      onClick={fetchProducts}
-                      className="text-xs uppercase underline tracking-wider cursor-pointer"
-                    >
-                      Try again
-                    </button>
-                  </div>
-                </div>
-              ) : filteredProducts.length === 0 ? (
-                <div className="py-20 text-center">
-                  <p className="text-sm text-[#1c1c1a]/60 font-light">
-                    {productSearchQuery || productCategoryFilter !== 'All'
-                      ? 'No products matching your search criteria.'
-                      : 'No products in database yet.'}
-                  </p>
-                  <div className="mt-4">
-                    <button
-                      onClick={openAddProductModal}
-                      className="px-4 py-2 bg-[#1c1c1a] text-white text-xs uppercase tracking-wider cursor-pointer hover:bg-[#333330]"
-                    >
-                      + Add First Product
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-xs">
-                    <thead className="bg-[#f9f9f9] border-b border-[#1c1c1a]/10 uppercase tracking-widest text-[#1c1c1a]/70 text-[10px]">
-                      <tr>
-                        <th className="py-3 px-4">Item</th>
-                        <th className="py-3 px-4">Rating</th>
-                        <th className="py-3 px-4">Category</th>
-                        <th className="py-3 px-4">Price</th>
-                        <th className="py-3 px-4">Fit Note</th>
-                        <th className="py-3 px-4">Stock</th>
-                        <th className="py-3 px-4 text-right">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-[#1c1c1a]/5">
-                      {filteredProducts.map((prod) => (
-                        <tr key={prod.id} className="hover:bg-[#faf9f6] transition-colors">
-                          <td className="py-3.5 px-4">
-                            <div className="flex items-center gap-3">
-                              <div className="relative w-12 h-14 bg-[#e8e4dc]/40 rounded-xs overflow-hidden flex-shrink-0">
-                                <Image
-                                  src={prod.image || '/image1.jpg'}
-                                  alt={prod.name}
-                                  fill
-                                  unoptimized={Boolean(prod.image?.startsWith('data:'))}
-                                  className="object-cover"
-                                  sizes="48px"
-                                />
-                              </div>
-                              <div>
-                                <div className="font-medium text-[#1c1c1a]">{prod.name}</div>
-                                <div className="text-[10px] text-[#1c1c1a]/50 font-mono">
-                                  /{prod.slug}
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap">
-                            <span className="text-amber-700 font-medium">★ {prod.rating || 4.9}</span>
-                            <span className="text-[10px] text-stone-400 ml-1">({prod.reviewsCount || 18})</span>
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap text-[#1c1c1a]/80">
-                            {prod.category}
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap">
-                            <div className="font-medium text-[#1c1c1a]">
-                              ₹{prod.price.toLocaleString()}
-                            </div>
-                            <div className="text-[9px] text-[#1c1c1a]/50">
-                              Incl. of taxes
-                            </div>
-                          </td>
-                          <td className="py-3.5 px-4 text-[11px] text-[#1c1c1a]/70 max-w-xs truncate">
-                            {prod.fitNote || 'Relaxed Fit'}
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap">
-                            <span
-                              className={`text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-xs border font-medium ${
-                                prod.inStock
-                                  ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                                  : 'bg-red-50 border-red-300 text-red-800'
-                              }`}
-                            >
-                              {prod.inStock ? `In Stock (${prod.stockQuantity})` : 'Out of Stock'}
-                            </span>
-                          </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap text-right space-x-2">
-                            <Link
-                              href={`/product/${prod.slug}`}
-                              target="_blank"
-                              className="inline-block px-2 py-1 text-[11px] border border-[#1c1c1a]/20 hover:bg-[#1c1c1a] hover:text-white transition-colors uppercase tracking-wider"
-                            >
-                              View ↗
-                            </Link>
-                            <button
-                              onClick={() => openEditProductModal(prod)}
-                              className="inline-block px-2.5 py-1 text-[11px] bg-[#1c1c1a] text-white hover:bg-[#333330] transition-colors uppercase tracking-wider cursor-pointer"
-                            >
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => handleProductDelete(prod.slug, prod.name)}
-                              disabled={productActionId === prod.slug}
-                              className="inline-block px-2 py-1 text-[11px] border border-red-200 text-red-700 hover:bg-red-700 hover:text-white transition-colors uppercase tracking-wider cursor-pointer disabled:opacity-50"
-                            >
-                              {productActionId === prod.slug ? 'Deleting...' : 'Delete'}
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
                     </tbody>
                   </table>
                 </div>
@@ -1846,7 +2024,7 @@ export default function AdminPage() {
                   </div>
                 </div>
 
-                {/* 3. Timeline & Staff Comments Card (Matching Screenshot 3) */}
+                {/* 3. Timeline & Staff Comments Card */}
                 <div className="bg-white p-5 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-4">
                   <div className="font-bold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-2">
                     Order Timeline & Activity
@@ -2049,7 +2227,7 @@ export default function AdminPage() {
       )}
 
       {/* ========================================================================= */}
-      {/* ADD / EDIT PRODUCT MODAL */}
+      {/* ADD / EDIT PRODUCT & SETS MODAL */}
       {/* ========================================================================= */}
       {isProductModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
@@ -2057,10 +2235,14 @@ export default function AdminPage() {
             <div className="flex justify-between items-start border-b border-[#1c1c1a]/10 pb-4 mb-6">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#bdb2a1] font-bold">
-                  Catalogue Editor
+                  Catalogue & Sets Editor
                 </span>
                 <h2 className="text-xl font-serif text-[#1c1c1a] mt-1">
-                  {editingProduct ? `Edit: ${editingProduct.name}` : 'Add New Garment'}
+                  {editingProduct
+                    ? `Edit: ${editingProduct.name}`
+                    : productForm.category.toLowerCase() === 'sets' || productForm.isSet
+                    ? 'Add New Luxury Set'
+                    : 'Add New Garment'}
                 </h2>
               </div>
               <button
@@ -2074,14 +2256,34 @@ export default function AdminPage() {
             <form onSubmit={handleProductSubmit} className="space-y-6 text-xs">
               {/* SECTION 1: General Info */}
               <div className="space-y-4">
-                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1">
-                  1. General Information
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1 flex justify-between items-center">
+                  <span>1. General Information</span>
+                  <label className="flex items-center gap-2 cursor-pointer font-sans normal-case">
+                    <input
+                      type="checkbox"
+                      checked={productForm.isSet || productForm.category.toLowerCase() === 'sets'}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        setProductForm((prev) => ({
+                          ...prev,
+                          isSet: checked,
+                          category: checked ? 'Sets' : prev.category === 'Sets' ? 'Tops' : prev.category,
+                        }));
+                      }}
+                      className="rounded-xs"
+                    />
+                    <span className="text-[11px] font-medium text-[#1c1c1a]">
+                      ✨ Multi-Piece Ensemble / Set
+                    </span>
+                  </label>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                      Garment Name*
+                      {productForm.isSet || productForm.category.toLowerCase() === 'sets'
+                        ? 'Set / Ensemble Title*'
+                        : 'Garment Name*'}
                     </label>
                     <input
                       type="text"
@@ -2095,7 +2297,11 @@ export default function AdminPage() {
                           slug: editingProduct ? prev.slug : name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''),
                         }));
                       }}
-                      placeholder="e.g. Kaddy Top in Cotton"
+                      placeholder={
+                        productForm.isSet || productForm.category.toLowerCase() === 'sets'
+                          ? 'e.g. Amber Vest & Pleated Trouser Set'
+                          : 'e.g. Kaddy Top in Cotton'
+                      }
                       className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                     />
                   </div>
@@ -2109,7 +2315,7 @@ export default function AdminPage() {
                       required
                       value={productForm.slug}
                       onChange={(e) => setProductForm({ ...productForm, slug: e.target.value })}
-                      placeholder="e.g. kaddy-top-in-cotton"
+                      placeholder="e.g. amber-vest-trouser-set"
                       className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                     />
                   </div>
@@ -2118,7 +2324,9 @@ export default function AdminPage() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="min-w-0">
                     <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
-                      Price (₹)*
+                      {productForm.isSet || productForm.category.toLowerCase() === 'sets'
+                        ? 'Total Set Price (₹)*'
+                        : 'Price (₹)*'}
                     </label>
                     <input
                       type="number"
@@ -2126,8 +2334,8 @@ export default function AdminPage() {
                       min="0"
                       value={productForm.price}
                       onChange={(e) => setProductForm({ ...productForm, price: e.target.value })}
-                      placeholder="1650"
-                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                      placeholder="6500"
+                      className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a] font-bold"
                     />
                     <span className="text-[9px] text-stone-400 mt-0.5 block">Incl. of all taxes</span>
                   </div>
@@ -2141,7 +2349,7 @@ export default function AdminPage() {
                       min="0"
                       value={productForm.compareAtPrice}
                       onChange={(e) => setProductForm({ ...productForm, compareAtPrice: e.target.value })}
-                      placeholder="1950"
+                      placeholder="7200"
                       className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                     />
                   </div>
@@ -2166,10 +2374,16 @@ export default function AdminPage() {
                       <select
                         value={productForm.category}
                         onChange={(e) => {
-                          if (e.target.value === '__new__') {
+                          const val = e.target.value;
+                          if (val === '__new__') {
                             setIsAddingNewCategory(true);
                           } else {
-                            setProductForm({ ...productForm, category: e.target.value });
+                            const isSet = val.toLowerCase() === 'sets';
+                            setProductForm({
+                              ...productForm,
+                              category: val,
+                              isSet: isSet ? true : productForm.isSet,
+                            });
                           }
                         }}
                         className="w-full border border-[#1c1c1a]/20 p-2 rounded-xs focus:outline-none focus:border-[#1c1c1a] bg-white cursor-pointer text-xs"
@@ -2237,6 +2451,143 @@ export default function AdminPage() {
                   </div>
                 </div>
 
+                {/* 1B: MULTI-PIECE SET PRICE BREAKDOWN */}
+                {(productForm.isSet || productForm.category.toLowerCase() === 'sets') && (
+                  <div className="bg-stone-50 p-4 rounded-xs border border-stone-300 space-y-3">
+                    <div className="flex justify-between items-center border-b border-stone-200 pb-2">
+                      <div>
+                        <span className="font-bold uppercase tracking-wider text-[11px] text-[#1c1c1a] flex items-center gap-1.5">
+                          <span>✨ Set Piece Breakdown & Prices</span>
+                        </span>
+                        <span className="text-[10px] text-stone-500 block">
+                          Specify individual prices for the upper and lower pieces of this set.
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleAutoSumSetPrice}
+                        className="px-2.5 py-1 bg-white border border-[#1c1c1a]/30 text-[10px] uppercase font-bold tracking-wider hover:bg-[#1c1c1a] hover:text-white transition-colors cursor-pointer shadow-xs"
+                        title="Calculate total price as sum of pieces"
+                      >
+                        ⚡ Auto-Sum Total
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {/* Piece 1: Top / Vest */}
+                      <div className="bg-white p-3 rounded-xs border border-stone-200 space-y-2">
+                        <span className="text-[10px] uppercase font-bold text-stone-500 block">
+                          Piece 1 · Upper Garment
+                        </span>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <label className="block text-[10px] uppercase text-stone-500 mb-0.5">
+                              Piece Name
+                            </label>
+                            <input
+                              type="text"
+                              value={productForm.setTopName}
+                              onChange={(e) =>
+                                setProductForm({ ...productForm, setTopName: e.target.value })
+                              }
+                              placeholder="Top / Vest"
+                              className="w-full border border-stone-300 p-1.5 rounded-xs text-xs"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[10px] uppercase text-stone-500 mb-0.5">
+                              Price (₹)
+                            </label>
+                            <input
+                              type="number"
+                              min="0"
+                              value={productForm.setTopPrice}
+                              onChange={(e) =>
+                                setProductForm({ ...productForm, setTopPrice: e.target.value })
+                              }
+                              placeholder="3200"
+                              className="w-full border border-stone-300 p-1.5 rounded-xs text-xs font-mono font-medium"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Piece 2: Skirt / Trouser */}
+                      <div className="bg-white p-3 rounded-xs border border-stone-200 space-y-2">
+                        <span className="text-[10px] uppercase font-bold text-stone-500 block">
+                          Piece 2 · Lower Garment
+                        </span>
+                        <div className="grid grid-cols-2 gap-2">
+                          <div>
+                            <label className="block text-[10px] uppercase text-stone-500 mb-0.5">
+                              Piece Name
+                            </label>
+                            <input
+                              type="text"
+                              value={productForm.setBottomName}
+                              onChange={(e) =>
+                                setProductForm({ ...productForm, setBottomName: e.target.value })
+                              }
+                              placeholder="Skirt / Trouser"
+                              className="w-full border border-stone-300 p-1.5 rounded-xs text-xs"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-[10px] uppercase text-stone-500 mb-0.5">
+                              Price (₹)
+                            </label>
+                            <input
+                              type="number"
+                              min="0"
+                              value={productForm.setBottomPrice}
+                              onChange={(e) =>
+                                setProductForm({ ...productForm, setBottomPrice: e.target.value })
+                              }
+                              placeholder="3300"
+                              className="w-full border border-stone-300 p-1.5 rounded-xs text-xs font-mono font-medium"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Piece 3: Optional Additional Piece */}
+                    <div className="pt-2 border-t border-stone-200">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-[10px] uppercase text-stone-500 mb-0.5">
+                            Additional Piece Name (Optional: Dupatta, Stole, Belt)
+                          </label>
+                          <input
+                            type="text"
+                            value={productForm.setAdditionalName}
+                            onChange={(e) =>
+                              setProductForm({ ...productForm, setAdditionalName: e.target.value })
+                            }
+                            placeholder="e.g. Handwoven Stole"
+                            className="w-full border border-stone-300 p-1.5 rounded-xs text-xs bg-white"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] uppercase text-stone-500 mb-0.5">
+                            Additional Piece Price (₹)
+                          </label>
+                          <input
+                            type="number"
+                            min="0"
+                            value={productForm.setAdditionalPrice}
+                            onChange={(e) =>
+                              setProductForm({ ...productForm, setAdditionalPrice: e.target.value })
+                            }
+                            placeholder="0"
+                            className="w-full border border-stone-300 p-1.5 rounded-xs text-xs bg-white font-mono"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label className="block font-semibold uppercase tracking-wider text-[11px] mb-1">
@@ -2283,20 +2634,23 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {/* SECTION 2: Photos Gallery */}
+              {/* SECTION 2: Photos Gallery & Subcategory Classification */}
               <div className="space-y-4">
-                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1">
-                  2. Garment Photos & Gallery
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-1 flex justify-between items-center">
+                  <span>2. Photos Gallery & Subcategory Classification</span>
+                  <span className="text-[10px] text-stone-500 font-mono">
+                    {productForm.images.length} {productForm.images.length === 1 ? 'photo' : 'photos'}
+                  </span>
                 </div>
 
-                <div className="bg-[#f9f9f9] p-4 rounded-sm border border-[#1c1c1a]/15">
-                  <div className="flex justify-between items-center mb-3">
+                <div className="bg-[#f9f9f9] p-4 rounded-sm border border-[#1c1c1a]/15 space-y-3">
+                  <div className="flex justify-between items-center">
                     <div>
                       <span className="font-semibold uppercase tracking-wider text-[11px] text-[#1c1c1a]">
-                        Photo Gallery
+                        Garment Photos
                       </span>
                       <span className="text-[10px] text-[#1c1c1a]/60 block">
-                        First photo is used as the cover on catalog pages.
+                        Photo #1 is used as the cover on catalog pages.
                       </span>
                     </div>
 
@@ -2318,117 +2672,180 @@ export default function AdminPage() {
                     </button>
                   </div>
 
-                  {/* Drag and Drop instructions */}
-                  <div className="mb-3 flex items-center justify-between text-[11px] text-[#1c1c1a]/70 bg-stone-100 px-3 py-2 rounded-xs border border-stone-200">
-                    <span>
-                      💡 <strong>Reshuffle Sequence:</strong> Drag & drop photos, or use the <strong>← / →</strong> buttons. Photo <strong>#1</strong> is always the cover.
-                    </span>
-                    <span className="text-[10px] text-stone-500 font-mono">
-                      {productForm.images.length} {productForm.images.length === 1 ? 'photo' : 'photos'}
+                  {/* Subcategory Tag Filter Bar */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-stone-200">
+                    <div className="flex flex-wrap gap-1 text-[10px]">
+                      <span className="text-stone-500 uppercase font-semibold mr-1 self-center">
+                        Filter Gallery:
+                      </span>
+                      {[
+                        { id: 'all', label: 'All Photos' },
+                        { id: 'full_set', label: 'Full Set' },
+                        { id: 'top', label: 'Top / Vest' },
+                        { id: 'bottom', label: 'Skirt / Trouser' },
+                        { id: 'detail', label: 'Detail' },
+                      ].map((tab) => {
+                        const count =
+                          tab.id === 'all'
+                            ? productForm.images.length
+                            : (productForm.classifiedImages || []).filter((c) => c.tag === tab.id).length;
+
+                        return (
+                          <button
+                            key={tab.id}
+                            type="button"
+                            onClick={() => setGalleryFilterTag(tab.id as typeof galleryFilterTag)}
+                            className={`px-2 py-0.5 rounded-xs uppercase tracking-wider font-medium cursor-pointer transition-colors ${
+                              galleryFilterTag === tab.id
+                                ? 'bg-[#1c1c1a] text-white'
+                                : 'bg-white border border-stone-300 text-stone-700 hover:text-black'
+                            }`}
+                          >
+                            {tab.label} ({count})
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <span className="text-[10px] text-stone-500">
+                      💡 Tag each photo below by piece
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
-                    {productForm.images.map((imgUrl, idx) => (
-                      <div
-                        key={idx}
-                        draggable
-                        onDragStart={() => setDraggedImageIdx(idx)}
-                        onDragOver={(e) => e.preventDefault()}
-                        onDrop={() => handleImageDrop(idx)}
-                        className={`relative group aspect-[3/4] bg-stone-200 rounded-xs overflow-hidden border transition-all cursor-grab active:cursor-grabbing ${
-                          draggedImageIdx === idx
-                            ? 'opacity-40 border-dashed border-[#1c1c1a] scale-95'
-                            : 'border-[#1c1c1a]/15 hover:border-[#1c1c1a] shadow-xs'
-                        }`}
-                      >
-                        <Image
-                          src={imgUrl}
-                          alt={`Photo ${idx + 1}`}
-                          fill
-                          unoptimized={Boolean(imgUrl?.startsWith('data:'))}
-                          className="object-cover"
-                          sizes="160px"
-                        />
+                  {/* Photo Cards Grid with Tag Selectors */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                    {productForm.images.map((imgUrl, idx) => {
+                      const currentTag =
+                        (productForm.classifiedImages || [])[idx]?.tag || (idx === 0 ? 'full_set' : 'general');
 
-                        <div className="absolute top-1.5 left-1.5 flex items-center gap-1 z-10">
-                          <span className="bg-black/80 text-white text-[9px] font-mono px-1.5 py-0.5 rounded-xs font-bold">
-                            #{idx + 1}
-                          </span>
-                          {idx === 0 && (
-                            <span className="bg-amber-600 text-white text-[9px] uppercase px-1.5 py-0.5 rounded-xs font-bold tracking-wider">
-                              Cover
-                            </span>
-                          )}
-                        </div>
+                      const isFilteredOut = galleryFilterTag !== 'all' && currentTag !== galleryFilterTag;
 
-                        <div className="absolute bottom-1 left-1 right-1 flex justify-between items-center z-10">
-                          <button
-                            type="button"
-                            disabled={idx === 0}
-                            onClick={() => handleMoveImage(idx, 'left')}
-                            className="bg-white/90 text-[#1c1c1a] text-[10px] w-5 h-5 rounded-xs flex items-center justify-center hover:bg-[#1c1c1a] hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-xs cursor-pointer font-bold"
-                            title="Move Left"
-                          >
-                            ←
-                          </button>
+                      if (isFilteredOut) return null;
 
-                          <button
-                            type="button"
-                            disabled={idx === productForm.images.length - 1}
-                            onClick={() => handleMoveImage(idx, 'right')}
-                            className="bg-white/90 text-[#1c1c1a] text-[10px] w-5 h-5 rounded-xs flex items-center justify-center hover:bg-[#1c1c1a] hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-xs cursor-pointer font-bold"
-                            title="Move Right"
-                          >
-                            →
-                          </button>
-                        </div>
+                      return (
+                        <div
+                          key={idx}
+                          draggable
+                          onDragStart={() => setDraggedImageIdx(idx)}
+                          onDragOver={(e) => e.preventDefault()}
+                          onDrop={() => handleImageDrop(idx)}
+                          className={`relative group bg-stone-200 rounded-xs overflow-hidden border transition-all cursor-grab active:cursor-grabbing flex flex-col justify-between ${
+                            draggedImageIdx === idx
+                              ? 'opacity-40 border-dashed border-[#1c1c1a] scale-95'
+                              : 'border-[#1c1c1a]/15 hover:border-[#1c1c1a] shadow-xs'
+                          }`}
+                        >
+                          <div className="relative aspect-[3/4] w-full bg-stone-100">
+                            <Image
+                              src={imgUrl}
+                              alt={`Photo ${idx + 1}`}
+                              fill
+                              unoptimized={Boolean(imgUrl?.startsWith('data:'))}
+                              className="object-cover"
+                              sizes="160px"
+                            />
 
-                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-1.5 z-20">
-                          <div className="flex justify-end">
-                            <button
-                              type="button"
-                              onClick={() => handleRemoveImage(idx)}
-                              className="bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center hover:bg-red-700 cursor-pointer shadow-xs"
-                              title="Remove Photo"
-                            >
-                              ✕
-                            </button>
-                          </div>
+                            {/* Top Badges */}
+                            <div className="absolute top-1.5 left-1.5 flex items-center gap-1 z-10">
+                              <span className="bg-black/80 text-white text-[9px] font-mono px-1.5 py-0.5 rounded-xs font-bold">
+                                #{idx + 1}
+                              </span>
+                              {idx === 0 && (
+                                <span className="bg-amber-600 text-white text-[9px] uppercase px-1.5 py-0.5 rounded-xs font-bold tracking-wider">
+                                  Cover
+                                </span>
+                              )}
+                            </div>
 
-                          <div className="space-y-1">
-                            {idx !== 0 && (
-                              <button
-                                type="button"
-                                onClick={() => handleMakeImagePrimary(idx)}
-                                className="w-full bg-white text-black text-[9px] uppercase font-bold py-1 px-1.5 rounded-xs hover:bg-stone-100 cursor-pointer tracking-wider text-center block shadow-xs"
-                              >
-                                ★ Make Cover
-                              </button>
-                            )}
-
-                            <div className="flex justify-between gap-1">
+                            {/* Move buttons */}
+                            <div className="absolute bottom-1 left-1 right-1 flex justify-between items-center z-10">
                               <button
                                 type="button"
                                 disabled={idx === 0}
                                 onClick={() => handleMoveImage(idx, 'left')}
-                                className="flex-1 bg-black/80 text-white text-[9px] py-0.5 rounded-xs hover:bg-black disabled:opacity-30 cursor-pointer"
+                                className="bg-white/90 text-[#1c1c1a] text-[10px] w-5 h-5 rounded-xs flex items-center justify-center hover:bg-[#1c1c1a] hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-xs cursor-pointer font-bold"
+                                title="Move Left"
                               >
-                                ← Move
+                                ←
                               </button>
+
                               <button
                                 type="button"
                                 disabled={idx === productForm.images.length - 1}
                                 onClick={() => handleMoveImage(idx, 'right')}
-                                className="flex-1 bg-black/80 text-white text-[9px] py-0.5 rounded-xs hover:bg-black disabled:opacity-30 cursor-pointer"
+                                className="bg-white/90 text-[#1c1c1a] text-[10px] w-5 h-5 rounded-xs flex items-center justify-center hover:bg-[#1c1c1a] hover:text-white transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-xs cursor-pointer font-bold"
+                                title="Move Right"
                               >
-                                Move →
+                                →
                               </button>
                             </div>
+
+                            {/* Overlay Controls */}
+                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-1.5 z-20">
+                              <div className="flex justify-end">
+                                <button
+                                  type="button"
+                                  onClick={() => handleRemoveImage(idx)}
+                                  className="bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center hover:bg-red-700 cursor-pointer shadow-xs"
+                                  title="Remove Photo"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+
+                              <div className="space-y-1">
+                                {idx !== 0 && (
+                                  <button
+                                    type="button"
+                                    onClick={() => handleMakeImagePrimary(idx)}
+                                    className="w-full bg-white text-black text-[9px] uppercase font-bold py-1 px-1.5 rounded-xs hover:bg-stone-100 cursor-pointer tracking-wider text-center block shadow-xs"
+                                  >
+                                    ★ Make Cover
+                                  </button>
+                                )}
+
+                                <div className="flex justify-between gap-1">
+                                  <button
+                                    type="button"
+                                    disabled={idx === 0}
+                                    onClick={() => handleMoveImage(idx, 'left')}
+                                    className="flex-1 bg-black/80 text-white text-[9px] py-0.5 rounded-xs hover:bg-black disabled:opacity-30 cursor-pointer"
+                                  >
+                                    ← Move
+                                  </button>
+                                  <button
+                                    type="button"
+                                    disabled={idx === productForm.images.length - 1}
+                                    onClick={() => handleMoveImage(idx, 'right')}
+                                    className="flex-1 bg-black/80 text-white text-[9px] py-0.5 rounded-xs hover:bg-black disabled:opacity-30 cursor-pointer"
+                                  >
+                                    Move →
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Classification Dropdown */}
+                          <div className="p-1.5 bg-white border-t border-stone-200">
+                            <label className="block text-[9px] uppercase font-bold text-stone-500 mb-0.5">
+                              Tag Piece:
+                            </label>
+                            <select
+                              value={currentTag}
+                              onChange={(e) => handleUpdateImageTag(idx, e.target.value as PhotoTag)}
+                              className="w-full text-[10px] bg-stone-50 border border-stone-300 rounded-xs p-1 cursor-pointer font-medium text-[#1c1c1a]"
+                            >
+                              <option value="full_set">✨ Full Set (Look)</option>
+                              <option value="top">👚 Top / Vest</option>
+                              <option value="bottom">👖 Skirt / Trouser</option>
+                              <option value="detail">🔍 Craft Detail</option>
+                              <option value="general">Standard</option>
+                            </select>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
 
                   <div className="flex gap-2 pt-2 border-t border-[#1c1c1a]/10">
@@ -2766,6 +3183,8 @@ export default function AdminPage() {
                     ? 'Saving...'
                     : editingProduct
                     ? 'Save Changes'
+                    : productForm.isSet || productForm.category.toLowerCase() === 'sets'
+                    ? 'Create Set Ensemble'
                     : 'Create Garment'}
                 </button>
               </div>
