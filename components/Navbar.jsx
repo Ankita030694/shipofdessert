@@ -7,12 +7,72 @@ import { useSession, signOut } from 'next-auth/react';
 import { useCart } from '@/context/CartContext';
 import CartDrawer from './CartDrawer';
 
+const navigationLinks = [
+  {
+    title: 'Women',
+    href: '/women',
+    children: [
+      { title: 'All Women', href: '/women' },
+      { title: 'Dresses', href: '/women/dresses' },
+      { title: 'Skirts', href: '/women/skirts' },
+      { title: 'Tops & Knitwear', href: '/shop' },
+      { title: 'Trousers', href: '/women' },
+    ],
+  },
+  {
+    title: 'Shop',
+    href: '/shop',
+    children: [
+      { title: 'All Clothing', href: '/shop' },
+      { title: 'Dresses', href: '/women/dresses' },
+      { title: 'Skirts', href: '/women/skirts' },
+      { title: 'Silk & Linen', href: '/shop' },
+      { title: 'Leather & Denim', href: '/shop' },
+      { title: 'Accessories', href: '/shop' },
+    ],
+  },
+  {
+    title: 'Collections',
+    href: '/collection',
+    children: [
+      { title: 'The Collection', href: '/collection' },
+      { title: 'Sets & Ensembles', href: '/collection?category=Sets' },
+      { title: 'The Inheritance 01', href: '/collection/the-inheritance-01' },
+      { title: 'Collection Details', href: '/collection/details' },
+      { title: 'Archives', href: '/archives' },
+    ],
+  },
+  {
+    title: 'Philosophy',
+    href: '/philosophy',
+    children: [
+      { title: 'Our Philosophy', href: '/philosophy' },
+      { title: 'The Quiet Choice', href: '/the-quiet-choice/philosophy' },
+      { title: 'Care For A Lifetime', href: '/care' },
+      { title: 'Journals', href: '/the-quiet-choice/journals' },
+    ],
+  },
+  {
+    title: 'Journals',
+    href: '/journal',
+    children: [
+      { title: 'All Journals', href: '/journal' },
+      { title: 'The Quiet Choice Stories', href: '/the-quiet-choice/journals' },
+    ],
+  },
+  {
+    title: 'Archives',
+    href: '/archives',
+  },
+];
+
 const Navbar = () => {
   const { data: session } = useSession();
   const { totalCount, openCart } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedMobileItem, setExpandedMobileItem] = useState(null);
   const searchInputRef = useRef(null);
 
   const toggleMenu = () => {
@@ -23,6 +83,10 @@ const Navbar = () => {
   const toggleSearch = () => {
     setSearchOpen(!searchOpen);
     if (isOpen) setIsOpen(false);
+  };
+
+  const toggleMobileAccordion = (title) => {
+    setExpandedMobileItem(expandedMobileItem === title ? null : title);
   };
 
   useEffect(() => {
@@ -52,93 +116,154 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="fixed top-0 left-0 w-full h-16 sm:h-20 bg-[#f5f5f5]/95 backdrop-blur-sm border-b border-[#dcd8cf] flex justify-between items-center px-4 sm:px-8 lg:px-16 z-40 transition-all">
+      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#f5f5f5]/95 backdrop-blur-md border-b border-[#dcd8cf]/60 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
         
-        {/* Left: Mobile (2-line Hamburger) vs Desktop (Category Link) */}
+        {/* Left Section: Desktop Links with Dropdown & Mobile Menu Toggle */}
         <div className="flex items-center">
-          {/* Mobile 2-line hamburger */}
+          {/* Mobile Menu Toggle (< lg) */}
           <button 
             onClick={toggleMenu}
             aria-label="Open Navigation Menu"
-            className="flex md:hidden flex-col justify-center items-start gap-[6px] p-2 -ml-2 group cursor-pointer focus:outline-none"
+            className="flex lg:hidden items-center gap-2 p-1.5 -ml-1.5 group cursor-pointer focus:outline-none"
           >
-            <span className="w-5 sm:w-6 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
-            <span className="w-5 sm:w-6 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
+            <div className="flex flex-col justify-center items-start gap-[5px]">
+              <span className="w-5 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
+              <span className="w-5 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
+            </div>
+            <span className="hidden sm:inline-block text-[12px] text-[#1c1c1a] font-normal tracking-wide">
+              Menu
+            </span>
           </button>
 
-          {/* Desktop Category Link */}
-          <button 
-            onClick={toggleMenu}
-            aria-label="Open Category Menu"
-            className="hidden md:inline-block text-xs sm:text-[13px] text-black font-normal hover:opacity-60 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap"
-          >
-            Category
-          </button>
+          {/* Desktop Navigation Links with Hover Dropdown (>= lg) */}
+          <div className="hidden lg:flex items-center gap-5 xl:gap-8 text-[12px] xl:text-[13px] text-[#1c1c1a] font-normal">
+            {navigationLinks.map((item) => (
+              <div key={item.title} className="relative group">
+                <Link 
+                  href={item.href} 
+                  className="inline-flex items-center gap-1 py-4 hover:opacity-50 transition-opacity whitespace-nowrap cursor-pointer"
+                >
+                  <span>{item.title}</span>
+                  {item.children && (
+                    <svg 
+                      className="w-2.5 h-2.5 opacity-40 group-hover:opacity-90 group-hover:rotate-180 transition-all duration-200" 
+                      viewBox="0 0 10 6" 
+                      fill="none"
+                    >
+                      <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </Link>
+
+                {/* Dropdown Menu on Hover */}
+                {item.children && (
+                  <div className="absolute top-[90%] left-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
+                    <div className="min-w-[190px] bg-[#f5f5f5] border border-[#dcd8cf] py-3.5 px-5 shadow-lg flex flex-col gap-2.5">
+                      {item.children.map((sub) => (
+                        <Link
+                          key={sub.title}
+                          href={sub.href}
+                          className="text-[12px] tracking-wide text-[#1c1c1a]/80 hover:text-black hover:translate-x-1 transition-all whitespace-nowrap block"
+                        >
+                          {sub.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
         
-        {/* Center: Brand Logo */}
+        {/* Center: Brand Logo / Wordmark */}
         <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center pointer-events-auto">
-          <Link href="/" className="inline-flex items-center justify-center hover:opacity-85 transition-opacity">
+          <Link 
+            href="/" 
+            className="inline-flex items-center justify-center hover:opacity-75 transition-opacity"
+            aria-label="KSHAUM Home"
+          >
             <Image 
               src="/KSHAUM.svg" 
               alt="KSHAUM" 
-              width={260} 
-              height={36} 
+              width={220} 
+              height={30} 
               priority
-              className="h-4 sm:h-5 md:h-7 w-auto object-contain"
+              className="h-3.5 sm:h-4 md:h-[18px] w-auto object-contain"
             />
           </Link>
         </div>
         
-        {/* Right Section: Mobile (Icons) vs Desktop (Text Links) */}
-        {/* Mobile: Search Icon + Bag Icon */}
-        <div className="flex md:hidden items-center gap-3 sm:gap-4 text-[#1c1c1a]">
+        {/* Right Section: Mobile (Search + Cart) vs Desktop (Search, Login/Account, Cart) */}
+        {/* Mobile View (< lg) */}
+        <div className="flex lg:hidden items-center gap-3 sm:gap-4 text-[#1c1c1a]">
           <button 
             onClick={toggleSearch}
             aria-label="Search"
-            className="p-1.5 hover:opacity-60 transition-opacity cursor-pointer focus:outline-none"
+            className="p-1.5 hover:opacity-50 transition-opacity cursor-pointer focus:outline-none"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
           </button>
 
           <button 
             onClick={openCart}
-            aria-label="Shopping Bag"
-            className="p-1.5 hover:opacity-60 transition-opacity cursor-pointer focus:outline-none relative"
+            aria-label="Shopping Cart"
+            className="p-1.5 hover:opacity-50 transition-opacity cursor-pointer focus:outline-none text-[12px] sm:text-[13px] flex items-center gap-1 font-normal"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119.993z" />
-            </svg>
-            {totalCount > 0 && (
-              <span className="absolute 0 top-0.5 right-0.5 bg-[#1c1c1a] text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-medium leading-none">
-                {totalCount}
-              </span>
-            )}
+            <span>Cart</span>
+            <span>({totalCount})</span>
           </button>
         </div>
 
-        {/* Desktop: Search, Login / Sign Out, Cart (Text Links) */}
-        <div className="hidden md:flex items-center gap-6 lg:gap-8 text-xs sm:text-[13px] text-black font-normal">
+        {/* Desktop View (>= lg): Search, Login / Account, Cart */}
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8 text-[12px] xl:text-[13px] text-[#1c1c1a] font-normal">
           <button 
             onClick={toggleSearch}
-            className="text-black hover:opacity-60 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap"
+            className="hover:opacity-50 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap py-4"
           >
             Search
           </button>
 
           {session?.user ? (
-            <button
-              onClick={() => signOut({ callbackUrl: '/' })}
-              className="text-black hover:opacity-60 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap"
-            >
-              Sign Out
-            </button>
+            <div className="relative group">
+              <button
+                className="hover:opacity-50 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap flex items-center gap-1 py-4"
+              >
+                <span>Account</span>
+                <svg 
+                  className="w-2.5 h-2.5 opacity-40 group-hover:opacity-90 group-hover:rotate-180 transition-all duration-200" 
+                  viewBox="0 0 10 6" 
+                  fill="none"
+                >
+                  <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              
+              <div className="absolute top-[90%] right-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
+                <div className="min-w-[180px] bg-[#f5f5f5] border border-[#dcd8cf] py-3.5 px-5 shadow-lg flex flex-col gap-2.5">
+                  <span className="text-[11px] text-gray-500 truncate pb-1.5 border-b border-[#dcd8cf]">
+                    {session.user.name || session.user.email}
+                  </span>
+                  {session.user.role === 'admin' && (
+                    <Link href="/admin" className="text-[12px] tracking-wide text-amber-900 hover:text-black hover:translate-x-1 transition-all">
+                      Admin Dashboard
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => signOut({ callbackUrl: '/' })}
+                    className="text-left text-[12px] tracking-wide text-[#1c1c1a]/80 hover:text-black hover:translate-x-1 transition-all cursor-pointer"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+            </div>
           ) : (
             <Link 
               href="/login" 
-              className="text-black hover:opacity-60 transition-opacity whitespace-nowrap"
+              className="hover:opacity-50 transition-opacity whitespace-nowrap py-4"
             >
               Login
             </Link>
@@ -146,7 +271,7 @@ const Navbar = () => {
 
           <button 
             onClick={openCart}
-            className="text-black hover:opacity-60 transition-opacity cursor-pointer focus:outline-none flex items-center gap-1 whitespace-nowrap"
+            className="hover:opacity-50 transition-opacity cursor-pointer focus:outline-none flex items-center gap-1 whitespace-nowrap py-4"
           >
             <span>Cart</span>
             <span>({totalCount})</span>
@@ -227,9 +352,9 @@ const Navbar = () => {
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         {/* Drawer Header & Close Button */}
-        <div className="p-6 sm:p-8">
+        <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(100vh-140px)]">
           <div className="flex justify-between items-center mb-8 border-b border-[#dcd8cf] pb-4">
-            <span className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] font-semibold">Categories</span>
+            <span className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] font-semibold">Navigation</span>
             <button 
               onClick={toggleMenu}
               className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#dcd8cf]/50 transition-colors cursor-pointer"
@@ -241,56 +366,63 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Main Navigation Links */}
-          <ul className="space-y-3.5 text-sm sm:text-base font-light text-[#1c1c1a]">
-            <li>
-              <Link href="/" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 font-normal">
-                The Quiet Choice
+          {/* Main Navigation Links with Mobile Accordion */}
+          <ul className="space-y-4 text-sm sm:text-base font-light text-[#1c1c1a]">
+            {navigationLinks.map((item) => (
+              <li key={item.title} className="border-b border-[#dcd8cf]/40 pb-3">
+                <div className="flex items-center justify-between">
+                  <Link 
+                    href={item.href} 
+                    onClick={toggleMenu} 
+                    className="hover:opacity-60 transition-opacity font-normal"
+                  >
+                    {item.title}
+                  </Link>
+                  {item.children && (
+                    <button
+                      onClick={() => toggleMobileAccordion(item.title)}
+                      className="p-2 text-stone-500 hover:text-black cursor-pointer"
+                      aria-label={`Expand ${item.title}`}
+                    >
+                      <svg
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          expandedMobileItem === item.title ? 'rotate-180' : ''
+                        }`}
+                        viewBox="0 0 10 6"
+                        fill="none"
+                      >
+                        <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
+                  )}
+                </div>
+
+                {item.children && expandedMobileItem === item.title && (
+                  <ul className="mt-2.5 pl-4 space-y-2 border-l border-[#dcd8cf]">
+                    {item.children.map((sub) => (
+                      <li key={sub.title}>
+                        <Link
+                          href={sub.href}
+                          onClick={toggleMenu}
+                          className="text-xs sm:text-sm text-stone-600 hover:text-black block py-1 transition-colors"
+                        >
+                          {sub.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+
+            <li className="pt-2">
+              <Link href="/contact" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 text-xs uppercase tracking-widest text-stone-500">
+                Stores &amp; Contact
               </Link>
             </li>
             <li>
-              <Link href="/the-quiet-choice/philosophy" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                Philosophy
-              </Link>
-            </li>
-            <li>
-              <Link href="/the-quiet-choice/journals" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                Journals
-              </Link>
-            </li>
-            <li>
-              <Link href="/shop" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                Shop
-              </Link>
-            </li>
-            <li>
-              <Link href="/women" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 pl-3 text-xs sm:text-sm text-gray-700">
-                — Women&apos;s
-              </Link>
-            </li>
-            <li>
-              <Link href="/collection" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                The Collection
-              </Link>
-            </li>
-            <li>
-              <Link href="/collection?category=Sets" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 pl-3 text-xs sm:text-sm text-gray-700">
-                — Sets & Ensembles
-              </Link>
-            </li>
-            <li>
-              <Link href="/collection/the-inheritance-01" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 pl-3 text-xs sm:text-sm text-gray-700">
-                — The Inheritance 01
-              </Link>
-            </li>
-            <li>
-              <Link href="/archives" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                Archives
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1">
-                Contact
+              <Link href="/innercircle" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 text-xs uppercase tracking-widest text-stone-500">
+                Saved / Inner Circle
               </Link>
             </li>
           </ul>
