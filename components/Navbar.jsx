@@ -13,10 +13,10 @@ const navigationLinks = [
     href: '/women',
     children: [
       { title: 'All Women', href: '/women' },
-      { title: 'Dresses', href: '/women/dresses' },
-      { title: 'Skirts', href: '/women/skirts' },
-      { title: 'Tops & Knitwear', href: '/shop' },
-      { title: 'Trousers', href: '/women' },
+      { title: 'Dresses', href: '/women?category=Dresses' },
+      { title: 'Skirts', href: '/women?category=Skirts' },
+      { title: 'Tops & Knitwear', href: '/women?category=Tops' },
+      { title: 'Trousers', href: '/women?category=Pants' },
     ],
   },
   {
@@ -24,11 +24,11 @@ const navigationLinks = [
     href: '/shop',
     children: [
       { title: 'All Clothing', href: '/shop' },
-      { title: 'Dresses', href: '/women/dresses' },
-      { title: 'Skirts', href: '/women/skirts' },
-      { title: 'Silk & Linen', href: '/shop' },
-      { title: 'Leather & Denim', href: '/shop' },
-      { title: 'Accessories', href: '/shop' },
+      { title: 'Dresses', href: '/shop?category=Dresses' },
+      { title: 'Skirts', href: '/shop?category=Skirts' },
+      { title: 'Silk & Linen', href: '/shop?search=Linen' },
+      { title: 'Leather & Denim', href: '/shop?search=Leather' },
+      { title: 'Accessories', href: '/shop?category=Footwear' },
     ],
   },
   {

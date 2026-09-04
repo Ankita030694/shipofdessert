@@ -21,56 +21,44 @@ interface Product {
   inStock?: boolean;
 }
 
-const FALLBACK_SKIRTS = [
+const FALLBACK_TROUSERS = [
   {
     id: '1',
-    name: 'Fluted Silk Crepe Skirt',
-    slug: 'fluted-silk-crepe-skirt',
-    price: 1280,
+    name: 'Alfidis Pant in Cotton',
+    slug: 'alfidis-pant-in-cotton',
+    price: 1390,
     currency: 'INR',
-    image: '/image3.jpg',
-    images: ['/image3.jpg'],
-    colors: ['Stone', 'Slate'],
-    category: 'Skirts',
-    collectionName: 'The Inheritance 01',
-  },
-  {
-    id: '2',
-    name: 'A-Line Raw Silk Midi Skirt',
-    slug: 'a-line-raw-silk-midi-skirt',
-    price: 1350,
-    currency: 'INR',
-    image: '/image1.jpg',
-    images: ['/image1.jpg'],
-    colors: ['Ecru', 'Sand'],
-    category: 'Skirts',
+    image: '/image4.jpg',
+    images: ['/image4.jpg', '/image2.jpg'],
+    colors: ['Brown', 'Ecru', 'Black'],
+    category: 'Pants',
     collectionName: 'The Inheritance 01',
   },
 ];
 
-export default function SkirtsPage() {
+export default function TrousersPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadSkirts() {
+    async function loadTrousers() {
       try {
         setLoading(true);
-        const res = await fetch('/api/products?category=Skirts');
+        const res = await fetch('/api/products?category=Pants');
         const data = await res.json();
         if (data.success && data.data && data.data.length > 0) {
           setProducts(data.data);
         } else {
-          setProducts(FALLBACK_SKIRTS);
+          setProducts(FALLBACK_TROUSERS);
         }
       } catch (err) {
-        console.error('Failed to load skirts:', err);
-        setProducts(FALLBACK_SKIRTS);
+        console.error('Failed to load trousers:', err);
+        setProducts(FALLBACK_TROUSERS);
       } finally {
         setLoading(false);
       }
     }
-    loadSkirts();
+    loadTrousers();
   }, []);
 
   return (
@@ -81,10 +69,10 @@ export default function SkirtsPage() {
         <div className="border-b border-[#dcd8cf] pb-6 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] mb-2">
-              <Link href="/women" className="hover:text-[#1c1c1a]">Women</Link> / <span>Skirts</span>
+              <Link href="/women" className="hover:text-[#1c1c1a]">Women</Link> / <span>Trousers</span>
             </nav>
             <h1 className="text-2xl sm:text-3xl font-light tracking-wide uppercase font-serif">
-              Skirts
+              Trousers
             </h1>
           </div>
           <span className="text-xs text-[#1c1c1a]/60 uppercase tracking-widest">
@@ -96,7 +84,7 @@ export default function SkirtsPage() {
           <div className="py-24 text-center">
             <div className="inline-block w-6 h-6 border-2 border-[#1c1c1a] border-t-transparent rounded-full animate-spin mb-3"></div>
             <p className="text-xs uppercase tracking-widest text-[#1c1c1a]/60">
-              Loading skirts...
+              Loading trousers...
             </p>
           </div>
         ) : (
@@ -106,7 +94,7 @@ export default function SkirtsPage() {
                 <Link href={`/product/${item.slug}`}>
                   <div className="relative aspect-[3/4] overflow-hidden bg-[#dcd8cf]/30 mb-4">
                     <Image
-                      src={item.image || (item.images && item.images[0]) || '/image3.jpg'}
+                      src={item.image || (item.images && item.images[0]) || '/image4.jpg'}
                       alt={item.name}
                       fill
                       unoptimized={Boolean(item.image?.startsWith('data:'))}
