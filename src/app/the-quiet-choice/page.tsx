@@ -40,7 +40,7 @@ export default function TheQuietChoicePage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#F5F5F5] text-[#1C1C1A]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1C1C1A]">
       <Navbar />
 
       <main className="flex-1 pt-28 sm:pt-36 pb-24 px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto w-full flex flex-col justify-start">
@@ -63,7 +63,7 @@ export default function TheQuietChoicePage() {
             <Link
               key={card.title}
               href={card.href}
-              className="group flex flex-col justify-between bg-white border border-[#DBD8CF] p-6 sm:p-8 lg:p-10 transition-all duration-300 hover:border-[#1C1C1A]/40 hover:shadow-lg"
+              className="group flex flex-col justify-between bg-[#DBD8CF] border border-[#1c1c1a]/20 p-6 sm:p-8 lg:p-10 transition-all duration-300 hover:border-[#1C1C1A]/40 hover:shadow-lg"
             >
               <div>
                 {/* Card Visual Image */}

@@ -112,7 +112,7 @@ export default function Philosophy() {
         </section>
 
         {/* Scroll-driven reveal sections */}
-        <div ref={sectionsRef} className="reveal-container relative z-20 bg-white">
+        <div ref={sectionsRef} className="reveal-container relative z-20 bg-[#DBD8CF]">
           
           {/* Brand Values Section */}
           <div className="reveal-section mt-8 md:mt-16">

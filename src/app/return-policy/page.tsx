@@ -78,7 +78,7 @@ export default function ReturnPolicy() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f5f5f5] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col bg-[#DBD8CF] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -106,23 +106,23 @@ export default function ReturnPolicy() {
           </div>
 
           {/* Key Return Policy Highlight Banner */}
-          <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200 shadow-sm mb-12">
+          <div className="bg-[#DBD8CF] p-6 sm:p-8 border border-[#1c1c1a]/15 shadow-xs mb-12">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div>
-                <span className="inline-block text-xs uppercase tracking-widest font-semibold px-2.5 py-1 bg-black text-white rounded mb-2">
+                <span className="inline-block text-xs uppercase tracking-widest font-semibold px-2.5 py-1 bg-[#1c1c1a] text-white rounded-none mb-2">
                   14-Day Return Window
                 </span>
-                <h2 className="text-xl font-medium text-black">
+                <h2 className="text-xl font-medium text-[#1c1c1a] font-serif">
                   Hassle-Free Returns & Dedicated Customer Support
                 </h2>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[#1c1c1a]/70 mt-1">
                   Our Customer Care team is here to assist you with every step of your return authorization.
                 </p>
               </div>
               <div className="shrink-0">
                 <Link
                   href="/contact"
-                  className="inline-block bg-black text-white px-6 py-3 rounded-md text-sm font-medium hover:bg-gray-800 transition-colors text-center w-full md:w-auto"
+                  className="inline-block bg-[#1c1c1a] text-white px-6 py-3 rounded-none text-xs uppercase tracking-widest font-medium hover:bg-[#333330] transition-colors text-center w-full md:w-auto"
                 >
                   Contact Customer Care
                 </Link>
@@ -133,8 +133,8 @@ export default function ReturnPolicy() {
           {/* Step-by-Step Instructions */}
           <section className="mb-14">
             <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-px bg-black"></span>
-              <h2 className="text-xs uppercase tracking-[0.2em] font-semibold text-gray-800">
+              <span className="w-8 h-px bg-[#1c1c1a]"></span>
+              <h2 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#1c1c1a]">
                 How to Initiate a Return
               </h2>
             </div>
@@ -143,16 +143,16 @@ export default function ReturnPolicy() {
               {steps.map((item) => (
                 <div 
                   key={item.step} 
-                  className="bg-white rounded-xl p-6 border border-gray-200/80 shadow-sm hover:border-gray-300 transition-all flex flex-col justify-between"
+                  className="bg-[#DBD8CF] p-6 border border-[#1c1c1a]/15 shadow-xs hover:border-[#1c1c1a]/30 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="text-2xl font-light font-serif text-gray-400 mb-3">
+                    <div className="text-2xl font-light font-serif text-[#1c1c1a]/50 mb-3">
                       {item.step}
                     </div>
-                    <h3 className="text-lg font-medium text-black mb-2">
+                    <h3 className="text-lg font-medium text-[#1c1c1a] mb-2 font-serif">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-gray-700 leading-relaxed">
+                    <p className="text-sm text-[#1c1c1a]/80 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -162,12 +162,12 @@ export default function ReturnPolicy() {
           </section>
 
           {/* Return Conditions & Guidelines */}
-          <section className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200/80 shadow-sm mb-12 space-y-6">
-            <h2 className="text-xl sm:text-2xl font-medium text-black border-b border-gray-100 pb-3">
+          <section className="bg-[#DBD8CF] p-6 sm:p-8 border border-[#1c1c1a]/15 shadow-xs mb-12 space-y-6">
+            <h2 className="text-xl sm:text-2xl font-medium text-[#1c1c1a] font-serif border-b border-[#1c1c1a]/10 pb-3">
               Conditions for Return
             </h2>
 
-            <div className="space-y-4 text-base text-gray-700 leading-relaxed">
+            <div className="space-y-4 text-base text-[#1c1c1a]/80 leading-relaxed">
               <div className="flex items-start gap-3">
                 <span className="mt-1 text-black font-bold">•</span>
                 <p>
@@ -192,14 +192,14 @@ export default function ReturnPolicy() {
           </section>
 
           {/* Regional Shipping Responsibilities */}
-          <section className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200/80 shadow-sm mb-12">
-            <div className="flex items-baseline justify-between mb-4 border-b border-gray-100 pb-3">
-              <h2 className="text-xl sm:text-2xl font-medium text-black">
+          <section className="bg-[#DBD8CF] p-6 sm:p-8 border border-[#1c1c1a]/15 shadow-xs mb-12">
+            <div className="flex items-baseline justify-between mb-4 border-b border-[#1c1c1a]/10 pb-3">
+              <h2 className="text-xl sm:text-2xl font-medium text-[#1c1c1a] font-serif">
                 Return Shipping & Covered Regions
               </h2>
             </div>
             
-            <p className="text-base text-gray-700 leading-relaxed mb-6">
+            <p className="text-base text-[#1c1c1a]/80 leading-relaxed mb-6">
               <strong className="font-semibold text-black">Kshaum takes full responsibility</strong> for the return label and associated shipping costs for orders returning from the following regions:
             </p>
 
@@ -207,41 +207,41 @@ export default function ReturnPolicy() {
               {eligibleRegions.map((region) => (
                 <span 
                   key={region} 
-                  className="px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-medium text-gray-800"
+                  className="px-3 py-1.5 bg-[#DBD8CF] border border-[#1c1c1a]/20 text-xs font-medium text-[#1c1c1a]"
                 >
                   {region}
                 </span>
               ))}
             </div>
 
-            <div className="bg-amber-50/70 border border-amber-200/80 rounded-lg p-4 text-sm text-amber-900 leading-relaxed">
+            <div className="bg-[#DBD8CF] border border-[#1c1c1a]/20 p-4 text-sm text-[#1c1c1a] leading-relaxed">
               <strong>Please Note:</strong> For regions not included in the above list, it is the customer’s full responsibility to arrange the return of their unwanted item(s), upon receiving their Return Authorization (RA) and return instructions from Kshaum Customer Care.
             </div>
           </section>
 
           {/* Refunds & Payment Methods */}
-          <section className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200/80 shadow-sm mb-12">
-            <h2 className="text-xl sm:text-2xl font-medium text-black border-b border-gray-100 pb-3 mb-4">
+          <section className="bg-[#DBD8CF] p-6 sm:p-8 border border-[#1c1c1a]/15 shadow-xs mb-12">
+            <h2 className="text-xl sm:text-2xl font-medium text-[#1c1c1a] font-serif border-b border-[#1c1c1a]/10 pb-3 mb-4">
               Refunds & Processing
             </h2>
 
-            <p className="text-base text-gray-700 leading-relaxed mb-6">
+            <p className="text-base text-[#1c1c1a]/80 leading-relaxed mb-6">
               Once your return shipment reaches our warehouse, please allow up to 10 business days for your return to be processed and refund issued. Once accepted, we will process your reimbursement and send you a Refund Confirmation email.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               {paymentMethods.map((method) => (
-                <div key={method.name} className="p-4 bg-gray-50 rounded-lg border border-gray-100 flex flex-col justify-between">
+                <div key={method.name} className="p-4 bg-[#DBD8CF] border border-[#1c1c1a]/15 flex flex-col justify-between">
                   <div>
                     <h3 className="font-semibold text-black text-sm">{method.name}</h3>
-                    <p className="text-xs text-gray-500 mb-2">{method.subtitle}</p>
-                    <p className="text-xs text-gray-700 leading-relaxed">{method.description}</p>
+                    <p className="text-xs text-[#1c1c1a]/60 mb-2">{method.subtitle}</p>
+                    <p className="text-xs text-[#1c1c1a]/80 leading-relaxed">{method.description}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="border-t border-gray-100 pt-4 text-sm text-gray-600 space-y-2">
+            <div className="border-t border-[#1c1c1a]/10 pt-4 text-sm text-[#1c1c1a]/70 space-y-2">
               <p>
                 If you have received a Refund Confirmation email but have not received your funds, please contact your bank or card issuer. If your bank is unable to locate your refund, please contact Customer Care.
               </p>
@@ -255,9 +255,9 @@ export default function ReturnPolicy() {
           </section>
 
           {/* Footer Contact Banner */}
-          <div className="text-center border-t border-gray-200 pt-8 space-y-3">
-            <h3 className="text-lg font-medium text-black">Questions about your Return?</h3>
-            <p className="text-sm text-gray-600">
+          <div className="text-center border-t border-[#1c1c1a]/15 pt-8 space-y-3">
+            <h3 className="text-lg font-medium text-[#1c1c1a] font-serif">Questions about your Return?</h3>
+            <p className="text-sm text-[#1c1c1a]/70">
               Our Customer Care team is available to assist you with any questions or return authorizations.
             </p>
             <div>

@@ -115,7 +115,7 @@ function WomenContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f5f5f5] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -214,7 +214,7 @@ function WomenContent() {
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     />
                     {product.inStock === false && (
-                      <span className="absolute top-2 left-2 bg-[#1c1c1a]/80 text-white text-[10px] uppercase tracking-widest px-2 py-0.5 backdrop-blur-sm">
+                      <span className="absolute top-2 left-2 bg-[#1c1c1a] text-white text-[10px] uppercase tracking-widest px-2 py-0.5">
                         Sold Out
                       </span>
                     )}
@@ -308,7 +308,7 @@ function WomenContent() {
 export default function WomenPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-[#f5f5f5]">
+      <div className="min-h-screen flex items-center justify-center bg-[#DBD8CF]">
         <div className="inline-block w-6 h-6 border-2 border-[#1c1c1a] border-t-transparent rounded-full animate-spin"></div>
       </div>
     }>

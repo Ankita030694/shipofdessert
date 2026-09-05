@@ -34,6 +34,7 @@ interface CartContextType {
   isCartOpen: boolean;
   openCart: () => void;
   closeCart: () => void;
+  toggleCart: () => void;
   addToCart: (item: AddToCartInput) => Promise<void>;
   updateQuantity: (itemId: string, quantity: number) => Promise<void>;
   removeItem: (itemId: string) => Promise<void>;
@@ -66,6 +67,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const openCart = useCallback(() => setIsCartOpen(true), []);
   const closeCart = useCallback(() => setIsCartOpen(false), []);
+  const toggleCart = useCallback(() => setIsCartOpen((prev) => !prev), []);
 
   // Compute total count & subtotal
   const totalCount = useMemo(
@@ -341,6 +343,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         isCartOpen,
         openCart,
         closeCart,
+        toggleCart,
         addToCart,
         updateQuantity,
         removeItem,

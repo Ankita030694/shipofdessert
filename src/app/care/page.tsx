@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function CarePage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f5f5f5] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-8 max-w-4xl mx-auto w-full">
@@ -37,7 +37,7 @@ export default function CarePage() {
         </div>
 
         {/* Intro Statement Card */}
-        <div className="bg-white p-8 sm:p-12 rounded-sm border border-[#dcd8cf] shadow-xs mb-12">
+        <div className="bg-[#DBD8CF] p-8 sm:p-12 rounded-sm border border-[#dcd8cf] shadow-xs mb-12">
           <p className="text-sm sm:text-base leading-relaxed text-[#1c1c1a]/90 font-light mb-6">
             Every piece purchased directly from KSHAUM is recorded to its owner, creating a private Ownership Record and access to our lifetime care service.
           </p>
@@ -49,7 +49,7 @@ export default function CarePage() {
         {/* Core Pillars: Ownership & Care */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* Ownership */}
-          <div className="bg-white p-8 rounded-sm border border-[#dcd8cf] shadow-xs flex flex-col justify-between">
+          <div className="bg-[#DBD8CF] p-8 rounded-sm border border-[#dcd8cf] shadow-xs flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-6 h-px bg-[#bdb2a1]"></span>
@@ -69,7 +69,7 @@ export default function CarePage() {
           </div>
 
           {/* Care */}
-          <div className="bg-white p-8 rounded-sm border border-[#dcd8cf] shadow-xs flex flex-col justify-between">
+          <div className="bg-[#DBD8CF] p-8 rounded-sm border border-[#dcd8cf] shadow-xs flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-6 h-px bg-[#bdb2a1]"></span>
@@ -93,14 +93,14 @@ export default function CarePage() {
         </div>
 
         {/* Detailed Terms & Consideration */}
-        <div className="bg-white p-8 sm:p-10 rounded-sm border border-[#dcd8cf] mb-12">
+        <div className="bg-[#DBD8CF] p-8 sm:p-10 rounded-sm border border-[#dcd8cf] mb-12">
           <h3 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#1c1c1a] mb-4">
             Repair & Restoration Considerations
           </h3>
           <p className="text-xs sm:text-sm leading-relaxed text-[#1c1c1a]/80 font-light mb-4">
             Certain repairs, including significant accidental damage, third-party alterations or extensive material replacement, may incur a charge. We will always inform you before proceeding.
           </p>
-          <div className="p-4 bg-[#f8f6f0] border-l-2 border-[#1c1c1a] rounded-xs">
+          <div className="p-4 bg-[#DBD8CF]/70 border-l-2 border-[#1c1c1a] rounded-xs">
             <p className="text-xs text-[#1c1c1a]/85 leading-relaxed italic">
               All restorations are conducted by master tailors with archival precision, preserving authentic fiber integrity and original silhouette.
             </p>
@@ -122,7 +122,7 @@ export default function CarePage() {
           <div className="pt-2">
             <a
               href="mailto:onlinecustomercare@thekshaum.com?subject=Lifetime%20Care%20Request%20-%20KSHAUM%20Ownership&body=Dear%20KSHAUM%20Concierge,%0A%0AI%20would%20like%20to%20request%20care%20for%20my%20KSHAUM%20piece.%0A%0AOwner%20Name:%0AOrder%20Number%20or%20Purchase%20Date:%0APiece%20Name/Description:%0ADetails%20of%20Care%20Required:%0A%0AThank%20you."
-              className="inline-block bg-white text-[#1c1c1a] hover:bg-[#f5f5f5] text-xs uppercase tracking-[0.25em] font-medium py-3.5 px-8 transition-colors border border-white"
+              className="inline-block bg-[#DBD8CF] text-[#1c1c1a] hover:bg-[#c9c5ba] text-xs uppercase tracking-[0.25em] font-medium py-3.5 px-8 transition-colors border border-[#DBD8CF]"
             >
               Request Care
             </a>

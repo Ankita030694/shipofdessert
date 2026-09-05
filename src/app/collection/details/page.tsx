@@ -74,7 +74,7 @@ export default function ProductDetails() {
   ];
 
   return (
-    <div className="bg-[#f5f5f5] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="container mx-auto px-4 pt-32 pb-20 flex-1 max-w-6xl">
@@ -162,7 +162,7 @@ export default function ProductDetails() {
                 <select
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value)}
-                  className="w-full border border-[#1c1c1a]/20 px-4 py-2.5 bg-white text-xs text-[#1c1c1a] focus:outline-none focus:border-[#1c1c1a] cursor-pointer"
+                  className="w-full border border-[#1c1c1a]/20 px-4 py-2.5 bg-[#DBD8CF] text-xs text-[#1c1c1a] focus:outline-none focus:border-[#1c1c1a] cursor-pointer"
                 >
                   <option value="XS">XS</option>
                   <option value="S">S</option>

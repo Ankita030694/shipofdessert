@@ -13,7 +13,7 @@ function SuccessContent() {
   return (
     <div className="max-w-3xl mx-auto w-full">
       {/* Thank you card */}
-      <div className="bg-white p-8 sm:p-12 rounded-sm border border-[#1c1c1a]/15 shadow-xl text-center space-y-8">
+      <div className="bg-[#DBD8CF] p-8 sm:p-12 rounded-sm border border-[#1c1c1a]/15 shadow-xl text-center space-y-8">
         <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center justify-center mx-auto text-3xl">
           ✓
         </div>
@@ -31,7 +31,7 @@ function SuccessContent() {
         </div>
 
         {/* Order Identifier Banner */}
-        <div className="bg-[#f9f9f9] border border-[#1c1c1a]/10 p-5 rounded-xs space-y-2">
+        <div className="bg-[#DBD8CF]/80 border border-[#1c1c1a]/10 p-5 rounded-xs space-y-2">
           <div className="text-xs uppercase tracking-widest text-[#1c1c1a]/60">
             Order Reference Number
           </div>
@@ -50,19 +50,19 @@ function SuccessContent() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
-            <div className="p-3 bg-stone-50 rounded-xs border border-emerald-300">
+            <div className="p-3 bg-[#DBD8CF]/60 rounded-xs border border-emerald-300">
               <span className="text-emerald-700 font-bold block text-[11px]">1. Placed</span>
               <span className="text-[10px] text-stone-500">Registered</span>
             </div>
-            <div className="p-3 bg-stone-50 rounded-xs border border-stone-200">
+            <div className="p-3 bg-[#DBD8CF]/60 rounded-xs border border-stone-200">
               <span className="text-[#1c1c1a] font-semibold block text-[11px]">2. Atelier Pack</span>
               <span className="text-[10px] text-stone-500">Handcrafted QC</span>
             </div>
-            <div className="p-3 bg-stone-50 rounded-xs border border-stone-200">
+            <div className="p-3 bg-[#DBD8CF]/60 rounded-xs border border-stone-200">
               <span className="text-[#1c1c1a] font-semibold block text-[11px]">3. Courier Waybill</span>
               <span className="text-[10px] text-stone-500">Blue Dart / Delhivery</span>
             </div>
-            <div className="p-3 bg-stone-50 rounded-xs border border-stone-200">
+            <div className="p-3 bg-[#DBD8CF]/60 rounded-xs border border-stone-200">
               <span className="text-[#1c1c1a] font-semibold block text-[11px]">4. Doorstep</span>
               <span className="text-[10px] text-stone-500">3–5 Business Days</span>
             </div>
@@ -91,7 +91,7 @@ function SuccessContent() {
 
 export default function CheckoutSuccessPage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f5f5f5] text-[#1c1c1a] font-sans">
+    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a] font-sans">
       <Navbar />
 
       <main className="flex-1 pt-32 sm:pt-36 pb-20 px-4 sm:px-6 lg:px-8">

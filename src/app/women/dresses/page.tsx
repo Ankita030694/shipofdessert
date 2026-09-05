@@ -86,7 +86,7 @@ export default function DressesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f5f5f5] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-32 pb-20 px-4 sm:px-8 max-w-7xl mx-auto w-full">

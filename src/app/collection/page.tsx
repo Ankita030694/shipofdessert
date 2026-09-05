@@ -158,7 +158,7 @@ function CollectionContent() {
                       />
                       {isSet && (
                         <div className="absolute top-2.5 left-2.5 z-10">
-                          <span className="bg-[#1c1c1a]/90 text-white text-[9px] uppercase px-2 py-0.5 tracking-widest font-mono font-medium backdrop-blur-xs">
+                          <span className="bg-[#1c1c1a] text-white text-[9px] uppercase px-2 py-0.5 tracking-widest font-mono font-medium">
                             Set
                           </span>
                         </div>
@@ -252,7 +252,7 @@ function CollectionContent() {
 
 export default function CollectionPage() {
   return (
-    <div className="bg-[#f5f5f5] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
       <Navbar />
       <Suspense
         fallback={

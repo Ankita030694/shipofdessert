@@ -12,10 +12,12 @@ const navigationLinks = [
     title: 'Shop',
     href: '/shop',
     children: [
-      { title: 'Women', href: '/women' },
-      { title: 'Sets & Ensembles', href: '/collection?category=Sets' },
-      { title: 'The Inheritance 01', href: '/collection/the-inheritance-01' },
-      { title: 'Collection Details', href: '/collection/details' },
+      { title: 'Dresses', href: '/women/dresses' },
+      { title: 'Sets & Ensembles', href: '/shop?category=Sets' },
+      { title: 'Vests & Tops', href: '/shop?category=Tops' },
+      { title: 'Trousers', href: '/women/trousers' },
+      { title: 'Skirts', href: '/women/skirts' },
+      { title: 'All Garments', href: '/shop' },
     ],
   },
   {
@@ -23,6 +25,7 @@ const navigationLinks = [
     href: '/collection',
     children: [
       { title: 'The Complete Collection', href: '/collection' },
+      { title: 'The Inheritance 01', href: '/collection/the-inheritance-01' },
       { title: 'Archives', href: '/archives' },
     ],
   },
@@ -38,7 +41,7 @@ const navigationLinks = [
 
 const Navbar = () => {
   const { data: session } = useSession();
-  const { totalCount, openCart } = useCart();
+  const { totalCount, isCartOpen, toggleCart, closeCart } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -48,11 +51,19 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
     if (searchOpen) setSearchOpen(false);
+    if (isCartOpen) closeCart();
   };
 
   const toggleSearch = () => {
     setSearchOpen(!searchOpen);
     if (isOpen) setIsOpen(false);
+    if (isCartOpen) closeCart();
+  };
+
+  const handleCartToggle = () => {
+    if (isOpen) setIsOpen(false);
+    if (searchOpen) setSearchOpen(false);
+    toggleCart();
   };
 
   const toggleMobileAccordion = (title) => {
@@ -68,6 +79,17 @@ const Navbar = () => {
       setSearchQuery('');
     }
   }, [searchOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (isOpen) setIsOpen(false);
+        if (searchOpen) setSearchOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, searchOpen]);
 
   const highlights = [
     'Sets',
@@ -86,7 +108,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#f5f5f5]/15 backdrop-blur-xs border-b border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
+      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#DBD8CF] border-b border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
         
         {/* Left Section: Desktop Links with Dropdown & Mobile Menu Toggle */}
         <div className="flex items-center">
@@ -128,7 +150,7 @@ const Navbar = () => {
                 {/* Dropdown Menu on Hover */}
                 {item.children && (
                   <div className="absolute top-[90%] left-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                    <div className="min-w-[190px] bg-[#DBD8CF]/95 backdrop-blur-2xl border border-[#bdb2a1]/60 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
+                    <div className="min-w-[190px] bg-[#DBD8CF] border border-[#bdb2a1]/60 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
                       {item.children.map((sub) => (
                         <Link
                           key={sub.title}
@@ -178,7 +200,7 @@ const Navbar = () => {
           </button>
 
           <button 
-            onClick={openCart}
+            onClick={handleCartToggle}
             aria-label="Shopping Bag"
             className="p-1.5 hover:opacity-50 transition-opacity cursor-pointer focus:outline-none relative flex items-center justify-center"
           >
@@ -229,7 +251,7 @@ const Navbar = () => {
               </button>
               
               <div className="absolute top-[90%] right-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                <div className="min-w-[180px] bg-[#DBD8CF]/95 backdrop-blur-2xl border border-[#bdb2a1]/60 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
+                <div className="min-w-[180px] bg-[#DBD8CF] border border-[#bdb2a1]/60 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
                   <span className="text-[11px] text-[#1c1c1a]/70 truncate pb-1.5 border-b border-[#bdb2a1]/60">
                     {session.user.name || session.user.email}
                   </span>
@@ -257,7 +279,7 @@ const Navbar = () => {
           )}
 
           <button 
-            onClick={openCart}
+            onClick={handleCartToggle}
             aria-label="Shopping Bag"
             className="hover:opacity-50 transition-opacity cursor-pointer focus:outline-none flex items-center gap-1 whitespace-nowrap py-4"
           >
@@ -272,7 +294,7 @@ const Navbar = () => {
 
       {/* Right-Side Full-Height Search Drawer */}
       <div 
-        className={`fixed top-0 right-0 h-screen w-full sm:w-[480px] md:w-[540px] bg-[#f5f5f5] text-[#1c1c1a] transform transition-transform duration-300 ease-in-out z-50 shadow-2xl flex flex-col justify-between border-l border-[#dcd8cf]
+        className={`fixed top-0 right-0 h-screen w-full sm:w-[480px] md:w-[540px] bg-[#DBD8CF] text-[#1c1c1a] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-l border-[#dcd8cf]
         ${searchOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="p-8 sm:p-12 h-full flex flex-col">
@@ -336,7 +358,7 @@ const Navbar = () => {
 
       {/* Side Navigation Drawer (Left) */}
       <div 
-        className={`fixed top-0 left-0 h-screen w-[85%] sm:w-[50%] md:w-[380px] bg-[#f5f5f5] text-[#1c1c1a] transform transition-transform duration-300 ease-in-out z-50 shadow-2xl flex flex-col justify-between border-r border-[#dcd8cf]
+        className={`fixed top-0 left-0 h-screen w-[85%] sm:w-[50%] md:w-[380px] bg-[#DBD8CF] text-[#1c1c1a] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-r border-[#dcd8cf]
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         {/* Drawer Header & Close Button */}
@@ -457,7 +479,7 @@ const Navbar = () => {
       {/* Dimmed Overlay Backdrop for Menu or Search */}
       {(isOpen || searchOpen) && (
         <div 
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-45 transition-opacity"
+          className="fixed inset-0 bg-black/40 z-[60] transition-opacity"
           onClick={() => {
             if (isOpen) setIsOpen(false);
             if (searchOpen) setSearchOpen(false);

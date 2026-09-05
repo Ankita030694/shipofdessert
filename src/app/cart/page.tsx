@@ -12,7 +12,7 @@ export default function CartPage() {
     useCart();
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f5f5f5] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
@@ -50,8 +50,10 @@ export default function CartPage() {
         ) : items.length === 0 ? (
           /* Empty Bag State */
           <div className="py-20 text-center max-w-md mx-auto">
-            <div className="w-16 h-16 rounded-full border border-[#1c1c1a]/15 flex items-center justify-center mx-auto mb-6 text-2xl">
-              🛍️
+            <div className="w-16 h-16 rounded-full border border-[#1c1c1a]/15 flex items-center justify-center mx-auto mb-6 text-[#1c1c1a]/60">
+              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
             </div>
             <h2 className="text-lg font-serif uppercase tracking-wider mb-2">
               Your Shopping Bag is Empty
@@ -70,7 +72,7 @@ export default function CartPage() {
           /* 2-Column Bag Layout */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left 8 Cols: Line Items Table */}
-            <div className="lg:col-span-8 bg-white border border-[#1c1c1a]/10 rounded-sm divide-y divide-[#1c1c1a]/10 p-6 sm:p-8 shadow-xs">
+            <div className="lg:col-span-8 bg-[#DBD8CF] border border-[#1c1c1a]/10 rounded-sm divide-y divide-[#1c1c1a]/10 p-6 sm:p-8 shadow-xs">
               {items.map((item) => (
                 <div key={item.id} className="pt-6 first:pt-0 pb-6 flex flex-col sm:flex-row gap-5">
                   {/* Garment Image */}
@@ -125,7 +127,7 @@ export default function CartPage() {
                         <span className="text-[11px] uppercase tracking-wider text-[#1c1c1a]/60">
                           Quantity:
                         </span>
-                        <div className="flex items-center border border-[#1c1c1a]/20 bg-[#f9f9f9]">
+                        <div className="flex items-center border border-[#1c1c1a]/20 bg-[#DBD8CF]">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
                             className="px-3 py-1 text-xs hover:bg-stone-200 transition-colors cursor-pointer"
@@ -157,7 +159,7 @@ export default function CartPage() {
             </div>
 
             {/* Right 4 Cols: Order Summary */}
-            <div className="lg:col-span-4 bg-white border border-[#1c1c1a]/10 rounded-sm p-6 sm:p-8 shadow-xs sticky top-28 space-y-6">
+            <div className="lg:col-span-4 bg-[#DBD8CF] border border-[#1c1c1a]/10 rounded-sm p-6 sm:p-8 shadow-xs sticky top-28 space-y-6">
               <h2 className="font-serif text-base uppercase tracking-wider border-b border-[#1c1c1a]/10 pb-3">
                 Order Summary
               </h2>
@@ -179,49 +181,48 @@ export default function CartPage() {
 
                 <div className="flex justify-between text-[#1c1c1a]/70">
                   <span>Estimated Taxes</span>
-                  <span className="text-[#1c1c1a]/60">Included</span>
+                  <span className="text-[#1c1c1a]/50">Included in garment price</span>
                 </div>
 
-                <div className="border-t border-[#1c1c1a]/10 pt-4 flex justify-between items-baseline">
-                  <span className="font-serif text-sm font-semibold uppercase tracking-wider">
-                    Total
+                <div className="border-t border-[#1c1c1a]/10 pt-3 flex justify-between items-baseline">
+                  <span className="font-serif uppercase tracking-wider text-sm font-semibold">
+                    Estimated Total
                   </span>
-                  <span className="font-serif text-xl font-bold text-[#1c1c1a]">
+                  <span className="font-serif text-lg font-bold text-[#1c1c1a]">
                     ₹{subtotal.toLocaleString()}
                   </span>
                 </div>
               </div>
 
               {/* Checkout CTA */}
-              <div className="space-y-3 pt-2">
+              <div className="space-y-2.5 pt-2">
                 <Link
                   href="/checkout"
-                  className="block w-full bg-[#1c1c1a] text-white py-4 text-xs font-medium uppercase tracking-[0.2em] text-center hover:bg-[#333330] transition-colors cursor-pointer"
+                  className="block w-full bg-[#1c1c1a] text-white py-4 text-xs font-medium uppercase tracking-[0.2em] text-center hover:bg-[#333330] transition-colors"
                 >
-                  Proceed to Checkout
+                  Proceed to Checkout →
                 </Link>
-
                 <Link
                   href="/collection"
-                  className="block w-full border border-[#1c1c1a]/20 text-[#1c1c1a] py-3 text-xs uppercase tracking-widest text-center hover:bg-stone-50 transition-colors"
+                  className="block w-full text-center text-xs text-[#1c1c1a]/70 hover:underline tracking-wider py-1"
                 >
                   Continue Shopping
                 </Link>
               </div>
 
-              {/* Assurances */}
-              <div className="pt-4 border-t border-[#1c1c1a]/10 space-y-2.5 text-[11px] text-[#1c1c1a]/70">
+              {/* Trust badges */}
+              <div className="border-t border-[#1c1c1a]/10 pt-4 space-y-2 text-[11px] text-[#1c1c1a]/70">
                 <div className="flex items-center gap-2">
-                  <span>✨</span>
-                  <span>100% Handcrafted Artisanal Garments</span>
+                  <span>🔒</span>
+                  <span>256-Bit Encrypted Secure Checkout</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span>📦</span>
-                  <span>Dispatched in Recyclable Luxury Packaging</span>
+                  <span>Complimentary Shipping Across India</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span>🔒</span>
-                  <span>Secure SSL Encrypted Checkout</span>
+                  <span>🔄</span>
+                  <span>7-Day Complimentary Returns & Exchanges</span>
                 </div>
               </div>
             </div>

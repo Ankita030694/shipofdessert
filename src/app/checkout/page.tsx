@@ -129,7 +129,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f5f5f5] text-[#1c1c1a] font-sans">
+    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a] font-sans">
       <Navbar />
 
       <main className="flex-1 pt-32 sm:pt-36 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -148,9 +148,11 @@ export default function CheckoutPage() {
             Preparing your luxury selection...
           </div>
         ) : items.length === 0 ? (
-          <div className="bg-white p-12 rounded-sm border border-[#1c1c1a]/10 max-w-xl mx-auto text-center space-y-6 shadow-xs">
-            <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center mx-auto text-2xl">
-              🛍️
+          <div className="bg-[#DBD8CF] p-12 rounded-sm border border-[#1c1c1a]/10 max-w-xl mx-auto text-center space-y-6 shadow-xs">
+            <div className="w-16 h-16 rounded-full border border-[#1c1c1a]/15 bg-[#DBD8CF] flex items-center justify-center mx-auto text-[#1c1c1a]/60">
+              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z" />
+              </svg>
             </div>
             <div>
               <h2 className="text-lg font-serif uppercase tracking-wider text-[#1c1c1a]">
@@ -173,7 +175,7 @@ export default function CheckoutPage() {
             <div className="lg:col-span-7 space-y-8">
               <form onSubmit={handleSubmitOrder} className="space-y-8">
                 {/* 1. Contact Information */}
-                <div className="bg-white p-6 sm:p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-4">
+                <div className="bg-[#DBD8CF] p-6 sm:p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-4">
                   <div className="flex justify-between items-center border-b border-[#1c1c1a]/10 pb-3">
                     <h2 className="text-xs uppercase tracking-[0.2em] font-serif font-bold text-[#1c1c1a]">
                       1. Contact Information
@@ -204,7 +206,7 @@ export default function CheckoutPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="you@example.com"
-                        className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                        className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                       />
                     </div>
 
@@ -219,14 +221,14 @@ export default function CheckoutPage() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+91 98765 43210"
-                        className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                        className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* 2. Delivery Address */}
-                <div className="bg-white p-6 sm:p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-4">
+                <div className="bg-[#DBD8CF] p-6 sm:p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-4">
                   <h2 className="text-xs uppercase tracking-[0.2em] font-serif font-bold text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-3">
                     2. Shipping Address
                   </h2>
@@ -244,7 +246,7 @@ export default function CheckoutPage() {
                           value={formData.firstName}
                           onChange={handleChange}
                           placeholder="Arjun"
-                          className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                          className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                         />
                       </div>
 
@@ -258,7 +260,7 @@ export default function CheckoutPage() {
                           value={formData.lastName}
                           onChange={handleChange}
                           placeholder="Sodhi"
-                          className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                          className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                         />
                       </div>
                     </div>
@@ -274,7 +276,7 @@ export default function CheckoutPage() {
                         value={formData.addressLine1}
                         onChange={handleChange}
                         placeholder="Flat 402, Lodha Bellissimo, NM Joshi Marg"
-                        className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                        className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                       />
                     </div>
 
@@ -288,7 +290,7 @@ export default function CheckoutPage() {
                         value={formData.addressLine2}
                         onChange={handleChange}
                         placeholder="Near Mahalaxmi Station"
-                        className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                        className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                       />
                     </div>
 
@@ -304,7 +306,7 @@ export default function CheckoutPage() {
                           value={formData.city}
                           onChange={handleChange}
                           placeholder="Mumbai"
-                          className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                          className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                         />
                       </div>
 
@@ -319,7 +321,7 @@ export default function CheckoutPage() {
                           value={formData.state}
                           onChange={handleChange}
                           placeholder="Maharashtra"
-                          className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
+                          className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a]"
                         />
                       </div>
 
@@ -334,7 +336,7 @@ export default function CheckoutPage() {
                           value={formData.pincode}
                           onChange={handleChange}
                           placeholder="400011"
-                          className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a] font-mono"
+                          className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#1c1c1a] font-mono"
                         />
                       </div>
                     </div>
@@ -342,7 +344,7 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* 3. Payment Method Selection */}
-                <div className="bg-white p-6 sm:p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-4">
+                <div className="bg-[#DBD8CF] p-6 sm:p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-4">
                   <h2 className="text-xs uppercase tracking-[0.2em] font-serif font-bold text-[#1c1c1a] border-b border-[#1c1c1a]/10 pb-3">
                     3. Payment Method
                   </h2>
@@ -352,7 +354,7 @@ export default function CheckoutPage() {
                     <label
                       className={`block p-4 rounded-xs border cursor-pointer transition-all ${
                         formData.paymentMethod === 'cod'
-                          ? 'border-[#1c1c1a] bg-stone-50 shadow-xs'
+                          ? 'border-[#1c1c1a] bg-[#DBD8CF]/80 shadow-xs'
                           : 'border-stone-200 hover:border-stone-400'
                       }`}
                     >
@@ -382,7 +384,7 @@ export default function CheckoutPage() {
                     </label>
 
                     {/* Online Gateway Option (Placeholder badge) */}
-                    <div className="p-4 rounded-xs border border-stone-200 bg-stone-50/60 opacity-60 flex justify-between items-center cursor-not-allowed">
+                    <div className="p-4 rounded-xs border border-stone-200 bg-[#DBD8CF]/40 opacity-60 flex justify-between items-center cursor-not-allowed">
                       <div className="flex items-center gap-3">
                         <input type="radio" disabled />
                         <div>
@@ -411,7 +413,7 @@ export default function CheckoutPage() {
                       value={formData.customerNotes}
                       onChange={handleChange}
                       placeholder="e.g. Please call before delivery, or leave with security."
-                      className="w-full bg-[#fcfcfc] border border-[#1c1c1a]/20 p-2.5 rounded-xs text-xs focus:outline-none focus:border-[#1c1c1a] resize-none"
+                      className="w-full bg-[#DBD8CF]/60 border border-[#1c1c1a]/20 p-2.5 rounded-xs text-xs focus:outline-none focus:border-[#1c1c1a] resize-none"
                     />
                   </div>
                 </div>
@@ -443,7 +445,7 @@ export default function CheckoutPage() {
 
             {/* RIGHT COLUMN: Order Summary (5 Cols) */}
             <div className="lg:col-span-5 sticky top-28 space-y-6">
-              <div className="bg-white p-6 sm:p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-6">
+              <div className="bg-[#DBD8CF] p-6 sm:p-8 rounded-sm border border-[#1c1c1a]/10 shadow-xs space-y-6">
                 <div className="flex justify-between items-center border-b border-[#1c1c1a]/10 pb-3">
                   <h2 className="text-xs uppercase tracking-[0.2em] font-serif font-bold text-[#1c1c1a]">
                     Order Summary ({totalCount} {totalCount === 1 ? 'item' : 'items'})

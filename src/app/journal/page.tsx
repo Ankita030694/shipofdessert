@@ -111,11 +111,11 @@ export default function JournalPage() {
   };
 
   return (
-    <div>
+    <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
       <Navbar />
       
       {/* Banner Image */}
-      <div className="relative w-full h-[50vh] md:h-[50vh] mt-25 mx-4">
+      <div className="relative w-full h-[50vh] md:h-[50vh] mt-25">
         <Image
           src="/sodhero.jpg"
           alt="Journal Banner"
@@ -123,12 +123,9 @@ export default function JournalPage() {
           priority
           className="object-cover"
         />
-        {/* <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white shadow-text">Journal</h1>
-        </div> */}
       </div>
 
-      <div className="min-h-screen bg-white px-4 sm:px-6 lg:px-8 py-24">
+      <div className="min-h-screen bg-[#DBD8CF] px-4 sm:px-6 lg:px-8 py-24">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -136,9 +133,9 @@ export default function JournalPage() {
           className="max-w-7xl mx-auto"
         >
           <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold tracking-tight text-black mb-4">Journal</h1>
-            <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-              Thoughts, ideas, and explorations in the realm of design and creativity.
+            <h1 className="text-4xl sm:text-5xl font-light tracking-tight text-[#1c1c1a] mb-4 font-serif">Journal</h1>
+            <p className="text-base sm:text-lg text-[#1c1c1a]/70 max-w-2xl mx-auto">
+              Thoughts, ideas, and explorations in the realm of design and craftsmanship.
             </p>
           </div>
 
@@ -153,12 +150,12 @@ export default function JournalPage() {
                 key={post.id}
                 variants={item}
                 whileHover={{ 
-                  y: -10,
+                  y: -6,
                   transition: { duration: 0.2 }
                 }}
-                className="flex flex-col overflow-hidden group cursor-pointer bg-white border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300"
+                className="flex flex-col overflow-hidden group cursor-pointer bg-[#DBD8CF] border border-[#1c1c1a]/15 shadow-xs hover:border-[#1c1c1a]/40 transition-all duration-300"
               >
-                <div className="relative w-full h-56 overflow-hidden bg-gray-100">
+                <div className="relative w-full h-56 overflow-hidden bg-[#DBD8CF]">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -173,23 +170,23 @@ export default function JournalPage() {
                 </div>
                 <div className="flex-1 p-6 flex flex-col">
                   <div className="flex-1">
-                    <h2 className="text-2xl font-bold tracking-tight text-black mb-2 group-hover:text-gray-700 transition-colors">
+                    <h2 className="text-xl font-medium tracking-tight text-[#1c1c1a] mb-2 font-serif group-hover:text-black transition-colors">
                       {post.title}
                     </h2>
-                    <h3 className="text-lg text-gray-600 mb-3 italic">
+                    <h3 className="text-sm text-[#1c1c1a]/70 mb-3 italic">
                       {post.subtitle}
                     </h3>
-                    <p className="text-gray-700 line-clamp-3">
+                    <p className="text-[#1c1c1a]/80 text-sm line-clamp-3 leading-relaxed">
                       {post.description}
                     </p>
                   </div>
                   <div className="mt-6">
                     <motion.span 
-                      className="inline-block relative text-black font-medium"
+                      className="inline-block relative text-xs uppercase tracking-widest text-[#1c1c1a] font-semibold"
                       whileHover={{ x: 5 }}
                     >
                       Read more
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-black group-hover:w-full transition-all duration-300"></span>
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#1c1c1a] group-hover:w-full transition-all duration-300"></span>
                     </motion.span>
                   </div>
                 </div>
@@ -208,10 +205,10 @@ export default function JournalPage() {
               <button
                 onClick={() => paginate(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
-                className={`px-4 py-2 border border-gray-300 text-sm font-medium ${
+                className={`px-4 py-2 border border-[#1c1c1a]/20 text-xs font-semibold uppercase tracking-wider ${
                   currentPage === 1 
-                    ? 'text-gray-400 cursor-not-allowed' 
-                    : 'text-black hover:bg-gray-100'
+                    ? 'text-[#1c1c1a]/30 cursor-not-allowed' 
+                    : 'text-[#1c1c1a] hover:bg-[#1c1c1a] hover:text-white'
                 } transition-colors duration-200`}
               >
                 Previous
@@ -221,10 +218,10 @@ export default function JournalPage() {
                 <button
                   key={index}
                   onClick={() => paginate(index + 1)}
-                  className={`px-4 py-2 border border-gray-300 text-sm font-medium ${
+                  className={`px-4 py-2 border border-[#1c1c1a]/20 text-xs font-semibold uppercase tracking-wider ${
                     currentPage === index + 1
-                      ? 'bg-black text-white' 
-                      : 'text-black hover:bg-gray-100'
+                      ? 'bg-[#1c1c1a] text-white' 
+                      : 'text-[#1c1c1a] hover:bg-[#1c1c1a] hover:text-white'
                   } transition-colors duration-200`}
                 >
                   {index + 1}
@@ -234,10 +231,10 @@ export default function JournalPage() {
               <button
                 onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
-                className={`px-4 py-2 border border-gray-300 text-sm font-medium ${
+                className={`px-4 py-2 border border-[#1c1c1a]/20 text-xs font-semibold uppercase tracking-wider ${
                   currentPage === totalPages 
-                    ? 'text-gray-400 cursor-not-allowed' 
-                    : 'text-black hover:bg-gray-100'
+                    ? 'text-[#1c1c1a]/30 cursor-not-allowed' 
+                    : 'text-[#1c1c1a] hover:bg-[#1c1c1a] hover:text-white'
                 } transition-colors duration-200`}
               >
                 Next

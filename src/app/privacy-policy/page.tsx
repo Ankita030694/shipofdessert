@@ -148,21 +148,21 @@ export default function PrivacyPolicy() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f5f5f5] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col bg-[#DBD8CF] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
-          <div className="border-b border-[#dcd8cf] pb-10 mb-12 text-center md:text-left">
-            <div className="inline-block uppercase tracking-[0.25em] text-xs font-semibold text-[#bdb2a1] mb-3">
+          <div className="border-b border-[#1c1c1a]/15 pb-10 mb-12 text-center md:text-left">
+            <div className="inline-block uppercase tracking-[0.25em] text-xs font-semibold text-[#8C827A] mb-3">
               Legal & Compliance
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#1c1c1a] mb-4 font-serif">
               Privacy Policy
             </h1>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-gray-600">
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-medium tracking-wide">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#1c1c1a]/70">
+              <span className="inline-flex items-center px-3 py-1 rounded-none border border-[#1c1c1a]/15 text-[#1c1c1a] text-xs tracking-wider">
                 Effective Date: July 2026
               </span>
               <span>•</span>
@@ -181,8 +181,8 @@ export default function PrivacyPolicy() {
           </div>
 
           {/* Introduction Card */}
-          <div className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200/80 shadow-sm mb-12 space-y-4">
-            <p className="text-base sm:text-lg leading-relaxed text-gray-800">
+          <div className="bg-[#DBD8CF] p-6 sm:p-8 border border-[#1c1c1a]/15 shadow-xs mb-12 space-y-4">
+            <p className="text-base sm:text-lg leading-relaxed text-[#1c1c1a]">
               This Privacy Policy describes how <strong className="font-semibold text-black">KSHAUM</strong>, operated by <strong className="font-semibold text-black">Thirteen Pillars of Business LLP</strong> (“we”, “our”, “us”), collects, uses, and protects the personal information of individuals who visit{' '}
               <a 
                 href="http://www.thekshaum.com" 
@@ -194,7 +194,7 @@ export default function PrivacyPolicy() {
               </a>{' '}
               (“the Site”).
             </p>
-            <p className="text-base sm:text-lg leading-relaxed text-gray-700 italic border-l-2 border-black pl-4 py-1">
+            <p className="text-base sm:text-lg leading-relaxed text-[#1c1c1a]/80 italic border-l-2 border-[#1c1c1a] pl-4 py-1">
               We are committed to preserving your privacy and handling your information with care, transparency, and respect.
             </p>
           </div>
@@ -205,10 +205,10 @@ export default function PrivacyPolicy() {
               <section 
                 key={section.id} 
                 id={section.id} 
-                className="bg-white rounded-xl p-6 sm:p-8 border border-gray-200/70 shadow-sm scroll-mt-28 transition-all hover:border-gray-300"
+                className="bg-[#DBD8CF] p-6 sm:p-8 border border-[#1c1c1a]/15 shadow-xs scroll-mt-28 transition-all hover:border-[#1c1c1a]/30"
               >
-                <div className="flex items-baseline gap-3 mb-4 border-b border-gray-100 pb-3">
-                  <span className="text-xs sm:text-sm font-mono font-semibold px-2 py-0.5 rounded bg-gray-100 text-gray-600">
+                <div className="flex items-baseline gap-3 mb-4 border-b border-[#1c1c1a]/10 pb-3">
+                  <span className="text-xs sm:text-sm font-mono font-semibold px-2 py-0.5 border border-[#1c1c1a]/20 text-[#1c1c1a]">
                     {section.number.padStart(2, '0')}
                   </span>
                   <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-black">
@@ -217,7 +217,7 @@ export default function PrivacyPolicy() {
                 </div>
 
                 {section.content && (
-                  <p className="text-gray-700 leading-relaxed mb-4 text-base">
+                  <p className="text-[#1c1c1a]/80 leading-relaxed mb-4 text-base">
                     {section.content}
                   </p>
                 )}
@@ -225,15 +225,15 @@ export default function PrivacyPolicy() {
                 {section.subsections && (
                   <div className="space-y-6 mt-4">
                     {section.subsections.map((sub, idx) => (
-                      <div key={idx} className="bg-gray-50/70 rounded-lg p-4 sm:p-5 border border-gray-100">
+                      <div key={idx} className="bg-[#DBD8CF] p-4 sm:p-5 border border-[#1c1c1a]/10">
                         <h3 className="text-base font-semibold text-gray-900 mb-2">
                           {sub.subtitle}
                         </h3>
-                        <p className="text-gray-700 text-sm leading-relaxed mb-3">
+                        <p className="text-[#1c1c1a]/80 text-sm leading-relaxed mb-3">
                           {sub.content}
                         </p>
                         {sub.items && (
-                          <ul className="space-y-2 pl-5 list-disc text-sm text-gray-700">
+                          <ul className="space-y-2 pl-5 list-disc text-sm text-[#1c1c1a]/80">
                             {sub.items.map((item, itemIdx) => (
                               <li key={itemIdx}>{item}</li>
                             ))}
@@ -245,7 +245,7 @@ export default function PrivacyPolicy() {
                 )}
 
                 {section.items && (
-                  <ul className="space-y-2.5 pl-5 list-disc text-gray-700 text-base mb-4 marker:text-gray-400">
+                  <ul className="space-y-2.5 pl-5 list-disc text-[#1c1c1a]/80 text-base mb-4 marker:text-[#1c1c1a]/40">
                     {section.items.map((item, idx) => (
                       <li key={idx} className="leading-relaxed">{item}</li>
                     ))}
@@ -253,13 +253,13 @@ export default function PrivacyPolicy() {
                 )}
 
                 {section.footnote && (
-                  <div className="mt-4 pt-4 border-t border-gray-100 text-sm text-gray-600 leading-relaxed">
+                  <div className="mt-4 pt-4 border-t border-[#1c1c1a]/10 text-sm text-[#1c1c1a]/70 leading-relaxed">
                     {section.footnote}
                   </div>
                 )}
 
                 {section.contactDetails && (
-                  <div className="mt-4 bg-gray-50 rounded-lg p-5 border border-gray-200/60 space-y-2 text-sm text-gray-800">
+                  <div className="mt-4 bg-[#DBD8CF] p-5 border border-[#1c1c1a]/20 space-y-2 text-sm text-[#1c1c1a]">
                     <p>
                       <strong>Email:</strong>{' '}
                       <a 

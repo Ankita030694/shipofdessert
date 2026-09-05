@@ -26,7 +26,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#f5f5f5] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a]">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-32 pb-24 px-5 sm:px-8 flex flex-col items-center justify-start">

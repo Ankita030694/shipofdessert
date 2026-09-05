@@ -273,7 +273,7 @@ export default function ProductDetailPage({
 
   if (loading) {
     return (
-      <div className="bg-[#f5f5f5] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+      <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
         <Navbar />
         <main className="flex-1 flex items-center justify-center pt-24">
           <div className="text-xs uppercase tracking-widest text-[#1c1c1a]/60 animate-pulse">
@@ -287,7 +287,7 @@ export default function ProductDetailPage({
 
   if (!product) {
     return (
-      <div className="bg-[#f5f5f5] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+      <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
         <Navbar />
         <main className="flex-1 flex flex-col items-center justify-center pt-24 px-4 text-center">
           <h1 className="text-xl font-serif uppercase tracking-wider mb-2">Product Not Found</h1>
@@ -319,7 +319,7 @@ export default function ProductDetailPage({
         ];
 
   return (
-    <div className="bg-[#f5f5f5] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 flex-1 max-w-7xl">
@@ -396,13 +396,13 @@ export default function ProductDetailPage({
               />
               {isSet && (
                 <div className="absolute top-3 left-3">
-                  <span className="bg-[#1c1c1a]/90 text-white text-[10px] uppercase tracking-widest px-2.5 py-1 font-mono font-medium backdrop-blur-xs">
+                  <span className="bg-[#1c1c1a] text-white text-[10px] uppercase tracking-widest px-2.5 py-1 font-mono font-medium">
                     {selectedPieceOption === 'full'
-                      ? '✨ Full Set Ensemble'
+                      ? 'Full Set Ensemble'
                       : selectedPieceOption === 'top'
-                      ? `👚 ${topName}`
+                      ? topName
                       : selectedPieceOption === 'bottom'
-                      ? `👖 ${bottomName}`
+                      ? bottomName
                       : 'Individual Piece'}
                   </span>
                 </div>
@@ -490,7 +490,7 @@ export default function ProductDetailPage({
                     className={`p-3 text-left border rounded-xs transition-all cursor-pointer relative ${
                       selectedPieceOption === 'full'
                         ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white shadow-xs'
-                        : 'border-stone-300 bg-white hover:border-[#1c1c1a] text-[#1c1c1a]'
+                        : 'border-stone-300 bg-[#DBD8CF] hover:border-[#1c1c1a] text-[#1c1c1a]'
                     }`}
                   >
                     <span
@@ -498,7 +498,7 @@ export default function ProductDetailPage({
                         selectedPieceOption === 'full' ? 'text-amber-300' : 'text-stone-500'
                       }`}
                     >
-                      ✨ Full Set
+                      Full Set
                     </span>
                     <span className="text-xs font-serif font-medium block mt-1">
                       Complete Ensemble
@@ -515,7 +515,7 @@ export default function ProductDetailPage({
                     className={`p-3 text-left border rounded-xs transition-all cursor-pointer relative ${
                       selectedPieceOption === 'top'
                         ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white shadow-xs'
-                        : 'border-stone-300 bg-white hover:border-[#1c1c1a] text-[#1c1c1a]'
+                        : 'border-stone-300 bg-[#DBD8CF] hover:border-[#1c1c1a] text-[#1c1c1a]'
                     }`}
                   >
                     <span
@@ -523,7 +523,7 @@ export default function ProductDetailPage({
                         selectedPieceOption === 'top' ? 'text-amber-300' : 'text-stone-500'
                       }`}
                     >
-                      👚 Upper Only
+                      Upper Only
                     </span>
                     <span className="text-xs font-serif font-medium block mt-1 truncate" title={topName}>
                       {topName}
@@ -540,7 +540,7 @@ export default function ProductDetailPage({
                     className={`p-3 text-left border rounded-xs transition-all cursor-pointer relative ${
                       selectedPieceOption === 'bottom'
                         ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white shadow-xs'
-                        : 'border-stone-300 bg-white hover:border-[#1c1c1a] text-[#1c1c1a]'
+                        : 'border-stone-300 bg-[#DBD8CF] hover:border-[#1c1c1a] text-[#1c1c1a]'
                     }`}
                   >
                     <span
@@ -548,7 +548,7 @@ export default function ProductDetailPage({
                         selectedPieceOption === 'bottom' ? 'text-amber-300' : 'text-stone-500'
                       }`}
                     >
-                      👖 Lower Only
+                      Lower Only
                     </span>
                     <span className="text-xs font-serif font-medium block mt-1 truncate" title={bottomName}>
                       {bottomName}
@@ -567,7 +567,7 @@ export default function ProductDetailPage({
                       className={`w-full p-2.5 text-left border rounded-xs transition-all cursor-pointer flex justify-between items-center ${
                         selectedPieceOption === 'additional'
                           ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white shadow-xs'
-                          : 'border-stone-300 bg-white hover:border-[#1c1c1a] text-[#1c1c1a]'
+                          : 'border-stone-300 bg-[#DBD8CF] hover:border-[#1c1c1a] text-[#1c1c1a]'
                       }`}
                     >
                       <span className="text-xs font-medium">
@@ -584,7 +584,7 @@ export default function ProductDetailPage({
 
             {/* Short Fit Note & Model Stats */}
             {product.fitNote && (
-              <div className="bg-[#f9f9f9] border border-[#1c1c1a]/10 p-3 rounded-xs flex items-center gap-2.5 text-xs text-[#1c1c1a]/80">
+              <div className="bg-[#DBD8CF]/70 border border-[#1c1c1a]/10 p-3 rounded-xs flex items-center gap-2.5 text-xs text-[#1c1c1a]/80">
                 <span className="text-sm">📏</span>
                 <div>
                   <span className="font-medium text-[#1c1c1a]">{product.fitNote}</span>
@@ -613,7 +613,7 @@ export default function ProductDetailPage({
                       className={`text-xs px-3.5 py-1.5 border transition-all cursor-pointer ${
                         selectedColor === color
                           ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white'
-                          : 'border-[#1c1c1a]/20 bg-white text-[#1c1c1a] hover:border-[#1c1c1a]'
+                          : 'border-[#1c1c1a]/20 bg-[#DBD8CF] text-[#1c1c1a] hover:border-[#1c1c1a]'
                       }`}
                     >
                       {color}
@@ -632,9 +632,12 @@ export default function ProductDetailPage({
                   </span>
                   <button
                     onClick={() => setIsSizeGuideOpen(true)}
-                    className="underline text-[#1c1c1a]/70 hover:text-[#1c1c1a] cursor-pointer flex items-center gap-1 text-[11px]"
+                    className="underline text-[#1c1c1a]/70 hover:text-[#1c1c1a] cursor-pointer flex items-center gap-1.5 text-[11px]"
                   >
-                    <span>📐</span>
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="m21.3 15.3-7.6-7.6a2.12 2.12 0 0 0-3 0L3 15.4a2.12 2.12 0 0 0 0 3l2.3 2.3a2.12 2.12 0 0 0 3 0l7.7-7.7" />
+                      <path d="m14.5 12.5 2-2M11.5 15.5 13 14M8.5 18.5 10 17" />
+                    </svg>
                     <span>Size Guide & Measurements</span>
                   </button>
                 </div>
@@ -646,7 +649,7 @@ export default function ProductDetailPage({
                       className={`py-2.5 text-xs uppercase tracking-wider border transition-all cursor-pointer font-mono ${
                         selectedSize === size
                           ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white font-bold'
-                          : 'border-[#1c1c1a]/20 bg-white text-[#1c1c1a] hover:border-[#1c1c1a]'
+                          : 'border-[#1c1c1a]/20 bg-[#DBD8CF] text-[#1c1c1a] hover:border-[#1c1c1a]'
                       }`}
                     >
                       {size}
@@ -680,9 +683,17 @@ export default function ProductDetailPage({
             </div>
 
             {/* Trust Signals Section */}
-            <div className="bg-white border border-[#1c1c1a]/10 p-4 rounded-xs divide-y divide-[#1c1c1a]/10 text-xs text-[#1c1c1a]/80 space-y-2.5">
-              <div className="flex items-center gap-3 pt-1 first:pt-0">
-                <span className="text-base">🚚</span>
+            <div className="bg-[#DBD8CF] border border-[#1c1c1a]/10 p-4 rounded-xs divide-y divide-[#1c1c1a]/10 text-xs text-[#1c1c1a]/80 space-y-2.5">
+              <div className="flex items-center gap-3.5 pt-1 first:pt-0">
+                <div className="w-8 h-8 rounded-full bg-[#1c1c1a]/5 border border-[#1c1c1a]/10 flex items-center justify-center flex-shrink-0 text-[#1c1c1a]">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2" />
+                    <path d="M15 18H9" />
+                    <path d="M19 18h2a1 1 0 0 0 1-1v-5.28a1 1 0 0 0-.284-.707l-3.432-3.43A1 1 0 0 0 17.576 7H14v11" />
+                    <circle cx="7" cy="18" r="2" />
+                    <circle cx="17" cy="18" r="2" />
+                  </svg>
+                </div>
                 <div>
                   <span className="font-semibold text-[#1c1c1a]">Estimated Delivery</span>
                   <p className="text-[11px] text-[#1c1c1a]/60">
@@ -692,8 +703,14 @@ export default function ProductDetailPage({
               </div>
 
               {product.codAvailable !== false && (
-                <div className="flex items-center gap-3 pt-2.5">
-                  <span className="text-base">💵</span>
+                <div className="flex items-center gap-3.5 pt-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#1c1c1a]/5 border border-[#1c1c1a]/10 flex items-center justify-center flex-shrink-0 text-[#1c1c1a]">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="12" x="2" y="6" rx="2" />
+                      <circle cx="12" cy="12" r="2" />
+                      <path d="M6 12h.01M18 12h.01" />
+                    </svg>
+                  </div>
                   <div>
                     <span className="font-semibold text-[#1c1c1a]">Cash on Delivery (COD)</span>
                     <p className="text-[11px] text-[#1c1c1a]/60">
@@ -704,8 +721,14 @@ export default function ProductDetailPage({
               )}
 
               {product.freeShipping !== false && (
-                <div className="flex items-center gap-3 pt-2.5">
-                  <span className="text-base">📦</span>
+                <div className="flex items-center gap-3.5 pt-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#1c1c1a]/5 border border-[#1c1c1a]/10 flex items-center justify-center flex-shrink-0 text-[#1c1c1a]">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                      <path d="m3.3 7 8.7 5 8.7-5" />
+                      <path d="M12 22V12" />
+                    </svg>
+                  </div>
                   <div>
                     <span className="font-semibold text-[#1c1c1a]">Complimentary Express Shipping</span>
                     <p className="text-[11px] text-[#1c1c1a]/60">
@@ -715,8 +738,15 @@ export default function ProductDetailPage({
                 </div>
               )}
 
-              <div className="flex items-center gap-3 pt-2.5">
-                <span className="text-base">🔄</span>
+              <div className="flex items-center gap-3.5 pt-2.5">
+                <div className="w-8 h-8 rounded-full bg-[#1c1c1a]/5 border border-[#1c1c1a]/10 flex items-center justify-center flex-shrink-0 text-[#1c1c1a]">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 12a9 9 0 0 1 15-6.7L21 8" />
+                    <path d="M21 3v5h-5" />
+                    <path d="M21 12a9 9 0 0 1-15 6.7L3 16" />
+                    <path d="M3 21v-5h5" />
+                  </svg>
+                </div>
                 <div>
                   <span className="font-semibold text-[#1c1c1a]">Hassle-Free Returns</span>
                   <p className="text-[11px] text-[#1c1c1a]/60">
@@ -902,8 +932,8 @@ export default function ProductDetailPage({
 
       {/* Size Guide Modal */}
       {isSizeGuideOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white max-w-lg w-full p-6 sm:p-8 rounded-sm shadow-2xl relative max-h-[90vh] overflow-y-auto border border-[#1c1c1a]/15">
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+          <div className="bg-[#DBD8CF] max-w-lg w-full p-6 sm:p-8 rounded-sm shadow-2xl relative max-h-[90vh] overflow-y-auto border border-[#1c1c1a]/15">
             <div className="flex justify-between items-start border-b border-[#1c1c1a]/10 pb-4 mb-5">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] font-bold">

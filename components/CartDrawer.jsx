@@ -9,16 +9,27 @@ export default function CartDrawer() {
   const { items, totalCount, subtotal, isCartOpen, closeCart, updateQuantity, removeItem } =
     useCart();
 
+  // Close drawer on Escape key press
+  React.useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && isCartOpen) {
+        closeCart();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isCartOpen, closeCart]);
+
   return (
     <>
       {/* Sliding Drawer Container */}
       <div
-        className={`fixed top-0 right-0 h-screen w-full sm:w-[460px] md:w-[500px] bg-[#f5f5f5] text-[#1c1c1a] transform transition-transform duration-300 ease-in-out z-50 shadow-2xl flex flex-col justify-between border-l border-[#dcd8cf] ${
+        className={`fixed top-0 right-0 h-screen w-full sm:w-[460px] md:w-[500px] bg-[#DBD8CF] text-[#1c1c1a] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-l border-[#dcd8cf] ${
           isCartOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Drawer Header */}
-        <div className="p-6 sm:p-8 border-b border-[#dcd8cf] flex justify-between items-center bg-[#f5f5f5]">
+        <div className="p-6 sm:p-8 border-b border-[#dcd8cf] flex justify-between items-center bg-[#DBD8CF]">
           <div className="flex items-center gap-2.5">
             <span className="text-xs uppercase tracking-[0.2em] font-serif font-medium">
               Shopping Bag
@@ -41,8 +52,10 @@ export default function CartDrawer() {
         <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-6">
           {items.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center py-16">
-              <div className="w-12 h-12 rounded-full border border-[#1c1c1a]/20 flex items-center justify-center mb-4 text-[#1c1c1a]/40">
-                🛍️
+              <div className="w-12 h-12 rounded-full border border-[#1c1c1a]/20 flex items-center justify-center mb-4 text-[#1c1c1a]/60">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
               </div>
               <h3 className="text-sm font-serif uppercase tracking-wider mb-2">Your Bag is Empty</h3>
               <p className="text-xs text-[#1c1c1a]/60 max-w-xs mb-8">
@@ -98,7 +111,7 @@ export default function CartDrawer() {
 
                     {/* Quantity + Remove */}
                     <div className="flex justify-between items-center mt-3 pt-2">
-                      <div className="flex items-center border border-[#1c1c1a]/20 bg-white">
+                      <div className="flex items-center border border-[#1c1c1a]/20 bg-[#DBD8CF]">
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
                           className="px-2.5 py-0.5 text-xs hover:bg-stone-100 transition-colors cursor-pointer"
@@ -174,7 +187,7 @@ export default function CartDrawer() {
       {/* Dimmed Overlay Backdrop */}
       {isCartOpen && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-xs z-45 transition-opacity"
+          className="fixed inset-0 bg-black/40 z-[60] transition-opacity"
           onClick={closeCart}
         />
       )}

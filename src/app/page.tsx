@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="bg-[#f5f5f5] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="relative w-full flex-1">
