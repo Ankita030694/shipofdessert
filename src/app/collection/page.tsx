@@ -128,8 +128,11 @@ function CollectionContent() {
       {/* Products Grid */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         {loading ? (
-          <div className="py-24 text-center text-xs uppercase tracking-widest text-[#1c1c1a]/60">
-            Loading collection...
+          <div className="py-28 text-center flex flex-col items-center justify-center">
+            <div className="w-8 h-8 border-2 border-[#1c1c1a]/20 border-t-[#1c1c1a] rounded-full animate-spin mb-4" />
+            <p className="text-xs uppercase tracking-[0.2em] text-[#1c1c1a]/60">
+              Loading collection...
+            </p>
           </div>
         ) : currentProducts.length === 0 ? (
           <div className="py-24 text-center text-xs uppercase tracking-widest text-[#1c1c1a]/60">
@@ -253,8 +256,11 @@ export default function CollectionPage() {
       <Navbar />
       <Suspense
         fallback={
-          <div className="pt-32 pb-24 text-center text-xs uppercase tracking-widest text-[#1c1c1a]/60">
-            Loading collection...
+          <div className="pt-36 pb-28 text-center flex flex-col items-center justify-center flex-1">
+            <div className="w-8 h-8 border-2 border-[#1c1c1a]/20 border-t-[#1c1c1a] rounded-full animate-spin mb-4" />
+            <p className="text-xs uppercase tracking-[0.2em] text-[#1c1c1a]/60">
+              Loading collection...
+            </p>
           </div>
         }
       >
