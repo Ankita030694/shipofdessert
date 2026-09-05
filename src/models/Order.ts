@@ -192,6 +192,10 @@ const OrderSchema: Schema<IOrder> = new Schema(
   }
 );
 
+OrderSchema.index({ createdAt: -1 });
+OrderSchema.index({ paymentStatus: 1, createdAt: -1 });
+OrderSchema.index({ fulfillmentStatus: 1, createdAt: -1 });
+
 const Order: Model<IOrder> = mongoose.models.Order || mongoose.model<IOrder>('Order', OrderSchema);
 
 export default Order;

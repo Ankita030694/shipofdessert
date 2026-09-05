@@ -29,19 +29,19 @@ export default function ContactPage() {
     <div className="min-h-screen flex flex-col justify-between bg-[#f5f5f5] text-[#1c1c1a]">
       <Navbar />
 
-      <main className="flex-1 pt-28 sm:pt-36 pb-20 px-5 sm:px-8 flex flex-col items-center justify-start">
-        <div className="w-full max-w-md mx-auto">
+      <main className="flex-1 pt-24 sm:pt-32 pb-24 px-5 sm:px-8 flex flex-col items-center justify-start">
+        <div className="w-full max-w-[440px] mx-auto">
           
           {/* Title: CONTACT */}
-          <h1 className="text-center font-bold text-sm sm:text-base tracking-[0.2em] uppercase text-[#1c1c1a] mb-12 sm:mb-16">
+          <h1 className="text-center font-bold text-sm sm:text-base tracking-[0.22em] uppercase text-[#1c1c1a] mb-12 sm:mb-14">
             CONTACT
           </h1>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-8 sm:space-y-10">
+          <form onSubmit={handleSubmit} className="space-y-7 sm:space-y-8">
             {/* Name */}
             <div>
-              <label htmlFor="contact-name" className="block text-xs sm:text-[13px] font-bold text-[#1c1c1a] mb-1.5">
+              <label htmlFor="contact-name" className="block text-xs sm:text-[13px] font-bold text-[#1c1c1a] mb-2">
                 Name* :
               </label>
               <input
@@ -51,13 +51,13 @@ export default function ContactPage() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Name"
-                className="w-full bg-transparent border-b border-[#1c1c1a] py-1.5 text-xs sm:text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/40 focus:outline-none rounded-none transition-colors"
+                className="w-full bg-transparent border-b border-[#1c1c1a] pb-2 text-xs sm:text-[13px] text-[#1c1c1a] placeholder-[#1c1c1a]/50 focus:outline-none focus:border-black rounded-none transition-colors"
               />
             </div>
 
             {/* Email Address */}
             <div>
-              <label htmlFor="contact-email" className="block text-xs sm:text-[13px] font-bold text-[#1c1c1a] mb-1.5">
+              <label htmlFor="contact-email" className="block text-xs sm:text-[13px] font-bold text-[#1c1c1a] mb-2">
                 Email Address* :
               </label>
               <input
@@ -67,13 +67,13 @@ export default function ContactPage() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Email Address"
-                className="w-full bg-transparent border-b border-[#1c1c1a] py-1.5 text-xs sm:text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/40 focus:outline-none rounded-none transition-colors"
+                className="w-full bg-transparent border-b border-[#1c1c1a] pb-2 text-xs sm:text-[13px] text-[#1c1c1a] placeholder-[#1c1c1a]/50 focus:outline-none focus:border-black rounded-none transition-colors"
               />
             </div>
 
             {/* Subject */}
             <div>
-              <label htmlFor="contact-subject" className="block text-xs sm:text-[13px] font-bold text-[#1c1c1a] mb-1.5">
+              <label htmlFor="contact-subject" className="block text-xs sm:text-[13px] font-bold text-[#1c1c1a] mb-2">
                 Subject* :
               </label>
               <div className="relative">
@@ -82,7 +82,7 @@ export default function ContactPage() {
                   required
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full bg-transparent border-b border-[#1c1c1a] py-1.5 pr-8 text-xs sm:text-sm text-[#1c1c1a] focus:outline-none appearance-none rounded-none cursor-pointer"
+                  className="w-full bg-transparent border-b border-[#1c1c1a] pb-2 pr-8 text-xs sm:text-[13px] text-[#1c1c1a] focus:outline-none focus:border-black appearance-none rounded-none cursor-pointer"
                 >
                   <option value="" disabled className="text-gray-400">
                     Inquiry Item
@@ -109,7 +109,7 @@ export default function ContactPage() {
                     General Inquiries
                   </option>
                 </select>
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-[#1c1c1a]">
+                <div className="absolute right-0 bottom-2.5 pointer-events-none text-[#1c1c1a]">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                   </svg>
@@ -119,7 +119,7 @@ export default function ContactPage() {
 
             {/* Message */}
             <div>
-              <label htmlFor="contact-message" className="block text-xs sm:text-[13px] font-bold text-[#1c1c1a] mb-2">
+              <label htmlFor="contact-message" className="block text-xs sm:text-[13px] font-bold text-[#1c1c1a] mb-2.5">
                 Message* :
               </label>
               <textarea
@@ -129,7 +129,7 @@ export default function ContactPage() {
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Message"
-                className="w-full bg-transparent border border-[#1c1c1a] p-3 sm:p-4 text-xs sm:text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/40 focus:outline-none rounded-none resize-y min-h-[160px] transition-colors"
+                className="w-full bg-transparent border border-[#1c1c1a]/50 p-3 sm:p-4 text-xs sm:text-[13px] text-[#1c1c1a] placeholder-[#1c1c1a]/50 focus:outline-none focus:border-[#1c1c1a] rounded-none resize-y min-h-[170px] transition-colors"
               ></textarea>
             </div>
 

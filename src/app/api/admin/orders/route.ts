@@ -44,54 +44,79 @@ export async function GET(request: NextRequest) {
       query.fulfillmentStatus = fulfillmentStatus;
     }
 
-    const orders = await Order.find(query).sort({ createdAt: -1 }).lean();
-
-    // Fetch all orders to compute accurate KPI stats
-    const allOrders = await Order.find({}).lean();
-
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    let todayOrdersCount = 0;
-    let totalItemsOrdered = 0;
-    let totalRevenue = 0;
-    let fulfilledCount = 0;
-    let deliveredCount = 0;
+    const [result] = await Order.aggregate([
+      {
+        $facet: {
+          orders: [
+            ...(Object.keys(query).length > 0 ? [{ $match: query }] : []),
+            { $sort: { createdAt: -1 } },
+          ],
+          stats: [
+            {
+              $group: {
+                _id: null,
+                totalOrders: { $sum: 1 },
+                todayOrders: {
+                  $sum: {
+                    $cond: [{ $gte: ['$createdAt', today] }, 1, 0],
+                  },
+                },
+                totalRevenue: {
+                  $sum: {
+                    $cond: [{ $eq: ['$paymentStatus', 'paid'] }, { $ifNull: ['$totalAmount', 0] }, 0],
+                  },
+                },
+                ordersFulfilled: {
+                  $sum: {
+                    $cond: [
+                      { $in: ['$fulfillmentStatus', ['fulfilled', 'delivered']] },
+                      1,
+                      0,
+                    ],
+                  },
+                },
+                ordersDelivered: {
+                  $sum: {
+                    $cond: [{ $eq: ['$fulfillmentStatus', 'delivered'] }, 1, 0],
+                  },
+                },
+                itemsOrdered: {
+                  $sum: {
+                    $reduce: {
+                      input: { $ifNull: ['$items', []] },
+                      initialValue: 0,
+                      in: {
+                        $add: [
+                          '$$value',
+                          { $ifNull: ['$$this.quantity', 1] },
+                        ],
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          ],
+        },
+      },
+    ]);
 
-    for (const ord of allOrders) {
-      const orderDate = new Date(ord.createdAt);
-      if (orderDate >= today) {
-        todayOrdersCount++;
-      }
-
-      if (ord.paymentStatus === 'paid') {
-        totalRevenue += ord.totalAmount || 0;
-      }
-
-      if (ord.fulfillmentStatus === 'fulfilled' || ord.fulfillmentStatus === 'delivered') {
-        fulfilledCount++;
-      }
-
-      if (ord.fulfillmentStatus === 'delivered') {
-        deliveredCount++;
-      }
-
-      const itemsSum = (ord.items || []).reduce((acc, item) => acc + (item.quantity || 1), 0);
-      totalItemsOrdered += itemsSum;
-    }
-
+    const statsData = result?.stats?.[0] || {};
     const stats = {
-      todayOrders: todayOrdersCount,
-      totalOrders: allOrders.length,
-      itemsOrdered: totalItemsOrdered,
-      totalRevenue: Math.round(totalRevenue * 100) / 100,
-      ordersFulfilled: fulfilledCount,
-      ordersDelivered: deliveredCount,
+      todayOrders: statsData.todayOrders || 0,
+      totalOrders: statsData.totalOrders || 0,
+      itemsOrdered: statsData.itemsOrdered || 0,
+      totalRevenue: Math.round((statsData.totalRevenue || 0) * 100) / 100,
+      ordersFulfilled: statsData.ordersFulfilled || 0,
+      ordersDelivered: statsData.ordersDelivered || 0,
     };
 
     return NextResponse.json({
       success: true,
-      data: orders,
+      data: result?.orders || [],
       stats,
     });
   } catch (error: unknown) {

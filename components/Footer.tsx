@@ -38,7 +38,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-[#f5f5f5] text-[#1c1c1a] border-t border-[#dcd8cf]">
+    <footer className="w-full bg-[#DBD8CF] text-[#1c1c1a] border-t border-[#bdb2a1]/40">
       {/* ---------------- DESKTOP VIEW (md+) ---------------- */}
       <div className="hidden md:block max-w-7xl mx-auto pt-16 pb-12 px-6 sm:px-8 lg:px-12">
         {/* Main 5-Section Layout */}
@@ -103,18 +103,8 @@ const Footer = () => {
           <div className="col-span-6 md:col-span-2 lg:col-span-2">
             <ul className="space-y-3 text-xs sm:text-[13px] text-[#1c1c1a] font-normal">
               <li>
-                <Link href="/philosophy" className="hover:opacity-50 transition-opacity">
-                  About the Brand
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:opacity-50 transition-opacity">
-                  Stores
-                </Link>
-              </li>
-              <li>
-                <Link href="/archives" className="hover:opacity-50 transition-opacity">
-                  Architecture
+                <Link href="/care" className="hover:opacity-50 transition-opacity">
+                  Care for a Lifetime
                 </Link>
               </li>
               <li>
@@ -170,7 +160,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/care" className="hover:opacity-50 transition-opacity">
+                <Link href="/privacy-policy" className="hover:opacity-50 transition-opacity">
                   Accessibility
                 </Link>
               </li>
@@ -282,18 +272,8 @@ const Footer = () => {
         <div className="grid grid-cols-2 gap-6 text-xs sm:text-[13px] text-[#1c1c1a]">
           <div className="space-y-2.5">
             <div>
-              <Link href="/philosophy" className="hover:opacity-60 transition-opacity">
-                About the Brand
-              </Link>
-            </div>
-            <div>
-              <Link href="/contact" className="hover:opacity-60 transition-opacity">
-                Stores
-              </Link>
-            </div>
-            <div>
-              <Link href="/archives" className="hover:opacity-60 transition-opacity">
-                Architecture
+              <Link href="/care" className="hover:opacity-60 transition-opacity">
+                Care for a Lifetime
               </Link>
             </div>
             <div>
@@ -335,7 +315,7 @@ const Footer = () => {
               </Link>
             </div>
             <div>
-              <Link href="/care" className="hover:opacity-60 transition-opacity">
+              <Link href="/privacy-policy" className="hover:opacity-60 transition-opacity">
                 Accessibility
               </Link>
             </div>

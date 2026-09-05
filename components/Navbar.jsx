@@ -9,60 +9,30 @@ import CartDrawer from './CartDrawer';
 
 const navigationLinks = [
   {
-    title: 'Women',
-    href: '/women',
-    children: [
-      { title: 'All Women', href: '/women' },
-      { title: 'Dresses', href: '/women?category=Dresses' },
-      { title: 'Skirts', href: '/women?category=Skirts' },
-      { title: 'Tops & Knitwear', href: '/women?category=Tops' },
-      { title: 'Trousers', href: '/women?category=Pants' },
-    ],
-  },
-  {
     title: 'Shop',
     href: '/shop',
     children: [
-      { title: 'All Clothing', href: '/shop' },
-      { title: 'Dresses', href: '/shop?category=Dresses' },
-      { title: 'Skirts', href: '/shop?category=Skirts' },
-      { title: 'Silk & Linen', href: '/shop?search=Linen' },
-      { title: 'Leather & Denim', href: '/shop?search=Leather' },
-      { title: 'Accessories', href: '/shop?category=Footwear' },
+      { title: 'Women', href: '/women' },
+      { title: 'Sets & Ensembles', href: '/collection?category=Sets' },
+      { title: 'The Inheritance 01', href: '/collection/the-inheritance-01' },
+      { title: 'Collection Details', href: '/collection/details' },
     ],
   },
   {
     title: 'Collections',
     href: '/collection',
     children: [
-      { title: 'The Collection', href: '/collection' },
-      { title: 'Sets & Ensembles', href: '/collection?category=Sets' },
-      { title: 'The Inheritance 01', href: '/collection/the-inheritance-01' },
-      { title: 'Collection Details', href: '/collection/details' },
+      { title: 'The Complete Collection', href: '/collection' },
       { title: 'Archives', href: '/archives' },
     ],
   },
   {
-    title: 'Philosophy',
-    href: '/philosophy',
-    children: [
-      { title: 'Our Philosophy', href: '/philosophy' },
-      { title: 'The Quiet Choice', href: '/the-quiet-choice/philosophy' },
-      { title: 'Care For A Lifetime', href: '/care' },
-      { title: 'Journals', href: '/the-quiet-choice/journals' },
-    ],
+    title: 'The Quiet Choice',
+    href: '/the-quiet-choice',
   },
   {
-    title: 'Journals',
-    href: '/journal',
-    children: [
-      { title: 'All Journals', href: '/journal' },
-      { title: 'The Quiet Choice Stories', href: '/the-quiet-choice/journals' },
-    ],
-  },
-  {
-    title: 'Archives',
-    href: '/archives',
+    title: 'Contact Us',
+    href: '/contact',
   },
 ];
 
@@ -116,7 +86,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#f5f5f5]/95 backdrop-blur-md border-b border-[#dcd8cf]/60 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
+      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#f5f5f5]/15 backdrop-blur-xs border-b border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
         
         {/* Left Section: Desktop Links with Dropdown & Mobile Menu Toggle */}
         <div className="flex items-center">
@@ -158,12 +128,12 @@ const Navbar = () => {
                 {/* Dropdown Menu on Hover */}
                 {item.children && (
                   <div className="absolute top-[90%] left-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                    <div className="min-w-[190px] bg-[#f5f5f5] border border-[#dcd8cf] py-3.5 px-5 shadow-lg flex flex-col gap-2.5">
+                    <div className="min-w-[190px] bg-[#DBD8CF]/95 backdrop-blur-2xl border border-[#bdb2a1]/60 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
                       {item.children.map((sub) => (
                         <Link
                           key={sub.title}
                           href={sub.href}
-                          className="text-[12px] tracking-wide text-[#1c1c1a]/80 hover:text-black hover:translate-x-1 transition-all whitespace-nowrap block"
+                          className="text-[12px] tracking-wide text-[#1c1c1a]/80 hover:text-[#1c1c1a] hover:translate-x-1 transition-all whitespace-nowrap block"
                         >
                           {sub.title}
                         </Link>
@@ -194,7 +164,7 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Right Section: Mobile (Search + Cart) vs Desktop (Search, Login/Account, Cart) */}
+        {/* Right Section: Mobile (Search + Bag Icon) vs Desktop (Search, Login/Account, Bag) */}
         {/* Mobile View (< lg) */}
         <div className="flex lg:hidden items-center gap-3 sm:gap-4 text-[#1c1c1a]">
           <button 
@@ -209,15 +179,32 @@ const Navbar = () => {
 
           <button 
             onClick={openCart}
-            aria-label="Shopping Cart"
-            className="p-1.5 hover:opacity-50 transition-opacity cursor-pointer focus:outline-none text-[12px] sm:text-[13px] flex items-center gap-1 font-normal"
+            aria-label="Shopping Bag"
+            className="p-1.5 hover:opacity-50 transition-opacity cursor-pointer focus:outline-none relative flex items-center justify-center"
           >
-            <span>Cart</span>
-            <span>({totalCount})</span>
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="w-4 h-4 sm:w-4.5 sm:h-4.5" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth={1.5}
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" 
+              />
+            </svg>
+            {totalCount > 0 && (
+              <span className="absolute -top-1 -right-1 min-w-[15px] h-[15px] px-1 bg-[#1c1c1a] text-white text-[9px] leading-none rounded-full flex items-center justify-center font-medium">
+                {totalCount}
+              </span>
+            )}
           </button>
         </div>
 
-        {/* Desktop View (>= lg): Search, Login / Account, Cart */}
+        {/* Desktop View (>= lg): Search, Login / Account, Bag */}
         <div className="hidden lg:flex items-center gap-6 xl:gap-8 text-[12px] xl:text-[13px] text-[#1c1c1a] font-normal">
           <button 
             onClick={toggleSearch}
@@ -235,25 +222,25 @@ const Navbar = () => {
                 <svg 
                   className="w-2.5 h-2.5 opacity-40 group-hover:opacity-90 group-hover:rotate-180 transition-all duration-200" 
                   viewBox="0 0 10 6" 
-                  fill="none"
+                  fill="none" 
                 >
                   <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </button>
               
               <div className="absolute top-[90%] right-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                <div className="min-w-[180px] bg-[#f5f5f5] border border-[#dcd8cf] py-3.5 px-5 shadow-lg flex flex-col gap-2.5">
-                  <span className="text-[11px] text-gray-500 truncate pb-1.5 border-b border-[#dcd8cf]">
+                <div className="min-w-[180px] bg-[#DBD8CF]/95 backdrop-blur-2xl border border-[#bdb2a1]/60 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
+                  <span className="text-[11px] text-[#1c1c1a]/70 truncate pb-1.5 border-b border-[#bdb2a1]/60">
                     {session.user.name || session.user.email}
                   </span>
                   {session.user.role === 'admin' && (
-                    <Link href="/admin" className="text-[12px] tracking-wide text-amber-900 hover:text-black hover:translate-x-1 transition-all">
+                    <Link href="/admin" className="text-[12px] tracking-wide text-amber-900 hover:text-[#1c1c1a] hover:translate-x-1 transition-all">
                       Admin Dashboard
                     </Link>
                   )}
                   <button
                     onClick={() => signOut({ callbackUrl: '/' })}
-                    className="text-left text-[12px] tracking-wide text-[#1c1c1a]/80 hover:text-black hover:translate-x-1 transition-all cursor-pointer"
+                    className="text-left text-[12px] tracking-wide text-[#1c1c1a]/80 hover:text-[#1c1c1a] hover:translate-x-1 transition-all cursor-pointer"
                   >
                     Sign Out
                   </button>
@@ -271,9 +258,10 @@ const Navbar = () => {
 
           <button 
             onClick={openCart}
+            aria-label="Shopping Bag"
             className="hover:opacity-50 transition-opacity cursor-pointer focus:outline-none flex items-center gap-1 whitespace-nowrap py-4"
           >
-            <span>Cart</span>
+            <span>Bag</span>
             <span>({totalCount})</span>
           </button>
         </div>
@@ -416,11 +404,6 @@ const Navbar = () => {
             ))}
 
             <li className="pt-2">
-              <Link href="/contact" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 text-xs uppercase tracking-widest text-stone-500">
-                Stores &amp; Contact
-              </Link>
-            </li>
-            <li>
               <Link href="/innercircle" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 text-xs uppercase tracking-widest text-stone-500">
                 Saved / Inner Circle
               </Link>
