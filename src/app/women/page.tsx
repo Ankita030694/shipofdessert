@@ -143,7 +143,7 @@ function WomenContent() {
                   setSelectedCategory(cat.value);
                   setCurrentPage(1);
                 }}
-                className={`text-xs uppercase tracking-widest px-3.5 py-1.5 border transition-all cursor-pointer ${
+                className={`text-[11px] uppercase tracking-widest px-3 py-1 border transition-all cursor-pointer ${
                   selectedCategory.toLowerCase() === cat.value.toLowerCase()
                     ? 'bg-[#1c1c1a] text-white border-[#1c1c1a]'
                     : 'bg-transparent text-[#1c1c1a] border-[#1c1c1a]/20 hover:border-[#1c1c1a]'
@@ -155,7 +155,7 @@ function WomenContent() {
           </div>
 
           {/* Right Controls: Sort & Count */}
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-4 text-[11px]">
             <span className="text-[#1c1c1a]/60 uppercase tracking-widest">
               {products.length} {products.length === 1 ? 'Product' : 'Products'}
             </span>
@@ -200,9 +200,9 @@ function WomenContent() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-5">
             {currentProducts.map((product) => (
-              <div key={product.id} className="group mb-4">
+              <div key={product.id} className="group">
                 <Link href={`/product/${product.slug}`} className="block">
                   <div className="relative aspect-[3/4] mb-3 bg-[#e8e4dc]/40 overflow-hidden">
                     <Image

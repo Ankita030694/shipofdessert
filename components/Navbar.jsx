@@ -9,6 +9,10 @@ import CartDrawer from './CartDrawer';
 
 const navigationLinks = [
   {
+    title: 'The Quiet Choice',
+    href: '/the-quiet-choice',
+  },
+  {
     title: 'Shop',
     href: '/shop',
     children: [
@@ -19,19 +23,6 @@ const navigationLinks = [
       { title: 'Skirts', href: '/women/skirts' },
       { title: 'All Garments', href: '/shop' },
     ],
-  },
-  {
-    title: 'Collections',
-    href: '/collection',
-    children: [
-      { title: 'The Complete Collection', href: '/collection' },
-      { title: 'The Inheritance 01', href: '/collection/the-inheritance-01' },
-      { title: 'Archives', href: '/archives' },
-    ],
-  },
-  {
-    title: 'The Quiet Choice',
-    href: '/the-quiet-choice',
   },
   {
     title: 'Contact Us',
@@ -116,15 +107,9 @@ const Navbar = () => {
           <button 
             onClick={toggleMenu}
             aria-label="Open Navigation Menu"
-            className="flex lg:hidden items-center gap-2 p-1.5 -ml-1.5 group cursor-pointer focus:outline-none"
+            className="flex lg:hidden items-center py-1.5 px-1 -ml-1 text-[12px] sm:text-[13px] text-[#1c1c1a] font-normal tracking-wide hover:opacity-50 transition-opacity cursor-pointer focus:outline-none"
           >
-            <div className="flex flex-col justify-center items-start gap-[5px]">
-              <span className="w-5 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
-              <span className="w-5 h-[1.5px] bg-[#1c1c1a] transition-all"></span>
-            </div>
-            <span className="hidden sm:inline-block text-[12px] text-[#1c1c1a] font-normal tracking-wide">
-              Menu
-            </span>
+            <span>Menu</span>
           </button>
 
           {/* Desktop Navigation Links with Hover Dropdown (>= lg) */}

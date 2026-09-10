@@ -104,19 +104,10 @@ function ShopContent() {
     <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a]">
       <Navbar />
 
-      <main className="flex-1 pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Editorial Header */}
-        <div className="text-center py-6 sm:py-8 border-b border-[#dcd8cf]">
-          <span className="text-xs uppercase tracking-[0.3em] text-[#bdb2a1] font-semibold block mb-2">
-            The Atelier &amp; Archives
-          </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-wide uppercase font-serif">
-            {urlSearch ? `Results for “${urlSearch}”` : selectedCategory === 'All' ? 'All Clothing' : selectedCategory}
-          </h1>
-          <p className="text-xs sm:text-sm font-light tracking-wide text-[#1c1c1a]/70 mt-2 max-w-lg mx-auto">
-            Considered silhouettes, architectural proportions, and pure natural textiles designed for enduring wear.
-          </p>
-        </div>
+      <main className="flex-1 pt-20 sm:pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <h1 className="sr-only">
+          {urlSearch ? `Results for “${urlSearch}”` : selectedCategory === 'All' ? 'All Clothing' : selectedCategory}
+        </h1>
 
         {/* Filter and Control Bar */}
         <div className="py-6 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-[#dcd8cf] mb-8">
@@ -129,7 +120,7 @@ function ShopContent() {
                   setSelectedCategory(cat);
                   setCurrentPage(1);
                 }}
-                className={`text-xs uppercase tracking-widest px-3.5 py-1.5 border transition-all cursor-pointer ${
+                className={`text-[11px] uppercase tracking-widest px-3 py-1 border transition-all cursor-pointer ${
                   selectedCategory.toLowerCase() === cat.toLowerCase()
                     ? 'bg-[#1c1c1a] text-white border-[#1c1c1a]'
                     : 'bg-transparent text-[#1c1c1a] border-[#1c1c1a]/20 hover:border-[#1c1c1a]'
@@ -141,7 +132,7 @@ function ShopContent() {
           </div>
 
           {/* Right Controls: Sort & Count */}
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-4 text-[11px]">
             <span className="text-[#1c1c1a]/60 uppercase tracking-widest">
               {products.length} {products.length === 1 ? 'Product' : 'Products'}
             </span>
@@ -154,7 +145,7 @@ function ShopContent() {
                 id="shop-sort"
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
-                className="bg-transparent border border-[#dcd8cf] px-2.5 py-1 text-xs uppercase tracking-wider text-[#1c1c1a] focus:outline-none cursor-pointer"
+                className="bg-transparent border border-[#dcd8cf] px-2.5 py-1 text-[11px] uppercase tracking-wider text-[#1c1c1a] focus:outline-none cursor-pointer"
               >
                 <option value="newest">Newest</option>
                 <option value="price_asc">Price: Low to High</option>
@@ -186,9 +177,9 @@ function ShopContent() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-5">
             {currentProducts.map((product) => (
-              <div key={product.id} className="group mb-4">
+              <div key={product.id} className="group">
                 <Link href={`/product/${product.slug}`} className="block">
                   <div className="relative aspect-[3/4] mb-3 bg-[#e8e4dc]/40 overflow-hidden">
                     <Image
