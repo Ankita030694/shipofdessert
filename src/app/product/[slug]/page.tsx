@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import { useCart } from '@/context/CartContext';
+import { getColorHex } from '@/lib/colors';
 
 interface RelatedProduct {
   id: string;
@@ -531,20 +532,26 @@ export default function ProductDetailPage({
                     Colour : <strong className="text-[#1c1c1a] font-normal">{selectedColor}</strong>
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {product.colors.map((color) => (
-                    <button
-                      key={color}
-                      onClick={() => setSelectedColor(color)}
-                      className={`text-xs px-3.5 py-1.5 border transition-all cursor-pointer ${
-                        selectedColor === color
-                          ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white'
-                          : 'border-[#1c1c1a]/20 bg-[#DBD8CF] text-[#1c1c1a] hover:border-[#1c1c1a]'
-                      }`}
-                    >
-                      {color}
-                    </button>
-                  ))}
+                <div className="flex flex-wrap gap-2.5">
+                  {product.colors.map((color) => {
+                    const isSelected = selectedColor === color;
+                    const bg = getColorHex(color);
+                    return (
+                      <button
+                        key={color}
+                        type="button"
+                        onClick={() => setSelectedColor(color)}
+                        title={color}
+                        aria-label={`Select ${color}`}
+                        className={`w-7 h-7 sm:w-8 sm:h-8 transition-all cursor-pointer border ${
+                          isSelected
+                            ? 'border-[#1c1c1a] ring-2 ring-[#1c1c1a] ring-offset-2 ring-offset-[#DBD8CF]'
+                            : 'border-[#1c1c1a]/30 hover:border-[#1c1c1a]'
+                        }`}
+                        style={{ backgroundColor: bg }}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             )}

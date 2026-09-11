@@ -1,0 +1,47 @@
+export const COLOR_MAP: Record<string, string> = {
+  'mustard yellow': '#D4A346',
+  'mustard': '#D4A346',
+  'stone': '#dcd8cf',
+  'sand': '#bdb2a1',
+  'slate': '#a3b2bf',
+  'ecru': '#f3eee3',
+  'white': '#ffffff',
+  'off-white': '#fbfaf8',
+  'off white': '#fbfaf8',
+  'black': '#1c1c1a',
+  'grey': '#808080',
+  'gray': '#808080',
+  'charcoal': '#333333',
+  'brown': '#593b2b',
+  'dark brown': '#3e2723',
+  'tan': '#c19a6b',
+  'beige': '#f5f5dc',
+  'cream': '#fffdd0',
+  'navy': '#1b263b',
+  'navy blue': '#1b263b',
+  'olive': '#556b2f',
+  'olive green': '#556b2f',
+  'khaki': '#c3b091',
+  'sage': '#9caf88',
+  'sage green': '#9caf88',
+  'rust': '#b7410e',
+  'taupe': '#8b8589',
+  'camel': '#c19a6b',
+  'terracotta': '#e2725b',
+  'maroon': '#800000',
+  'burgundy': '#800020',
+  'pink': '#f472b6',
+  'red': '#c8102e',
+  'blue': '#1e3a8a',
+  'green': '#2d5a27',
+  'yellow': '#eab308',
+  'orange': '#ea580c',
+  'purple': '#7c3aed',
+  'indigo': '#4b0082',
+};
+
+export function getColorHex(colorName?: string): string {
+  if (!colorName) return '#1c1c1a';
+  const c = colorName.trim().toLowerCase();
+  return COLOR_MAP[c] || colorName;
+}
