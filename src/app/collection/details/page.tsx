@@ -171,11 +171,11 @@ export default function ProductDetails() {
                   onChange={(e) => setSelectedSize(e.target.value)}
                   className="w-full border border-[#1c1c1a]/20 px-4 py-2.5 bg-[#DBD8CF] text-xs text-[#1c1c1a] focus:outline-none focus:border-[#1c1c1a] cursor-pointer"
                 >
-                  <option value="XS">XS</option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
+                  <option value="0">0 (XS)</option>
+                  <option value="2">2 (S)</option>
+                  <option value="4">4 (M)</option>
+                  <option value="6">6 (L)</option>
+                  <option value="8">8 (XL)</option>
                 </select>
               </div>
 

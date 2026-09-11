@@ -8,6 +8,7 @@ import Navbar from '../../../../components/Navbar';
 import Footer from '../../../../components/Footer';
 import { useCart } from '@/context/CartContext';
 import { getColorHex } from '@/lib/colors';
+import { formatSizeLabel } from '@/lib/sizes';
 
 interface RelatedProduct {
   id: string;
@@ -259,7 +260,7 @@ export default function ProductDetailPage({
     if (!product) return;
 
     const chosenColor = selectedColor || product.colors?.[0] || 'Standard';
-    const chosenSize = selectedSize || product.sizes?.[0] || 'M';
+    const chosenSize = formatSizeLabel(selectedSize || product.sizes?.[0] || 'M');
 
     const itemName = !isSet || selectedPieceOption === 'full'
       ? `${product.name} (Full Set)`
@@ -294,7 +295,7 @@ export default function ProductDetailPage({
     if (!product) return;
 
     const chosenColor = selectedColor || product.colors?.[0] || 'Standard';
-    const chosenSize = selectedSize || product.sizes?.[0] || 'M';
+    const chosenSize = formatSizeLabel(selectedSize || product.sizes?.[0] || 'M');
 
     const itemName = !isSet || selectedPieceOption === 'full'
       ? `${product.name} (Full Set)`
@@ -578,6 +579,7 @@ export default function ProductDetailPage({
                   {product.sizes.map((size) => (
                     <button
                       key={size}
+                      type="button"
                       onClick={() => setSelectedSize(size)}
                       className={`py-2.5 text-xs uppercase tracking-wider border transition-all cursor-pointer font-mono ${
                         selectedSize === size
@@ -585,7 +587,7 @@ export default function ProductDetailPage({
                           : 'border-[#1c1c1a]/20 bg-[#DBD8CF] text-[#1c1c1a] hover:border-[#1c1c1a]'
                       }`}
                     >
-                      {size}
+                      {formatSizeLabel(size)}
                     </button>
                   ))}
                 </div>
@@ -823,31 +825,31 @@ export default function ProductDetailPage({
                 </thead>
                 <tbody className="divide-y divide-[#1c1c1a]/10 font-mono text-[11px]">
                   <tr>
-                    <td className="py-2 font-bold">XS</td>
+                    <td className="py-2 font-bold">0 (XS)</td>
                     <td className="py-2">32 - 34&quot;</td>
                     <td className="py-2">26 - 28&quot;</td>
                     <td className="py-2">34 - 36&quot;</td>
                   </tr>
                   <tr>
-                    <td className="py-2 font-bold">S</td>
+                    <td className="py-2 font-bold">2 (S)</td>
                     <td className="py-2">35 - 37&quot;</td>
                     <td className="py-2">29 - 31&quot;</td>
                     <td className="py-2">37 - 39&quot;</td>
                   </tr>
                   <tr>
-                    <td className="py-2 font-bold">M</td>
+                    <td className="py-2 font-bold">4 (M)</td>
                     <td className="py-2">38 - 40&quot;</td>
                     <td className="py-2">32 - 34&quot;</td>
                     <td className="py-2">40 - 42&quot;</td>
                   </tr>
                   <tr>
-                    <td className="py-2 font-bold">L</td>
+                    <td className="py-2 font-bold">6 (L)</td>
                     <td className="py-2">41 - 43&quot;</td>
                     <td className="py-2">35 - 37&quot;</td>
                     <td className="py-2">43 - 45&quot;</td>
                   </tr>
                   <tr>
-                    <td className="py-2 font-bold">XL</td>
+                    <td className="py-2 font-bold">8 (XL)</td>
                     <td className="py-2">44 - 46&quot;</td>
                     <td className="py-2">38 - 40&quot;</td>
                     <td className="py-2">46 - 48&quot;</td>
