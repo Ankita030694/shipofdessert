@@ -933,12 +933,12 @@ export default function AdminPage() {
 
   if (status === 'loading') {
     return (
-      <div className="min-h-screen bg-[#1F1D1A] text-[#F4F4F1] flex flex-col items-center justify-center p-4">
+      <div className="min-h-screen bg-[#F4F4F1] text-[#635F58] flex flex-col items-center justify-center p-4">
         <div className="text-center space-y-4">
-          <div className="font-serif tracking-[0.3em] uppercase text-sm font-semibold text-[#F4F4F1]">
+          <div className="font-serif tracking-[0.3em] uppercase text-sm font-semibold text-[#635F58]">
             KSHAUM
           </div>
-          <div className="text-xs uppercase tracking-widest text-[#F4F4F1]/60 animate-pulse">
+          <div className="text-xs uppercase tracking-widest text-[#635F58]/60 animate-pulse">
             Verifying Administrator Credentials...
           </div>
         </div>
@@ -948,23 +948,23 @@ export default function AdminPage() {
 
   if (status === 'unauthenticated' || !session?.user) {
     return (
-      <div className="min-h-screen bg-[#1F1D1A] text-[#F4F4F1] flex flex-col items-center justify-center p-4">
-        <div className="bg-[#1F1D1A] max-w-md w-full p-8 sm:p-10 rounded-sm border border-[#F4F4F1]/15 shadow-xl text-center space-y-6">
+      <div className="min-h-screen bg-[#F4F4F1] text-[#635F58] flex flex-col items-center justify-center p-4">
+        <div className="bg-[#F4F4F1] max-w-md w-full p-8 sm:p-10 rounded-sm border border-[#635F58]/15 shadow-xl text-center space-y-6">
           <div>
             <span className="text-[10px] uppercase tracking-[0.3em] text-[#8C827A] font-bold block mb-2">
               Security Gate
             </span>
-            <h1 className="text-xl font-serif uppercase tracking-wider text-[#F4F4F1]">
+            <h1 className="text-xl font-serif uppercase tracking-wider text-[#635F58]">
               Admin Portal
             </h1>
-            <p className="text-xs text-[#F4F4F1]/70 mt-3 leading-relaxed">
+            <p className="text-xs text-[#635F58]/70 mt-3 leading-relaxed">
               Please sign in with your verified administrator account.
             </p>
           </div>
           <div className="space-y-3 pt-2">
             <Link
               href="/login?callbackUrl=/admin"
-              className="block w-full bg-[#F4F4F1] text-[#1F1D1A] py-3.5 text-xs uppercase tracking-widest font-medium hover:bg-[#333330] transition-colors"
+              className="block w-full bg-[#635F58] text-[#F4F4F1] py-3.5 text-xs uppercase tracking-widest font-medium hover:bg-[#524E48] transition-colors"
             >
               Sign In to Admin Portal
             </Link>
@@ -976,8 +976,8 @@ export default function AdminPage() {
 
   if (session.user.role !== 'admin') {
     return (
-      <div className="min-h-screen bg-[#1F1D1A] text-[#F4F4F1] flex flex-col items-center justify-center p-4">
-        <div className="bg-[#1F1D1A] max-w-md w-full p-8 sm:p-10 rounded-sm border border-amber-300 shadow-xl text-center space-y-6">
+      <div className="min-h-screen bg-[#F4F4F1] text-[#635F58] flex flex-col items-center justify-center p-4">
+        <div className="bg-[#F4F4F1] max-w-md w-full p-8 sm:p-10 rounded-sm border border-amber-300 shadow-xl text-center space-y-6">
           <div className="w-12 h-12 rounded-full bg-amber-50 text-amber-800 flex items-center justify-center mx-auto text-xl border border-amber-200">
             🔒
           </div>
@@ -985,13 +985,13 @@ export default function AdminPage() {
             <span className="text-[10px] uppercase tracking-[0.3em] text-amber-800 font-bold block mb-1">
               Access Restricted
             </span>
-            <h1 className="text-lg font-serif uppercase tracking-wider text-[#F4F4F1]">
+            <h1 className="text-lg font-serif uppercase tracking-wider text-[#635F58]">
               Administrator Privileges Required
             </h1>
           </div>
           <button
             onClick={() => signOut({ callbackUrl: '/login?callbackUrl=/admin' })}
-            className="block w-full bg-[#F4F4F1] text-[#1F1D1A] py-3.5 text-xs uppercase tracking-widest font-medium hover:bg-[#333330] transition-colors cursor-pointer"
+            className="block w-full bg-[#635F58] text-[#F4F4F1] py-3.5 text-xs uppercase tracking-widest font-medium hover:bg-[#524E48] transition-colors cursor-pointer"
           >
             Sign In with Admin Account
           </button>
@@ -1005,9 +1005,9 @@ export default function AdminPage() {
   // ---------------------------------------------------------------------------
 
   return (
-    <div className="min-h-screen bg-[#1F1D1A] text-[#F4F4F1] font-sans antialiased">
+    <div className="min-h-screen bg-[#F4F4F1] text-[#635F58] font-sans antialiased">
       {/* Top Header */}
-      <header className="border-b border-[#F4F4F1]/10 bg-[#1F1D1A] sticky top-0 z-40">
+      <header className="border-b border-[#635F58]/10 bg-[#F4F4F1] sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <Link
@@ -1016,16 +1016,16 @@ export default function AdminPage() {
             >
               KSHAUM
             </Link>
-            <span className="text-xs uppercase tracking-widest text-[#bdb2a1] border-l border-[#F4F4F1]/20 pl-4">
+            <span className="text-xs uppercase tracking-widest text-[#bdb2a1] border-l border-[#635F58]/20 pl-4">
               Atelier Management
             </span>
           </div>
 
           <div className="flex items-center space-x-3">
-            <div className="hidden sm:flex items-center gap-2 pr-3 border-r border-[#F4F4F1]/15 text-xs">
+            <div className="hidden sm:flex items-center gap-2 pr-3 border-r border-[#635F58]/15 text-xs">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span className="text-[#F4F4F1]/70">Admin:</span>
-              <strong className="text-[#F4F4F1]">{session.user.name || session.user.email}</strong>
+              <span className="text-[#635F58]/70">Admin:</span>
+              <strong className="text-[#635F58]">{session.user.name || session.user.email}</strong>
             </div>
 
             {activeTab === 'orders' && (
@@ -1033,13 +1033,13 @@ export default function AdminPage() {
                 <button
                   onClick={fetchOrders}
                   disabled={ordersLoading}
-                  className="text-xs uppercase tracking-widest px-3 py-1.5 border border-[#F4F4F1]/20 hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-all cursor-pointer disabled:opacity-50"
+                  className="text-xs uppercase tracking-widest px-3 py-1.5 border border-[#635F58]/20 hover:bg-[#635F58] hover:text-[#F4F4F1] transition-all cursor-pointer disabled:opacity-50"
                 >
                   {ordersLoading ? 'Syncing...' : 'Refresh'}
                 </button>
                 <button
                   onClick={handleSeedOrders}
-                  className="text-xs uppercase tracking-widest px-3 py-1.5 bg-[#F4F4F1] text-[#1F1D1A] hover:bg-[#333330] transition-all cursor-pointer"
+                  className="text-xs uppercase tracking-widest px-3 py-1.5 bg-[#635F58] text-[#F4F4F1] hover:bg-[#524E48] transition-all cursor-pointer"
                 >
                   Seed Shopify Demo
                 </button>
@@ -1051,13 +1051,13 @@ export default function AdminPage() {
                 <button
                   onClick={fetchProducts}
                   disabled={productsLoading}
-                  className="text-xs uppercase tracking-widest px-3 py-1.5 border border-[#F4F4F1]/20 hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-all cursor-pointer disabled:opacity-50"
+                  className="text-xs uppercase tracking-widest px-3 py-1.5 border border-[#635F58]/20 hover:bg-[#635F58] hover:text-[#F4F4F1] transition-all cursor-pointer disabled:opacity-50"
                 >
                   {productsLoading ? 'Refreshing...' : 'Refresh'}
                 </button>
                 <button
                   onClick={openAddProductModal}
-                  className="text-xs uppercase tracking-widest px-3.5 py-1.5 bg-[#F4F4F1] text-[#1F1D1A] hover:bg-[#333330] transition-all cursor-pointer flex items-center gap-1.5"
+                  className="text-xs uppercase tracking-widest px-3.5 py-1.5 bg-[#635F58] text-[#F4F4F1] hover:bg-[#524E48] transition-all cursor-pointer flex items-center gap-1.5"
                 >
                   <span>+ Add Product / Set</span>
                 </button>
@@ -1076,13 +1076,13 @@ export default function AdminPage() {
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Main Tabs Navigation */}
-        <div className="flex border-b border-[#F4F4F1]/15 mb-8">
+        <div className="flex border-b border-[#635F58]/15 mb-8">
           <button
             onClick={() => setActiveTab('products')}
             className={`pb-3 px-4 text-xs uppercase tracking-[0.2em] font-medium transition-all cursor-pointer border-b-2 -mb-px flex items-center gap-2 ${
               activeTab === 'products'
-                ? 'border-[#F4F4F1] text-[#F4F4F1]'
-                : 'border-transparent text-[#F4F4F1]/50 hover:text-[#F4F4F1]'
+                ? 'border-[#635F58] text-[#635F58]'
+                : 'border-transparent text-[#635F58]/50 hover:text-[#635F58]'
             }`}
           >
             <span>🛍️ Products & Sets</span>
@@ -1095,8 +1095,8 @@ export default function AdminPage() {
             onClick={() => setActiveTab('orders')}
             className={`pb-3 px-4 text-xs uppercase tracking-[0.2em] font-medium transition-all cursor-pointer border-b-2 -mb-px flex items-center gap-2 ${
               activeTab === 'orders'
-                ? 'border-[#F4F4F1] text-[#F4F4F1]'
-                : 'border-transparent text-[#F4F4F1]/50 hover:text-[#F4F4F1]'
+                ? 'border-[#635F58] text-[#635F58]'
+                : 'border-transparent text-[#635F58]/50 hover:text-[#635F58]'
             }`}
           >
             <span>📦 Orders</span>
@@ -1109,8 +1109,8 @@ export default function AdminPage() {
             onClick={() => setActiveTab('users')}
             className={`pb-3 px-4 text-xs uppercase tracking-[0.2em] font-medium transition-all cursor-pointer border-b-2 -mb-px flex items-center gap-2 ${
               activeTab === 'users'
-                ? 'border-[#F4F4F1] text-[#F4F4F1]'
-                : 'border-transparent text-[#F4F4F1]/50 hover:text-[#F4F4F1]'
+                ? 'border-[#635F58] text-[#635F58]'
+                : 'border-transparent text-[#635F58]/50 hover:text-[#635F58]'
             }`}
           >
             <span>👥 Signed-Up Users</span>
@@ -1127,13 +1127,13 @@ export default function AdminPage() {
           <div>
             {/* Products KPI Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-              <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#F4F4F1]/60">
+              <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#635F58]/60">
                   Total Products & Sets
                 </span>
-                <div className="text-2xl font-serif mt-2 text-[#F4F4F1]">{productStats.total}</div>
+                <div className="text-2xl font-serif mt-2 text-[#635F58]">{productStats.total}</div>
               </div>
-              <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs">
+              <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs">
                 <span className="text-xs font-semibold uppercase tracking-wider text-emerald-800">
                   In Stock
                 </span>
@@ -1141,7 +1141,7 @@ export default function AdminPage() {
                   {productStats.inStock}
                 </div>
               </div>
-              <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs">
+              <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs">
                 <span className="text-xs font-semibold uppercase tracking-wider text-purple-800">
                   Featured Ensembles
                 </span>
@@ -1149,18 +1149,18 @@ export default function AdminPage() {
                   {productStats.featured}
                 </div>
               </div>
-              <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#F4F4F1]/60">
+              <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#635F58]/60">
                   Categories
                 </span>
-                <div className="text-2xl font-serif mt-2 text-[#F4F4F1]">
+                <div className="text-2xl font-serif mt-2 text-[#635F58]">
                   {productStats.categoriesCount}
                 </div>
               </div>
             </div>
 
             {/* Filter and Search Bar (with SETS pill) */}
-            <div className="bg-[#1F1D1A] p-4 rounded-sm border border-[#F4F4F1]/15 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
+            <div className="bg-[#F4F4F1] p-4 rounded-sm border border-[#635F58]/15 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
               <div className="flex flex-wrap gap-1">
                 {['All', ...allCategories].map((cat) => (
                   <button
@@ -1168,8 +1168,8 @@ export default function AdminPage() {
                     onClick={() => setProductCategoryFilter(cat)}
                     className={`px-3 py-1 text-xs uppercase tracking-wider font-medium rounded-xs transition-colors cursor-pointer ${
                       productCategoryFilter === cat
-                        ? 'bg-[#F4F4F1] text-[#1F1D1A] shadow-xs'
-                        : 'bg-[#1F1D1A] border border-[#F4F4F1]/15 text-[#F4F4F1]/70 hover:text-[#F4F4F1]'
+                        ? 'bg-[#635F58] text-[#F4F4F1] shadow-xs'
+                        : 'bg-[#F4F4F1] border border-[#635F58]/15 text-[#635F58]/70 hover:text-[#635F58]'
                     }`}
                   >
                     {cat}
@@ -1183,7 +1183,7 @@ export default function AdminPage() {
                   placeholder="Search products by title, slug, collection..."
                   value={productSearchQuery}
                   onChange={(e) => setProductSearchQuery(e.target.value)}
-                  className="w-full text-xs bg-[#1F1D1A] border border-[#F4F4F1]/20 px-3 py-2 rounded-sm focus:outline-none focus:border-[#F4F4F1]"
+                  className="w-full text-xs bg-[#F4F4F1] border border-[#635F58]/20 px-3 py-2 rounded-sm focus:outline-none focus:border-[#635F58]"
                 />
                 {productSearchQuery && (
                   <button
@@ -1197,9 +1197,9 @@ export default function AdminPage() {
             </div>
 
             {/* Products Table */}
-            <div className="bg-[#1F1D1A] rounded-sm border border-[#F4F4F1]/15 overflow-hidden shadow-xs">
+            <div className="bg-[#F4F4F1] rounded-sm border border-[#635F58]/15 overflow-hidden shadow-xs">
               {productsLoading && products.length === 0 ? (
-                <div className="py-20 text-center text-xs uppercase tracking-widest text-[#F4F4F1]/60">
+                <div className="py-20 text-center text-xs uppercase tracking-widest text-[#635F58]/60">
                   Loading catalogue from MongoDB...
                 </div>
               ) : productsError ? (
@@ -1216,7 +1216,7 @@ export default function AdminPage() {
                 </div>
               ) : filteredProducts.length === 0 ? (
                 <div className="py-20 text-center">
-                  <p className="text-sm text-[#F4F4F1]/60 font-light">
+                  <p className="text-sm text-[#635F58]/60 font-light">
                     {productSearchQuery || productCategoryFilter !== 'All'
                       ? 'No items matching your search criteria.'
                       : 'No products or sets in database yet.'}
@@ -1224,7 +1224,7 @@ export default function AdminPage() {
                   <div className="mt-4">
                     <button
                       onClick={openAddProductModal}
-                      className="px-4 py-2 bg-[#F4F4F1] text-[#1F1D1A] text-xs uppercase tracking-wider cursor-pointer hover:bg-[#333330]"
+                      className="px-4 py-2 bg-[#635F58] text-[#F4F4F1] text-xs uppercase tracking-wider cursor-pointer hover:bg-[#524E48]"
                     >
                       + Add First Product / Set
                     </button>
@@ -1233,7 +1233,7 @@ export default function AdminPage() {
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-[#1F1D1A] border-b border-[#F4F4F1]/10 uppercase tracking-widest text-[#F4F4F1]/70 text-[10px]">
+                    <thead className="bg-[#F4F4F1] border-b border-[#635F58]/10 uppercase tracking-widest text-[#635F58]/70 text-[10px]">
                       <tr>
                         <th className="py-3 px-4">Item</th>
                         <th className="py-3 px-4">Category / Type</th>
@@ -1243,7 +1243,7 @@ export default function AdminPage() {
                         <th className="py-3 px-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#F4F4F1]/10">
+                    <tbody className="divide-y divide-[#635F58]/10">
                       {filteredProducts.map((prod) => {
                         const isSet = prod.category.toLowerCase() === 'sets' || prod.setPieces?.isSet;
 
@@ -1251,7 +1251,7 @@ export default function AdminPage() {
                           <tr key={prod.id} className="hover:bg-[#d4d0c7] transition-colors">
                             <td className="py-3.5 px-4">
                               <div className="flex items-center gap-3">
-                                <div className="relative w-12 h-14 bg-[#1F1D1A] rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10">
+                                <div className="relative w-12 h-14 bg-[#F4F4F1] rounded-xs overflow-hidden flex-shrink-0 border border-[#635F58]/10">
                                   <Image
                                     src={prod.image || '/image1.jpg'}
                                     alt={prod.name}
@@ -1262,7 +1262,7 @@ export default function AdminPage() {
                                   />
                                 </div>
                                 <div>
-                                  <div className="font-medium text-[#F4F4F1] flex items-center gap-1.5">
+                                  <div className="font-medium text-[#635F58] flex items-center gap-1.5">
                                     <span>{prod.name}</span>
                                     {isSet && (
                                       <span className="bg-black text-white text-[9px] uppercase px-1.5 py-0.2 rounded-xs font-bold font-mono">
@@ -1270,20 +1270,20 @@ export default function AdminPage() {
                                       </span>
                                     )}
                                   </div>
-                                  <div className="text-[10px] text-[#F4F4F1]/50 font-mono">
+                                  <div className="text-[10px] text-[#635F58]/50 font-mono">
                                     /{prod.slug}
                                   </div>
                                 </div>
                               </div>
                             </td>
                             <td className="py-3.5 px-4 whitespace-nowrap">
-                              <span className="font-medium text-[#F4F4F1]">{prod.category}</span>
+                              <span className="font-medium text-[#635F58]">{prod.category}</span>
                               <div className="text-[10px] text-stone-600">
                                 ★ {prod.rating || 4.9} ({prod.reviewsCount || 18})
                               </div>
                             </td>
                             <td className="py-3.5 px-4">
-                              <div className="font-bold text-sm text-[#F4F4F1]">
+                              <div className="font-bold text-sm text-[#635F58]">
                                 ₹{prod.price.toLocaleString()}
                               </div>
                               {isSet && (prod.setPieces?.topPrice || prod.setPieces?.bottomPrice) ? (
@@ -1296,10 +1296,10 @@ export default function AdminPage() {
                                   ) : null}
                                 </div>
                               ) : (
-                                <div className="text-[9px] text-[#F4F4F1]/50">Incl. of all taxes</div>
+                                <div className="text-[9px] text-[#635F58]/50">Incl. of all taxes</div>
                               )}
                             </td>
-                            <td className="py-3.5 px-4 text-[11px] text-[#F4F4F1]/70 max-w-xs truncate">
+                            <td className="py-3.5 px-4 text-[11px] text-[#635F58]/70 max-w-xs truncate">
                               {prod.fitNote || 'Relaxed Fit'}
                             </td>
                             <td className="py-3.5 px-4 whitespace-nowrap">
@@ -1317,13 +1317,13 @@ export default function AdminPage() {
                               <Link
                                 href={`/product/${prod.slug}`}
                                 target="_blank"
-                                className="inline-block px-2 py-1 text-[11px] border border-[#F4F4F1]/20 hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors uppercase tracking-wider"
+                                className="inline-block px-2 py-1 text-[11px] border border-[#635F58]/20 hover:bg-[#635F58] hover:text-[#F4F4F1] transition-colors uppercase tracking-wider"
                               >
                                 View ↗
                               </Link>
                               <button
                                 onClick={() => openEditProductModal(prod)}
-                                className="inline-block px-2.5 py-1 text-[11px] bg-[#F4F4F1] text-[#1F1D1A] hover:bg-[#333330] transition-colors uppercase tracking-wider cursor-pointer"
+                                className="inline-block px-2.5 py-1 text-[11px] bg-[#635F58] text-[#F4F4F1] hover:bg-[#524E48] transition-colors uppercase tracking-wider cursor-pointer"
                               >
                                 Edit
                               </button>
@@ -1352,10 +1352,10 @@ export default function AdminPage() {
         {activeTab === 'orders' && (
           <div className="space-y-6">
             {/* Shopify-Style Top KPI Metrics Header */}
-            <div className="bg-[#1F1D1A] rounded-sm border border-[#F4F4F1]/15 p-4 sm:p-5 shadow-xs">
-              <div className="flex items-center justify-between border-b border-[#F4F4F1]/10 pb-3 mb-4">
+            <div className="bg-[#F4F4F1] rounded-sm border border-[#635F58]/15 p-4 sm:p-5 shadow-xs">
+              <div className="flex items-center justify-between border-b border-[#635F58]/10 pb-3 mb-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-semibold uppercase tracking-wider text-[#F4F4F1]">
+                  <span className="text-sm font-semibold uppercase tracking-wider text-[#635F58]">
                     Orders Performance
                   </span>
                 </div>
@@ -1364,12 +1364,12 @@ export default function AdminPage() {
                 </span>
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 divide-x-0 sm:divide-x divide-[#F4F4F1]/10">
+              <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 divide-x-0 sm:divide-x divide-[#635F58]/10">
                 <div className="px-2">
-                  <span className="text-[11px] uppercase tracking-wider text-[#F4F4F1]/60 font-semibold block">
+                  <span className="text-[11px] uppercase tracking-wider text-[#635F58]/60 font-semibold block">
                     Orders
                   </span>
-                  <div className="text-2xl font-serif text-[#F4F4F1] mt-1">
+                  <div className="text-2xl font-serif text-[#635F58] mt-1">
                     {orderStats.totalOrders}
                   </div>
                   <span className="text-[10px] text-emerald-800 block mt-0.5 font-medium">
@@ -1378,10 +1378,10 @@ export default function AdminPage() {
                 </div>
 
                 <div className="px-2 sm:pl-4">
-                  <span className="text-[11px] uppercase tracking-wider text-[#F4F4F1]/60 font-semibold block">
+                  <span className="text-[11px] uppercase tracking-wider text-[#635F58]/60 font-semibold block">
                     Items Ordered
                   </span>
-                  <div className="text-2xl font-serif text-[#F4F4F1] mt-1">
+                  <div className="text-2xl font-serif text-[#635F58] mt-1">
                     {orderStats.itemsOrdered}
                   </div>
                   <span className="text-[10px] text-stone-600 block mt-0.5">
@@ -1390,10 +1390,10 @@ export default function AdminPage() {
                 </div>
 
                 <div className="px-2 sm:pl-4">
-                  <span className="text-[11px] uppercase tracking-wider text-[#F4F4F1]/60 font-semibold block">
+                  <span className="text-[11px] uppercase tracking-wider text-[#635F58]/60 font-semibold block">
                     Net Sales
                   </span>
-                  <div className="text-2xl font-serif text-[#F4F4F1] mt-1">
+                  <div className="text-2xl font-serif text-[#635F58] mt-1">
                     ₹{orderStats.totalRevenue.toLocaleString()}
                   </div>
                   <span className="text-[10px] text-stone-600 block mt-0.5">
@@ -1428,7 +1428,7 @@ export default function AdminPage() {
             </div>
 
             {/* Filter and Search Bar (Shopify style) */}
-            <div className="bg-[#1F1D1A] p-4 rounded-sm border border-[#F4F4F1]/15 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
+            <div className="bg-[#F4F4F1] p-4 rounded-sm border border-[#635F58]/15 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
               <div className="flex flex-wrap gap-1">
                 {[
                   { id: 'all', label: 'All' },
@@ -1444,8 +1444,8 @@ export default function AdminPage() {
                     onClick={() => setOrderStatusFilter(tab.id as typeof orderStatusFilter)}
                     className={`px-3 py-1.5 text-xs uppercase tracking-wider font-medium rounded-xs transition-colors cursor-pointer ${
                       orderStatusFilter === tab.id
-                        ? 'bg-[#F4F4F1] text-[#1F1D1A] shadow-xs'
-                        : 'bg-[#1F1D1A] border border-[#F4F4F1]/15 text-[#F4F4F1]/70 hover:text-[#F4F4F1]'
+                        ? 'bg-[#635F58] text-[#F4F4F1] shadow-xs'
+                        : 'bg-[#F4F4F1] border border-[#635F58]/15 text-[#635F58]/70 hover:text-[#635F58]'
                     }`}
                   >
                     {tab.label}
@@ -1459,7 +1459,7 @@ export default function AdminPage() {
                   placeholder="Search orders by #, customer name, email, phone..."
                   value={orderSearchQuery}
                   onChange={(e) => setOrderSearchQuery(e.target.value)}
-                  className="w-full text-xs bg-[#1F1D1A] border border-[#F4F4F1]/20 px-3 py-2 rounded-sm focus:outline-none focus:border-[#F4F4F1]"
+                  className="w-full text-xs bg-[#F4F4F1] border border-[#635F58]/20 px-3 py-2 rounded-sm focus:outline-none focus:border-[#635F58]"
                 />
                 {orderSearchQuery && (
                   <button
@@ -1473,9 +1473,9 @@ export default function AdminPage() {
             </div>
 
             {/* Shopify-Style Orders Table */}
-            <div className="bg-[#1F1D1A] rounded-sm border border-[#F4F4F1]/15 overflow-hidden shadow-xs">
+            <div className="bg-[#F4F4F1] rounded-sm border border-[#635F58]/15 overflow-hidden shadow-xs">
               {ordersLoading && orders.length === 0 ? (
-                <div className="py-20 text-center text-xs uppercase tracking-widest text-[#F4F4F1]/60">
+                <div className="py-20 text-center text-xs uppercase tracking-widest text-[#635F58]/60">
                   Loading orders from MongoDB Atlas...
                 </div>
               ) : ordersError ? (
@@ -1492,7 +1492,7 @@ export default function AdminPage() {
                 </div>
               ) : filteredOrders.length === 0 ? (
                 <div className="py-20 text-center">
-                  <p className="text-sm text-[#F4F4F1]/60 font-light">
+                  <p className="text-sm text-[#635F58]/60 font-light">
                     {orderSearchQuery || orderStatusFilter !== 'all'
                       ? 'No orders match your filter criteria.'
                       : 'No orders placed yet.'}
@@ -1500,7 +1500,7 @@ export default function AdminPage() {
                   <div className="mt-4">
                     <button
                       onClick={handleSeedOrders}
-                      className="px-4 py-2 bg-[#F4F4F1] text-[#1F1D1A] text-xs uppercase tracking-wider cursor-pointer hover:bg-[#333330]"
+                      className="px-4 py-2 bg-[#635F58] text-[#F4F4F1] text-xs uppercase tracking-wider cursor-pointer hover:bg-[#524E48]"
                     >
                       Seed Sample Orders (Shopify Demo)
                     </button>
@@ -1509,7 +1509,7 @@ export default function AdminPage() {
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-[#1F1D1A] border-b border-[#F4F4F1]/10 uppercase tracking-widest text-[#F4F4F1]/70 text-[10px]">
+                    <thead className="bg-[#F4F4F1] border-b border-[#635F58]/10 uppercase tracking-widest text-[#635F58]/70 text-[10px]">
                       <tr>
                         <th className="py-3 px-4">Order</th>
                         <th className="py-3 px-4">Date</th>
@@ -1523,7 +1523,7 @@ export default function AdminPage() {
                         <th className="py-3 px-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#F4F4F1]/10 font-sans">
+                    <tbody className="divide-y divide-[#635F58]/10 font-sans">
                       {filteredOrders.map((ord) => {
                         const rawDate = ord.createdAt || ord.paymentDetails?.paymentDate || ord.updatedAt;
                         const parsedDate = rawDate ? new Date(rawDate) : new Date();
@@ -1548,21 +1548,21 @@ export default function AdminPage() {
                             className="hover:bg-[#d4d0c7] transition-colors cursor-pointer group"
                           >
                             <td className="py-3.5 px-4 whitespace-nowrap">
-                              <span className="font-bold text-[#F4F4F1] group-hover:underline font-mono">
+                              <span className="font-bold text-[#635F58] group-hover:underline font-mono">
                                 {ord.orderNumber}
                               </span>
                             </td>
-                            <td className="py-3.5 px-4 whitespace-nowrap text-[#F4F4F1]/70 text-[11px]">
+                            <td className="py-3.5 px-4 whitespace-nowrap text-[#635F58]/70 text-[11px]">
                               {dateFormatted}
                             </td>
                             <td className="py-3.5 px-4 whitespace-nowrap">
-                              <div className="font-medium text-[#F4F4F1]">{ord.customer.name}</div>
-                              <div className="text-[10px] text-[#F4F4F1]/50">{ord.customer.email}</div>
+                              <div className="font-medium text-[#635F58]">{ord.customer.name}</div>
+                              <div className="text-[10px] text-[#635F58]/50">{ord.customer.email}</div>
                             </td>
-                            <td className="py-3.5 px-4 whitespace-nowrap text-[11px] text-[#F4F4F1]/70 font-mono">
+                            <td className="py-3.5 px-4 whitespace-nowrap text-[11px] text-[#635F58]/70 font-mono">
                               {ord.channel || 'Online Store'}
                             </td>
-                            <td className="py-3.5 px-4 whitespace-nowrap font-medium text-[#F4F4F1]">
+                            <td className="py-3.5 px-4 whitespace-nowrap font-medium text-[#635F58]">
                               ₹{ord.totalAmount.toLocaleString()}
                             </td>
                             <td className="py-3.5 px-4 whitespace-nowrap">
@@ -1605,7 +1605,7 @@ export default function AdminPage() {
                                 </span>
                               )}
                             </td>
-                            <td className="py-3.5 px-4 whitespace-nowrap text-[#F4F4F1]/70 text-[11px]">
+                            <td className="py-3.5 px-4 whitespace-nowrap text-[#635F58]/70 text-[11px]">
                               {totalItems} {totalItems === 1 ? 'item' : 'items'}
                             </td>
                             <td className="py-3.5 px-4 whitespace-nowrap">
@@ -1627,7 +1627,7 @@ export default function AdminPage() {
                                   e.stopPropagation();
                                   openOrderDetail(ord);
                                 }}
-                                className="px-2.5 py-1 text-[11px] border border-[#F4F4F1]/20 hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors uppercase tracking-wider"
+                                className="px-2.5 py-1 text-[11px] border border-[#635F58]/20 hover:bg-[#635F58] hover:text-[#F4F4F1] transition-colors uppercase tracking-wider"
                               >
                                 View ↗
                               </button>
@@ -1649,19 +1649,19 @@ export default function AdminPage() {
         {activeTab === 'users' && (
           <div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-              <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs">
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#F4F4F1]/60">
+              <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs">
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#635F58]/60">
                   Total Registered Members
                 </span>
-                <div className="text-2xl font-serif mt-2 text-[#F4F4F1]">{userStats.total}</div>
+                <div className="text-2xl font-serif mt-2 text-[#635F58]">{userStats.total}</div>
               </div>
-              <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs">
+              <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs">
                 <span className="text-xs font-semibold uppercase tracking-wider text-blue-800">
                   Customer Accounts
                 </span>
                 <div className="text-2xl font-serif mt-2 text-blue-950">{userStats.customers}</div>
               </div>
-              <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs">
+              <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs">
                 <span className="text-xs font-semibold uppercase tracking-wider text-amber-800">
                   Admin Accounts
                 </span>
@@ -1669,16 +1669,16 @@ export default function AdminPage() {
               </div>
             </div>
 
-            <div className="bg-[#1F1D1A] p-4 rounded-sm border border-[#F4F4F1]/15 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
-              <div className="flex space-x-1 border border-[#F4F4F1]/15 p-1 rounded-sm bg-[#1F1D1A]">
+            <div className="bg-[#F4F4F1] p-4 rounded-sm border border-[#635F58]/15 mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
+              <div className="flex space-x-1 border border-[#635F58]/15 p-1 rounded-sm bg-[#F4F4F1]">
                 {(['all', 'customer', 'admin'] as const).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setUserRoleFilter(tab)}
                     className={`px-3 py-1 text-xs uppercase tracking-wider font-medium rounded-xs transition-colors cursor-pointer ${
                       userRoleFilter === tab
-                        ? 'bg-[#F4F4F1] text-[#1F1D1A] shadow-xs'
-                        : 'text-[#F4F4F1]/70 hover:text-[#F4F4F1]'
+                        ? 'bg-[#635F58] text-[#F4F4F1] shadow-xs'
+                        : 'text-[#635F58]/70 hover:text-[#635F58]'
                     }`}
                   >
                     {tab === 'all' ? 'All Members' : tab === 'customer' ? 'Customers' : 'Admins'}
@@ -1692,20 +1692,20 @@ export default function AdminPage() {
                   placeholder="Search registered members by name, email..."
                   value={userSearchQuery}
                   onChange={(e) => setUserSearchQuery(e.target.value)}
-                  className="w-full text-xs bg-[#1F1D1A] border border-[#F4F4F1]/20 px-3 py-2 rounded-sm focus:outline-none focus:border-[#F4F4F1]"
+                  className="w-full text-xs bg-[#F4F4F1] border border-[#635F58]/20 px-3 py-2 rounded-sm focus:outline-none focus:border-[#635F58]"
                 />
               </div>
             </div>
 
-            <div className="bg-[#1F1D1A] rounded-sm border border-[#F4F4F1]/15 overflow-hidden shadow-xs">
+            <div className="bg-[#F4F4F1] rounded-sm border border-[#635F58]/15 overflow-hidden shadow-xs">
               {filteredUsers.length === 0 ? (
-                <div className="py-20 text-center text-sm text-[#F4F4F1]/60">
+                <div className="py-20 text-center text-sm text-[#635F58]/60">
                   No members found.
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-[#1F1D1A] border-b border-[#F4F4F1]/10 uppercase tracking-widest text-[#F4F4F1]/70 text-[10px]">
+                    <thead className="bg-[#F4F4F1] border-b border-[#635F58]/10 uppercase tracking-widest text-[#635F58]/70 text-[10px]">
                       <tr>
                         <th className="py-3 px-4">Member</th>
                         <th className="py-3 px-4">Email</th>
@@ -1714,18 +1714,18 @@ export default function AdminPage() {
                         <th className="py-3 px-4 text-right">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[#F4F4F1]/10">
+                    <tbody className="divide-y divide-[#635F58]/10">
                       {filteredUsers.map((user) => (
                         <tr key={user.id} className="hover:bg-[#d4d0c7] transition-colors">
                           <td className="py-3.5 px-4 whitespace-nowrap">
                             <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 rounded-full bg-[#F4F4F1] text-[#1F1D1A] flex items-center justify-center text-[11px] font-medium uppercase">
+                              <div className="w-8 h-8 rounded-full bg-[#635F58] text-[#F4F4F1] flex items-center justify-center text-[11px] font-medium uppercase">
                                 {user.firstName ? user.firstName[0] : user.name[0] || 'U'}
                               </div>
-                              <div className="font-medium text-[#F4F4F1]">{user.name}</div>
+                              <div className="font-medium text-[#635F58]">{user.name}</div>
                             </div>
                           </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap text-[#F4F4F1]/80">
+                          <td className="py-3.5 px-4 whitespace-nowrap text-[#635F58]/80">
                             {user.email}
                           </td>
                           <td className="py-3.5 px-4 whitespace-nowrap">
@@ -1738,14 +1738,14 @@ export default function AdminPage() {
                               className={`text-[11px] uppercase tracking-wider py-1 px-2 rounded-xs border font-medium cursor-pointer ${
                                 user.role === 'admin'
                                   ? 'bg-amber-100 border-amber-300 text-amber-950 font-bold'
-                                  : 'bg-[#1F1D1A] border-[#F4F4F1]/20 text-[#F4F4F1]'
+                                  : 'bg-[#F4F4F1] border-[#635F58]/20 text-[#635F58]'
                               }`}
                             >
                               <option value="customer">Customer</option>
                               <option value="admin">Admin</option>
                             </select>
                           </td>
-                          <td className="py-3.5 px-4 whitespace-nowrap text-[#F4F4F1]/70">
+                          <td className="py-3.5 px-4 whitespace-nowrap text-[#635F58]/70">
                             {new Date(user.createdAt).toLocaleDateString()}
                           </td>
                           <td className="py-3.5 px-4 whitespace-nowrap text-right">
@@ -1773,12 +1773,12 @@ export default function AdminPage() {
       {/* ========================================================================= */}
       {isOrderDetailOpen && selectedOrder && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
-          <div className="bg-[#1F1D1A] w-full max-w-5xl rounded-sm border border-[#F4F4F1]/20 shadow-2xl my-6 max-h-[92vh] overflow-y-auto flex flex-col">
+          <div className="bg-[#F4F4F1] w-full max-w-5xl rounded-sm border border-[#635F58]/20 shadow-2xl my-6 max-h-[92vh] overflow-y-auto flex flex-col">
             {/* Modal Top Nav & Header (Shopify style) */}
-            <div className="bg-[#1F1D1A] border-b border-[#F4F4F1]/15 p-4 sm:p-6 sticky top-0 z-20 flex justify-between items-start">
+            <div className="bg-[#F4F4F1] border-b border-[#635F58]/15 p-4 sm:p-6 sticky top-0 z-20 flex justify-between items-start">
               <div>
                 <div className="flex flex-wrap items-center gap-2 mb-1">
-                  <h2 className="text-xl sm:text-2xl font-bold font-mono text-[#F4F4F1]">
+                  <h2 className="text-xl sm:text-2xl font-bold font-mono text-[#635F58]">
                     {selectedOrder.orderNumber}
                   </h2>
                   <span
@@ -1804,7 +1804,7 @@ export default function AdminPage() {
                     ● {selectedOrder.fulfillmentStatus}
                   </span>
                 </div>
-                <p className="text-xs text-[#F4F4F1]/70">
+                <p className="text-xs text-[#635F58]/70">
                   {(() => {
                     const rawDate = selectedOrder.createdAt || selectedOrder.paymentDetails?.paymentDate || selectedOrder.updatedAt;
                     const parsedDate = rawDate ? new Date(rawDate) : new Date();
@@ -1825,7 +1825,7 @@ export default function AdminPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsOrderDetailOpen(false)}
-                  className="w-8 h-8 rounded-full border border-[#F4F4F1]/20 hover:bg-[#F4F4F1] hover:text-[#1F1D1A] flex items-center justify-center text-sm font-bold cursor-pointer transition-colors"
+                  className="w-8 h-8 rounded-full border border-[#635F58]/20 hover:bg-[#635F58] hover:text-[#F4F4F1] flex items-center justify-center text-sm font-bold cursor-pointer transition-colors"
                 >
                   ✕
                 </button>
@@ -1837,9 +1837,9 @@ export default function AdminPage() {
               {/* LEFT COLUMN (8 cols): Line items, financial summary, timeline */}
               <div className="lg:col-span-8 space-y-6">
                 {/* 1. Line Items Card */}
-                <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs space-y-4">
-                  <div className="flex justify-between items-center border-b border-[#F4F4F1]/10 pb-3">
-                    <span className="font-bold text-xs uppercase tracking-wider text-[#F4F4F1]">
+                <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs space-y-4">
+                  <div className="flex justify-between items-center border-b border-[#635F58]/10 pb-3">
+                    <span className="font-bold text-xs uppercase tracking-wider text-[#635F58]">
                       Items in Order ({(selectedOrder.items || []).length})
                     </span>
                     <span className="text-[11px] text-stone-600 font-mono">
@@ -1847,11 +1847,11 @@ export default function AdminPage() {
                     </span>
                   </div>
 
-                  <div className="divide-y divide-[#F4F4F1]/10">
+                  <div className="divide-y divide-[#635F58]/10">
                     {selectedOrder.items.map((item, idx) => (
                       <div key={idx} className="py-3 flex items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
-                          <div className="relative w-14 h-16 bg-[#1F1D1A] rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10">
+                          <div className="relative w-14 h-16 bg-[#F4F4F1] rounded-xs overflow-hidden flex-shrink-0 border border-[#635F58]/10">
                             <Image
                               src={item.image || '/image1.jpg'}
                               alt={item.name}
@@ -1862,21 +1862,21 @@ export default function AdminPage() {
                             />
                           </div>
                           <div>
-                            <div className="font-semibold text-sm text-[#F4F4F1]">{item.name}</div>
-                            <div className="text-xs text-[#F4F4F1]/70 mt-0.5">
+                            <div className="font-semibold text-sm text-[#635F58]">{item.name}</div>
+                            <div className="text-xs text-[#635F58]/70 mt-0.5">
                               {item.size} / {item.color}
                             </div>
-                            <div className="text-[10px] text-[#F4F4F1]/50 font-mono mt-0.5">
+                            <div className="text-[10px] text-[#635F58]/50 font-mono mt-0.5">
                               SKU: {item.slug}
                             </div>
                           </div>
                         </div>
 
                         <div className="text-right">
-                          <div className="font-mono text-xs text-[#F4F4F1]/70">
+                          <div className="font-mono text-xs text-[#635F58]/70">
                             ₹{item.price.toLocaleString()} × {item.quantity}
                           </div>
-                          <div className="font-bold text-sm text-[#F4F4F1] mt-0.5">
+                          <div className="font-bold text-sm text-[#635F58] mt-0.5">
                             ₹{item.subtotal.toLocaleString()}
                           </div>
                         </div>
@@ -1885,12 +1885,12 @@ export default function AdminPage() {
                   </div>
 
                   {/* Fulfillment Action Bar */}
-                  <div className="border-t border-[#F4F4F1]/10 pt-4 flex flex-wrap items-center justify-between gap-3 bg-[#1F1D1A] border border-[#F4F4F1]/15 p-3 rounded-xs">
+                  <div className="border-t border-[#635F58]/10 pt-4 flex flex-wrap items-center justify-between gap-3 bg-[#F4F4F1] border border-[#635F58]/15 p-3 rounded-xs">
                     <div className="text-xs">
-                      <span className="font-semibold block text-[#F4F4F1]">Fulfillment State</span>
-                      <span className="text-[#F4F4F1]/70 text-[11px]">
+                      <span className="font-semibold block text-[#635F58]">Fulfillment State</span>
+                      <span className="text-[#635F58]/70 text-[11px]">
                         Status:{' '}
-                        <strong className="text-[#F4F4F1] uppercase">
+                        <strong className="text-[#635F58] uppercase">
                           {selectedOrder.fulfillmentStatus}
                         </strong>
                         {selectedOrder.fulfillmentDetails?.courierName && (
@@ -1914,7 +1914,7 @@ export default function AdminPage() {
                                 fulfillmentStatus: 'fulfilled',
                               })
                             }
-                            className="px-3 py-1.5 bg-[#F4F4F1] text-[#1F1D1A] text-xs font-medium uppercase tracking-wider hover:bg-[#333330] cursor-pointer disabled:opacity-50"
+                            className="px-3 py-1.5 bg-[#635F58] text-[#F4F4F1] text-xs font-medium uppercase tracking-wider hover:bg-[#524E48] cursor-pointer disabled:opacity-50"
                           >
                             Mark as Fulfilled
                           </button>
@@ -1939,12 +1939,12 @@ export default function AdminPage() {
                 </div>
 
                 {/* 2. Financial Breakdown Card */}
-                <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs space-y-3">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-2">
+                <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs space-y-3">
+                  <div className="font-bold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-2">
                     Payment Breakdown
                   </div>
 
-                  <div className="space-y-1.5 text-xs text-[#F4F4F1]/80">
+                  <div className="space-y-1.5 text-xs text-[#635F58]/80">
                     <div className="flex justify-between">
                       <span>Subtotal ({selectedOrder.items.length} items)</span>
                       <span>₹{selectedOrder.subtotal.toLocaleString()}</span>
@@ -1959,12 +1959,12 @@ export default function AdminPage() {
                         <span>-₹{selectedOrder.discount.toLocaleString()}</span>
                       </div>
                     )}
-                    <div className="flex justify-between font-bold text-sm text-[#F4F4F1] border-t border-[#F4F4F1]/10 pt-2">
+                    <div className="flex justify-between font-bold text-sm text-[#635F58] border-t border-[#635F58]/10 pt-2">
                       <span>Total Amount</span>
                       <span>₹{selectedOrder.totalAmount.toLocaleString()}</span>
                     </div>
 
-                    <div className="flex justify-between text-xs pt-1 border-t border-[#F4F4F1]/10">
+                    <div className="flex justify-between text-xs pt-1 border-t border-[#635F58]/10">
                       <span>Paid by Customer</span>
                       <span className="font-semibold">
                         {selectedOrder.paymentStatus === 'paid'
@@ -1984,8 +1984,8 @@ export default function AdminPage() {
                   </div>
 
                   {/* Payment Action Bar */}
-                  <div className="border-t border-[#F4F4F1]/10 pt-3 flex justify-between items-center">
-                    <span className="text-[11px] text-[#F4F4F1]/60">
+                  <div className="border-t border-[#635F58]/10 pt-3 flex justify-between items-center">
+                    <span className="text-[11px] text-[#635F58]/60">
                       Gateway: {selectedOrder.paymentDetails?.gateway || selectedOrder.channel}
                     </span>
                     <div className="space-x-2">
@@ -2025,14 +2025,14 @@ export default function AdminPage() {
                 </div>
 
                 {/* 3. Timeline & Staff Comments Card */}
-                <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs space-y-4">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-2">
+                <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs space-y-4">
+                  <div className="font-bold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-2">
                     Order Timeline & Activity
                   </div>
 
                   {/* Comment Box */}
-                  <div className="bg-[#1F1D1A] p-3 rounded-xs border border-[#F4F4F1]/15">
-                    <div className="text-[11px] font-semibold text-[#F4F4F1] mb-1">
+                  <div className="bg-[#F4F4F1] p-3 rounded-xs border border-[#635F58]/15">
+                    <div className="text-[11px] font-semibold text-[#635F58] mb-1">
                       Add Internal Staff Comment
                     </div>
                     <div className="flex gap-2">
@@ -2041,7 +2041,7 @@ export default function AdminPage() {
                         value={staffCommentInput}
                         onChange={(e) => setStaffCommentInput(e.target.value)}
                         placeholder="Leave a comment (only staff can see)..."
-                        className="flex-1 bg-[#1F1D1A] border border-[#F4F4F1]/20 px-3 py-1.5 text-xs rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                        className="flex-1 bg-[#F4F4F1] border border-[#635F58]/20 px-3 py-1.5 text-xs rounded-xs focus:outline-none focus:border-[#635F58]"
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             e.preventDefault();
@@ -2061,7 +2061,7 @@ export default function AdminPage() {
                             newStaffNote: staffCommentInput.trim(),
                           })
                         }
-                        className="px-4 py-1.5 bg-[#F4F4F1] text-[#1F1D1A] text-xs font-medium uppercase tracking-wider hover:bg-[#333330] cursor-pointer disabled:opacity-50"
+                        className="px-4 py-1.5 bg-[#635F58] text-[#F4F4F1] text-xs font-medium uppercase tracking-wider hover:bg-[#524E48] cursor-pointer disabled:opacity-50"
                       >
                         Post
                       </button>
@@ -2072,10 +2072,10 @@ export default function AdminPage() {
                   <div className="space-y-4 pt-2">
                     {(selectedOrder.timeline || []).map((ev, idx) => (
                       <div key={idx} className="flex items-start gap-3 text-xs">
-                        <span className="w-2 h-2 rounded-full bg-[#F4F4F1] mt-1.5 flex-shrink-0" />
+                        <span className="w-2 h-2 rounded-full bg-[#635F58] mt-1.5 flex-shrink-0" />
                         <div className="flex-1">
                           <div className="flex justify-between items-center">
-                            <span className="font-semibold text-[#F4F4F1]">{ev.title}</span>
+                            <span className="font-semibold text-[#635F58]">{ev.title}</span>
                             <span className="text-[10px] text-stone-600 font-mono">
                               {(() => {
                                 const d = ev.createdAt ? new Date(ev.createdAt) : new Date();
@@ -2091,7 +2091,7 @@ export default function AdminPage() {
                             </span>
                           </div>
                           {ev.description && (
-                            <p className="text-[11px] text-[#F4F4F1]/70 mt-0.5">
+                            <p className="text-[11px] text-[#635F58]/70 mt-0.5">
                               {ev.description}
                             </p>
                           )}
@@ -2106,12 +2106,12 @@ export default function AdminPage() {
               {/* RIGHT COLUMN (4 cols): Customer, Addresses, Channel Info */}
               <div className="lg:col-span-4 space-y-6">
                 {/* Customer Profile Card */}
-                <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs space-y-3">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-2">
+                <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs space-y-3">
+                  <div className="font-bold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-2">
                     Customer Details
                   </div>
                   <div>
-                    <div className="font-semibold text-sm text-[#F4F4F1]">
+                    <div className="font-semibold text-sm text-[#635F58]">
                       {selectedOrder.customer.name}
                     </div>
                     <a
@@ -2123,7 +2123,7 @@ export default function AdminPage() {
                     {selectedOrder.customer.phone && (
                       <a
                         href={`tel:${selectedOrder.customer.phone}`}
-                        className="text-xs text-[#F4F4F1]/80 block mt-0.5"
+                        className="text-xs text-[#635F58]/80 block mt-0.5"
                       >
                         {selectedOrder.customer.phone}
                       </a>
@@ -2132,12 +2132,12 @@ export default function AdminPage() {
                 </div>
 
                 {/* Shipping Address Card */}
-                <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs space-y-2">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-2 flex justify-between items-center">
+                <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs space-y-2">
+                  <div className="font-bold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-2 flex justify-between items-center">
                     <span>Shipping Address</span>
                   </div>
-                  <div className="text-xs text-[#F4F4F1]/80 leading-relaxed">
-                    <p className="font-semibold text-[#F4F4F1]">
+                  <div className="text-xs text-[#635F58]/80 leading-relaxed">
+                    <p className="font-semibold text-[#635F58]">
                       {selectedOrder.shippingAddress.fullName}
                     </p>
                     <p>{selectedOrder.shippingAddress.addressLine1}</p>
@@ -2158,8 +2158,8 @@ export default function AdminPage() {
                 </div>
 
                 {/* Courier & Waybill Card */}
-                <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs space-y-3">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-2">
+                <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs space-y-3">
+                  <div className="font-bold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-2">
                     Shipping & Waybill
                   </div>
 
@@ -2173,7 +2173,7 @@ export default function AdminPage() {
                         value={courierNameInput}
                         onChange={(e) => setCourierNameInput(e.target.value)}
                         placeholder="Blue Dart / Delhivery"
-                        className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-1.5 text-xs rounded-xs"
+                        className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-1.5 text-xs rounded-xs"
                       />
                     </div>
 
@@ -2186,7 +2186,7 @@ export default function AdminPage() {
                         value={trackingNumberInput}
                         onChange={(e) => setTrackingNumberInput(e.target.value)}
                         placeholder="e.g. BLUEDART-99201"
-                        className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-1.5 text-xs rounded-xs font-mono"
+                        className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-1.5 text-xs rounded-xs font-mono"
                       />
                     </div>
 
@@ -2199,7 +2199,7 @@ export default function AdminPage() {
                           courierName: courierNameInput.trim(),
                         })
                       }
-                      className="w-full bg-[#F4F4F1] text-[#1F1D1A] py-2 text-xs uppercase font-medium tracking-wider hover:bg-[#333330] cursor-pointer"
+                      className="w-full bg-[#635F58] text-[#F4F4F1] py-2 text-xs uppercase font-medium tracking-wider hover:bg-[#524E48] cursor-pointer"
                     >
                       Update Tracking Details
                     </button>
@@ -2207,8 +2207,8 @@ export default function AdminPage() {
                 </div>
 
                 {/* Channel & Technical Card */}
-                <div className="bg-[#1F1D1A] p-5 rounded-sm border border-[#F4F4F1]/15 shadow-xs space-y-2">
-                  <div className="font-bold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-2">
+                <div className="bg-[#F4F4F1] p-5 rounded-sm border border-[#635F58]/15 shadow-xs space-y-2">
+                  <div className="font-bold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-2">
                     Channel & Gateway
                   </div>
                   <div className="text-[11px] text-stone-700 space-y-1 font-mono">
@@ -2231,13 +2231,13 @@ export default function AdminPage() {
       {/* ========================================================================= */}
       {isProductModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-[#1F1D1A] w-full max-w-3xl rounded-sm border border-[#F4F4F1]/20 shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-start border-b border-[#F4F4F1]/10 pb-4 mb-6">
+          <div className="bg-[#F4F4F1] w-full max-w-3xl rounded-sm border border-[#635F58]/20 shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-start border-b border-[#635F58]/10 pb-4 mb-6">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.2em] text-[#8C827A] font-bold">
                   Catalogue & Sets Editor
                 </span>
-                <h2 className="text-xl font-serif text-[#F4F4F1] mt-1">
+                <h2 className="text-xl font-serif text-[#635F58] mt-1">
                   {editingProduct
                     ? `Edit: ${editingProduct.name}`
                     : productForm.category.toLowerCase() === 'sets' || productForm.isSet
@@ -2247,7 +2247,7 @@ export default function AdminPage() {
               </div>
               <button
                 onClick={() => setIsProductModalOpen(false)}
-                className="text-[#F4F4F1]/60 hover:text-[#F4F4F1] text-lg leading-none p-1 cursor-pointer"
+                className="text-[#635F58]/60 hover:text-[#635F58] text-lg leading-none p-1 cursor-pointer"
               >
                 ✕
               </button>
@@ -2256,7 +2256,7 @@ export default function AdminPage() {
             <form onSubmit={handleProductSubmit} className="space-y-6 text-xs">
               {/* SECTION 1: General Info */}
               <div className="space-y-4">
-                <div className="font-semibold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-1 flex justify-between items-center">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-1 flex justify-between items-center">
                   <span>1. General Information</span>
                   <label className="flex items-center gap-2 cursor-pointer font-sans normal-case">
                     <input
@@ -2272,7 +2272,7 @@ export default function AdminPage() {
                       }}
                       className="rounded-xs"
                     />
-                    <span className="text-[11px] font-medium text-[#F4F4F1]">
+                    <span className="text-[11px] font-medium text-[#635F58]">
                       ✨ Multi-Piece Ensemble / Set
                     </span>
                   </label>
@@ -2302,7 +2302,7 @@ export default function AdminPage() {
                           ? 'e.g. Amber Vest & Pleated Trouser Set'
                           : 'e.g. Kaddy Top in Cotton'
                       }
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
 
@@ -2316,7 +2316,7 @@ export default function AdminPage() {
                       value={productForm.slug}
                       onChange={(e) => setProductForm({ ...productForm, slug: e.target.value })}
                       placeholder="e.g. amber-vest-trouser-set"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
                 </div>
@@ -2335,9 +2335,9 @@ export default function AdminPage() {
                       value={productForm.price}
                       onChange={(e) => setProductForm({ ...productForm, price: e.target.value })}
                       placeholder="6500"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1] font-bold"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58] font-bold"
                     />
-                    <span className="text-[9px] text-[#F4F4F1]/60 mt-0.5 block">Incl. of all taxes</span>
+                    <span className="text-[9px] text-[#635F58]/60 mt-0.5 block">Incl. of all taxes</span>
                   </div>
 
                   <div className="min-w-0">
@@ -2350,7 +2350,7 @@ export default function AdminPage() {
                       value={productForm.compareAtPrice}
                       onChange={(e) => setProductForm({ ...productForm, compareAtPrice: e.target.value })}
                       placeholder="7200"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
 
@@ -2363,7 +2363,7 @@ export default function AdminPage() {
                         <button
                           type="button"
                           onClick={() => setIsAddingNewCategory(true)}
-                          className="text-[10px] uppercase font-bold text-stone-600 hover:text-[#F4F4F1] underline cursor-pointer ml-1 whitespace-nowrap"
+                          className="text-[10px] uppercase font-bold text-stone-600 hover:text-[#635F58] underline cursor-pointer ml-1 whitespace-nowrap"
                         >
                           + New
                         </button>
@@ -2386,7 +2386,7 @@ export default function AdminPage() {
                             });
                           }
                         }}
-                        className="w-full border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1] bg-[#1F1D1A] cursor-pointer text-xs"
+                        className="w-full border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58] bg-[#F4F4F1] cursor-pointer text-xs"
                       >
                         {allCategories.map((cat) => (
                           <option key={cat} value={cat}>
@@ -2409,13 +2409,13 @@ export default function AdminPage() {
                             }
                           }}
                           placeholder="New category"
-                          className="w-full border border-[#F4F4F1] p-2 pr-14 text-xs rounded-xs focus:outline-none bg-[#1F1D1A]"
+                          className="w-full border border-[#635F58] p-2 pr-14 text-xs rounded-xs focus:outline-none bg-[#F4F4F1]"
                         />
                         <div className="absolute right-1 top-1 bottom-1 flex items-center gap-1">
                           <button
                             type="button"
                             onClick={handleAddNewCategory}
-                            className="h-full px-2 bg-[#F4F4F1] text-[#1F1D1A] text-[10px] uppercase font-bold rounded-xs hover:bg-[#333330] cursor-pointer flex items-center justify-center shadow-xs"
+                            className="h-full px-2 bg-[#635F58] text-[#F4F4F1] text-[10px] uppercase font-bold rounded-xs hover:bg-[#524E48] cursor-pointer flex items-center justify-center shadow-xs"
                             title="Save Category"
                           >
                             Add
@@ -2446,27 +2446,27 @@ export default function AdminPage() {
                       value={productForm.stockQuantity}
                       onChange={(e) => setProductForm({ ...productForm, stockQuantity: e.target.value })}
                       placeholder="50"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
                 </div>
 
                 {/* 1B: MULTI-PIECE SET PRICE BREAKDOWN */}
                 {(productForm.isSet || productForm.category.toLowerCase() === 'sets') && (
-                  <div className="bg-[#1F1D1A] p-4 rounded-xs border border-[#F4F4F1]/20 space-y-3">
-                    <div className="flex justify-between items-center border-b border-[#F4F4F1]/15 pb-2">
+                  <div className="bg-[#F4F4F1] p-4 rounded-xs border border-[#635F58]/20 space-y-3">
+                    <div className="flex justify-between items-center border-b border-[#635F58]/15 pb-2">
                       <div>
-                        <span className="font-bold uppercase tracking-wider text-[11px] text-[#F4F4F1] flex items-center gap-1.5">
+                        <span className="font-bold uppercase tracking-wider text-[11px] text-[#635F58] flex items-center gap-1.5">
                           <span>✨ Set Piece Breakdown & Prices</span>
                         </span>
-                        <span className="text-[10px] text-[#F4F4F1]/60 block">
+                        <span className="text-[10px] text-[#635F58]/60 block">
                           Specify individual prices for the upper and lower pieces of this set.
                         </span>
                       </div>
                       <button
                         type="button"
                         onClick={handleAutoSumSetPrice}
-                        className="px-2.5 py-1 bg-[#1F1D1A] border border-[#F4F4F1]/30 text-[10px] uppercase font-bold tracking-wider hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors cursor-pointer shadow-xs"
+                        className="px-2.5 py-1 bg-[#F4F4F1] border border-[#635F58]/30 text-[10px] uppercase font-bold tracking-wider hover:bg-[#635F58] hover:text-[#F4F4F1] transition-colors cursor-pointer shadow-xs"
                         title="Calculate total price as sum of pieces"
                       >
                         ⚡ Auto-Sum Total
@@ -2475,13 +2475,13 @@ export default function AdminPage() {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {/* Piece 1: Top / Vest */}
-                      <div className="bg-[#1F1D1A] p-3 rounded-xs border border-[#F4F4F1]/15 space-y-2">
-                        <span className="text-[10px] uppercase font-bold text-[#F4F4F1]/70 block">
+                      <div className="bg-[#F4F4F1] p-3 rounded-xs border border-[#635F58]/15 space-y-2">
+                        <span className="text-[10px] uppercase font-bold text-[#635F58]/70 block">
                           Piece 1 · Upper Garment
                         </span>
                         <div className="grid grid-cols-2 gap-2">
                           <div>
-                            <label className="block text-[10px] uppercase text-[#F4F4F1]/70 mb-0.5">
+                            <label className="block text-[10px] uppercase text-[#635F58]/70 mb-0.5">
                               Piece Name
                             </label>
                             <input
@@ -2491,11 +2491,11 @@ export default function AdminPage() {
                                 setProductForm({ ...productForm, setTopName: e.target.value })
                               }
                               placeholder="Top / Vest"
-                              className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-1.5 rounded-xs text-xs"
+                              className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-1.5 rounded-xs text-xs"
                             />
                           </div>
                           <div>
-                            <label className="block text-[10px] uppercase text-[#F4F4F1]/70 mb-0.5">
+                            <label className="block text-[10px] uppercase text-[#635F58]/70 mb-0.5">
                               Price (₹)
                             </label>
                             <input
@@ -2506,20 +2506,20 @@ export default function AdminPage() {
                                 setProductForm({ ...productForm, setTopPrice: e.target.value })
                               }
                               placeholder="3200"
-                              className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-1.5 rounded-xs text-xs font-mono font-medium"
+                              className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-1.5 rounded-xs text-xs font-mono font-medium"
                             />
                           </div>
                         </div>
                       </div>
 
                       {/* Piece 2: Skirt / Trouser */}
-                      <div className="bg-[#1F1D1A] p-3 rounded-xs border border-[#F4F4F1]/15 space-y-2">
-                        <span className="text-[10px] uppercase font-bold text-[#F4F4F1]/70 block">
+                      <div className="bg-[#F4F4F1] p-3 rounded-xs border border-[#635F58]/15 space-y-2">
+                        <span className="text-[10px] uppercase font-bold text-[#635F58]/70 block">
                           Piece 2 · Lower Garment
                         </span>
                         <div className="grid grid-cols-2 gap-2">
                           <div>
-                            <label className="block text-[10px] uppercase text-[#F4F4F1]/70 mb-0.5">
+                            <label className="block text-[10px] uppercase text-[#635F58]/70 mb-0.5">
                               Piece Name
                             </label>
                             <input
@@ -2529,11 +2529,11 @@ export default function AdminPage() {
                                 setProductForm({ ...productForm, setBottomName: e.target.value })
                               }
                               placeholder="Skirt / Trouser"
-                              className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-1.5 rounded-xs text-xs"
+                              className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-1.5 rounded-xs text-xs"
                             />
                           </div>
                           <div>
-                            <label className="block text-[10px] uppercase text-[#F4F4F1]/70 mb-0.5">
+                            <label className="block text-[10px] uppercase text-[#635F58]/70 mb-0.5">
                               Price (₹)
                             </label>
                             <input
@@ -2544,7 +2544,7 @@ export default function AdminPage() {
                                 setProductForm({ ...productForm, setBottomPrice: e.target.value })
                               }
                               placeholder="3300"
-                              className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-1.5 rounded-xs text-xs font-mono font-medium"
+                              className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-1.5 rounded-xs text-xs font-mono font-medium"
                             />
                           </div>
                         </div>
@@ -2552,10 +2552,10 @@ export default function AdminPage() {
                     </div>
 
                     {/* Piece 3: Optional Additional Piece */}
-                    <div className="pt-2 border-t border-[#F4F4F1]/15">
+                    <div className="pt-2 border-t border-[#635F58]/15">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-[10px] uppercase text-[#F4F4F1]/70 mb-0.5">
+                          <label className="block text-[10px] uppercase text-[#635F58]/70 mb-0.5">
                             Additional Piece Name (Optional: Dupatta, Stole, Belt)
                           </label>
                           <input
@@ -2565,11 +2565,11 @@ export default function AdminPage() {
                               setProductForm({ ...productForm, setAdditionalName: e.target.value })
                             }
                             placeholder="e.g. Handwoven Stole"
-                            className="w-full border border-[#F4F4F1]/20 p-1.5 rounded-xs text-xs bg-[#1F1D1A]"
+                            className="w-full border border-[#635F58]/20 p-1.5 rounded-xs text-xs bg-[#F4F4F1]"
                           />
                         </div>
                         <div>
-                          <label className="block text-[10px] uppercase text-[#F4F4F1]/70 mb-0.5">
+                          <label className="block text-[10px] uppercase text-[#635F58]/70 mb-0.5">
                             Additional Piece Price (₹)
                           </label>
                           <input
@@ -2580,7 +2580,7 @@ export default function AdminPage() {
                               setProductForm({ ...productForm, setAdditionalPrice: e.target.value })
                             }
                             placeholder="0"
-                            className="w-full border border-[#F4F4F1]/20 p-1.5 rounded-xs text-xs bg-[#1F1D1A] font-mono"
+                            className="w-full border border-[#635F58]/20 p-1.5 rounded-xs text-xs bg-[#F4F4F1] font-mono"
                           />
                         </div>
                       </div>
@@ -2598,7 +2598,7 @@ export default function AdminPage() {
                       value={productForm.collectionName}
                       onChange={(e) => setProductForm({ ...productForm, collectionName: e.target.value })}
                       placeholder="The Inheritance 01"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
 
@@ -2614,7 +2614,7 @@ export default function AdminPage() {
                       value={productForm.rating}
                       onChange={(e) => setProductForm({ ...productForm, rating: e.target.value })}
                       placeholder="4.9"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
 
@@ -2628,7 +2628,7 @@ export default function AdminPage() {
                       value={productForm.reviewsCount}
                       onChange={(e) => setProductForm({ ...productForm, reviewsCount: e.target.value })}
                       placeholder="18"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
                 </div>
@@ -2636,20 +2636,20 @@ export default function AdminPage() {
 
               {/* SECTION 2: Photos Gallery & Subcategory Classification */}
               <div className="space-y-4">
-                <div className="font-semibold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-1 flex justify-between items-center">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-1 flex justify-between items-center">
                   <span>2. Photos Gallery & Subcategory Classification</span>
                   <span className="text-[10px] text-stone-600 font-mono">
                     {productForm.images.length} {productForm.images.length === 1 ? 'photo' : 'photos'}
                   </span>
                 </div>
 
-                <div className="bg-[#1F1D1A] p-4 rounded-sm border border-[#F4F4F1]/15 space-y-3">
+                <div className="bg-[#F4F4F1] p-4 rounded-sm border border-[#635F58]/15 space-y-3">
                   <div className="flex justify-between items-center">
                     <div>
-                      <span className="font-semibold uppercase tracking-wider text-[11px] text-[#F4F4F1]">
+                      <span className="font-semibold uppercase tracking-wider text-[11px] text-[#635F58]">
                         Garment Photos
                       </span>
-                      <span className="text-[10px] text-[#F4F4F1]/60 block">
+                      <span className="text-[10px] text-[#635F58]/60 block">
                         Photo #1 is used as the cover on catalog pages.
                       </span>
                     </div>
@@ -2666,14 +2666,14 @@ export default function AdminPage() {
                       type="button"
                       disabled={uploadingImage}
                       onClick={() => fileInputRef.current?.click()}
-                      className="px-3 py-1.5 bg-[#F4F4F1] text-[#1F1D1A] text-[11px] uppercase tracking-wider hover:bg-[#333330] transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
+                      className="px-3 py-1.5 bg-[#635F58] text-[#F4F4F1] text-[11px] uppercase tracking-wider hover:bg-[#524E48] transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1.5"
                     >
                       {uploadingImage ? 'Uploading...' : '+ Upload Photo'}
                     </button>
                   </div>
 
                   {/* Subcategory Tag Filter Bar */}
-                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-[#F4F4F1]/15">
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-[#635F58]/15">
                     <div className="flex flex-wrap gap-1 text-[10px]">
                       <span className="text-stone-600 uppercase font-semibold mr-1 self-center">
                         Filter Gallery:
@@ -2697,8 +2697,8 @@ export default function AdminPage() {
                             onClick={() => setGalleryFilterTag(tab.id as typeof galleryFilterTag)}
                             className={`px-2 py-0.5 rounded-xs uppercase tracking-wider font-medium cursor-pointer transition-colors ${
                               galleryFilterTag === tab.id
-                                ? 'bg-[#F4F4F1] text-[#1F1D1A]'
-                                : 'bg-[#1F1D1A] border border-[#F4F4F1]/20 text-[#F4F4F1]/70 hover:text-[#F4F4F1]'
+                                ? 'bg-[#635F58] text-[#F4F4F1]'
+                                : 'bg-[#F4F4F1] border border-[#635F58]/20 text-[#635F58]/70 hover:text-[#635F58]'
                             }`}
                           >
                             {tab.label} ({count})
@@ -2729,13 +2729,13 @@ export default function AdminPage() {
                           onDragStart={() => setDraggedImageIdx(idx)}
                           onDragOver={(e) => e.preventDefault()}
                           onDrop={() => handleImageDrop(idx)}
-                          className={`relative group bg-[#1F1D1A] rounded-xs overflow-hidden border transition-all cursor-grab active:cursor-grabbing flex flex-col justify-between ${
+                          className={`relative group bg-[#F4F4F1] rounded-xs overflow-hidden border transition-all cursor-grab active:cursor-grabbing flex flex-col justify-between ${
                             draggedImageIdx === idx
-                              ? 'opacity-40 border-dashed border-[#F4F4F1] scale-95'
-                              : 'border-[#F4F4F1]/15 hover:border-[#F4F4F1] shadow-xs'
+                              ? 'opacity-40 border-dashed border-[#635F58] scale-95'
+                              : 'border-[#635F58]/15 hover:border-[#635F58] shadow-xs'
                           }`}
                         >
-                          <div className="relative aspect-[3/4] w-full bg-[#1F1D1A]">
+                          <div className="relative aspect-[3/4] w-full bg-[#F4F4F1]">
                             <Image
                               src={imgUrl}
                               alt={`Photo ${idx + 1}`}
@@ -2763,7 +2763,7 @@ export default function AdminPage() {
                                 type="button"
                                 disabled={idx === 0}
                                 onClick={() => handleMoveImage(idx, 'left')}
-                                className="bg-[#1F1D1A]/90 text-[#F4F4F1] text-[10px] w-5 h-5 rounded-xs flex items-center justify-center hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-xs cursor-pointer font-bold border border-[#F4F4F1]/15"
+                                className="bg-[#F4F4F1]/90 text-[#635F58] text-[10px] w-5 h-5 rounded-xs flex items-center justify-center hover:bg-[#635F58] hover:text-[#F4F4F1] transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-xs cursor-pointer font-bold border border-[#635F58]/15"
                                 title="Move Left"
                               >
                                 ←
@@ -2773,7 +2773,7 @@ export default function AdminPage() {
                                 type="button"
                                 disabled={idx === productForm.images.length - 1}
                                 onClick={() => handleMoveImage(idx, 'right')}
-                                className="bg-[#1F1D1A]/90 text-[#F4F4F1] text-[10px] w-5 h-5 rounded-xs flex items-center justify-center hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-xs cursor-pointer font-bold border border-[#F4F4F1]/15"
+                                className="bg-[#F4F4F1]/90 text-[#635F58] text-[10px] w-5 h-5 rounded-xs flex items-center justify-center hover:bg-[#635F58] hover:text-[#F4F4F1] transition-colors disabled:opacity-30 disabled:pointer-events-none shadow-xs cursor-pointer font-bold border border-[#635F58]/15"
                                 title="Move Right"
                               >
                                 →
@@ -2798,7 +2798,7 @@ export default function AdminPage() {
                                   <button
                                     type="button"
                                     onClick={() => handleMakeImagePrimary(idx)}
-                                    className="w-full bg-[#1F1D1A] text-[#F4F4F1] text-[9px] uppercase font-bold py-1 px-1.5 rounded-xs hover:bg-white cursor-pointer tracking-wider text-center block shadow-xs"
+                                    className="w-full bg-[#F4F4F1] text-[#635F58] text-[9px] uppercase font-bold py-1 px-1.5 rounded-xs hover:bg-white cursor-pointer tracking-wider text-center block shadow-xs"
                                   >
                                     ★ Make Cover
                                   </button>
@@ -2827,14 +2827,14 @@ export default function AdminPage() {
                           </div>
 
                           {/* Classification Dropdown */}
-                          <div className="p-1.5 bg-[#1F1D1A] border-t border-[#F4F4F1]/15">
+                          <div className="p-1.5 bg-[#F4F4F1] border-t border-[#635F58]/15">
                             <label className="block text-[9px] uppercase font-bold text-stone-600 mb-0.5">
                               Tag Piece:
                             </label>
                             <select
                               value={currentTag}
                               onChange={(e) => handleUpdateImageTag(idx, e.target.value as PhotoTag)}
-                              className="w-full text-[10px] bg-[#1F1D1A] border border-[#F4F4F1]/20 rounded-xs p-1 cursor-pointer font-medium text-[#F4F4F1]"
+                              className="w-full text-[10px] bg-[#F4F4F1] border border-[#635F58]/20 rounded-xs p-1 cursor-pointer font-medium text-[#635F58]"
                             >
                               <option value="full_set">✨ Full Set (Look)</option>
                               <option value="top">👚 Top / Vest</option>
@@ -2848,18 +2848,18 @@ export default function AdminPage() {
                     })}
                   </div>
 
-                  <div className="flex gap-2 pt-2 border-t border-[#F4F4F1]/10">
+                  <div className="flex gap-2 pt-2 border-t border-[#635F58]/10">
                     <input
                       type="text"
                       value={manualImageUrl}
                       onChange={(e) => setManualImageUrl(e.target.value)}
                       placeholder="Or enter image URL/path (e.g. /image2.jpg or https://...)"
-                      className="flex-1 border border-[#F4F4F1]/20 px-2.5 py-1.5 rounded-xs text-[11px] focus:outline-none focus:border-[#F4F4F1] bg-[#1F1D1A]"
+                      className="flex-1 border border-[#635F58]/20 px-2.5 py-1.5 rounded-xs text-[11px] focus:outline-none focus:border-[#635F58] bg-[#F4F4F1]"
                     />
                     <button
                       type="button"
                       onClick={handleAddManualImage}
-                      className="px-3 py-1.5 border border-[#F4F4F1]/30 text-[11px] uppercase tracking-wider hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors cursor-pointer"
+                      className="px-3 py-1.5 border border-[#635F58]/30 text-[11px] uppercase tracking-wider hover:bg-[#635F58] hover:text-[#F4F4F1] transition-colors cursor-pointer"
                     >
                       Add URL
                     </button>
@@ -2869,7 +2869,7 @@ export default function AdminPage() {
 
               {/* SECTION 3: Sizing & Fit */}
               <div className="space-y-4">
-                <div className="font-semibold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-1">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-1">
                   3. Colors, Sizing & Fit Specifications
                 </div>
 
@@ -2882,7 +2882,7 @@ export default function AdminPage() {
                     value={productForm.colorsStr}
                     onChange={(e) => setProductForm({ ...productForm, colorsStr: e.target.value })}
                     placeholder="Black, Grey, Stone"
-                    className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                    className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                   />
                 </div>
 
@@ -2895,7 +2895,7 @@ export default function AdminPage() {
                       <button
                         type="button"
                         onClick={() => setIsAddingNewSize(true)}
-                        className="text-[10px] uppercase font-bold text-stone-600 hover:text-[#F4F4F1] underline cursor-pointer"
+                        className="text-[10px] uppercase font-bold text-stone-600 hover:text-[#635F58] underline cursor-pointer"
                       >
                         + Add Custom Size
                       </button>
@@ -2903,8 +2903,8 @@ export default function AdminPage() {
                   </div>
 
                   {isAddingNewSize && (
-                    <div className="mb-3 p-2.5 bg-[#1F1D1A] rounded-xs border border-[#F4F4F1]/20 flex flex-col sm:flex-row gap-2 items-start sm:items-center">
-                      <span className="text-[11px] font-semibold text-[#F4F4F1] whitespace-nowrap">
+                    <div className="mb-3 p-2.5 bg-[#F4F4F1] rounded-xs border border-[#635F58]/20 flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+                      <span className="text-[11px] font-semibold text-[#635F58] whitespace-nowrap">
                         New Size:
                       </span>
                       <div className="relative flex-1 max-w-xs w-full">
@@ -2920,13 +2920,13 @@ export default function AdminPage() {
                             }
                           }}
                           placeholder="e.g. 3XL, 28, Free Size, UK 8"
-                          className="w-full border border-[#F4F4F1] p-1.5 pr-14 text-xs rounded-xs focus:outline-none bg-[#1F1D1A] font-mono"
+                          className="w-full border border-[#635F58] p-1.5 pr-14 text-xs rounded-xs focus:outline-none bg-[#F4F4F1] font-mono"
                         />
                         <div className="absolute right-1 top-1 bottom-1 flex items-center gap-1">
                           <button
                             type="button"
                             onClick={handleAddNewSize}
-                            className="h-full px-2 bg-[#F4F4F1] text-[#1F1D1A] text-[10px] uppercase font-bold rounded-xs hover:bg-[#333330] cursor-pointer flex items-center justify-center shadow-xs"
+                            className="h-full px-2 bg-[#635F58] text-[#F4F4F1] text-[10px] uppercase font-bold rounded-xs hover:bg-[#524E48] cursor-pointer flex items-center justify-center shadow-xs"
                             title="Add Size"
                           >
                             Add
@@ -2969,8 +2969,8 @@ export default function AdminPage() {
                           }}
                           className={`px-3 py-1.5 text-xs font-mono rounded-xs border transition-all cursor-pointer flex items-center gap-1.5 ${
                             isChecked
-                              ? 'bg-[#F4F4F1] border-[#F4F4F1] text-white shadow-xs font-bold'
-                              : 'bg-[#1F1D1A] border-[#F4F4F1]/20 text-[#F4F4F1]/70 hover:border-[#F4F4F1]'
+                              ? 'bg-[#635F58] border-[#635F58] text-white shadow-xs font-bold'
+                              : 'bg-[#F4F4F1] border-[#635F58]/20 text-[#635F58]/70 hover:border-[#635F58]'
                           }`}
                         >
                           <span>{isChecked ? '✓' : '+'}</span>
@@ -2991,7 +2991,7 @@ export default function AdminPage() {
                       value={productForm.fitNote}
                       onChange={(e) => setProductForm({ ...productForm, fitNote: e.target.value })}
                       placeholder="e.g. Relaxed Fit · Model is 6'0&quot; and wears M"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
 
@@ -3004,7 +3004,7 @@ export default function AdminPage() {
                       value={productForm.modelStats}
                       onChange={(e) => setProductForm({ ...productForm, modelStats: e.target.value })}
                       placeholder="e.g. Model is 6'0&quot; (183cm) and wears size M"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
                 </div>
@@ -3012,7 +3012,7 @@ export default function AdminPage() {
 
               {/* SECTION 4: Narrative & Accordions */}
               <div className="space-y-4">
-                <div className="font-semibold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-1">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-1">
                   4. Product Narrative & Accordion Content
                 </div>
 
@@ -3026,7 +3026,7 @@ export default function AdminPage() {
                     value={productForm.description}
                     onChange={(e) => setProductForm({ ...productForm, description: e.target.value })}
                     placeholder="Architectural silhouette tailored with refined dropped shoulder seam..."
-                    className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1] resize-none"
+                    className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58] resize-none"
                   />
                 </div>
 
@@ -3040,7 +3040,7 @@ export default function AdminPage() {
                       value={productForm.fabric}
                       onChange={(e) => setProductForm({ ...productForm, fabric: e.target.value })}
                       placeholder="100% Handcrafted Organic Cotton."
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
                   <div>
@@ -3052,7 +3052,7 @@ export default function AdminPage() {
                       value={productForm.fit}
                       onChange={(e) => setProductForm({ ...productForm, fit: e.target.value })}
                       placeholder="Relaxed silhouette with dropped shoulders."
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
                 </div>
@@ -3065,7 +3065,7 @@ export default function AdminPage() {
                     rows={3}
                     value={productForm.designDetailsStr}
                     onChange={(e) => setProductForm({ ...productForm, designDetailsStr: e.target.value })}
-                    className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1] resize-none font-mono text-[11px]"
+                    className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58] resize-none font-mono text-[11px]"
                   />
                 </div>
 
@@ -3078,14 +3078,14 @@ export default function AdminPage() {
                     value={productForm.care}
                     onChange={(e) => setProductForm({ ...productForm, care: e.target.value })}
                     placeholder="Dry clean or gentle hand wash in cold water."
-                    className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                    className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                   />
                 </div>
               </div>
 
               {/* SECTION 5: Trust Signals & Companion Set */}
               <div className="space-y-4">
-                <div className="font-semibold text-xs uppercase tracking-wider text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-1">
+                <div className="font-semibold text-xs uppercase tracking-wider text-[#635F58] border-b border-[#635F58]/10 pb-1">
                   5. Trust Signals & Companion Pieces
                 </div>
 
@@ -3099,7 +3099,7 @@ export default function AdminPage() {
                       value={productForm.estimatedDelivery}
                       onChange={(e) => setProductForm({ ...productForm, estimatedDelivery: e.target.value })}
                       placeholder="3–5 Business Days"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
                   <div>
@@ -3111,7 +3111,7 @@ export default function AdminPage() {
                       value={productForm.easyReturns}
                       onChange={(e) => setProductForm({ ...productForm, easyReturns: e.target.value })}
                       placeholder="7-Day Complimentary Returns"
-                      className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                      className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                     />
                   </div>
                 </div>
@@ -3160,24 +3160,24 @@ export default function AdminPage() {
                     value={productForm.completeTheSetStr}
                     onChange={(e) => setProductForm({ ...productForm, completeTheSetStr: e.target.value })}
                     placeholder="e.g. alfidis-pant-in-cotton, stella-slipper-in-leather"
-                    className="w-full bg-[#1F1D1A] border border-[#F4F4F1]/20 p-2 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                    className="w-full bg-[#F4F4F1] border border-[#635F58]/20 p-2 rounded-xs focus:outline-none focus:border-[#635F58]"
                   />
                 </div>
               </div>
 
               {/* Modal Actions */}
-              <div className="mt-8 pt-4 border-t border-[#F4F4F1]/10 flex justify-end gap-3">
+              <div className="mt-8 pt-4 border-t border-[#635F58]/10 flex justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsProductModalOpen(false)}
-                  className="px-4 py-2 border border-[#F4F4F1]/20 uppercase tracking-wider text-xs hover:bg-[#F4F4F1]/10 cursor-pointer"
+                  className="px-4 py-2 border border-[#635F58]/20 uppercase tracking-wider text-xs hover:bg-[#635F58]/10 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={productSubmitting || uploadingImage}
-                  className="px-6 py-2 bg-[#F4F4F1] text-[#1F1D1A] uppercase tracking-wider text-xs hover:bg-[#333330] transition-colors cursor-pointer disabled:opacity-50"
+                  className="px-6 py-2 bg-[#635F58] text-[#F4F4F1] uppercase tracking-wider text-xs hover:bg-[#524E48] transition-colors cursor-pointer disabled:opacity-50"
                 >
                   {productSubmitting
                     ? 'Saving...'

@@ -91,14 +91,14 @@ function CollectionContent() {
     <main className="pt-24 flex-1">
       {/* Filters and View Options */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col sm:flex-row justify-between sm:items-center border-b border-[#F4F4F1]/20 pb-4 gap-4">
+        <div className="flex flex-col sm:flex-row justify-between sm:items-center border-b border-[#635F58]/20 pb-4 gap-4">
           {/* Left side - Category and Items count */}
-          <div className="flex items-center gap-3 text-[#F4F4F1]">
+          <div className="flex items-center gap-3 text-[#635F58]">
             <h1 className="text-xl font-light font-serif uppercase tracking-wider">
               The Collection
             </h1>
             <span className="text-sm text-[#bdb2a1]">•</span>
-            <span className="text-xs uppercase tracking-widest text-[#F4F4F1]/60">
+            <span className="text-xs uppercase tracking-widest text-[#635F58]/60">
               {products.length} {products.length === 1 ? 'Item' : 'Items'}
             </span>
           </div>
@@ -114,8 +114,8 @@ function CollectionContent() {
                 }}
                 className={`text-[11px] uppercase tracking-widest px-3 py-1 border transition-all cursor-pointer ${
                   selectedCategory.toLowerCase() === cat.toLowerCase()
-                    ? 'bg-[#F4F4F1] text-[#1F1D1A] border-[#F4F4F1] shadow-xs font-medium'
-                    : 'bg-transparent text-[#F4F4F1] border-[#F4F4F1]/20 hover:border-[#F4F4F1]'
+                    ? 'bg-[#635F58] text-[#F4F4F1] border-[#635F58] shadow-xs font-medium'
+                    : 'bg-transparent text-[#635F58] border-[#635F58]/20 hover:border-[#635F58]'
                 }`}
               >
                 {cat}
@@ -129,13 +129,13 @@ function CollectionContent() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         {loading ? (
           <div className="py-28 text-center flex flex-col items-center justify-center">
-            <div className="w-8 h-8 border-2 border-[#F4F4F1]/20 border-t-[#F4F4F1] rounded-full animate-spin mb-4" />
-            <p className="text-xs uppercase tracking-[0.2em] text-[#F4F4F1]/60">
+            <div className="w-8 h-8 border-2 border-[#635F58]/20 border-t-[#635F58] rounded-full animate-spin mb-4" />
+            <p className="text-xs uppercase tracking-[0.2em] text-[#635F58]/60">
               Loading collection...
             </p>
           </div>
         ) : currentProducts.length === 0 ? (
-          <div className="py-24 text-center text-xs uppercase tracking-widest text-[#F4F4F1]/60">
+          <div className="py-24 text-center text-xs uppercase tracking-widest text-[#635F58]/60">
             No products found in {selectedCategory}.
           </div>
         ) : (
@@ -147,7 +147,7 @@ function CollectionContent() {
               return (
                 <div key={product.id} className="group">
                   <Link href={`/product/${product.slug}`}>
-                    <div className="relative aspect-[3/4] mb-3 bg-[#2a2723]/40 overflow-hidden">
+                    <div className="relative aspect-[3/4] mb-3 bg-[#e6e2d8]/40 overflow-hidden">
                       <Image
                         src={product.image || '/image1.jpg'}
                         alt={product.name}
@@ -158,7 +158,7 @@ function CollectionContent() {
                       />
                       {isSet && (
                         <div className="absolute top-2.5 left-2.5 z-10">
-                          <span className="bg-[#F4F4F1] text-[#1F1D1A] text-[9px] uppercase px-2 py-0.5 tracking-widest font-mono font-medium">
+                          <span className="bg-[#635F58] text-[#F4F4F1] text-[9px] uppercase px-2 py-0.5 tracking-widest font-mono font-medium">
                             Set
                           </span>
                         </div>
@@ -166,7 +166,7 @@ function CollectionContent() {
                     </div>
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="text-xs sm:text-sm font-normal text-[#F4F4F1] group-hover:opacity-60 transition-opacity">
+                        <h3 className="text-xs sm:text-sm font-normal text-[#635F58] group-hover:opacity-60 transition-opacity">
                           {product.name}
                         </h3>
                         {isSet && (
@@ -175,7 +175,7 @@ function CollectionContent() {
                           </span>
                         )}
                       </div>
-                      <span className="text-xs sm:text-sm text-[#F4F4F1] font-light ml-2 whitespace-nowrap">
+                      <span className="text-xs sm:text-sm text-[#635F58] font-light ml-2 whitespace-nowrap">
                         ₹{product.price.toLocaleString()}
                       </span>
                     </div>
@@ -189,7 +189,7 @@ function CollectionContent() {
                             style={{
                               backgroundColor:
                                 color.toLowerCase() === 'stone'
-                                  ? '#1F1D1A'
+                                  ? '#F4F4F1'
                                   : color.toLowerCase() === 'sand'
                                   ? '#bdb2a1'
                                   : color.toLowerCase() === 'slate'
@@ -214,7 +214,7 @@ function CollectionContent() {
               {currentPage > 1 && (
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
-                  className="px-4 py-2 border border-[#F4F4F1]/20 text-xs uppercase tracking-wider text-[#F4F4F1] hover:border-[#F4F4F1] cursor-pointer"
+                  className="px-4 py-2 border border-[#635F58]/20 text-xs uppercase tracking-wider text-[#635F58] hover:border-[#635F58] cursor-pointer"
                 >
                   Previous
                 </button>
@@ -226,8 +226,8 @@ function CollectionContent() {
                   onClick={() => handlePageChange(number)}
                   className={`px-4 py-2 text-xs border transition-colors cursor-pointer ${
                     currentPage === number
-                      ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#1F1D1A]'
-                      : 'border-[#F4F4F1]/20 text-[#F4F4F1] hover:border-[#F4F4F1]'
+                      ? 'border-[#635F58] bg-[#635F58] text-[#F4F4F1]'
+                      : 'border-[#635F58]/20 text-[#635F58] hover:border-[#635F58]'
                   }`}
                 >
                   {number}
@@ -237,7 +237,7 @@ function CollectionContent() {
               {currentPage < totalPages && (
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
-                  className="px-4 py-2 border border-[#F4F4F1]/20 text-xs uppercase tracking-wider text-[#F4F4F1] hover:border-[#F4F4F1] cursor-pointer"
+                  className="px-4 py-2 border border-[#635F58]/20 text-xs uppercase tracking-wider text-[#635F58] hover:border-[#635F58] cursor-pointer"
                 >
                   Next
                 </button>
@@ -252,13 +252,13 @@ function CollectionContent() {
 
 export default function CollectionPage() {
   return (
-    <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#F4F4F1] text-[#635F58] min-h-screen flex flex-col justify-between">
       <Navbar />
       <Suspense
         fallback={
           <div className="pt-36 pb-28 text-center flex flex-col items-center justify-center flex-1">
-            <div className="w-8 h-8 border-2 border-[#F4F4F1]/20 border-t-[#F4F4F1] rounded-full animate-spin mb-4" />
-            <p className="text-xs uppercase tracking-[0.2em] text-[#F4F4F1]/60">
+            <div className="w-8 h-8 border-2 border-[#635F58]/20 border-t-[#635F58] rounded-full animate-spin mb-4" />
+            <p className="text-xs uppercase tracking-[0.2em] text-[#635F58]/60">
               Loading collection...
             </p>
           </div>

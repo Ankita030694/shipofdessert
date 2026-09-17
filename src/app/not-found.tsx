@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#F4F4F1] text-[#635F58]">
       <Navbar />
 
       <main className="flex-1 pt-40 pb-24 px-4 sm:px-6 flex flex-col items-center justify-center text-center">
@@ -22,13 +22,13 @@ export default function NotFound() {
         <h1 className="text-2xl sm:text-3xl font-light tracking-[0.2em] uppercase font-serif mb-4">
           Nothing Here
         </h1>
-        <p className="text-xs sm:text-sm text-[#F4F4F1]/70 max-w-sm mb-8">
+        <p className="text-xs sm:text-sm text-[#635F58]/70 max-w-sm mb-8">
           The requested page could not be located. You may explore the active collections.
         </p>
 
         <Link
           href="/shop"
-          className="inline-block bg-[#F4F4F1] text-[#1F1D1A] px-8 py-3.5 text-xs font-medium uppercase tracking-widest hover:bg-[#333330] transition-colors"
+          className="inline-block bg-[#635F58] text-[#F4F4F1] px-8 py-3.5 text-xs font-medium uppercase tracking-widest hover:bg-[#524E48] transition-colors"
         >
           Return to Shop
         </Link>

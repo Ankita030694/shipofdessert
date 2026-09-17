@@ -34,19 +34,19 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#1F1D1A] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col bg-[#F4F4F1] text-[#635F58]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 flex items-center justify-center">
         <div className="w-full max-w-lg mx-auto">
           
           {/* Header Title */}
-          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#F4F4F1] mb-8">
+          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#635F58] mb-8">
             RESET YOUR PASSWORD
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm font-normal text-[#F4F4F1] mb-8 text-center sm:text-left">
+          <p className="text-sm font-normal text-[#635F58] mb-8 text-center sm:text-left">
             We will send you an email to reset your password.
           </p>
 
@@ -68,7 +68,7 @@ export default function ForgotPasswordPage() {
             <div>
               <label 
                 htmlFor="reset-email" 
-                className="block font-bold text-xs sm:text-sm text-[#F4F4F1] mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#635F58] mb-1"
               >
                 Email* :
               </label>
@@ -79,7 +79,7 @@ export default function ForgotPasswordPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
-                className="w-full bg-transparent text-sm text-[#F4F4F1] placeholder-[#F4F4F1]/60 border-b border-[#F4F4F1] py-2 focus:outline-none"
+                className="w-full bg-transparent text-sm text-[#635F58] placeholder-[#635F58]/60 border-b border-[#635F58] py-2 focus:outline-none"
               />
             </div>
 
@@ -88,14 +88,14 @@ export default function ForgotPasswordPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#F4F4F1] text-[#1F1D1A] py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#eaeae7] transition-colors disabled:opacity-50 cursor-pointer"
+                className="w-full bg-[#635F58] text-[#F4F4F1] py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#524E48] transition-colors disabled:opacity-50 cursor-pointer"
               >
                 {loading ? 'Submitting...' : 'Submit'}
               </button>
 
               <Link
                 href="/login"
-                className="block w-full text-center text-xs sm:text-sm text-[#F4F4F1] underline hover:opacity-75 py-2"
+                className="block w-full text-center text-xs sm:text-sm text-[#635F58] underline hover:opacity-75 py-2"
               >
                 Cancel
               </Link>

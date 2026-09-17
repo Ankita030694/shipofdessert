@@ -17,11 +17,11 @@ export const metadata: Metadata = {
 
 export default function ShippingPage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#F4F4F1] text-[#635F58]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-20 px-4 sm:px-8 max-w-4xl mx-auto w-full">
-        <div className="border-b border-[#F4F4F1]/20 pb-8 mb-10 text-center md:text-left">
+        <div className="border-b border-[#635F58]/20 pb-8 mb-10 text-center md:text-left">
           <span className="text-xs uppercase tracking-[0.25em] text-[#bdb2a1] font-semibold block mb-2">
             Customer Services
           </span>
@@ -30,17 +30,17 @@ export default function ShippingPage() {
           </h1>
         </div>
 
-        <div className="space-y-8 text-xs sm:text-sm text-[#F4F4F1]/85 leading-relaxed">
+        <div className="space-y-8 text-xs sm:text-sm text-[#635F58]/85 leading-relaxed">
           <section className="space-y-3">
-            <h2 className="font-semibold uppercase tracking-wider text-[#F4F4F1]">1. Complimentary Standard Delivery</h2>
+            <h2 className="font-semibold uppercase tracking-wider text-[#635F58]">1. Complimentary Standard Delivery</h2>
             <p>
               KSHAUM offers complimentary express delivery on all orders globally. Orders are dispatched with premium couriers in climate-controlled packaging designed to protect natural and delicate fibers.
             </p>
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-semibold uppercase tracking-wider text-[#F4F4F1]">2. Delivery Timelines</h2>
-            <ul className="list-disc pl-5 space-y-1.5 text-[#F4F4F1]/80">
+            <h2 className="font-semibold uppercase tracking-wider text-[#635F58]">2. Delivery Timelines</h2>
+            <ul className="list-disc pl-5 space-y-1.5 text-[#635F58]/80">
               <li>Domestic Orders (India): 2–4 business days from dispatch.</li>
               <li>International Orders: 4–7 business days via DHL Express / FedEx Priority.</li>
               <li>Made-to-Order / Archival pieces: 10–14 business days.</li>
@@ -48,7 +48,7 @@ export default function ShippingPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-semibold uppercase tracking-wider text-[#F4F4F1]">3. Customs, Duties & Taxes</h2>
+            <h2 className="font-semibold uppercase tracking-wider text-[#635F58]">3. Customs, Duties & Taxes</h2>
             <p>
               All international shipments are delivered on a DDP (Delivered Duty Paid) basis where applicable, ensuring no unforeseen charges upon arrival.
             </p>

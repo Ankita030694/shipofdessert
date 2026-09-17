@@ -12,12 +12,12 @@ export default function CartPage() {
     useCart();
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#F4F4F1] text-[#635F58]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
         {/* Header */}
-        <div className="border-b border-[#F4F4F1]/20 pb-6 mb-8 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
+        <div className="border-b border-[#635F58]/20 pb-6 mb-8 flex flex-col sm:flex-row justify-between sm:items-end gap-4">
           <div>
             <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] font-semibold block mb-1">
               Your Selection
@@ -29,12 +29,12 @@ export default function CartPage() {
 
           {items.length > 0 && (
             <div className="flex items-center gap-4 text-xs">
-              <span className="text-[#F4F4F1]/60">
+              <span className="text-[#635F58]/60">
                 {totalCount} {totalCount === 1 ? 'Garment' : 'Garments'}
               </span>
               <button
                 onClick={clearCart}
-                className="underline text-[#F4F4F1]/60 hover:text-red-400 uppercase tracking-wider text-[11px] cursor-pointer"
+                className="underline text-[#635F58]/60 hover:text-red-400 uppercase tracking-wider text-[11px] cursor-pointer"
               >
                 Clear Bag
               </button>
@@ -44,13 +44,13 @@ export default function CartPage() {
 
         {/* Loading State */}
         {loading && items.length === 0 ? (
-          <div className="py-24 text-center text-xs uppercase tracking-widest text-[#F4F4F1]/60">
+          <div className="py-24 text-center text-xs uppercase tracking-widest text-[#635F58]/60">
             Loading your selection...
           </div>
         ) : items.length === 0 ? (
           /* Empty Bag State */
           <div className="py-20 text-center max-w-md mx-auto">
-            <div className="w-16 h-16 rounded-full border border-[#F4F4F1]/15 flex items-center justify-center mx-auto mb-6 text-[#F4F4F1]/60">
+            <div className="w-16 h-16 rounded-full border border-[#635F58]/15 flex items-center justify-center mx-auto mb-6 text-[#635F58]/60">
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
@@ -58,12 +58,12 @@ export default function CartPage() {
             <h2 className="text-lg font-serif uppercase tracking-wider mb-2">
               Your Shopping Bag is Empty
             </h2>
-            <p className="text-xs text-[#F4F4F1]/70 leading-relaxed mb-8">
+            <p className="text-xs text-[#635F58]/70 leading-relaxed mb-8">
               Explore our current collection of handcrafted garments and timeless silhouettes.
             </p>
             <Link
               href="/collection"
-              className="inline-block bg-[#F4F4F1] text-[#1F1D1A] px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors"
+              className="inline-block bg-[#635F58] text-[#F4F4F1] px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#524E48] transition-colors"
             >
               Explore Collection
             </Link>
@@ -72,13 +72,13 @@ export default function CartPage() {
           /* 2-Column Bag Layout */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left 8 Cols: Line Items Table */}
-            <div className="lg:col-span-8 bg-[#1F1D1A] border border-[#F4F4F1]/10 rounded-sm divide-y divide-[#F4F4F1]/10 p-6 sm:p-8 shadow-xs">
+            <div className="lg:col-span-8 bg-[#F4F4F1] border border-[#635F58]/10 rounded-sm divide-y divide-[#635F58]/10 p-6 sm:p-8 shadow-xs">
               {items.map((item) => (
                 <div key={item.id} className="pt-6 first:pt-0 pb-6 flex flex-col sm:flex-row gap-5">
                   {/* Garment Image */}
                   <Link
                     href={`/product/${item.slug}`}
-                    className="relative w-24 sm:w-28 aspect-[3/4] bg-[#2a2723]/40 rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10"
+                    className="relative w-24 sm:w-28 aspect-[3/4] bg-[#e6e2d8]/40 rounded-xs overflow-hidden flex-shrink-0 border border-[#635F58]/10"
                   >
                     <Image
                       src={item.image || '/image1.jpg'}
@@ -97,14 +97,14 @@ export default function CartPage() {
                         <div>
                           <Link
                             href={`/product/${item.slug}`}
-                            className="font-serif text-sm sm:text-base text-[#F4F4F1] hover:underline"
+                            className="font-serif text-sm sm:text-base text-[#635F58] hover:underline"
                           >
                             {item.name}
                           </Link>
-                          <div className="flex flex-wrap gap-2 text-xs text-[#F4F4F1]/60 mt-1">
-                            <span>Size: <strong className="text-[#F4F4F1]">{item.size}</strong></span>
+                          <div className="flex flex-wrap gap-2 text-xs text-[#635F58]/60 mt-1">
+                            <span>Size: <strong className="text-[#635F58]">{item.size}</strong></span>
                             <span>•</span>
-                            <span>Color: <strong className="text-[#F4F4F1]">{item.color}</strong></span>
+                            <span>Color: <strong className="text-[#635F58]">{item.color}</strong></span>
                           </div>
                         </div>
 
@@ -113,7 +113,7 @@ export default function CartPage() {
                             ₹{(item.price * item.quantity).toLocaleString()}
                           </span>
                           {item.quantity > 1 && (
-                            <div className="text-[11px] text-[#F4F4F1]/50">
+                            <div className="text-[11px] text-[#635F58]/50">
                               (₹{item.price.toLocaleString()} each)
                             </div>
                           )}
@@ -122,15 +122,15 @@ export default function CartPage() {
                     </div>
 
                     {/* Quantity Selector & Remove Action */}
-                    <div className="flex justify-between items-center mt-6 pt-4 border-t border-[#F4F4F1]/5">
+                    <div className="flex justify-between items-center mt-6 pt-4 border-t border-[#635F58]/5">
                       <div className="flex items-center gap-3">
-                        <span className="text-[11px] uppercase tracking-wider text-[#F4F4F1]/60">
+                        <span className="text-[11px] uppercase tracking-wider text-[#635F58]/60">
                           Quantity:
                         </span>
-                        <div className="flex items-center border border-[#F4F4F1]/20 bg-[#1F1D1A]">
+                        <div className="flex items-center border border-[#635F58]/20 bg-[#F4F4F1]">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="px-3 py-1 text-xs hover:bg-[#2e2a25] transition-colors cursor-pointer"
+                            className="px-3 py-1 text-xs hover:bg-[#ded9cd] transition-colors cursor-pointer"
                             title="Decrease quantity"
                           >
                             −
@@ -138,7 +138,7 @@ export default function CartPage() {
                           <span className="px-3 text-xs font-mono font-medium">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="px-3 py-1 text-xs hover:bg-[#2e2a25] transition-colors cursor-pointer"
+                            className="px-3 py-1 text-xs hover:bg-[#ded9cd] transition-colors cursor-pointer"
                             title="Increase quantity"
                           >
                             +
@@ -159,36 +159,36 @@ export default function CartPage() {
             </div>
 
             {/* Right 4 Cols: Order Summary */}
-            <div className="lg:col-span-4 bg-[#1F1D1A] border border-[#F4F4F1]/10 rounded-sm p-6 sm:p-8 shadow-xs sticky top-28 space-y-6">
-              <h2 className="font-serif text-base uppercase tracking-wider border-b border-[#F4F4F1]/10 pb-3">
+            <div className="lg:col-span-4 bg-[#F4F4F1] border border-[#635F58]/10 rounded-sm p-6 sm:p-8 shadow-xs sticky top-28 space-y-6">
+              <h2 className="font-serif text-base uppercase tracking-wider border-b border-[#635F58]/10 pb-3">
                 Order Summary
               </h2>
 
               <div className="space-y-3 text-xs">
-                <div className="flex justify-between text-[#F4F4F1]/70">
+                <div className="flex justify-between text-[#635F58]/70">
                   <span>Subtotal ({totalCount} items)</span>
-                  <span className="font-medium text-[#F4F4F1]">
+                  <span className="font-medium text-[#635F58]">
                     ₹{subtotal.toLocaleString()}
                   </span>
                 </div>
 
-                <div className="flex justify-between text-[#F4F4F1]/70">
+                <div className="flex justify-between text-[#635F58]/70">
                   <span>Shipping & Delivery</span>
                   <span className="uppercase text-[10px] tracking-wider text-emerald-300 font-semibold bg-emerald-900/30 px-2 py-0.5 border border-emerald-500/30">
                     Complimentary
                   </span>
                 </div>
 
-                <div className="flex justify-between text-[#F4F4F1]/70">
+                <div className="flex justify-between text-[#635F58]/70">
                   <span>Estimated Taxes</span>
-                  <span className="text-[#F4F4F1]/50">Included in garment price</span>
+                  <span className="text-[#635F58]/50">Included in garment price</span>
                 </div>
 
-                <div className="border-t border-[#F4F4F1]/10 pt-3 flex justify-between items-baseline">
+                <div className="border-t border-[#635F58]/10 pt-3 flex justify-between items-baseline">
                   <span className="font-serif uppercase tracking-wider text-sm font-semibold">
                     Estimated Total
                   </span>
-                  <span className="font-serif text-lg font-bold text-[#F4F4F1]">
+                  <span className="font-serif text-lg font-bold text-[#635F58]">
                     ₹{subtotal.toLocaleString()}
                   </span>
                 </div>
@@ -198,20 +198,20 @@ export default function CartPage() {
               <div className="space-y-2.5 pt-2">
                 <Link
                   href="/checkout"
-                  className="block w-full bg-[#F4F4F1] text-[#1F1D1A] py-4 text-xs font-medium uppercase tracking-[0.2em] text-center hover:bg-[#eaeae7] transition-colors"
+                  className="block w-full bg-[#635F58] text-[#F4F4F1] py-4 text-xs font-medium uppercase tracking-[0.2em] text-center hover:bg-[#524E48] transition-colors"
                 >
                   Proceed to Checkout →
                 </Link>
                 <Link
                   href="/collection"
-                  className="block w-full text-center text-xs text-[#F4F4F1]/70 hover:underline tracking-wider py-1"
+                  className="block w-full text-center text-xs text-[#635F58]/70 hover:underline tracking-wider py-1"
                 >
                   Continue Shopping
                 </Link>
               </div>
 
               {/* Trust badges */}
-              <div className="border-t border-[#F4F4F1]/10 pt-4 space-y-2 text-[11px] text-[#F4F4F1]/70">
+              <div className="border-t border-[#635F58]/10 pt-4 space-y-2 text-[11px] text-[#635F58]/70">
                 <div className="flex items-center gap-2">
                   <span>🔒</span>
                   <span>256-Bit Encrypted Secure Checkout</span>

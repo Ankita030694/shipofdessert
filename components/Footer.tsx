@@ -38,26 +38,26 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-[#1F1D1A] text-[#F4F4F1] border-t border-[#F4F4F1]/20">
+    <footer className="w-full bg-[#F4F4F1] text-[#635F58] border-t border-[#635F58]/20">
       {/* ---------------- DESKTOP VIEW (md+) ---------------- */}
       <div className="hidden md:block max-w-7xl mx-auto pt-16 pb-12 px-6 sm:px-8 lg:px-12">
         {/* Main 5-Section Layout */}
         <div className="grid grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Section 1: Language & Country Selector (Left with Right Border) */}
-          <div className="col-span-12 md:col-span-3 lg:col-span-3 pr-6 border-r border-[#F4F4F1]/20/80 space-y-6">
+          <div className="col-span-12 md:col-span-3 lg:col-span-3 pr-6 border-r border-[#635F58]/20/80 space-y-6">
             {/* Language Selector */}
             <div>
-              <span className="block text-xs sm:text-[13px] text-[#F4F4F1] font-normal mb-1">
+              <span className="block text-xs sm:text-[13px] text-[#635F58] font-normal mb-1">
                 Choose language:
               </span>
               <div className="relative inline-block w-full">
                 <select
                   value={currentLanguage?.code || 'en'}
                   onChange={(e) => setLanguageByCode(e.target.value)}
-                  className="w-full bg-transparent text-xs sm:text-[13px] text-[#F4F4F1] py-0.5 pl-0 pr-6 border-none focus:outline-none cursor-pointer appearance-none"
+                  className="w-full bg-transparent text-xs sm:text-[13px] text-[#635F58] py-0.5 pl-0 pr-6 border-none focus:outline-none cursor-pointer appearance-none"
                   style={{
-                    backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23F4F4F1%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
+                    backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23635F58%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'right 0 top 50%',
                     backgroundSize: '8px auto'
@@ -74,16 +74,16 @@ const Footer = () => {
 
             {/* Country Selector */}
             <div>
-              <span className="block text-xs sm:text-[13px] text-[#F4F4F1] font-normal mb-1">
+              <span className="block text-xs sm:text-[13px] text-[#635F58] font-normal mb-1">
                 Select country:
               </span>
               <div className="relative inline-block w-full">
                 <select
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  className="w-full bg-transparent text-xs sm:text-[13px] text-[#F4F4F1] py-0.5 pl-0 pr-6 border-none focus:outline-none cursor-pointer appearance-none"
+                  className="w-full bg-transparent text-xs sm:text-[13px] text-[#635F58] py-0.5 pl-0 pr-6 border-none focus:outline-none cursor-pointer appearance-none"
                   style={{
-                    backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23F4F4F1%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
+                    backgroundImage: `url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23635F58%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E")`,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'right 0 top 50%',
                     backgroundSize: '8px auto'
@@ -101,7 +101,7 @@ const Footer = () => {
 
           {/* Section 2: Links Column 1 */}
           <div className="col-span-6 md:col-span-2 lg:col-span-2">
-            <ul className="space-y-3 text-xs sm:text-[13px] text-[#F4F4F1] font-normal">
+            <ul className="space-y-3 text-xs sm:text-[13px] text-[#635F58] font-normal">
               <li>
                 <Link href="/care" className="hover:opacity-50 transition-opacity">
                   Care for a Lifetime
@@ -117,7 +117,7 @@ const Footer = () => {
 
           {/* Section 3: Links Column 2 */}
           <div className="col-span-6 md:col-span-2 lg:col-span-2">
-            <ul className="space-y-3 text-xs sm:text-[13px] text-[#F4F4F1] font-normal">
+            <ul className="space-y-3 text-xs sm:text-[13px] text-[#635F58] font-normal">
               <li>
                 <a
                   href="https://instagram.com"
@@ -148,7 +148,7 @@ const Footer = () => {
 
           {/* Section 4: Links Column 3 */}
           <div className="col-span-6 md:col-span-2 lg:col-span-2">
-            <ul className="space-y-3 text-xs sm:text-[13px] text-[#F4F4F1] font-normal">
+            <ul className="space-y-3 text-xs sm:text-[13px] text-[#635F58] font-normal">
               <li>
                 <Link href="/contact" className="hover:opacity-50 transition-opacity">
                   FAQ
@@ -170,23 +170,23 @@ const Footer = () => {
           {/* Section 5: Newsletter Subscription (Right) */}
           <div className="col-span-12 md:col-span-3 lg:col-span-3">
             <form onSubmit={handleSubscribe} className="max-w-sm">
-              <span className="block text-xs sm:text-[13px] text-[#F4F4F1] font-normal mb-3">
+              <span className="block text-xs sm:text-[13px] text-[#635F58] font-normal mb-3">
                 Subscribe to our Newsletter
               </span>
 
-              <div className="relative border-b border-[#F4F4F1] pb-1.5 focus-within:border-black transition-colors flex items-center justify-between">
+              <div className="relative border-b border-[#635F58] pb-1.5 focus-within:border-black transition-colors flex items-center justify-between">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   required
-                  className="w-full bg-transparent text-xs sm:text-[13px] text-[#F4F4F1] placeholder-[#F4F4F1]/60 focus:outline-none pr-6"
+                  className="w-full bg-transparent text-xs sm:text-[13px] text-[#635F58] placeholder-[#635F58]/60 focus:outline-none pr-6"
                 />
                 <button
                   type="submit"
                   aria-label="Submit email"
-                  className="text-[#F4F4F1] hover:opacity-50 transition-opacity text-sm font-light pl-2 cursor-pointer"
+                  className="text-[#635F58] hover:opacity-50 transition-opacity text-sm font-light pl-2 cursor-pointer"
                 >
                   &gt;
                 </button>
@@ -200,14 +200,14 @@ const Footer = () => {
                   checked={agreed}
                   onChange={(e) => setAgreed(e.target.checked)}
                   required
-                  className="mt-0.5 h-3.5 w-3.5 rounded-none border-[#F4F4F1] text-[#F4F4F1] focus:ring-0 focus:ring-offset-0 cursor-pointer"
+                  className="mt-0.5 h-3.5 w-3.5 rounded-none border-[#635F58] text-[#635F58] focus:ring-0 focus:ring-offset-0 cursor-pointer"
                 />
                 <label
                   htmlFor="footer-privacy-consent"
-                  className="text-[11px] sm:text-xs text-[#F4F4F1] leading-snug cursor-pointer select-none"
+                  className="text-[11px] sm:text-xs text-[#635F58] leading-snug cursor-pointer select-none"
                 >
                   I have read and understood the{' '}
-                  <Link href="/privacy-policy" className="underline hover:opacity-60 text-[#F4F4F1]">
+                  <Link href="/privacy-policy" className="underline hover:opacity-60 text-[#635F58]">
                     Privacy Policy
                   </Link>
                 </label>
@@ -224,7 +224,7 @@ const Footer = () => {
         </div>
 
         {/* Centered Copyright Notice */}
-        <div className="mt-20 pt-8 text-center text-xs sm:text-[13px] text-[#F4F4F1] font-normal">
+        <div className="mt-20 pt-8 text-center text-xs sm:text-[13px] text-[#635F58] font-normal">
           <p>KSHAUM © 2026</p>
         </div>
       </div>
@@ -232,15 +232,15 @@ const Footer = () => {
       {/* ---------------- MOBILE VIEW (< md) ---------------- */}
       <div className="block md:hidden px-6 pt-12 pb-10 max-w-md mx-auto space-y-10">
         {/* Language & Country Selectors */}
-        <div className="space-y-4 pb-6 border-b border-[#F4F4F1]/20">
+        <div className="space-y-4 pb-6 border-b border-[#635F58]/20">
           <div>
-            <span className="block text-xs uppercase tracking-wider text-[#F4F4F1] font-medium mb-1">
+            <span className="block text-xs uppercase tracking-wider text-[#635F58] font-medium mb-1">
               Choose language:
             </span>
             <select
               value={currentLanguage?.code || 'en'}
               onChange={(e) => setLanguageByCode(e.target.value)}
-              className="w-full bg-transparent text-xs text-[#F4F4F1] py-1 border-b border-[#F4F4F1]/20 focus:outline-none cursor-pointer"
+              className="w-full bg-transparent text-xs text-[#635F58] py-1 border-b border-[#635F58]/20 focus:outline-none cursor-pointer"
             >
               {languages.map((lang) => (
                 <option key={lang.code} value={lang.code}>
@@ -251,13 +251,13 @@ const Footer = () => {
           </div>
 
           <div>
-            <span className="block text-xs uppercase tracking-wider text-[#F4F4F1] font-medium mb-1">
+            <span className="block text-xs uppercase tracking-wider text-[#635F58] font-medium mb-1">
               Select country:
             </span>
             <select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              className="w-full bg-transparent text-xs text-[#F4F4F1] py-1 border-b border-[#F4F4F1]/20 focus:outline-none cursor-pointer"
+              className="w-full bg-transparent text-xs text-[#635F58] py-1 border-b border-[#635F58]/20 focus:outline-none cursor-pointer"
             >
               {COUNTRIES.map((c) => (
                 <option key={c} value={c}>
@@ -269,7 +269,7 @@ const Footer = () => {
         </div>
 
         {/* Links Grid */}
-        <div className="grid grid-cols-2 gap-6 text-xs sm:text-[13px] text-[#F4F4F1]">
+        <div className="grid grid-cols-2 gap-6 text-xs sm:text-[13px] text-[#635F58]">
           <div className="space-y-2.5">
             <div>
               <Link href="/care" className="hover:opacity-60 transition-opacity">
@@ -323,24 +323,24 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Inline Subscription */}
-        <div className="pt-4 border-t border-[#F4F4F1]/20">
+        <div className="pt-4 border-t border-[#635F58]/20">
           <form onSubmit={handleSubscribe} className="space-y-3">
-            <span className="block text-xs uppercase tracking-wider text-[#F4F4F1] font-medium">
+            <span className="block text-xs uppercase tracking-wider text-[#635F58] font-medium">
               Subscribe to our Newsletter
             </span>
-            <div className="relative border-b border-[#F4F4F1] pb-1 flex items-center justify-between">
+            <div className="relative border-b border-[#635F58] pb-1 flex items-center justify-between">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email address"
                 required
-                className="w-full bg-transparent text-xs text-[#F4F4F1] placeholder-[#F4F4F1]/60 focus:outline-none pr-6"
+                className="w-full bg-transparent text-xs text-[#635F58] placeholder-[#635F58]/60 focus:outline-none pr-6"
               />
               <button
                 type="submit"
                 aria-label="Subscribe"
-                className="text-[#F4F4F1] hover:opacity-60 text-sm pl-2 cursor-pointer font-light"
+                className="text-[#635F58] hover:opacity-60 text-sm pl-2 cursor-pointer font-light"
               >
                 &gt;
               </button>
@@ -352,9 +352,9 @@ const Footer = () => {
                 checked={agreed}
                 onChange={(e) => setAgreed(e.target.checked)}
                 required
-                className="h-3.5 w-3.5 rounded-none border-[#F4F4F1] text-[#F4F4F1] focus:ring-0 cursor-pointer"
+                className="h-3.5 w-3.5 rounded-none border-[#635F58] text-[#635F58] focus:ring-0 cursor-pointer"
               />
-              <label htmlFor="mobile-footer-privacy" className="text-[11px] text-[#F4F4F1]">
+              <label htmlFor="mobile-footer-privacy" className="text-[11px] text-[#635F58]">
                 I agree to the{' '}
                 <Link href="/privacy-policy" className="underline">
                   Privacy Policy
@@ -370,7 +370,7 @@ const Footer = () => {
         </div>
 
         {/* Centered Copyright */}
-        <div className="pt-6 border-t border-[#F4F4F1]/20 text-center text-xs text-[#F4F4F1]">
+        <div className="pt-6 border-t border-[#635F58]/20 text-center text-xs text-[#635F58]">
           <p>KSHAUM © 2026</p>
         </div>
       </div>

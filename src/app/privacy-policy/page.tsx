@@ -115,7 +115,7 @@ export default function PrivacyPolicy() {
       footnote: (
         <span>
           To exercise your rights, please contact:{' '}
-          <a href="mailto:onlinecustomercare@thekshaum.com" className="font-medium underline hover:text-[#F4F4F1] transition-colors">
+          <a href="mailto:onlinecustomercare@thekshaum.com" className="font-medium underline hover:text-[#635F58] transition-colors">
             onlinecustomercare@thekshaum.com
           </a>
         </span>
@@ -148,21 +148,21 @@ export default function PrivacyPolicy() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#1F1D1A] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col bg-[#F4F4F1] text-[#635F58]">
       <Navbar />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
-          <div className="border-b border-[#F4F4F1]/15 pb-10 mb-12 text-center md:text-left">
+          <div className="border-b border-[#635F58]/15 pb-10 mb-12 text-center md:text-left">
             <div className="inline-block uppercase tracking-[0.25em] text-xs font-semibold text-[#8C827A] mb-3">
               Legal & Compliance
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#F4F4F1] mb-4 font-serif">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#635F58] mb-4 font-serif">
               Privacy Policy
             </h1>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#F4F4F1]/70">
-              <span className="inline-flex items-center px-3 py-1 rounded-none border border-[#F4F4F1]/15 text-[#F4F4F1] text-xs tracking-wider">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#635F58]/70">
+              <span className="inline-flex items-center px-3 py-1 rounded-none border border-[#635F58]/15 text-[#635F58] text-xs tracking-wider">
                 Effective Date: July 2026
               </span>
               <span>•</span>
@@ -172,7 +172,7 @@ export default function PrivacyPolicy() {
                   href="http://www.thekshaum.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="underline hover:text-[#F4F4F1] transition-colors"
+                  className="underline hover:text-[#635F58] transition-colors"
                 >
                   www.thekshaum.com
                 </a>
@@ -181,20 +181,20 @@ export default function PrivacyPolicy() {
           </div>
 
           {/* Introduction Card */}
-          <div className="bg-[#1F1D1A] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12 space-y-4">
-            <p className="text-base sm:text-lg leading-relaxed text-[#F4F4F1]">
-              This Privacy Policy describes how <strong className="font-semibold text-[#F4F4F1]">KSHAUM</strong>, operated by <strong className="font-semibold text-[#F4F4F1]">Thirteen Pillars of Business LLP</strong> (“we”, “our”, “us”), collects, uses, and protects the personal information of individuals who visit{' '}
+          <div className="bg-[#F4F4F1] p-6 sm:p-8 border border-[#635F58]/15 shadow-xs mb-12 space-y-4">
+            <p className="text-base sm:text-lg leading-relaxed text-[#635F58]">
+              This Privacy Policy describes how <strong className="font-semibold text-[#635F58]">KSHAUM</strong>, operated by <strong className="font-semibold text-[#635F58]">Thirteen Pillars of Business LLP</strong> (“we”, “our”, “us”), collects, uses, and protects the personal information of individuals who visit{' '}
               <a 
                 href="http://www.thekshaum.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="underline font-medium text-[#F4F4F1] hover:opacity-80"
+                className="underline font-medium text-[#635F58] hover:opacity-80"
               >
                 www.thekshaum.com
               </a>{' '}
               (“the Site”).
             </p>
-            <p className="text-base sm:text-lg leading-relaxed text-[#F4F4F1]/80 italic border-l-2 border-[#F4F4F1] pl-4 py-1">
+            <p className="text-base sm:text-lg leading-relaxed text-[#635F58]/80 italic border-l-2 border-[#635F58] pl-4 py-1">
               We are committed to preserving your privacy and handling your information with care, transparency, and respect.
             </p>
           </div>
@@ -205,19 +205,19 @@ export default function PrivacyPolicy() {
               <section 
                 key={section.id} 
                 id={section.id} 
-                className="bg-[#1F1D1A] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs scroll-mt-28 transition-all hover:border-[#F4F4F1]/30"
+                className="bg-[#F4F4F1] p-6 sm:p-8 border border-[#635F58]/15 shadow-xs scroll-mt-28 transition-all hover:border-[#635F58]/30"
               >
-                <div className="flex items-baseline gap-3 mb-4 border-b border-[#F4F4F1]/10 pb-3">
-                  <span className="text-xs sm:text-sm font-mono font-semibold px-2 py-0.5 border border-[#F4F4F1]/20 text-[#F4F4F1]">
+                <div className="flex items-baseline gap-3 mb-4 border-b border-[#635F58]/10 pb-3">
+                  <span className="text-xs sm:text-sm font-mono font-semibold px-2 py-0.5 border border-[#635F58]/20 text-[#635F58]">
                     {section.number.padStart(2, '0')}
                   </span>
-                  <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-[#F4F4F1]">
+                  <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-[#635F58]">
                     {section.title}
                   </h2>
                 </div>
 
                 {section.content && (
-                  <p className="text-[#F4F4F1]/80 leading-relaxed mb-4 text-base">
+                  <p className="text-[#635F58]/80 leading-relaxed mb-4 text-base">
                     {section.content}
                   </p>
                 )}
@@ -225,15 +225,15 @@ export default function PrivacyPolicy() {
                 {section.subsections && (
                   <div className="space-y-6 mt-4">
                     {section.subsections.map((sub, idx) => (
-                      <div key={idx} className="bg-[#1F1D1A] p-4 sm:p-5 border border-[#F4F4F1]/10">
-                        <h3 className="text-base font-semibold text-[#F4F4F1] mb-2">
+                      <div key={idx} className="bg-[#F4F4F1] p-4 sm:p-5 border border-[#635F58]/10">
+                        <h3 className="text-base font-semibold text-[#635F58] mb-2">
                           {sub.subtitle}
                         </h3>
-                        <p className="text-[#F4F4F1]/80 text-sm leading-relaxed mb-3">
+                        <p className="text-[#635F58]/80 text-sm leading-relaxed mb-3">
                           {sub.content}
                         </p>
                         {sub.items && (
-                          <ul className="space-y-2 pl-5 list-disc text-sm text-[#F4F4F1]/80">
+                          <ul className="space-y-2 pl-5 list-disc text-sm text-[#635F58]/80">
                             {sub.items.map((item, itemIdx) => (
                               <li key={itemIdx}>{item}</li>
                             ))}
@@ -245,7 +245,7 @@ export default function PrivacyPolicy() {
                 )}
 
                 {section.items && (
-                  <ul className="space-y-2.5 pl-5 list-disc text-[#F4F4F1]/80 text-base mb-4 marker:text-[#F4F4F1]/40">
+                  <ul className="space-y-2.5 pl-5 list-disc text-[#635F58]/80 text-base mb-4 marker:text-[#635F58]/40">
                     {section.items.map((item, idx) => (
                       <li key={idx} className="leading-relaxed">{item}</li>
                     ))}
@@ -253,18 +253,18 @@ export default function PrivacyPolicy() {
                 )}
 
                 {section.footnote && (
-                  <div className="mt-4 pt-4 border-t border-[#F4F4F1]/10 text-sm text-[#F4F4F1]/70 leading-relaxed">
+                  <div className="mt-4 pt-4 border-t border-[#635F58]/10 text-sm text-[#635F58]/70 leading-relaxed">
                     {section.footnote}
                   </div>
                 )}
 
                 {section.contactDetails && (
-                  <div className="mt-4 bg-[#1F1D1A] p-5 border border-[#F4F4F1]/20 space-y-2 text-sm text-[#F4F4F1]">
+                  <div className="mt-4 bg-[#F4F4F1] p-5 border border-[#635F58]/20 space-y-2 text-sm text-[#635F58]">
                     <p>
                       <strong>Email:</strong>{' '}
                       <a 
                         href={`mailto:${section.contactDetails.email}`} 
-                        className="underline font-medium text-[#F4F4F1] hover:opacity-75"
+                        className="underline font-medium text-[#635F58] hover:opacity-75"
                       >
                         {section.contactDetails.email}
                       </a>
@@ -280,9 +280,9 @@ export default function PrivacyPolicy() {
 
           {/* Bottom Help Notice */}
           <div className="mt-14 text-center border-t border-gray-200 pt-8">
-            <p className="text-sm text-[#F4F4F1]/70">
+            <p className="text-sm text-[#635F58]/70">
               Have questions regarding our Privacy Policy?{' '}
-              <Link href="/contact" className="text-[#F4F4F1] underline font-medium hover:opacity-80">
+              <Link href="/contact" className="text-[#635F58] underline font-medium hover:opacity-80">
                 Contact our customer care team
               </Link>
             </p>

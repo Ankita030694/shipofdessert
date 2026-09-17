@@ -327,10 +327,10 @@ export default function ProductDetailPage({
 
   if (loading) {
     return (
-      <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+      <div className="bg-[#F4F4F1] text-[#635F58] min-h-screen flex flex-col justify-between">
         <Navbar />
         <main className="flex-1 flex items-center justify-center pt-24">
-          <div className="text-xs uppercase tracking-widest text-[#F4F4F1]/60 animate-pulse">
+          <div className="text-xs uppercase tracking-widest text-[#635F58]/60 animate-pulse">
             Loading garment details...
           </div>
         </main>
@@ -341,16 +341,16 @@ export default function ProductDetailPage({
 
   if (!product) {
     return (
-      <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+      <div className="bg-[#F4F4F1] text-[#635F58] min-h-screen flex flex-col justify-between">
         <Navbar />
         <main className="flex-1 flex flex-col items-center justify-center pt-24 px-4 text-center">
           <h1 className="text-xl font-serif uppercase tracking-wider mb-2">Product Not Found</h1>
-          <p className="text-xs text-[#F4F4F1]/60 mb-6">
+          <p className="text-xs text-[#635F58]/60 mb-6">
             The requested piece could not be located in our current collection.
           </p>
           <Link
             href="/collection"
-            className="text-xs uppercase tracking-widest border-b border-[#F4F4F1] pb-0.5 hover:opacity-60"
+            className="text-xs uppercase tracking-widest border-b border-[#635F58] pb-0.5 hover:opacity-60"
           >
             Return to Collection
           </Link>
@@ -373,26 +373,26 @@ export default function ProductDetailPage({
         ];
 
   return (
-    <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#F4F4F1] text-[#635F58] min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 flex-1 max-w-7xl">
         {/* Breadcrumb */}
-        <div className="text-[11px] uppercase tracking-widest text-[#F4F4F1]/50 mb-8">
-          <Link href="/collection" className="hover:text-[#F4F4F1]">
+        <div className="text-[11px] uppercase tracking-widest text-[#635F58]/50 mb-8">
+          <Link href="/collection" className="hover:text-[#635F58]">
             Collection
           </Link>
           <span className="mx-2">/</span>
           <span>{product.category}</span>
           <span className="mx-2">/</span>
-          <span className="text-[#F4F4F1]">{product.name}</span>
+          <span className="text-[#635F58]">{product.name}</span>
         </div>
 
         {/* Main Product Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mb-24 items-start">
           {/* Left Column: Draggable Image Carousel (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="relative aspect-[3/4] bg-[#2a2723]/40 rounded-xs overflow-hidden border border-[#F4F4F1]/10 max-h-[780px] group select-none">
+            <div className="relative aspect-[3/4] bg-[#e6e2d8]/40 rounded-xs overflow-hidden border border-[#635F58]/10 max-h-[780px] group select-none">
               {/* Draggable Carousel Track */}
               <div
                 ref={carouselRef}
@@ -433,7 +433,7 @@ export default function ProductDetailPage({
                       type="button"
                       onClick={handlePrevImage}
                       aria-label="Previous image"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#1F1D1A]/85 hover:bg-[#1F1D1A] text-[#F4F4F1] border border-[#F4F4F1]/20 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20 backdrop-blur-xs"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#F4F4F1]/85 hover:bg-[#F4F4F1] text-[#635F58] border border-[#635F58]/20 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20 backdrop-blur-xs"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
@@ -446,7 +446,7 @@ export default function ProductDetailPage({
                       type="button"
                       onClick={handleNextImage}
                       aria-label="Next image"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#1F1D1A]/85 hover:bg-[#1F1D1A] text-[#F4F4F1] border border-[#F4F4F1]/20 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20 backdrop-blur-xs"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#F4F4F1]/85 hover:bg-[#F4F4F1] text-[#635F58] border border-[#635F58]/20 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20 backdrop-blur-xs"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
@@ -464,15 +464,15 @@ export default function ProductDetailPage({
                         aria-label={`Go to image ${idx + 1}`}
                         className={`h-1.5 transition-all duration-300 rounded-full cursor-pointer ${
                           idx === activeImageIndex
-                            ? 'w-6 bg-[#F4F4F1]'
-                            : 'w-1.5 bg-[#F4F4F1]/30 hover:bg-[#F4F4F1]/60'
+                            ? 'w-6 bg-[#635F58]'
+                            : 'w-1.5 bg-[#635F58]/30 hover:bg-[#635F58]/60'
                         }`}
                       />
                     ))}
                   </div>
 
                   {/* Image Counter Tag */}
-                  <div className="absolute bottom-3 right-3 bg-[#F4F4F1]/70 backdrop-blur-xs text-white text-[10px] tracking-widest font-mono px-2 py-0.5 rounded-xs pointer-events-none z-20">
+                  <div className="absolute bottom-3 right-3 bg-[#635F58]/70 backdrop-blur-xs text-white text-[10px] tracking-widest font-mono px-2 py-0.5 rounded-xs pointer-events-none z-20">
                     {activeImageIndex + 1} / {productImages.length}
                   </div>
                 </>
@@ -487,24 +487,24 @@ export default function ProductDetailPage({
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] font-semibold block mb-1">
                 {product.collectionName}
               </span>
-              <h1 className="text-2xl sm:text-3xl font-serif text-[#F4F4F1] font-normal tracking-wide mb-3">
+              <h1 className="text-2xl sm:text-3xl font-serif text-[#635F58] font-normal tracking-wide mb-3">
                 {product.name}
               </h1>
 
               {/* Price + Inclusive of Taxes Note */}
-              <div className="border-b border-[#F4F4F1]/20 pb-4">
+              <div className="border-b border-[#635F58]/20 pb-4">
                 <div className="flex items-baseline gap-3">
-                  <span className="text-xl sm:text-2xl font-serif font-light text-[#F4F4F1]">
+                  <span className="text-xl sm:text-2xl font-serif font-light text-[#635F58]">
                     ₹{activePrice.toLocaleString()}
                   </span>
                   {!product.inStock && (
-                    <span className="text-[10px] uppercase tracking-wider text-[#1F1D1A] bg-[#F4F4F1] px-2 py-0.5 ml-auto font-medium">
+                    <span className="text-[10px] uppercase tracking-wider text-[#F4F4F1] bg-[#635F58] px-2 py-0.5 ml-auto font-medium">
                       Made to Order
                     </span>
                   )}
                 </div>
 
-                <p className="text-[11px] text-[#F4F4F1]/60 font-light mt-1">
+                <p className="text-[11px] text-[#635F58]/60 font-light mt-1">
                   Inclusive of all taxes. Complimentary express shipping across India.
                 </p>
               </div>
@@ -512,12 +512,12 @@ export default function ProductDetailPage({
 
             {/* Short Fit Note & Model Stats */}
             {product.fitNote && (
-              <div className="bg-[#1F1D1A]/70 border border-[#F4F4F1]/10 p-3 rounded-xs flex items-center gap-2.5 text-xs text-[#F4F4F1]/80">
+              <div className="bg-[#F4F4F1]/70 border border-[#635F58]/10 p-3 rounded-xs flex items-center gap-2.5 text-xs text-[#635F58]/80">
                 <span className="text-sm">📏</span>
                 <div>
-                  <span className="font-medium text-[#F4F4F1]">{product.fitNote}</span>
+                  <span className="font-medium text-[#635F58]">{product.fitNote}</span>
                   {product.modelStats && product.modelStats !== product.fitNote && (
-                    <span className="text-[11px] text-[#F4F4F1]/60 block mt-0.5">
+                    <span className="text-[11px] text-[#635F58]/60 block mt-0.5">
                       {product.modelStats}
                     </span>
                   )}
@@ -528,9 +528,9 @@ export default function ProductDetailPage({
             {/* Colour Selector */}
             {product.colors && product.colors.length > 0 && (
               <div>
-                <div className="flex justify-between text-xs text-[#F4F4F1] mb-2.5">
+                <div className="flex justify-between text-xs text-[#635F58] mb-2.5">
                   <span className="uppercase tracking-wider font-semibold text-[11px]">
-                    Colour : <strong className="text-[#F4F4F1] font-normal">{selectedColor}</strong>
+                    Colour : <strong className="text-[#635F58] font-normal">{selectedColor}</strong>
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-2.5">
@@ -546,8 +546,8 @@ export default function ProductDetailPage({
                         aria-label={`Select ${color}`}
                         className={`w-7 h-7 sm:w-8 sm:h-8 transition-all cursor-pointer border ${
                           isSelected
-                            ? 'border-[#F4F4F1] ring-2 ring-[#F4F4F1] ring-offset-2 ring-offset-[#1F1D1A]'
-                            : 'border-[#F4F4F1]/30 hover:border-[#F4F4F1]'
+                            ? 'border-[#635F58] ring-2 ring-[#635F58] ring-offset-2 ring-offset-[#F4F4F1]'
+                            : 'border-[#635F58]/30 hover:border-[#635F58]'
                         }`}
                         style={{ backgroundColor: bg }}
                       />
@@ -560,13 +560,13 @@ export default function ProductDetailPage({
             {/* Size Selector & Size Guide */}
             {product.sizes && product.sizes.length > 0 && (
               <div>
-                <div className="flex justify-between items-center mb-2.5 text-xs text-[#F4F4F1]">
+                <div className="flex justify-between items-center mb-2.5 text-xs text-[#635F58]">
                   <span className="uppercase tracking-wider font-semibold text-[11px]">
                     Select Size
                   </span>
                   <button
                     onClick={() => setIsSizeGuideOpen(true)}
-                    className="underline text-[#F4F4F1]/70 hover:text-[#F4F4F1] cursor-pointer flex items-center gap-1.5 text-[11px]"
+                    className="underline text-[#635F58]/70 hover:text-[#635F58] cursor-pointer flex items-center gap-1.5 text-[11px]"
                   >
                     <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="m21.3 15.3-7.6-7.6a2.12 2.12 0 0 0-3 0L3 15.4a2.12 2.12 0 0 0 0 3l2.3 2.3a2.12 2.12 0 0 0 3 0l7.7-7.7" />
@@ -583,8 +583,8 @@ export default function ProductDetailPage({
                       onClick={() => setSelectedSize(size)}
                       className={`py-2.5 text-xs uppercase tracking-wider border transition-all cursor-pointer font-mono ${
                         selectedSize === size
-                          ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#1F1D1A] font-bold'
-                          : 'border-[#F4F4F1]/20 bg-[#1F1D1A] text-[#F4F4F1] hover:border-[#F4F4F1]'
+                          ? 'border-[#635F58] bg-[#635F58] text-[#F4F4F1] font-bold'
+                          : 'border-[#635F58]/20 bg-[#F4F4F1] text-[#635F58] hover:border-[#635F58]'
                       }`}
                     >
                       {formatSizeLabel(size)}
@@ -598,7 +598,7 @@ export default function ProductDetailPage({
             <div className="space-y-2.5 pt-2">
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-[#F4F4F1] text-[#1F1D1A] py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors cursor-pointer flex items-center justify-center gap-2"
+                className="w-full bg-[#635F58] text-[#F4F4F1] py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#524E48] transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>
                   {added ? 'Added to Bag ✓' : 'Add to Shopping Bag'}
@@ -607,27 +607,27 @@ export default function ProductDetailPage({
 
               <button
                 onClick={handleBuyNow}
-                className="w-full border border-[#F4F4F1] text-[#F4F4F1] py-3.5 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors cursor-pointer text-center block"
+                className="w-full border border-[#635F58] text-[#635F58] py-3.5 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#635F58] hover:text-[#F4F4F1] transition-colors cursor-pointer text-center block"
               >
                 Buy Now
               </button>
             </div>
 
             {/* Editorial Accordion Tabs */}
-            <div className="border-t border-[#F4F4F1]/20 pt-4 divide-y divide-[#F4F4F1]/20 text-xs">
+            <div className="border-t border-[#635F58]/20 pt-4 divide-y divide-[#635F58]/20 text-xs">
               {/* 1. Description */}
               <div className="py-3">
                 <button
                   onClick={() =>
                     setExpandedSection(expandedSection === 'description' ? null : 'description')
                   }
-                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#F4F4F1] cursor-pointer"
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#635F58] cursor-pointer"
                 >
                   <span>Editorial Description</span>
                   <span>{expandedSection === 'description' ? '−' : '+'}</span>
                 </button>
                 {expandedSection === 'description' && (
-                  <div className="pt-3 text-[#F4F4F1]/80 leading-relaxed font-light">
+                  <div className="pt-3 text-[#635F58]/80 leading-relaxed font-light">
                     <p>{product.description}</p>
                   </div>
                 )}
@@ -637,13 +637,13 @@ export default function ProductDetailPage({
               <div className="py-3">
                 <button
                   onClick={() => setExpandedSection(expandedSection === 'fabric' ? null : 'fabric')}
-                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#F4F4F1] cursor-pointer"
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#635F58] cursor-pointer"
                 >
                   <span>Fabric & Drape</span>
                   <span>{expandedSection === 'fabric' ? '−' : '+'}</span>
                 </button>
                 {expandedSection === 'fabric' && (
-                  <div className="pt-3 text-[#F4F4F1]/80 leading-relaxed font-light">
+                  <div className="pt-3 text-[#635F58]/80 leading-relaxed font-light">
                     <p>{product.fabric || '100% Handcrafted Natural Fiber.'}</p>
                   </div>
                 )}
@@ -653,13 +653,13 @@ export default function ProductDetailPage({
               <div className="py-3">
                 <button
                   onClick={() => setExpandedSection(expandedSection === 'fit' ? null : 'fit')}
-                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#F4F4F1] cursor-pointer"
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#635F58] cursor-pointer"
                 >
                   <span>Silhouette & Fit</span>
                   <span>{expandedSection === 'fit' ? '−' : '+'}</span>
                 </button>
                 {expandedSection === 'fit' && (
-                  <div className="pt-3 text-[#F4F4F1]/80 leading-relaxed font-light">
+                  <div className="pt-3 text-[#635F58]/80 leading-relaxed font-light">
                     <p>{product.fit || product.fitNote || 'Relaxed architectural fit.'}</p>
                     {product.modelStats && (
                       <p className="mt-2 text-[11px] text-stone-500 font-mono">
@@ -676,13 +676,13 @@ export default function ProductDetailPage({
                   onClick={() =>
                     setExpandedSection(expandedSection === 'details' ? null : 'details')
                   }
-                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#F4F4F1] cursor-pointer"
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#635F58] cursor-pointer"
                 >
                   <span>Craft & Tailoring Details</span>
                   <span>{expandedSection === 'details' ? '−' : '+'}</span>
                 </button>
                 {expandedSection === 'details' && (
-                  <ul className="pt-3 space-y-1.5 text-[#F4F4F1]/80 list-disc list-inside font-light">
+                  <ul className="pt-3 space-y-1.5 text-[#635F58]/80 list-disc list-inside font-light">
                     {designPointers.map((detail, index) => (
                       <li key={index} className="leading-relaxed">
                         {detail}
@@ -696,13 +696,13 @@ export default function ProductDetailPage({
               <div className="py-3">
                 <button
                   onClick={() => setExpandedSection(expandedSection === 'care' ? null : 'care')}
-                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#F4F4F1] cursor-pointer"
+                  className="w-full flex justify-between items-center text-left uppercase tracking-wider font-medium text-[#635F58] cursor-pointer"
                 >
                   <span>Care Guidelines</span>
                   <span>{expandedSection === 'care' ? '−' : '+'}</span>
                 </button>
                 {expandedSection === 'care' && (
-                  <div className="pt-3 text-[#F4F4F1]/80 leading-relaxed font-light">
+                  <div className="pt-3 text-[#635F58]/80 leading-relaxed font-light">
                     <p>
                       {product.care ||
                         'Dry clean or gentle hand wash in cold water with mild detergent. Do not wring. Line dry in shade.'}
@@ -716,18 +716,18 @@ export default function ProductDetailPage({
 
         {/* Complete the Look / Companion Pieces */}
         {product.companionItems && product.companionItems.length > 0 && (
-          <div className="border-t border-[#F4F4F1]/20 pt-16 mb-24">
+          <div className="border-t border-[#635F58]/20 pt-16 mb-24">
             <div className="text-center mb-10">
               <span className="text-[10px] uppercase tracking-[0.3em] text-[#bdb2a1] font-semibold block mb-1">
                 Curated Ensemble
               </span>
-              <h2 className="text-xl sm:text-2xl font-serif text-[#F4F4F1]">Complete The Look</h2>
+              <h2 className="text-xl sm:text-2xl font-serif text-[#635F58]">Complete The Look</h2>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {product.companionItems.map((item) => (
                 <Link key={item.id} href={`/product/${item.slug}`} className="group block">
-                  <div className="relative aspect-[3/4] bg-[#2a2723]/40 rounded-xs overflow-hidden mb-2.5">
+                  <div className="relative aspect-[3/4] bg-[#e6e2d8]/40 rounded-xs overflow-hidden mb-2.5">
                     <Image
                       src={item.image || '/image1.jpg'}
                       alt={item.name}
@@ -737,10 +737,10 @@ export default function ProductDetailPage({
                       sizes="(max-width: 768px) 50vw, 25vw"
                     />
                   </div>
-                  <h4 className="text-xs font-medium text-[#F4F4F1] group-hover:underline truncate">
+                  <h4 className="text-xs font-medium text-[#635F58] group-hover:underline truncate">
                     {item.name}
                   </h4>
-                  <span className="text-xs text-[#F4F4F1]/70 font-mono mt-0.5 block">
+                  <span className="text-xs text-[#635F58]/70 font-mono mt-0.5 block">
                     ₹{item.price.toLocaleString()}
                   </span>
                 </Link>
@@ -751,18 +751,18 @@ export default function ProductDetailPage({
 
         {/* Related Garments */}
         {product.relatedProducts && product.relatedProducts.length > 0 && (
-          <div className="border-t border-[#F4F4F1]/20 pt-16">
+          <div className="border-t border-[#635F58]/20 pt-16">
             <div className="text-center mb-10">
               <span className="text-[10px] uppercase tracking-[0.3em] text-[#bdb2a1] font-semibold block mb-1">
                 More From {product.category}
               </span>
-              <h2 className="text-xl sm:text-2xl font-serif text-[#F4F4F1]">You May Also Consider</h2>
+              <h2 className="text-xl sm:text-2xl font-serif text-[#635F58]">You May Also Consider</h2>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {product.relatedProducts.map((rel) => (
                 <Link key={rel.id} href={`/product/${rel.slug}`} className="group block">
-                  <div className="relative aspect-[3/4] bg-[#2a2723]/40 rounded-xs overflow-hidden mb-2.5">
+                  <div className="relative aspect-[3/4] bg-[#e6e2d8]/40 rounded-xs overflow-hidden mb-2.5">
                     <Image
                       src={rel.image || '/image1.jpg'}
                       alt={rel.name}
@@ -773,10 +773,10 @@ export default function ProductDetailPage({
                     />
                   </div>
                   <div className="flex justify-between items-start">
-                    <h4 className="text-xs font-medium text-[#F4F4F1] group-hover:underline">
+                    <h4 className="text-xs font-medium text-[#635F58] group-hover:underline">
                       {rel.name}
                     </h4>
-                    <span className="text-xs text-[#F4F4F1] font-mono ml-2">
+                    <span className="text-xs text-[#635F58] font-mono ml-2">
                       ₹{rel.price.toLocaleString()}
                     </span>
                   </div>
@@ -790,32 +790,32 @@ export default function ProductDetailPage({
       {/* Size Guide Modal */}
       {isSizeGuideOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-          <div className="bg-[#1F1D1A] max-w-lg w-full p-6 sm:p-8 rounded-sm shadow-2xl relative max-h-[90vh] overflow-y-auto border border-[#F4F4F1]/15">
-            <div className="flex justify-between items-start border-b border-[#F4F4F1]/10 pb-4 mb-5">
+          <div className="bg-[#F4F4F1] max-w-lg w-full p-6 sm:p-8 rounded-sm shadow-2xl relative max-h-[90vh] overflow-y-auto border border-[#635F58]/15">
+            <div className="flex justify-between items-start border-b border-[#635F58]/10 pb-4 mb-5">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] font-bold">
                   Sizing Guide
                 </span>
-                <h3 className="text-lg font-serif uppercase tracking-wider text-[#F4F4F1] mt-0.5">
+                <h3 className="text-lg font-serif uppercase tracking-wider text-[#635F58] mt-0.5">
                   Body Measurements & Fit
                 </h3>
               </div>
               <button
                 onClick={() => setIsSizeGuideOpen(false)}
-                className="text-[#F4F4F1]/60 hover:text-[#F4F4F1] text-lg p-1 cursor-pointer"
+                className="text-[#635F58]/60 hover:text-[#635F58] text-lg p-1 cursor-pointer"
               >
                 ✕
               </button>
             </div>
 
-            <p className="text-xs text-[#F4F4F1]/70 mb-4 leading-relaxed">
+            <p className="text-xs text-[#635F58]/70 mb-4 leading-relaxed">
               All measurements are indicated in inches. Our garments are cut with relaxed ease to
               honor natural movement and fabric breathability.
             </p>
 
             <div className="overflow-x-auto">
               <table className="w-full text-xs text-left">
-                <thead className="border-b border-[#F4F4F1]/20 uppercase tracking-widest text-[10px] text-[#F4F4F1]/70">
+                <thead className="border-b border-[#635F58]/20 uppercase tracking-widest text-[10px] text-[#635F58]/70">
                   <tr>
                     <th className="py-2.5">Size</th>
                     <th className="py-2.5">Bust/Chest</th>
@@ -823,7 +823,7 @@ export default function ProductDetailPage({
                     <th className="py-2.5">Hip</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#F4F4F1]/10 font-mono text-[11px]">
+                <tbody className="divide-y divide-[#635F58]/10 font-mono text-[11px]">
                   <tr>
                     <td className="py-2 font-bold">0 (XS)</td>
                     <td className="py-2">32 - 34&quot;</td>
@@ -858,9 +858,9 @@ export default function ProductDetailPage({
               </table>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[#F4F4F1]/10 text-[11px] text-[#F4F4F1]/70">
+            <div className="mt-6 pt-4 border-t border-[#635F58]/10 text-[11px] text-[#635F58]/70">
               Need custom tailoring? Reach out to our atelier team via{' '}
-              <a href="mailto:atelier@thekshaum.com" className="underline text-[#F4F4F1]">
+              <a href="mailto:atelier@thekshaum.com" className="underline text-[#635F58]">
                 atelier@thekshaum.com
               </a>
               .
