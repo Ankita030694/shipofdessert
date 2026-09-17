@@ -139,7 +139,7 @@ export default function TermsAndConditions() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -172,7 +172,7 @@ export default function TermsAndConditions() {
           </div>
 
           {/* Introduction Card */}
-          <div className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12 space-y-4">
+          <div className="bg-[#1F1D1A] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12 space-y-4">
             <p className="text-base sm:text-lg leading-relaxed text-[#F4F4F1]">
               Welcome to{' '}
               <a 
@@ -194,7 +194,7 @@ export default function TermsAndConditions() {
             {sections.map((section) => (
               <section 
                 key={section.number} 
-                className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs scroll-mt-28 transition-all hover:border-[#F4F4F1]/30"
+                className="bg-[#1F1D1A] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs scroll-mt-28 transition-all hover:border-[#F4F4F1]/30"
               >
                 <div className="flex items-baseline gap-3 mb-4 border-b border-[#F4F4F1]/10 pb-3">
                   <span className="text-xs sm:text-sm font-mono font-semibold px-2 py-0.5 border border-[#F4F4F1]/20 text-[#F4F4F1]">
@@ -230,7 +230,7 @@ export default function TermsAndConditions() {
                 )}
 
                 {section.contactDetails && (
-                  <div className="mt-4 bg-[#635F58] p-5 border border-[#F4F4F1]/20 space-y-2 text-sm text-[#F4F4F1]">
+                  <div className="mt-4 bg-[#1F1D1A] p-5 border border-[#F4F4F1]/20 space-y-2 text-sm text-[#F4F4F1]">
                     <p>
                       <strong>Email:</strong>{' '}
                       <a 

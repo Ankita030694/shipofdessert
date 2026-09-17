@@ -38,7 +38,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-full bg-[#635F58] text-[#F4F4F1] border-t border-[#F4F4F1]/20">
+    <footer className="w-full bg-[#1F1D1A] text-[#F4F4F1] border-t border-[#F4F4F1]/20">
       {/* ---------------- DESKTOP VIEW (md+) ---------------- */}
       <div className="hidden md:block max-w-7xl mx-auto pt-16 pb-12 px-6 sm:px-8 lg:px-12">
         {/* Main 5-Section Layout */}

@@ -26,7 +26,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-32 pb-24 px-5 sm:px-8 flex flex-col items-center justify-start">
@@ -135,7 +135,7 @@ export default function ContactPage() {
 
             {/* Submit Notification */}
             {submitted && (
-              <div className="p-3 bg-[#58544e]/40 border border-[#F4F4F1]/20 text-center text-xs text-[#F4F4F1] tracking-wide">
+              <div className="p-3 bg-[#2a2723]/40 border border-[#F4F4F1]/20 text-center text-xs text-[#F4F4F1] tracking-wide">
                 Thank you. Your message has been received by the KSHAUM concierge.
               </div>
             )}
@@ -145,7 +145,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 bg-[#F4F4F1] hover:bg-[#e4e4e1] text-[#635F58] text-xs uppercase tracking-[0.25em] font-medium transition-colors cursor-pointer disabled:opacity-50"
+                className="w-full py-3.5 bg-[#F4F4F1] hover:bg-[#e4e4e1] text-[#1F1D1A] text-xs uppercase tracking-[0.25em] font-medium transition-colors cursor-pointer disabled:opacity-50"
               >
                 {loading ? 'Sending...' : 'Submit'}
               </button>

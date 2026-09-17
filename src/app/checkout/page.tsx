@@ -129,7 +129,7 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1] font-sans">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1] font-sans">
       <Navbar />
 
       <main className="flex-1 pt-32 sm:pt-36 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -148,8 +148,8 @@ export default function CheckoutPage() {
             Preparing your luxury selection...
           </div>
         ) : items.length === 0 ? (
-          <div className="bg-[#635F58] p-12 rounded-sm border border-[#F4F4F1]/10 max-w-xl mx-auto text-center space-y-6 shadow-xs">
-            <div className="w-16 h-16 rounded-full border border-[#F4F4F1]/15 bg-[#635F58] flex items-center justify-center mx-auto text-[#F4F4F1]/60">
+          <div className="bg-[#1F1D1A] p-12 rounded-sm border border-[#F4F4F1]/10 max-w-xl mx-auto text-center space-y-6 shadow-xs">
+            <div className="w-16 h-16 rounded-full border border-[#F4F4F1]/15 bg-[#1F1D1A] flex items-center justify-center mx-auto text-[#F4F4F1]/60">
               <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M16 11V7a4 4 0 0 0-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
@@ -164,7 +164,7 @@ export default function CheckoutPage() {
             </div>
             <Link
               href="/collection"
-              className="inline-block bg-[#F4F4F1] text-[#635F58] px-8 py-3.5 text-xs uppercase tracking-widest font-medium hover:bg-[#eaeae7] transition-colors"
+              className="inline-block bg-[#F4F4F1] text-[#1F1D1A] px-8 py-3.5 text-xs uppercase tracking-widest font-medium hover:bg-[#eaeae7] transition-colors"
             >
               Explore Collection
             </Link>
@@ -175,7 +175,7 @@ export default function CheckoutPage() {
             <div className="lg:col-span-7 space-y-8">
               <form onSubmit={handleSubmitOrder} className="space-y-8">
                 {/* 1. Contact Information */}
-                <div className="bg-[#635F58] p-6 sm:p-8 rounded-sm border border-[#F4F4F1]/10 shadow-xs space-y-4">
+                <div className="bg-[#1F1D1A] p-6 sm:p-8 rounded-sm border border-[#F4F4F1]/10 shadow-xs space-y-4">
                   <div className="flex justify-between items-center border-b border-[#F4F4F1]/10 pb-3">
                     <h2 className="text-xs uppercase tracking-[0.2em] font-serif font-bold text-[#F4F4F1]">
                       1. Contact Information
@@ -206,7 +206,7 @@ export default function CheckoutPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="you@example.com"
-                        className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                        className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
                       />
                     </div>
 
@@ -221,14 +221,14 @@ export default function CheckoutPage() {
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+91 98765 43210"
-                        className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                        className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* 2. Delivery Address */}
-                <div className="bg-[#635F58] p-6 sm:p-8 rounded-sm border border-[#F4F4F1]/10 shadow-xs space-y-4">
+                <div className="bg-[#1F1D1A] p-6 sm:p-8 rounded-sm border border-[#F4F4F1]/10 shadow-xs space-y-4">
                   <h2 className="text-xs uppercase tracking-[0.2em] font-serif font-bold text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-3">
                     2. Shipping Address
                   </h2>
@@ -246,7 +246,7 @@ export default function CheckoutPage() {
                           value={formData.firstName}
                           onChange={handleChange}
                           placeholder="Arjun"
-                          className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                          className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
                         />
                       </div>
 
@@ -260,7 +260,7 @@ export default function CheckoutPage() {
                           value={formData.lastName}
                           onChange={handleChange}
                           placeholder="Sodhi"
-                          className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                          className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
                         />
                       </div>
                     </div>
@@ -276,7 +276,7 @@ export default function CheckoutPage() {
                         value={formData.addressLine1}
                         onChange={handleChange}
                         placeholder="Flat 402, Lodha Bellissimo, NM Joshi Marg"
-                        className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                        className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
                       />
                     </div>
 
@@ -290,7 +290,7 @@ export default function CheckoutPage() {
                         value={formData.addressLine2}
                         onChange={handleChange}
                         placeholder="Near Mahalaxmi Station"
-                        className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                        className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
                       />
                     </div>
 
@@ -306,7 +306,7 @@ export default function CheckoutPage() {
                           value={formData.city}
                           onChange={handleChange}
                           placeholder="Mumbai"
-                          className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                          className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
                         />
                       </div>
 
@@ -321,7 +321,7 @@ export default function CheckoutPage() {
                           value={formData.state}
                           onChange={handleChange}
                           placeholder="Maharashtra"
-                          className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
+                          className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1]"
                         />
                       </div>
 
@@ -336,7 +336,7 @@ export default function CheckoutPage() {
                           value={formData.pincode}
                           onChange={handleChange}
                           placeholder="400011"
-                          className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1] font-mono"
+                          className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs focus:outline-none focus:border-[#F4F4F1] font-mono"
                         />
                       </div>
                     </div>
@@ -344,7 +344,7 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* 3. Payment Method Selection */}
-                <div className="bg-[#635F58] p-6 sm:p-8 rounded-sm border border-[#F4F4F1]/10 shadow-xs space-y-4">
+                <div className="bg-[#1F1D1A] p-6 sm:p-8 rounded-sm border border-[#F4F4F1]/10 shadow-xs space-y-4">
                   <h2 className="text-xs uppercase tracking-[0.2em] font-serif font-bold text-[#F4F4F1] border-b border-[#F4F4F1]/10 pb-3">
                     3. Payment Method
                   </h2>
@@ -354,7 +354,7 @@ export default function CheckoutPage() {
                     <label
                       className={`block p-4 rounded-xs border cursor-pointer transition-all ${
                         formData.paymentMethod === 'cod'
-                          ? 'border-[#F4F4F1] bg-[#635F58]/80 shadow-xs'
+                          ? 'border-[#F4F4F1] bg-[#1F1D1A]/80 shadow-xs'
                           : 'border-[#F4F4F1]/20 hover:border-[#F4F4F1]/40'
                       }`}
                     >
@@ -384,7 +384,7 @@ export default function CheckoutPage() {
                     </label>
 
                     {/* Online Gateway Option (Placeholder badge) */}
-                    <div className="p-4 rounded-xs border border-[#F4F4F1]/20 bg-[#635F58]/40 opacity-60 flex justify-between items-center cursor-not-allowed">
+                    <div className="p-4 rounded-xs border border-[#F4F4F1]/20 bg-[#1F1D1A]/40 opacity-60 flex justify-between items-center cursor-not-allowed">
                       <div className="flex items-center gap-3">
                         <input type="radio" disabled />
                         <div>
@@ -396,7 +396,7 @@ export default function CheckoutPage() {
                           </span>
                         </div>
                       </div>
-                      <span className="text-[9px] uppercase font-bold text-[#F4F4F1]/60 bg-[#524E48] px-2 py-0.5 rounded-full">
+                      <span className="text-[9px] uppercase font-bold text-[#F4F4F1]/60 bg-[#2e2a25] px-2 py-0.5 rounded-full">
                         Gateway Setup Next
                       </span>
                     </div>
@@ -413,7 +413,7 @@ export default function CheckoutPage() {
                       value={formData.customerNotes}
                       onChange={handleChange}
                       placeholder="e.g. Please call before delivery, or leave with security."
-                      className="w-full bg-[#635F58]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs text-xs focus:outline-none focus:border-[#F4F4F1] resize-none"
+                      className="w-full bg-[#1F1D1A]/60 border border-[#F4F4F1]/20 p-2.5 rounded-xs text-xs focus:outline-none focus:border-[#F4F4F1] resize-none"
                     />
                   </div>
                 </div>
@@ -429,7 +429,7 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting || items.length === 0}
-                  className="w-full bg-[#F4F4F1] text-[#635F58] py-4 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#eaeae7] transition-colors cursor-pointer shadow-md disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full bg-[#F4F4F1] text-[#1F1D1A] py-4 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#eaeae7] transition-colors cursor-pointer shadow-md disabled:opacity-50 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <>
@@ -445,7 +445,7 @@ export default function CheckoutPage() {
 
             {/* RIGHT COLUMN: Order Summary (5 Cols) */}
             <div className="lg:col-span-5 sticky top-28 space-y-6">
-              <div className="bg-[#635F58] p-6 sm:p-8 rounded-sm border border-[#F4F4F1]/10 shadow-xs space-y-6">
+              <div className="bg-[#1F1D1A] p-6 sm:p-8 rounded-sm border border-[#F4F4F1]/10 shadow-xs space-y-6">
                 <div className="flex justify-between items-center border-b border-[#F4F4F1]/10 pb-3">
                   <h2 className="text-xs uppercase tracking-[0.2em] font-serif font-bold text-[#F4F4F1]">
                     Order Summary ({totalCount} {totalCount === 1 ? 'item' : 'items'})
@@ -460,7 +460,7 @@ export default function CheckoutPage() {
                   {items.map((item) => (
                     <div key={item.id} className="py-3.5 first:pt-0 flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <div className="relative w-14 h-16 bg-[#58544e]/40 rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10">
+                        <div className="relative w-14 h-16 bg-[#2a2723]/40 rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10">
                           <Image
                             src={item.image || '/image1.jpg'}
                             alt={item.name}

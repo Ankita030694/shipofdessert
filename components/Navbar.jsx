@@ -99,7 +99,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#635F58] border-b border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
+      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#1F1D1A] border-b border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
         
         {/* Left Section: Desktop Links with Dropdown & Mobile Menu Toggle */}
         <div className="flex items-center">
@@ -135,7 +135,7 @@ const Navbar = () => {
                 {/* Dropdown Menu on Hover */}
                 {item.children && (
                   <div className="absolute top-[90%] left-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                    <div className="min-w-[190px] bg-[#635F58] border border-[#F4F4F1]/20 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
+                    <div className="min-w-[190px] bg-[#1F1D1A] border border-[#F4F4F1]/20 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
                       {item.children.map((sub) => (
                         <Link
                           key={sub.title}
@@ -204,7 +204,7 @@ const Navbar = () => {
               />
             </svg>
             {totalCount > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[15px] h-[15px] px-1 bg-[#F4F4F1] text-[#635F58] text-[9px] leading-none rounded-full flex items-center justify-center font-medium">
+              <span className="absolute -top-1 -right-1 min-w-[15px] h-[15px] px-1 bg-[#F4F4F1] text-[#1F1D1A] text-[9px] leading-none rounded-full flex items-center justify-center font-medium">
                 {totalCount}
               </span>
             )}
@@ -236,7 +236,7 @@ const Navbar = () => {
               </button>
               
               <div className="absolute top-[90%] right-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                <div className="min-w-[180px] bg-[#635F58] border border-[#F4F4F1]/20 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
+                <div className="min-w-[180px] bg-[#1F1D1A] border border-[#F4F4F1]/20 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
                   <span className="text-[11px] text-[#F4F4F1]/70 truncate pb-1.5 border-b border-[#F4F4F1]/20">
                     {session.user.name || session.user.email}
                   </span>
@@ -279,7 +279,7 @@ const Navbar = () => {
 
       {/* Right-Side Full-Height Search Drawer */}
       <div 
-        className={`fixed top-0 right-0 h-screen w-full sm:w-[480px] md:w-[540px] bg-[#635F58] text-[#F4F4F1] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-l border-[#F4F4F1]/20
+        className={`fixed top-0 right-0 h-screen w-full sm:w-[480px] md:w-[540px] bg-[#1F1D1A] text-[#F4F4F1] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-l border-[#F4F4F1]/20
         ${searchOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="p-8 sm:p-12 h-full flex flex-col">
@@ -343,7 +343,7 @@ const Navbar = () => {
 
       {/* Side Navigation Drawer (Left) */}
       <div 
-        className={`fixed top-0 left-0 h-screen w-[85%] sm:w-[50%] md:w-[380px] bg-[#635F58] text-[#F4F4F1] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-r border-[#F4F4F1]/20
+        className={`fixed top-0 left-0 h-screen w-[85%] sm:w-[50%] md:w-[380px] bg-[#1F1D1A] text-[#F4F4F1] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-r border-[#F4F4F1]/20
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         {/* Drawer Header & Close Button */}
@@ -352,7 +352,7 @@ const Navbar = () => {
             <span className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] font-semibold">Navigation</span>
             <button 
               onClick={toggleMenu}
-              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#635F58]/50 transition-colors cursor-pointer"
+              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#1F1D1A]/50 transition-colors cursor-pointer"
               aria-label="Close navigation"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="#F4F4F1">
@@ -419,7 +419,7 @@ const Navbar = () => {
         </div>
 
         {/* Drawer Footer / Account section */}
-        <div className="p-6 sm:p-8 border-t border-[#F4F4F1]/20 bg-[#58544e]/50">
+        <div className="p-6 sm:p-8 border-t border-[#F4F4F1]/20 bg-[#2a2723]/50">
           <ul className="space-y-2 text-xs sm:text-[13px] text-[#F4F4F1]/80">
             {session?.user ? (
               <>

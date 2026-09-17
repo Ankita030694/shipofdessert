@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-40 pb-24 px-4 sm:px-6 flex flex-col items-center justify-center text-center">
@@ -28,7 +28,7 @@ export default function NotFound() {
 
         <Link
           href="/shop"
-          className="inline-block bg-[#F4F4F1] text-[#635F58] px-8 py-3.5 text-xs font-medium uppercase tracking-widest hover:bg-[#333330] transition-colors"
+          className="inline-block bg-[#F4F4F1] text-[#1F1D1A] px-8 py-3.5 text-xs font-medium uppercase tracking-widest hover:bg-[#333330] transition-colors"
         >
           Return to Shop
         </Link>

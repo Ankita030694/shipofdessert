@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function ShippingPage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-20 px-4 sm:px-8 max-w-4xl mx-auto w-full">

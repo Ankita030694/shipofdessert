@@ -36,7 +36,7 @@ export default function ArchivesPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-20 px-4 sm:px-8 max-w-6xl mx-auto w-full">
@@ -52,7 +52,7 @@ export default function ArchivesPage() {
         <div className="space-y-16">
           {archiveItems.map((item) => (
             <div key={item.title} className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-b border-[#F4F4F1]/20 pb-12">
-              <div className="md:col-span-5 relative aspect-[4/3] bg-[#58544e]/50 overflow-hidden">
+              <div className="md:col-span-5 relative aspect-[4/3] bg-[#2a2723]/50 overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.alt}

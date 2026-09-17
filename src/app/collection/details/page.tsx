@@ -75,7 +75,7 @@ export default function ProductDetails() {
   ];
 
   return (
-    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="container mx-auto px-4 pt-32 pb-20 flex-1 max-w-6xl">
@@ -87,7 +87,7 @@ export default function ProductDetails() {
               <button
                 key={index}
                 onClick={() => setSelectedImage(image)}
-                className={`relative aspect-[3/4] w-16 sm:w-20 bg-[#58544e]/40 border transition-all cursor-pointer flex-shrink-0 ${
+                className={`relative aspect-[3/4] w-16 sm:w-20 bg-[#2a2723]/40 border transition-all cursor-pointer flex-shrink-0 ${
                   selectedImage === image
                     ? 'border-[#F4F4F1]'
                     : 'border-transparent opacity-70 hover:opacity-100'
@@ -106,7 +106,7 @@ export default function ProductDetails() {
           </div>
 
           {/* Center - Main image */}
-          <div className="flex-1 relative aspect-[3/4] max-h-[750px] bg-[#58544e]/40 rounded-sm overflow-hidden order-1 lg:order-2">
+          <div className="flex-1 relative aspect-[3/4] max-h-[750px] bg-[#2a2723]/40 rounded-sm overflow-hidden order-1 lg:order-2">
             <Image
               src={selectedImage}
               alt="Kabira Top in Cotton"
@@ -148,7 +148,7 @@ export default function ProductDetails() {
                         aria-label={`Select ${color}`}
                         className={`w-7 h-7 transition-all cursor-pointer border ${
                           isSelected
-                            ? 'border-[#F4F4F1] ring-2 ring-[#F4F4F1] ring-offset-2 ring-offset-[#635F58]'
+                            ? 'border-[#F4F4F1] ring-2 ring-[#F4F4F1] ring-offset-2 ring-offset-[#1F1D1A]'
                             : 'border-[#F4F4F1]/30 hover:border-[#F4F4F1]'
                         }`}
                         style={{ backgroundColor: bg }}
@@ -169,7 +169,7 @@ export default function ProductDetails() {
                 <select
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value)}
-                  className="w-full border border-[#F4F4F1]/20 px-4 py-2.5 bg-[#635F58] text-xs text-[#F4F4F1] focus:outline-none focus:border-[#F4F4F1] cursor-pointer"
+                  className="w-full border border-[#F4F4F1]/20 px-4 py-2.5 bg-[#1F1D1A] text-xs text-[#F4F4F1] focus:outline-none focus:border-[#F4F4F1] cursor-pointer"
                 >
                   <option value="0">0 (XS)</option>
                   <option value="2">2 (S)</option>
@@ -182,7 +182,7 @@ export default function ProductDetails() {
               {/* Add to cart button */}
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-[#F4F4F1] text-[#635F58] py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors cursor-pointer mb-6"
+                className="w-full bg-[#F4F4F1] text-[#1F1D1A] py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors cursor-pointer mb-6"
               >
                 {added ? 'Added to Bag ✓' : 'Add to Shopping Bag'}
               </button>
@@ -224,7 +224,7 @@ export default function ProductDetails() {
             {relatedProducts.map((product) => (
               <div key={product.id} className="group">
                 <Link href={`/product/${product.slug}`} className="text-[#F4F4F1]">
-                  <div className="relative aspect-[3/4] mb-3 bg-[#58544e]/40 overflow-hidden">
+                  <div className="relative aspect-[3/4] mb-3 bg-[#2a2723]/40 overflow-hidden">
                     <Image
                       src={product.image}
                       alt={product.name}

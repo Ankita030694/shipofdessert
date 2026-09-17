@@ -327,7 +327,7 @@ export default function ProductDetailPage({
 
   if (loading) {
     return (
-      <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+      <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
         <Navbar />
         <main className="flex-1 flex items-center justify-center pt-24">
           <div className="text-xs uppercase tracking-widest text-[#F4F4F1]/60 animate-pulse">
@@ -341,7 +341,7 @@ export default function ProductDetailPage({
 
   if (!product) {
     return (
-      <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+      <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
         <Navbar />
         <main className="flex-1 flex flex-col items-center justify-center pt-24 px-4 text-center">
           <h1 className="text-xl font-serif uppercase tracking-wider mb-2">Product Not Found</h1>
@@ -373,7 +373,7 @@ export default function ProductDetailPage({
         ];
 
   return (
-    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 flex-1 max-w-7xl">
@@ -392,7 +392,7 @@ export default function ProductDetailPage({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 mb-24 items-start">
           {/* Left Column: Draggable Image Carousel (7 Cols) */}
           <div className="lg:col-span-7">
-            <div className="relative aspect-[3/4] bg-[#58544e]/40 rounded-xs overflow-hidden border border-[#F4F4F1]/10 max-h-[780px] group select-none">
+            <div className="relative aspect-[3/4] bg-[#2a2723]/40 rounded-xs overflow-hidden border border-[#F4F4F1]/10 max-h-[780px] group select-none">
               {/* Draggable Carousel Track */}
               <div
                 ref={carouselRef}
@@ -433,7 +433,7 @@ export default function ProductDetailPage({
                       type="button"
                       onClick={handlePrevImage}
                       aria-label="Previous image"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#635F58]/85 hover:bg-[#635F58] text-[#F4F4F1] border border-[#F4F4F1]/20 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20 backdrop-blur-xs"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#1F1D1A]/85 hover:bg-[#1F1D1A] text-[#F4F4F1] border border-[#F4F4F1]/20 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20 backdrop-blur-xs"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 19l-7-7 7-7" />
@@ -446,7 +446,7 @@ export default function ProductDetailPage({
                       type="button"
                       onClick={handleNextImage}
                       aria-label="Next image"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#635F58]/85 hover:bg-[#635F58] text-[#F4F4F1] border border-[#F4F4F1]/20 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20 backdrop-blur-xs"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#1F1D1A]/85 hover:bg-[#1F1D1A] text-[#F4F4F1] border border-[#F4F4F1]/20 flex items-center justify-center shadow-md transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20 backdrop-blur-xs"
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
@@ -498,7 +498,7 @@ export default function ProductDetailPage({
                     ₹{activePrice.toLocaleString()}
                   </span>
                   {!product.inStock && (
-                    <span className="text-[10px] uppercase tracking-wider text-[#635F58] bg-[#F4F4F1] px-2 py-0.5 ml-auto font-medium">
+                    <span className="text-[10px] uppercase tracking-wider text-[#1F1D1A] bg-[#F4F4F1] px-2 py-0.5 ml-auto font-medium">
                       Made to Order
                     </span>
                   )}
@@ -512,7 +512,7 @@ export default function ProductDetailPage({
 
             {/* Short Fit Note & Model Stats */}
             {product.fitNote && (
-              <div className="bg-[#635F58]/70 border border-[#F4F4F1]/10 p-3 rounded-xs flex items-center gap-2.5 text-xs text-[#F4F4F1]/80">
+              <div className="bg-[#1F1D1A]/70 border border-[#F4F4F1]/10 p-3 rounded-xs flex items-center gap-2.5 text-xs text-[#F4F4F1]/80">
                 <span className="text-sm">📏</span>
                 <div>
                   <span className="font-medium text-[#F4F4F1]">{product.fitNote}</span>
@@ -546,7 +546,7 @@ export default function ProductDetailPage({
                         aria-label={`Select ${color}`}
                         className={`w-7 h-7 sm:w-8 sm:h-8 transition-all cursor-pointer border ${
                           isSelected
-                            ? 'border-[#F4F4F1] ring-2 ring-[#F4F4F1] ring-offset-2 ring-offset-[#635F58]'
+                            ? 'border-[#F4F4F1] ring-2 ring-[#F4F4F1] ring-offset-2 ring-offset-[#1F1D1A]'
                             : 'border-[#F4F4F1]/30 hover:border-[#F4F4F1]'
                         }`}
                         style={{ backgroundColor: bg }}
@@ -583,8 +583,8 @@ export default function ProductDetailPage({
                       onClick={() => setSelectedSize(size)}
                       className={`py-2.5 text-xs uppercase tracking-wider border transition-all cursor-pointer font-mono ${
                         selectedSize === size
-                          ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#635F58] font-bold'
-                          : 'border-[#F4F4F1]/20 bg-[#635F58] text-[#F4F4F1] hover:border-[#F4F4F1]'
+                          ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#1F1D1A] font-bold'
+                          : 'border-[#F4F4F1]/20 bg-[#1F1D1A] text-[#F4F4F1] hover:border-[#F4F4F1]'
                       }`}
                     >
                       {formatSizeLabel(size)}
@@ -598,7 +598,7 @@ export default function ProductDetailPage({
             <div className="space-y-2.5 pt-2">
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-[#F4F4F1] text-[#635F58] py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors cursor-pointer flex items-center justify-center gap-2"
+                className="w-full bg-[#F4F4F1] text-[#1F1D1A] py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>
                   {added ? 'Added to Bag ✓' : 'Add to Shopping Bag'}
@@ -607,7 +607,7 @@ export default function ProductDetailPage({
 
               <button
                 onClick={handleBuyNow}
-                className="w-full border border-[#F4F4F1] text-[#F4F4F1] py-3.5 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#F4F4F1] hover:text-[#635F58] transition-colors cursor-pointer text-center block"
+                className="w-full border border-[#F4F4F1] text-[#F4F4F1] py-3.5 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors cursor-pointer text-center block"
               >
                 Buy Now
               </button>
@@ -727,7 +727,7 @@ export default function ProductDetailPage({
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {product.companionItems.map((item) => (
                 <Link key={item.id} href={`/product/${item.slug}`} className="group block">
-                  <div className="relative aspect-[3/4] bg-[#58544e]/40 rounded-xs overflow-hidden mb-2.5">
+                  <div className="relative aspect-[3/4] bg-[#2a2723]/40 rounded-xs overflow-hidden mb-2.5">
                     <Image
                       src={item.image || '/image1.jpg'}
                       alt={item.name}
@@ -762,7 +762,7 @@ export default function ProductDetailPage({
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {product.relatedProducts.map((rel) => (
                 <Link key={rel.id} href={`/product/${rel.slug}`} className="group block">
-                  <div className="relative aspect-[3/4] bg-[#58544e]/40 rounded-xs overflow-hidden mb-2.5">
+                  <div className="relative aspect-[3/4] bg-[#2a2723]/40 rounded-xs overflow-hidden mb-2.5">
                     <Image
                       src={rel.image || '/image1.jpg'}
                       alt={rel.name}
@@ -790,7 +790,7 @@ export default function ProductDetailPage({
       {/* Size Guide Modal */}
       {isSizeGuideOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
-          <div className="bg-[#635F58] max-w-lg w-full p-6 sm:p-8 rounded-sm shadow-2xl relative max-h-[90vh] overflow-y-auto border border-[#F4F4F1]/15">
+          <div className="bg-[#1F1D1A] max-w-lg w-full p-6 sm:p-8 rounded-sm shadow-2xl relative max-h-[90vh] overflow-y-auto border border-[#F4F4F1]/15">
             <div className="flex justify-between items-start border-b border-[#F4F4F1]/10 pb-4 mb-5">
               <div>
                 <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] font-bold">

@@ -86,7 +86,7 @@ export default function DressesPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-32 pb-20 px-4 sm:px-8 max-w-7xl mx-auto w-full">
@@ -116,7 +116,7 @@ export default function DressesPage() {
             {products.map((item) => (
               <div key={item.id} className="group">
                 <Link href={`/product/${item.slug}`}>
-                  <div className="relative aspect-[3/4] overflow-hidden bg-[#58544e]/50 mb-4">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[#2a2723]/50 mb-4">
                     <Image
                       src={item.image || (item.images && item.images[0]) || '/image1.jpg'}
                       alt={item.name}

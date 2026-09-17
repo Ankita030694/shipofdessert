@@ -101,7 +101,7 @@ function ShopContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-20 sm:pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
@@ -122,7 +122,7 @@ function ShopContent() {
                 }}
                 className={`text-[11px] uppercase tracking-widest px-3 py-1 border transition-all cursor-pointer ${
                   selectedCategory.toLowerCase() === cat.toLowerCase()
-                    ? 'bg-[#F4F4F1] text-[#635F58] border-[#F4F4F1]'
+                    ? 'bg-[#F4F4F1] text-[#1F1D1A] border-[#F4F4F1]'
                     : 'bg-transparent text-[#F4F4F1] border-[#F4F4F1]/20 hover:border-[#F4F4F1]'
                 }`}
               >
@@ -181,7 +181,7 @@ function ShopContent() {
             {currentProducts.map((product) => (
               <div key={product.id} className="group">
                 <Link href={`/product/${product.slug}`} className="block">
-                  <div className="relative aspect-[3/4] mb-3 bg-[#58544e]/40 overflow-hidden">
+                  <div className="relative aspect-[3/4] mb-3 bg-[#2a2723]/40 overflow-hidden">
                     <Image
                       src={product.image || (product.images && product.images[0]) || '/image1.jpg'}
                       alt={product.name}
@@ -191,7 +191,7 @@ function ShopContent() {
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     />
                     {product.inStock === false && (
-                      <span className="absolute top-2 left-2 bg-[#F4F4F1] text-[#635F58] text-[10px] uppercase tracking-widest px-2 py-0.5">
+                      <span className="absolute top-2 left-2 bg-[#F4F4F1] text-[#1F1D1A] text-[10px] uppercase tracking-widest px-2 py-0.5">
                         Sold Out
                       </span>
                     )}
@@ -214,7 +214,7 @@ function ShopContent() {
                           style={{
                             backgroundColor:
                               color.toLowerCase() === 'stone'
-                                ? '#635F58'
+                                ? '#1F1D1A'
                                 : color.toLowerCase() === 'sand'
                                 ? '#bdb2a1'
                                 : color.toLowerCase() === 'slate'
@@ -256,7 +256,7 @@ function ShopContent() {
                   onClick={() => handlePageChange(number)}
                   className={`px-4 py-2 text-xs border transition-colors cursor-pointer ${
                     currentPage === number
-                      ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#635F58]'
+                      ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#1F1D1A]'
                       : 'border-[#F4F4F1]/20 text-[#F4F4F1] hover:border-[#F4F4F1]'
                   }`}
                 >
@@ -285,7 +285,7 @@ function ShopContent() {
 export default function ShopPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-[#635F58]">
+      <div className="min-h-screen flex items-center justify-center bg-[#1F1D1A]">
         <div className="inline-block w-6 h-6 border-2 border-[#F4F4F1] border-t-transparent rounded-full animate-spin"></div>
       </div>
     }>

@@ -59,7 +59,7 @@ export default function TheInheritance01Page() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
@@ -85,7 +85,7 @@ export default function TheInheritance01Page() {
           {galleryItems.map((item) => (
             <div key={item.id} className="group">
               <Link href="/collection/details">
-                <div className="relative aspect-[3/4] overflow-hidden bg-[#58544e]/50 mb-4">
+                <div className="relative aspect-[3/4] overflow-hidden bg-[#2a2723]/50 mb-4">
                   <Image
                     src={item.image}
                     alt={item.alt}

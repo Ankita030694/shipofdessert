@@ -111,7 +111,7 @@ export default function JournalPage() {
   };
 
   return (
-    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
       <Navbar />
       
       {/* Banner Image */}
@@ -125,7 +125,7 @@ export default function JournalPage() {
         />
       </div>
 
-      <div className="min-h-screen bg-[#635F58] px-4 sm:px-6 lg:px-8 py-24">
+      <div className="min-h-screen bg-[#1F1D1A] px-4 sm:px-6 lg:px-8 py-24">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -153,9 +153,9 @@ export default function JournalPage() {
                   y: -6,
                   transition: { duration: 0.2 }
                 }}
-                className="flex flex-col overflow-hidden group cursor-pointer bg-[#635F58] border border-[#F4F4F1]/15 shadow-xs hover:border-[#F4F4F1]/40 transition-all duration-300"
+                className="flex flex-col overflow-hidden group cursor-pointer bg-[#1F1D1A] border border-[#F4F4F1]/15 shadow-xs hover:border-[#F4F4F1]/40 transition-all duration-300"
               >
-                <div className="relative w-full h-56 overflow-hidden bg-[#635F58]">
+                <div className="relative w-full h-56 overflow-hidden bg-[#1F1D1A]">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -208,7 +208,7 @@ export default function JournalPage() {
                 className={`px-4 py-2 border border-[#F4F4F1]/20 text-xs font-semibold uppercase tracking-wider ${
                   currentPage === 1 
                     ? 'text-[#F4F4F1]/30 cursor-not-allowed' 
-                    : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#635F58]'
+                    : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#1F1D1A]'
                 } transition-colors duration-200`}
               >
                 Previous
@@ -220,8 +220,8 @@ export default function JournalPage() {
                   onClick={() => paginate(index + 1)}
                   className={`px-4 py-2 border border-[#F4F4F1]/20 text-xs font-semibold uppercase tracking-wider ${
                     currentPage === index + 1
-                      ? 'bg-[#F4F4F1] text-[#635F58]' 
-                      : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#635F58]'
+                      ? 'bg-[#F4F4F1] text-[#1F1D1A]' 
+                      : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#1F1D1A]'
                   } transition-colors duration-200`}
                 >
                   {index + 1}
@@ -234,7 +234,7 @@ export default function JournalPage() {
                 className={`px-4 py-2 border border-[#F4F4F1]/20 text-xs font-semibold uppercase tracking-wider ${
                   currentPage === totalPages 
                     ? 'text-[#F4F4F1]/30 cursor-not-allowed' 
-                    : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#635F58]'
+                    : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#1F1D1A]'
                 } transition-colors duration-200`}
               >
                 Next

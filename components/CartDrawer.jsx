@@ -24,17 +24,17 @@ export default function CartDrawer() {
     <>
       {/* Sliding Drawer Container */}
       <div
-        className={`fixed top-0 right-0 h-screen w-full sm:w-[460px] md:w-[500px] bg-[#635F58] text-[#F4F4F1] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-l border-[#F4F4F1]/20 ${
+        className={`fixed top-0 right-0 h-screen w-full sm:w-[460px] md:w-[500px] bg-[#1F1D1A] text-[#F4F4F1] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-l border-[#F4F4F1]/20 ${
           isCartOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Drawer Header */}
-        <div className="p-6 sm:p-8 border-b border-[#F4F4F1]/20 flex justify-between items-center bg-[#635F58]">
+        <div className="p-6 sm:p-8 border-b border-[#F4F4F1]/20 flex justify-between items-center bg-[#1F1D1A]">
           <div className="flex items-center gap-2.5">
             <span className="text-xs uppercase tracking-[0.2em] font-serif font-medium">
               Shopping Bag
             </span>
-            <span className="text-[10px] bg-[#F4F4F1] text-[#635F58] px-2 py-0.5 rounded-full font-bold">
+            <span className="text-[10px] bg-[#F4F4F1] text-[#1F1D1A] px-2 py-0.5 rounded-full font-bold">
               {totalCount}
             </span>
           </div>
@@ -64,7 +64,7 @@ export default function CartDrawer() {
               <Link
                 href="/collection"
                 onClick={closeCart}
-                className="px-6 py-3 bg-[#F4F4F1] text-[#635F58] text-xs uppercase tracking-widest hover:bg-[#333330] transition-colors"
+                className="px-6 py-3 bg-[#F4F4F1] text-[#1F1D1A] text-xs uppercase tracking-widest hover:bg-[#333330] transition-colors"
               >
                 Explore Collection
               </Link>
@@ -74,7 +74,7 @@ export default function CartDrawer() {
               {items.map((item) => (
                 <div key={item.id} className="pt-6 first:pt-0 pb-6 flex gap-4">
                   {/* Item Image */}
-                  <div className="relative w-20 h-24 bg-[#58544e]/40 rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10">
+                  <div className="relative w-20 h-24 bg-[#2a2723]/40 rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10">
                     <Image
                       src={item.image || '/image1.jpg'}
                       alt={item.name}
@@ -111,7 +111,7 @@ export default function CartDrawer() {
 
                     {/* Quantity + Remove */}
                     <div className="flex justify-between items-center mt-3 pt-2">
-                      <div className="flex items-center border border-[#F4F4F1]/20 bg-[#635F58]">
+                      <div className="flex items-center border border-[#F4F4F1]/20 bg-[#1F1D1A]">
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
                           className="px-2.5 py-0.5 text-xs hover:bg-stone-100 transition-colors cursor-pointer"
@@ -145,7 +145,7 @@ export default function CartDrawer() {
 
         {/* Drawer Footer & Checkout CTAs */}
         {items.length > 0 && (
-          <div className="p-6 sm:p-8 border-t border-[#F4F4F1]/20 bg-[#58544e]/40 space-y-4">
+          <div className="p-6 sm:p-8 border-t border-[#F4F4F1]/20 bg-[#2a2723]/40 space-y-4">
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between text-[#F4F4F1]/70">
                 <span>Shipping</span>
@@ -168,14 +168,14 @@ export default function CartDrawer() {
               <Link
                 href="/checkout"
                 onClick={closeCart}
-                className="block w-full bg-[#F4F4F1] text-[#635F58] py-3.5 text-xs uppercase tracking-[0.2em] font-medium text-center hover:bg-[#333330] transition-colors"
+                className="block w-full bg-[#F4F4F1] text-[#1F1D1A] py-3.5 text-xs uppercase tracking-[0.2em] font-medium text-center hover:bg-[#333330] transition-colors"
               >
                 Proceed to Checkout
               </Link>
               <Link
                 href="/cart"
                 onClick={closeCart}
-                className="block w-full border border-[#F4F4F1]/30 text-[#F4F4F1] py-2.5 text-xs uppercase tracking-widest text-center hover:bg-[#F4F4F1] hover:text-[#635F58] transition-colors"
+                className="block w-full border border-[#F4F4F1]/30 text-[#F4F4F1] py-2.5 text-xs uppercase tracking-widest text-center hover:bg-[#F4F4F1] hover:text-[#1F1D1A] transition-colors"
               >
                 View Full Bag ({totalCount})
               </Link>

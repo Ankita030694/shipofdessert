@@ -78,7 +78,7 @@ export default function ReturnPolicy() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8">
@@ -106,10 +106,10 @@ export default function ReturnPolicy() {
           </div>
 
           {/* Key Return Policy Highlight Banner */}
-          <div className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
+          <div className="bg-[#1F1D1A] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div>
-                <span className="inline-block text-xs uppercase tracking-widest font-semibold px-2.5 py-1 bg-[#F4F4F1] text-[#635F58] rounded-none mb-2">
+                <span className="inline-block text-xs uppercase tracking-widest font-semibold px-2.5 py-1 bg-[#F4F4F1] text-[#1F1D1A] rounded-none mb-2">
                   14-Day Return Window
                 </span>
                 <h2 className="text-xl font-medium text-[#F4F4F1] font-serif">
@@ -122,7 +122,7 @@ export default function ReturnPolicy() {
               <div className="shrink-0">
                 <Link
                   href="/contact"
-                  className="inline-block bg-[#F4F4F1] text-[#635F58] px-6 py-3 rounded-none text-xs uppercase tracking-widest font-medium hover:bg-[#333330] transition-colors text-center w-full md:w-auto"
+                  className="inline-block bg-[#F4F4F1] text-[#1F1D1A] px-6 py-3 rounded-none text-xs uppercase tracking-widest font-medium hover:bg-[#333330] transition-colors text-center w-full md:w-auto"
                 >
                   Contact Customer Care
                 </Link>
@@ -143,7 +143,7 @@ export default function ReturnPolicy() {
               {steps.map((item) => (
                 <div 
                   key={item.step} 
-                  className="bg-[#635F58] p-6 border border-[#F4F4F1]/15 shadow-xs hover:border-[#F4F4F1]/30 transition-all flex flex-col justify-between"
+                  className="bg-[#1F1D1A] p-6 border border-[#F4F4F1]/15 shadow-xs hover:border-[#F4F4F1]/30 transition-all flex flex-col justify-between"
                 >
                   <div>
                     <div className="text-2xl font-light font-serif text-[#F4F4F1]/50 mb-3">
@@ -162,7 +162,7 @@ export default function ReturnPolicy() {
           </section>
 
           {/* Return Conditions & Guidelines */}
-          <section className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12 space-y-6">
+          <section className="bg-[#1F1D1A] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12 space-y-6">
             <h2 className="text-xl sm:text-2xl font-medium text-[#F4F4F1] font-serif border-b border-[#F4F4F1]/10 pb-3">
               Conditions for Return
             </h2>
@@ -192,7 +192,7 @@ export default function ReturnPolicy() {
           </section>
 
           {/* Regional Shipping Responsibilities */}
-          <section className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
+          <section className="bg-[#1F1D1A] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
             <div className="flex items-baseline justify-between mb-4 border-b border-[#F4F4F1]/10 pb-3">
               <h2 className="text-xl sm:text-2xl font-medium text-[#F4F4F1] font-serif">
                 Return Shipping & Covered Regions
@@ -207,20 +207,20 @@ export default function ReturnPolicy() {
               {eligibleRegions.map((region) => (
                 <span 
                   key={region} 
-                  className="px-3 py-1.5 bg-[#635F58] border border-[#F4F4F1]/20 text-xs font-medium text-[#F4F4F1]"
+                  className="px-3 py-1.5 bg-[#1F1D1A] border border-[#F4F4F1]/20 text-xs font-medium text-[#F4F4F1]"
                 >
                   {region}
                 </span>
               ))}
             </div>
 
-            <div className="bg-[#635F58] border border-[#F4F4F1]/20 p-4 text-sm text-[#F4F4F1] leading-relaxed">
+            <div className="bg-[#1F1D1A] border border-[#F4F4F1]/20 p-4 text-sm text-[#F4F4F1] leading-relaxed">
               <strong>Please Note:</strong> For regions not included in the above list, it is the customer’s full responsibility to arrange the return of their unwanted item(s), upon receiving their Return Authorization (RA) and return instructions from Kshaum Customer Care.
             </div>
           </section>
 
           {/* Refunds & Payment Methods */}
-          <section className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
+          <section className="bg-[#1F1D1A] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
             <h2 className="text-xl sm:text-2xl font-medium text-[#F4F4F1] font-serif border-b border-[#F4F4F1]/10 pb-3 mb-4">
               Refunds & Processing
             </h2>
@@ -231,7 +231,7 @@ export default function ReturnPolicy() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               {paymentMethods.map((method) => (
-                <div key={method.name} className="p-4 bg-[#635F58] border border-[#F4F4F1]/15 flex flex-col justify-between">
+                <div key={method.name} className="p-4 bg-[#1F1D1A] border border-[#F4F4F1]/15 flex flex-col justify-between">
                   <div>
                     <h3 className="font-semibold text-[#F4F4F1] text-sm">{method.name}</h3>
                     <p className="text-xs text-[#F4F4F1]/60 mb-2">{method.subtitle}</p>

@@ -12,7 +12,7 @@ export default function CartPage() {
     useCart();
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full">
@@ -63,7 +63,7 @@ export default function CartPage() {
             </p>
             <Link
               href="/collection"
-              className="inline-block bg-[#F4F4F1] text-[#635F58] px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors"
+              className="inline-block bg-[#F4F4F1] text-[#1F1D1A] px-8 py-3.5 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors"
             >
               Explore Collection
             </Link>
@@ -72,13 +72,13 @@ export default function CartPage() {
           /* 2-Column Bag Layout */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left 8 Cols: Line Items Table */}
-            <div className="lg:col-span-8 bg-[#635F58] border border-[#F4F4F1]/10 rounded-sm divide-y divide-[#F4F4F1]/10 p-6 sm:p-8 shadow-xs">
+            <div className="lg:col-span-8 bg-[#1F1D1A] border border-[#F4F4F1]/10 rounded-sm divide-y divide-[#F4F4F1]/10 p-6 sm:p-8 shadow-xs">
               {items.map((item) => (
                 <div key={item.id} className="pt-6 first:pt-0 pb-6 flex flex-col sm:flex-row gap-5">
                   {/* Garment Image */}
                   <Link
                     href={`/product/${item.slug}`}
-                    className="relative w-24 sm:w-28 aspect-[3/4] bg-[#58544e]/40 rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10"
+                    className="relative w-24 sm:w-28 aspect-[3/4] bg-[#2a2723]/40 rounded-xs overflow-hidden flex-shrink-0 border border-[#F4F4F1]/10"
                   >
                     <Image
                       src={item.image || '/image1.jpg'}
@@ -127,10 +127,10 @@ export default function CartPage() {
                         <span className="text-[11px] uppercase tracking-wider text-[#F4F4F1]/60">
                           Quantity:
                         </span>
-                        <div className="flex items-center border border-[#F4F4F1]/20 bg-[#635F58]">
+                        <div className="flex items-center border border-[#F4F4F1]/20 bg-[#1F1D1A]">
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="px-3 py-1 text-xs hover:bg-[#524E48] transition-colors cursor-pointer"
+                            className="px-3 py-1 text-xs hover:bg-[#2e2a25] transition-colors cursor-pointer"
                             title="Decrease quantity"
                           >
                             −
@@ -138,7 +138,7 @@ export default function CartPage() {
                           <span className="px-3 text-xs font-mono font-medium">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="px-3 py-1 text-xs hover:bg-[#524E48] transition-colors cursor-pointer"
+                            className="px-3 py-1 text-xs hover:bg-[#2e2a25] transition-colors cursor-pointer"
                             title="Increase quantity"
                           >
                             +
@@ -159,7 +159,7 @@ export default function CartPage() {
             </div>
 
             {/* Right 4 Cols: Order Summary */}
-            <div className="lg:col-span-4 bg-[#635F58] border border-[#F4F4F1]/10 rounded-sm p-6 sm:p-8 shadow-xs sticky top-28 space-y-6">
+            <div className="lg:col-span-4 bg-[#1F1D1A] border border-[#F4F4F1]/10 rounded-sm p-6 sm:p-8 shadow-xs sticky top-28 space-y-6">
               <h2 className="font-serif text-base uppercase tracking-wider border-b border-[#F4F4F1]/10 pb-3">
                 Order Summary
               </h2>
@@ -198,7 +198,7 @@ export default function CartPage() {
               <div className="space-y-2.5 pt-2">
                 <Link
                   href="/checkout"
-                  className="block w-full bg-[#F4F4F1] text-[#635F58] py-4 text-xs font-medium uppercase tracking-[0.2em] text-center hover:bg-[#eaeae7] transition-colors"
+                  className="block w-full bg-[#F4F4F1] text-[#1F1D1A] py-4 text-xs font-medium uppercase tracking-[0.2em] text-center hover:bg-[#eaeae7] transition-colors"
                 >
                   Proceed to Checkout →
                 </Link>

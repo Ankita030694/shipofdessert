@@ -1,7 +1,7 @@
 export const COLOR_MAP: Record<string, string> = {
   'mustard yellow': '#D4A346',
   'mustard': '#D4A346',
-  'stone': '#635F58',
+  'stone': '#1F1D1A',
   'sand': '#bdb2a1',
   'slate': '#a3b2bf',
   'ecru': '#f3eee3',

@@ -114,7 +114,7 @@ function CollectionContent() {
                 }}
                 className={`text-[11px] uppercase tracking-widest px-3 py-1 border transition-all cursor-pointer ${
                   selectedCategory.toLowerCase() === cat.toLowerCase()
-                    ? 'bg-[#F4F4F1] text-[#635F58] border-[#F4F4F1] shadow-xs font-medium'
+                    ? 'bg-[#F4F4F1] text-[#1F1D1A] border-[#F4F4F1] shadow-xs font-medium'
                     : 'bg-transparent text-[#F4F4F1] border-[#F4F4F1]/20 hover:border-[#F4F4F1]'
                 }`}
               >
@@ -147,7 +147,7 @@ function CollectionContent() {
               return (
                 <div key={product.id} className="group">
                   <Link href={`/product/${product.slug}`}>
-                    <div className="relative aspect-[3/4] mb-3 bg-[#58544e]/40 overflow-hidden">
+                    <div className="relative aspect-[3/4] mb-3 bg-[#2a2723]/40 overflow-hidden">
                       <Image
                         src={product.image || '/image1.jpg'}
                         alt={product.name}
@@ -158,7 +158,7 @@ function CollectionContent() {
                       />
                       {isSet && (
                         <div className="absolute top-2.5 left-2.5 z-10">
-                          <span className="bg-[#F4F4F1] text-[#635F58] text-[9px] uppercase px-2 py-0.5 tracking-widest font-mono font-medium">
+                          <span className="bg-[#F4F4F1] text-[#1F1D1A] text-[9px] uppercase px-2 py-0.5 tracking-widest font-mono font-medium">
                             Set
                           </span>
                         </div>
@@ -189,7 +189,7 @@ function CollectionContent() {
                             style={{
                               backgroundColor:
                                 color.toLowerCase() === 'stone'
-                                  ? '#635F58'
+                                  ? '#1F1D1A'
                                   : color.toLowerCase() === 'sand'
                                   ? '#bdb2a1'
                                   : color.toLowerCase() === 'slate'
@@ -226,7 +226,7 @@ function CollectionContent() {
                   onClick={() => handlePageChange(number)}
                   className={`px-4 py-2 text-xs border transition-colors cursor-pointer ${
                     currentPage === number
-                      ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#635F58]'
+                      ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#1F1D1A]'
                       : 'border-[#F4F4F1]/20 text-[#F4F4F1] hover:border-[#F4F4F1]'
                   }`}
                 >
@@ -252,7 +252,7 @@ function CollectionContent() {
 
 export default function CollectionPage() {
   return (
-    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#1F1D1A] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
       <Navbar />
       <Suspense
         fallback={

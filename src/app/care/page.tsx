@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function CarePage() {
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#1F1D1A] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-8 max-w-4xl mx-auto w-full">
@@ -37,7 +37,7 @@ export default function CarePage() {
         </div>
 
         {/* Intro Statement Card */}
-        <div className="bg-[#635F58] p-8 sm:p-12 rounded-sm border border-[#F4F4F1]/20 shadow-xs mb-12">
+        <div className="bg-[#1F1D1A] p-8 sm:p-12 rounded-sm border border-[#F4F4F1]/20 shadow-xs mb-12">
           <p className="text-sm sm:text-base leading-relaxed text-[#F4F4F1]/90 font-light mb-6">
             Every piece purchased directly from KSHAUM is recorded to its owner, creating a private Ownership Record and access to our lifetime care service.
           </p>
@@ -49,7 +49,7 @@ export default function CarePage() {
         {/* Core Pillars: Ownership & Care */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           {/* Ownership */}
-          <div className="bg-[#635F58] p-8 rounded-sm border border-[#F4F4F1]/20 shadow-xs flex flex-col justify-between">
+          <div className="bg-[#1F1D1A] p-8 rounded-sm border border-[#F4F4F1]/20 shadow-xs flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-6 h-px bg-[#bdb2a1]"></span>
@@ -69,7 +69,7 @@ export default function CarePage() {
           </div>
 
           {/* Care */}
-          <div className="bg-[#635F58] p-8 rounded-sm border border-[#F4F4F1]/20 shadow-xs flex flex-col justify-between">
+          <div className="bg-[#1F1D1A] p-8 rounded-sm border border-[#F4F4F1]/20 shadow-xs flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <span className="w-6 h-px bg-[#bdb2a1]"></span>
@@ -93,14 +93,14 @@ export default function CarePage() {
         </div>
 
         {/* Detailed Terms & Consideration */}
-        <div className="bg-[#635F58] p-8 sm:p-10 rounded-sm border border-[#F4F4F1]/20 mb-12">
+        <div className="bg-[#1F1D1A] p-8 sm:p-10 rounded-sm border border-[#F4F4F1]/20 mb-12">
           <h3 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#F4F4F1] mb-4">
             Repair & Restoration Considerations
           </h3>
           <p className="text-xs sm:text-sm leading-relaxed text-[#F4F4F1]/80 font-light mb-4">
             Certain repairs, including significant accidental damage, third-party alterations or extensive material replacement, may incur a charge. We will always inform you before proceeding.
           </p>
-          <div className="p-4 bg-[#635F58]/70 border-l-2 border-[#F4F4F1] rounded-xs">
+          <div className="p-4 bg-[#1F1D1A]/70 border-l-2 border-[#F4F4F1] rounded-xs">
             <p className="text-xs text-[#F4F4F1]/85 leading-relaxed italic">
               All restorations are conducted by master tailors with archival precision, preserving authentic fiber integrity and original silhouette.
             </p>
@@ -108,7 +108,7 @@ export default function CarePage() {
         </div>
 
         {/* Made to Remain & CTA Banner */}
-        <div className="text-center bg-[#F4F4F1] text-[#635F58] p-10 sm:p-14 rounded-sm shadow-md">
+        <div className="text-center bg-[#F4F4F1] text-[#1F1D1A] p-10 sm:p-14 rounded-sm shadow-md">
           <span className="text-xs uppercase tracking-[0.3em] text-[#bdb2a1] font-light block mb-3">
             Philosophy of Longevity
           </span>
@@ -122,7 +122,7 @@ export default function CarePage() {
           <div className="pt-2">
             <a
               href="mailto:onlinecustomercare@thekshaum.com?subject=Lifetime%20Care%20Request%20-%20KSHAUM%20Ownership&body=Dear%20KSHAUM%20Concierge,%0A%0AI%20would%20like%20to%20request%20care%20for%20my%20KSHAUM%20piece.%0A%0AOwner%20Name:%0AOrder%20Number%20or%20Purchase%20Date:%0APiece%20Name/Description:%0ADetails%20of%20Care%20Required:%0A%0AThank%20you."
-              className="inline-block bg-[#635F58] text-[#F4F4F1] hover:bg-[#c9c5ba] text-xs uppercase tracking-[0.25em] font-medium py-3.5 px-8 transition-colors border border-[#635F58]"
+              className="inline-block bg-[#1F1D1A] text-[#F4F4F1] hover:bg-[#c9c5ba] text-xs uppercase tracking-[0.25em] font-medium py-3.5 px-8 transition-colors border border-[#1F1D1A]"
             >
               Request Care
             </a>
