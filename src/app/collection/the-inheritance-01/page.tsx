@@ -59,7 +59,7 @@ export default function TheInheritance01Page() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
@@ -68,14 +68,14 @@ export default function TheInheritance01Page() {
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-8 max-w-7xl mx-auto w-full">
         {/* Collection Identity Header */}
-        <div className="border-b border-[#dcd8cf] pb-8 mb-12 text-center">
+        <div className="border-b border-[#F4F4F1]/20 pb-8 mb-12 text-center">
           <span className="text-xs uppercase tracking-[0.3em] text-[#bdb2a1] font-semibold block mb-2">
             Collection 01
           </span>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-wide uppercase font-serif mb-4">
             The Inheritance 01
           </h1>
-          <p className="max-w-xl mx-auto text-xs sm:text-sm text-[#1c1c1a]/75 font-light leading-relaxed">
+          <p className="max-w-xl mx-auto text-xs sm:text-sm text-[#F4F4F1]/75 font-light leading-relaxed">
             Presented through considered silhouettes, quiet proportion and enduring natural materials.
           </p>
         </div>
@@ -85,7 +85,7 @@ export default function TheInheritance01Page() {
           {galleryItems.map((item) => (
             <div key={item.id} className="group">
               <Link href="/collection/details">
-                <div className="relative aspect-[3/4] overflow-hidden bg-[#dcd8cf]/30 mb-4">
+                <div className="relative aspect-[3/4] overflow-hidden bg-[#58544e]/50 mb-4">
                   <Image
                     src={item.image}
                     alt={item.alt}
@@ -95,7 +95,7 @@ export default function TheInheritance01Page() {
                   />
                 </div>
                 <div className="text-left">
-                  <h2 className="text-xs font-medium uppercase tracking-wider text-[#1c1c1a]">
+                  <h2 className="text-xs font-medium uppercase tracking-wider text-[#F4F4F1]">
                     {item.title}
                   </h2>
                   <span className="text-[11px] text-[#bdb2a1] uppercase tracking-widest block mt-0.5">

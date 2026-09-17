@@ -76,11 +76,11 @@ export default function TermsAndConditions() {
           <p>Refunds are issued to the original payment method within 7–14 working days upon receipt and inspection of the returned goods.</p>
           <p>
             To initiate a return or exchange, contact:{' '}
-            <a href="mailto:onlinecustomercare@thekshaum.com" className="font-medium underline hover:text-black">
+            <a href="mailto:onlinecustomercare@thekshaum.com" className="font-medium underline hover:text-[#F4F4F1]">
               onlinecustomercare@thekshaum.com
             </a>{' '}
             or visit our{' '}
-            <Link href="/return-policy" className="font-medium underline hover:text-black">
+            <Link href="/return-policy" className="font-medium underline hover:text-[#F4F4F1]">
               Return Policy
             </Link>.
           </p>
@@ -139,21 +139,21 @@ export default function TermsAndConditions() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#DBD8CF] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col bg-[#635F58] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
-          <div className="border-b border-[#1c1c1a]/15 pb-10 mb-12 text-center md:text-left">
+          <div className="border-b border-[#F4F4F1]/15 pb-10 mb-12 text-center md:text-left">
             <div className="inline-block uppercase tracking-[0.25em] text-xs font-semibold text-[#8C827A] mb-3">
               Legal Agreement
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#1c1c1a] mb-4 font-serif">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#F4F4F1] mb-4 font-serif">
               Terms & Conditions
             </h1>
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#1c1c1a]/70">
-              <span className="inline-flex items-center px-3 py-1 rounded-none border border-[#1c1c1a]/15 text-[#1c1c1a] text-xs tracking-wider">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-[#F4F4F1]/70">
+              <span className="inline-flex items-center px-3 py-1 rounded-none border border-[#F4F4F1]/15 text-[#F4F4F1] text-xs tracking-wider">
                 Effective Date: July 2026
               </span>
               <span>•</span>
@@ -163,7 +163,7 @@ export default function TermsAndConditions() {
                   href="http://www.thekshaum.com" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="underline hover:text-black transition-colors"
+                  className="underline hover:text-[#F4F4F1] transition-colors"
                 >
                   www.thekshaum.com
                 </a>
@@ -172,19 +172,19 @@ export default function TermsAndConditions() {
           </div>
 
           {/* Introduction Card */}
-          <div className="bg-[#DBD8CF] p-6 sm:p-8 border border-[#1c1c1a]/15 shadow-xs mb-12 space-y-4">
-            <p className="text-base sm:text-lg leading-relaxed text-[#1c1c1a]">
+          <div className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12 space-y-4">
+            <p className="text-base sm:text-lg leading-relaxed text-[#F4F4F1]">
               Welcome to{' '}
               <a 
                 href="http://www.thekshaum.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="underline font-medium text-black hover:opacity-80"
+                className="underline font-medium text-[#F4F4F1] hover:opacity-80"
               >
                 www.thekshaum.com
-              </a>, owned and operated by <strong className="font-semibold text-black">Thirteen Pillars of Business LLP</strong> (“we”, “our”, “us”).
+              </a>, owned and operated by <strong className="font-semibold text-[#F4F4F1]">Thirteen Pillars of Business LLP</strong> (“we”, “our”, “us”).
             </p>
-            <p className="text-base sm:text-lg leading-relaxed text-[#1c1c1a]/80 italic border-l-2 border-[#1c1c1a] pl-4 py-1">
+            <p className="text-base sm:text-lg leading-relaxed text-[#F4F4F1]/80 italic border-l-2 border-[#F4F4F1] pl-4 py-1">
               By accessing our website or making a purchase, you agree to be bound by the following Terms & Conditions.
             </p>
           </div>
@@ -194,25 +194,25 @@ export default function TermsAndConditions() {
             {sections.map((section) => (
               <section 
                 key={section.number} 
-                className="bg-[#DBD8CF] p-6 sm:p-8 border border-[#1c1c1a]/15 shadow-xs scroll-mt-28 transition-all hover:border-[#1c1c1a]/30"
+                className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs scroll-mt-28 transition-all hover:border-[#F4F4F1]/30"
               >
-                <div className="flex items-baseline gap-3 mb-4 border-b border-[#1c1c1a]/10 pb-3">
-                  <span className="text-xs sm:text-sm font-mono font-semibold px-2 py-0.5 border border-[#1c1c1a]/20 text-[#1c1c1a]">
+                <div className="flex items-baseline gap-3 mb-4 border-b border-[#F4F4F1]/10 pb-3">
+                  <span className="text-xs sm:text-sm font-mono font-semibold px-2 py-0.5 border border-[#F4F4F1]/20 text-[#F4F4F1]">
                     {section.number}
                   </span>
-                  <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-black">
+                  <h2 className="text-xl sm:text-2xl font-medium tracking-tight text-[#F4F4F1]">
                     {section.title}
                   </h2>
                 </div>
 
-                <div className="space-y-3 text-[#1c1c1a]/80 text-base leading-relaxed">
+                <div className="space-y-3 text-[#F4F4F1]/80 text-base leading-relaxed">
                   {section.paragraphs.map((p, pIdx) => (
                     <p key={pIdx}>{p}</p>
                   ))}
                 </div>
 
                 {section.listItems && (
-                  <ul className="space-y-2 pl-5 list-disc text-[#1c1c1a]/80 text-base my-3 marker:text-[#1c1c1a]/40">
+                  <ul className="space-y-2 pl-5 list-disc text-[#F4F4F1]/80 text-base my-3 marker:text-[#F4F4F1]/40">
                     {section.listItems.map((item, idx) => (
                       <li key={idx} className="leading-relaxed">{item}</li>
                     ))}
@@ -222,20 +222,20 @@ export default function TermsAndConditions() {
                 {section.extraParagraph}
 
                 {section.link && (
-                  <div className="mt-4 pt-3 border-t border-[#1c1c1a]/10">
-                    <Link href={section.link.href} className="inline-flex items-center gap-1.5 text-sm font-medium text-black underline hover:opacity-75">
+                  <div className="mt-4 pt-3 border-t border-[#F4F4F1]/10">
+                    <Link href={section.link.href} className="inline-flex items-center gap-1.5 text-sm font-medium text-[#F4F4F1] underline hover:opacity-75">
                       {section.link.text} →
                     </Link>
                   </div>
                 )}
 
                 {section.contactDetails && (
-                  <div className="mt-4 bg-[#DBD8CF] p-5 border border-[#1c1c1a]/20 space-y-2 text-sm text-[#1c1c1a]">
+                  <div className="mt-4 bg-[#635F58] p-5 border border-[#F4F4F1]/20 space-y-2 text-sm text-[#F4F4F1]">
                     <p>
                       <strong>Email:</strong>{' '}
                       <a 
                         href={`mailto:${section.contactDetails.email}`} 
-                        className="underline font-medium text-black hover:opacity-75"
+                        className="underline font-medium text-[#F4F4F1] hover:opacity-75"
                       >
                         {section.contactDetails.email}
                       </a>
@@ -251,9 +251,9 @@ export default function TermsAndConditions() {
 
           {/* Bottom Help Notice */}
           <div className="mt-14 text-center border-t border-gray-200 pt-8">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-[#F4F4F1]/70">
               Need clarification regarding our terms?{' '}
-              <Link href="/contact" className="text-black underline font-medium hover:opacity-80">
+              <Link href="/contact" className="text-[#F4F4F1] underline font-medium hover:opacity-80">
                 Contact our customer support
               </Link>
             </p>

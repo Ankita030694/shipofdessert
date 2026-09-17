@@ -111,7 +111,7 @@ export default function JournalPage() {
   };
 
   return (
-    <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
       <Navbar />
       
       {/* Banner Image */}
@@ -125,7 +125,7 @@ export default function JournalPage() {
         />
       </div>
 
-      <div className="min-h-screen bg-[#DBD8CF] px-4 sm:px-6 lg:px-8 py-24">
+      <div className="min-h-screen bg-[#635F58] px-4 sm:px-6 lg:px-8 py-24">
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -133,8 +133,8 @@ export default function JournalPage() {
           className="max-w-7xl mx-auto"
         >
           <div className="text-center mb-16">
-            <h1 className="text-4xl sm:text-5xl font-light tracking-tight text-[#1c1c1a] mb-4 font-serif">Journal</h1>
-            <p className="text-base sm:text-lg text-[#1c1c1a]/70 max-w-2xl mx-auto">
+            <h1 className="text-4xl sm:text-5xl font-light tracking-tight text-[#F4F4F1] mb-4 font-serif">Journal</h1>
+            <p className="text-base sm:text-lg text-[#F4F4F1]/70 max-w-2xl mx-auto">
               Thoughts, ideas, and explorations in the realm of design and craftsmanship.
             </p>
           </div>
@@ -153,9 +153,9 @@ export default function JournalPage() {
                   y: -6,
                   transition: { duration: 0.2 }
                 }}
-                className="flex flex-col overflow-hidden group cursor-pointer bg-[#DBD8CF] border border-[#1c1c1a]/15 shadow-xs hover:border-[#1c1c1a]/40 transition-all duration-300"
+                className="flex flex-col overflow-hidden group cursor-pointer bg-[#635F58] border border-[#F4F4F1]/15 shadow-xs hover:border-[#F4F4F1]/40 transition-all duration-300"
               >
-                <div className="relative w-full h-56 overflow-hidden bg-[#DBD8CF]">
+                <div className="relative w-full h-56 overflow-hidden bg-[#635F58]">
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -170,23 +170,23 @@ export default function JournalPage() {
                 </div>
                 <div className="flex-1 p-6 flex flex-col">
                   <div className="flex-1">
-                    <h2 className="text-xl font-medium tracking-tight text-[#1c1c1a] mb-2 font-serif group-hover:text-black transition-colors">
+                    <h2 className="text-xl font-medium tracking-tight text-[#F4F4F1] mb-2 font-serif group-hover:text-[#F4F4F1] transition-colors">
                       {post.title}
                     </h2>
-                    <h3 className="text-sm text-[#1c1c1a]/70 mb-3 italic">
+                    <h3 className="text-sm text-[#F4F4F1]/70 mb-3 italic">
                       {post.subtitle}
                     </h3>
-                    <p className="text-[#1c1c1a]/80 text-sm line-clamp-3 leading-relaxed">
+                    <p className="text-[#F4F4F1]/80 text-sm line-clamp-3 leading-relaxed">
                       {post.description}
                     </p>
                   </div>
                   <div className="mt-6">
                     <motion.span 
-                      className="inline-block relative text-xs uppercase tracking-widest text-[#1c1c1a] font-semibold"
+                      className="inline-block relative text-xs uppercase tracking-widest text-[#F4F4F1] font-semibold"
                       whileHover={{ x: 5 }}
                     >
                       Read more
-                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#1c1c1a] group-hover:w-full transition-all duration-300"></span>
+                      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F4F4F1] group-hover:w-full transition-all duration-300"></span>
                     </motion.span>
                   </div>
                 </div>
@@ -205,10 +205,10 @@ export default function JournalPage() {
               <button
                 onClick={() => paginate(Math.max(1, currentPage - 1))}
                 disabled={currentPage === 1}
-                className={`px-4 py-2 border border-[#1c1c1a]/20 text-xs font-semibold uppercase tracking-wider ${
+                className={`px-4 py-2 border border-[#F4F4F1]/20 text-xs font-semibold uppercase tracking-wider ${
                   currentPage === 1 
-                    ? 'text-[#1c1c1a]/30 cursor-not-allowed' 
-                    : 'text-[#1c1c1a] hover:bg-[#1c1c1a] hover:text-white'
+                    ? 'text-[#F4F4F1]/30 cursor-not-allowed' 
+                    : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#635F58]'
                 } transition-colors duration-200`}
               >
                 Previous
@@ -218,10 +218,10 @@ export default function JournalPage() {
                 <button
                   key={index}
                   onClick={() => paginate(index + 1)}
-                  className={`px-4 py-2 border border-[#1c1c1a]/20 text-xs font-semibold uppercase tracking-wider ${
+                  className={`px-4 py-2 border border-[#F4F4F1]/20 text-xs font-semibold uppercase tracking-wider ${
                     currentPage === index + 1
-                      ? 'bg-[#1c1c1a] text-white' 
-                      : 'text-[#1c1c1a] hover:bg-[#1c1c1a] hover:text-white'
+                      ? 'bg-[#F4F4F1] text-[#635F58]' 
+                      : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#635F58]'
                   } transition-colors duration-200`}
                 >
                   {index + 1}
@@ -231,10 +231,10 @@ export default function JournalPage() {
               <button
                 onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
                 disabled={currentPage === totalPages}
-                className={`px-4 py-2 border border-[#1c1c1a]/20 text-xs font-semibold uppercase tracking-wider ${
+                className={`px-4 py-2 border border-[#F4F4F1]/20 text-xs font-semibold uppercase tracking-wider ${
                   currentPage === totalPages 
-                    ? 'text-[#1c1c1a]/30 cursor-not-allowed' 
-                    : 'text-[#1c1c1a] hover:bg-[#1c1c1a] hover:text-white'
+                    ? 'text-[#F4F4F1]/30 cursor-not-allowed' 
+                    : 'text-[#F4F4F1] hover:bg-[#F4F4F1] hover:text-[#635F58]'
                 } transition-colors duration-200`}
               >
                 Next

@@ -115,25 +115,25 @@ function WomenContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
         {/* Editorial Header */}
-        <div className="text-center py-6 sm:py-8 border-b border-[#dcd8cf]">
+        <div className="text-center py-6 sm:py-8 border-b border-[#F4F4F1]/20">
           <span className="text-xs uppercase tracking-[0.3em] text-[#bdb2a1] font-semibold block mb-2">
             Women’s Collection &amp; Silhouette
           </span>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-wide uppercase font-serif">
             {selectedCategory === 'All' ? 'All Women' : getActiveCategoryLabel()}
           </h1>
-          <p className="text-xs sm:text-sm font-light tracking-wide text-[#1c1c1a]/70 mt-2 max-w-lg mx-auto">
+          <p className="text-xs sm:text-sm font-light tracking-wide text-[#F4F4F1]/70 mt-2 max-w-lg mx-auto">
             Understated elegance, fluid draping, and considered forms designed to move effortlessly with the body.
           </p>
         </div>
 
         {/* Filter and Control Bar */}
-        <div className="py-6 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-[#dcd8cf] mb-8">
+        <div className="py-6 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-[#F4F4F1]/20 mb-8">
           {/* Category Filter Pills */}
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-2">
             {WOMEN_CATEGORIES.map((cat) => (
@@ -145,8 +145,8 @@ function WomenContent() {
                 }}
                 className={`text-[11px] uppercase tracking-widest px-3 py-1 border transition-all cursor-pointer ${
                   selectedCategory.toLowerCase() === cat.value.toLowerCase()
-                    ? 'bg-[#1c1c1a] text-white border-[#1c1c1a]'
-                    : 'bg-transparent text-[#1c1c1a] border-[#1c1c1a]/20 hover:border-[#1c1c1a]'
+                    ? 'bg-[#F4F4F1] text-[#635F58] border-[#F4F4F1]'
+                    : 'bg-transparent text-[#F4F4F1] border-[#F4F4F1]/20 hover:border-[#F4F4F1]'
                 }`}
               >
                 {cat.label}
@@ -156,19 +156,19 @@ function WomenContent() {
 
           {/* Right Controls: Sort & Count */}
           <div className="flex items-center gap-4 text-[11px]">
-            <span className="text-[#1c1c1a]/60 uppercase tracking-widest">
+            <span className="text-[#F4F4F1]/60 uppercase tracking-widest">
               {products.length} {products.length === 1 ? 'Product' : 'Products'}
             </span>
 
             <div className="flex items-center gap-1.5">
-              <label htmlFor="women-sort" className="uppercase tracking-wider text-[#1c1c1a]/60 hidden sm:inline">
+              <label htmlFor="women-sort" className="uppercase tracking-wider text-[#F4F4F1]/60 hidden sm:inline">
                 Sort:
               </label>
               <select
                 id="women-sort"
                 value={sortOption}
                 onChange={(e) => setSortOption(e.target.value)}
-                className="bg-transparent border border-[#dcd8cf] px-2.5 py-1 text-xs uppercase tracking-wider text-[#1c1c1a] focus:outline-none cursor-pointer"
+                className="bg-transparent border border-[#F4F4F1]/20 px-2.5 py-1 text-xs uppercase tracking-wider text-[#F4F4F1] focus:outline-none cursor-pointer"
               >
                 <option value="newest">Newest</option>
                 <option value="price_asc">Price: Low to High</option>
@@ -182,19 +182,19 @@ function WomenContent() {
         {/* Products Grid */}
         {loading ? (
           <div className="py-24 text-center">
-            <div className="inline-block w-6 h-6 border-2 border-[#1c1c1a] border-t-transparent rounded-full animate-spin mb-3"></div>
-            <p className="text-xs uppercase tracking-widest text-[#1c1c1a]/60">
+            <div className="inline-block w-6 h-6 border-2 border-[#F4F4F1] border-t-transparent rounded-full animate-spin mb-3"></div>
+            <p className="text-xs uppercase tracking-widest text-[#F4F4F1]/60">
               Loading collection...
             </p>
           </div>
         ) : currentProducts.length === 0 ? (
           <div className="py-24 text-center">
-            <p className="text-xs uppercase tracking-widest text-[#1c1c1a]/60 mb-4">
+            <p className="text-xs uppercase tracking-widest text-[#F4F4F1]/60 mb-4">
               No products found in this category.
             </p>
             <button
               onClick={() => setSelectedCategory('All')}
-              className="text-xs uppercase tracking-wider underline text-[#1c1c1a] hover:opacity-75 cursor-pointer"
+              className="text-xs uppercase tracking-wider underline text-[#F4F4F1] hover:opacity-75 cursor-pointer"
             >
               View All Women
             </button>
@@ -204,7 +204,7 @@ function WomenContent() {
             {currentProducts.map((product) => (
               <div key={product.id} className="group">
                 <Link href={`/product/${product.slug}`} className="block">
-                  <div className="relative aspect-[3/4] mb-3 bg-[#e8e4dc]/40 overflow-hidden">
+                  <div className="relative aspect-[3/4] mb-3 bg-[#58544e]/40 overflow-hidden">
                     <Image
                       src={product.image || (product.images && product.images[0]) || '/image1.jpg'}
                       alt={product.name}
@@ -214,16 +214,16 @@ function WomenContent() {
                       sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                     />
                     {product.inStock === false && (
-                      <span className="absolute top-2 left-2 bg-[#1c1c1a] text-white text-[10px] uppercase tracking-widest px-2 py-0.5">
+                      <span className="absolute top-2 left-2 bg-[#F4F4F1] text-[#635F58] text-[10px] uppercase tracking-widest px-2 py-0.5">
                         Sold Out
                       </span>
                     )}
                   </div>
                   <div className="flex justify-between items-start">
-                    <h2 className="text-xs sm:text-sm font-normal text-[#1c1c1a] group-hover:opacity-60 transition-opacity">
+                    <h2 className="text-xs sm:text-sm font-normal text-[#F4F4F1] group-hover:opacity-60 transition-opacity">
                       {product.name}
                     </h2>
-                    <span className="text-xs sm:text-sm text-[#1c1c1a] font-light ml-2 whitespace-nowrap">
+                    <span className="text-xs sm:text-sm text-[#F4F4F1] font-light ml-2 whitespace-nowrap">
                       ₹{product.price.toLocaleString()}
                     </span>
                   </div>
@@ -237,7 +237,7 @@ function WomenContent() {
                           style={{
                             backgroundColor:
                               color.toLowerCase() === 'stone'
-                                ? '#dcd8cf'
+                                ? '#635F58'
                                 : color.toLowerCase() === 'sand'
                                 ? '#bdb2a1'
                                 : color.toLowerCase() === 'slate'
@@ -267,7 +267,7 @@ function WomenContent() {
               {currentPage > 1 && (
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
-                  className="px-4 py-2 border border-[#1c1c1a]/20 text-xs uppercase tracking-wider text-[#1c1c1a] hover:border-[#1c1c1a] cursor-pointer"
+                  className="px-4 py-2 border border-[#F4F4F1]/20 text-xs uppercase tracking-wider text-[#F4F4F1] hover:border-[#F4F4F1] cursor-pointer"
                 >
                   Previous
                 </button>
@@ -279,8 +279,8 @@ function WomenContent() {
                   onClick={() => handlePageChange(number)}
                   className={`px-4 py-2 text-xs border transition-colors cursor-pointer ${
                     currentPage === number
-                      ? 'border-[#1c1c1a] bg-[#1c1c1a] text-white'
-                      : 'border-[#1c1c1a]/20 text-[#1c1c1a] hover:border-[#1c1c1a]'
+                      ? 'border-[#F4F4F1] bg-[#F4F4F1] text-[#635F58]'
+                      : 'border-[#F4F4F1]/20 text-[#F4F4F1] hover:border-[#F4F4F1]'
                   }`}
                 >
                   {number}
@@ -290,7 +290,7 @@ function WomenContent() {
               {currentPage < totalPages && (
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
-                  className="px-4 py-2 border border-[#1c1c1a]/20 text-xs uppercase tracking-wider text-[#1c1c1a] hover:border-[#1c1c1a] cursor-pointer"
+                  className="px-4 py-2 border border-[#F4F4F1]/20 text-xs uppercase tracking-wider text-[#F4F4F1] hover:border-[#F4F4F1] cursor-pointer"
                 >
                   Next
                 </button>
@@ -308,8 +308,8 @@ function WomenContent() {
 export default function WomenPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-[#DBD8CF]">
-        <div className="inline-block w-6 h-6 border-2 border-[#1c1c1a] border-t-transparent rounded-full animate-spin"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#635F58]">
+        <div className="inline-block w-6 h-6 border-2 border-[#F4F4F1] border-t-transparent rounded-full animate-spin"></div>
       </div>
     }>
       <WomenContent />

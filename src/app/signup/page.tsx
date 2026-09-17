@@ -97,18 +97,18 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#DBD8CF] text-[#1c1c1a]">
+    <div className="min-h-screen flex flex-col bg-[#635F58] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-24 px-4 sm:px-6 flex items-center justify-center">
         <div className="w-full max-w-lg mx-auto">
           {/* Header Title */}
-          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#1c1c1a] mb-8 font-serif">
+          <h1 className="text-center font-bold text-base sm:text-lg tracking-widest uppercase text-[#F4F4F1] mb-8 font-serif">
             CREATE AN ACCOUNT
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm font-normal text-[#1c1c1a]/80 mb-8">
+          <p className="text-sm font-normal text-[#F4F4F1]/80 mb-8">
             Please enter your details to create an account:
           </p>
 
@@ -117,7 +117,7 @@ export default function SignupPage() {
             <div
               className={`p-3.5 mb-6 text-xs sm:text-sm rounded border ${
                 message.type === 'success'
-                  ? 'bg-stone-100 text-[#1c1c1a] border-[#bdb2a1]'
+                  ? 'bg-stone-100 text-[#F4F4F1] border-[#F4F4F1]/20'
                   : 'bg-red-50 text-red-800 border-red-200'
               }`}
             >
@@ -131,7 +131,7 @@ export default function SignupPage() {
             <div>
               <label
                 htmlFor="signup-firstName"
-                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#F4F4F1] mb-1"
               >
                 First Name* :
               </label>
@@ -144,7 +144,7 @@ export default function SignupPage() {
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder="First Name"
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none disabled:opacity-50"
+                className="w-full bg-transparent text-sm text-[#F4F4F1] placeholder-[#F4F4F1]/60 border-b border-[#F4F4F1] py-2 focus:outline-none disabled:opacity-50"
               />
             </div>
 
@@ -152,7 +152,7 @@ export default function SignupPage() {
             <div>
               <label
                 htmlFor="signup-lastName"
-                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#F4F4F1] mb-1"
               >
                 Last Name :
               </label>
@@ -164,7 +164,7 @@ export default function SignupPage() {
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none disabled:opacity-50"
+                className="w-full bg-transparent text-sm text-[#F4F4F1] placeholder-[#F4F4F1]/60 border-b border-[#F4F4F1] py-2 focus:outline-none disabled:opacity-50"
               />
             </div>
 
@@ -172,7 +172,7 @@ export default function SignupPage() {
             <div>
               <label
                 htmlFor="signup-email"
-                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#F4F4F1] mb-1"
               >
                 Email* :
               </label>
@@ -185,7 +185,7 @@ export default function SignupPage() {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email Address"
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none disabled:opacity-50"
+                className="w-full bg-transparent text-sm text-[#F4F4F1] placeholder-[#F4F4F1]/60 border-b border-[#F4F4F1] py-2 focus:outline-none disabled:opacity-50"
               />
             </div>
 
@@ -193,7 +193,7 @@ export default function SignupPage() {
             <div className="pt-2">
               <label
                 htmlFor="signup-password"
-                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#F4F4F1] mb-1"
               >
                 Password* :
               </label>
@@ -207,12 +207,12 @@ export default function SignupPage() {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Password (minimum 6 characters)"
-                  className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 pr-10 focus:outline-none disabled:opacity-50"
+                  className="w-full bg-transparent text-sm text-[#F4F4F1] placeholder-[#F4F4F1]/60 border-b border-[#F4F4F1] py-2 pr-10 focus:outline-none disabled:opacity-50"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-gray-500 hover:text-[#1c1c1a] focus:outline-none p-1 cursor-pointer"
+                  className="absolute right-0 top-1/2 -translate-y-1/2 text-xs text-[#F4F4F1]/60 hover:text-[#F4F4F1] focus:outline-none p-1 cursor-pointer"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? 'Hide' : 'Show'}
@@ -224,7 +224,7 @@ export default function SignupPage() {
             <div className="pt-2">
               <label
                 htmlFor="signup-confirmPassword"
-                className="block font-bold text-xs sm:text-sm text-[#1c1c1a] mb-1"
+                className="block font-bold text-xs sm:text-sm text-[#F4F4F1] mb-1"
               >
                 Confirm Password* :
               </label>
@@ -237,7 +237,7 @@ export default function SignupPage() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm Password"
-                className="w-full bg-transparent text-sm text-[#1c1c1a] placeholder-[#1c1c1a]/60 border-b border-[#1c1c1a] py-2 focus:outline-none disabled:opacity-50"
+                className="w-full bg-transparent text-sm text-[#F4F4F1] placeholder-[#F4F4F1]/60 border-b border-[#F4F4F1] py-2 focus:outline-none disabled:opacity-50"
               />
             </div>
 
@@ -246,7 +246,7 @@ export default function SignupPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
+                className="w-full bg-[#F4F4F1] text-[#635F58] py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#eaeae7] transition-colors disabled:opacity-50 cursor-pointer flex items-center justify-center gap-2"
               >
                 {loading ? 'Creating Account...' : 'Sign Up'}
               </button>
@@ -255,12 +255,12 @@ export default function SignupPage() {
 
           {/* Already have an account Section */}
           <div className="mt-14 text-center">
-            <h2 className="font-bold text-xs sm:text-sm tracking-widest uppercase text-[#1c1c1a] mb-4">
+            <h2 className="font-bold text-xs sm:text-sm tracking-widest uppercase text-[#F4F4F1] mb-4">
               ALREADY HAVE AN ACCOUNT?
             </h2>
             <Link
               href="/login"
-              className="block w-full bg-[#1c1c1a] text-white py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#333330] transition-colors text-center cursor-pointer"
+              className="block w-full bg-[#F4F4F1] text-[#635F58] py-3.5 text-xs sm:text-sm font-medium tracking-wide uppercase hover:bg-[#eaeae7] transition-colors text-center cursor-pointer"
             >
               Login
             </Link>

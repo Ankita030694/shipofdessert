@@ -40,7 +40,7 @@ export default function TheQuietChoicePage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#DBD8CF] text-[#1C1C1A]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-28 sm:pt-36 pb-24 px-5 sm:px-8 lg:px-12 max-w-6xl mx-auto w-full flex flex-col justify-start">
@@ -49,10 +49,10 @@ export default function TheQuietChoicePage() {
           <span className="text-xs uppercase tracking-[0.3em] text-[#BDB2A1] font-medium block mb-3">
             KSHAUM Curation
           </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.18em] uppercase text-[#1C1C1A] font-serif mb-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-[0.18em] uppercase text-[#F4F4F1] font-serif mb-4">
             The Quiet Choice
           </h1>
-          <p className="text-xs sm:text-sm tracking-wider text-[#1C1C1A]/75 font-light leading-relaxed">
+          <p className="text-xs sm:text-sm tracking-wider text-[#F4F4F1]/75 font-light leading-relaxed">
             A deeper exploration into the ideas, craftsmanship, and timeless narratives that guide our work.
           </p>
         </div>
@@ -63,11 +63,11 @@ export default function TheQuietChoicePage() {
             <Link
               key={card.title}
               href={card.href}
-              className="group flex flex-col justify-between bg-[#DBD8CF] border border-[#1c1c1a]/20 p-6 sm:p-8 lg:p-10 transition-all duration-300 hover:border-[#1C1C1A]/40 hover:shadow-lg"
+              className="group flex flex-col justify-between bg-[#635F58] border border-[#F4F4F1]/20 p-6 sm:p-8 lg:p-10 transition-all duration-300 hover:border-[#F4F4F1]/40 hover:shadow-lg"
             >
               <div>
                 {/* Card Visual Image */}
-                <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-[#DBD8CF]/40 mb-6 sm:mb-8">
+                <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden bg-[#635F58]/40 mb-6 sm:mb-8">
                   <Image
                     src={card.image}
                     alt={card.title}
@@ -75,7 +75,7 @@ export default function TheQuietChoicePage() {
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter brightness-[0.97]"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
-                  <div className="absolute inset-0 bg-[#1C1C1A]/5 group-hover:bg-transparent transition-colors duration-300"></div>
+                  <div className="absolute inset-0 bg-[#F4F4F1]/5 group-hover:bg-transparent transition-colors duration-300"></div>
                 </div>
 
                 {/* Eyebrow */}
@@ -84,18 +84,18 @@ export default function TheQuietChoicePage() {
                 </span>
 
                 {/* Title */}
-                <h2 className="text-xl sm:text-2xl font-light font-serif tracking-wider uppercase text-[#1C1C1A] mb-3 group-hover:opacity-80 transition-opacity">
+                <h2 className="text-xl sm:text-2xl font-light font-serif tracking-wider uppercase text-[#F4F4F1] mb-3 group-hover:opacity-80 transition-opacity">
                   {card.title}
                 </h2>
 
                 {/* Description */}
-                <p className="text-xs sm:text-[13px] text-[#1C1C1A]/75 font-light leading-relaxed mb-8">
+                <p className="text-xs sm:text-[13px] text-[#F4F4F1]/75 font-light leading-relaxed mb-8">
                   {card.description}
                 </p>
               </div>
 
               {/* Action Link / Arrow */}
-              <div className="pt-4 border-t border-[#DBD8CF]/70 flex items-center justify-between text-xs uppercase tracking-[0.2em] font-medium text-[#1C1C1A]">
+              <div className="pt-4 border-t border-[#F4F4F1]/20 flex items-center justify-between text-xs uppercase tracking-[0.2em] font-medium text-[#F4F4F1]">
                 <span className="group-hover:translate-x-1 transition-transform duration-300">
                   {card.ctaText}
                 </span>

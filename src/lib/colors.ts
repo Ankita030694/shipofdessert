@@ -1,14 +1,14 @@
 export const COLOR_MAP: Record<string, string> = {
   'mustard yellow': '#D4A346',
   'mustard': '#D4A346',
-  'stone': '#dcd8cf',
+  'stone': '#635F58',
   'sand': '#bdb2a1',
   'slate': '#a3b2bf',
   'ecru': '#f3eee3',
   'white': '#ffffff',
   'off-white': '#fbfaf8',
   'off white': '#fbfaf8',
-  'black': '#1c1c1a',
+  'black': '#F4F4F1',
   'grey': '#808080',
   'gray': '#808080',
   'charcoal': '#333333',
@@ -41,7 +41,7 @@ export const COLOR_MAP: Record<string, string> = {
 };
 
 export function getColorHex(colorName?: string): string {
-  if (!colorName) return '#1c1c1a';
+  if (!colorName) return '#F4F4F1';
   const c = colorName.trim().toLowerCase();
   return COLOR_MAP[c] || colorName;
 }

@@ -75,7 +75,7 @@ export default function ProductDetails() {
   ];
 
   return (
-    <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="container mx-auto px-4 pt-32 pb-20 flex-1 max-w-6xl">
@@ -87,9 +87,9 @@ export default function ProductDetails() {
               <button
                 key={index}
                 onClick={() => setSelectedImage(image)}
-                className={`relative aspect-[3/4] w-16 sm:w-20 bg-[#e8e4dc]/40 border transition-all cursor-pointer flex-shrink-0 ${
+                className={`relative aspect-[3/4] w-16 sm:w-20 bg-[#58544e]/40 border transition-all cursor-pointer flex-shrink-0 ${
                   selectedImage === image
-                    ? 'border-[#1c1c1a]'
+                    ? 'border-[#F4F4F1]'
                     : 'border-transparent opacity-70 hover:opacity-100'
                 }`}
               >
@@ -106,7 +106,7 @@ export default function ProductDetails() {
           </div>
 
           {/* Center - Main image */}
-          <div className="flex-1 relative aspect-[3/4] max-h-[750px] bg-[#e8e4dc]/30 rounded-sm overflow-hidden order-1 lg:order-2">
+          <div className="flex-1 relative aspect-[3/4] max-h-[750px] bg-[#58544e]/40 rounded-sm overflow-hidden order-1 lg:order-2">
             <Image
               src={selectedImage}
               alt="Kabira Top in Cotton"
@@ -124,16 +124,16 @@ export default function ProductDetails() {
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] font-semibold block mb-1">
                 The Inheritance 01
               </span>
-              <h1 className="text-xl sm:text-2xl font-serif text-[#1c1c1a] font-normal tracking-wide mb-2">
+              <h1 className="text-xl sm:text-2xl font-serif text-[#F4F4F1] font-normal tracking-wide mb-2">
                 Kabira Top in Cotton
               </h1>
-              <p className="text-base font-light text-[#1c1c1a] mb-6">₹1,750</p>
+              <p className="text-base font-light text-[#F4F4F1] mb-6">₹1,750</p>
 
               {/* Color selection */}
               <div className="mb-6">
-                <div className="flex justify-between text-xs text-[#1c1c1a] mb-2">
+                <div className="flex justify-between text-xs text-[#F4F4F1] mb-2">
                   <span className="uppercase tracking-wider">Color</span>
-                  <span className="text-[#1c1c1a]/70 font-light">{selectedColor}</span>
+                  <span className="text-[#F4F4F1]/70 font-light">{selectedColor}</span>
                 </div>
                 <div className="flex gap-2.5">
                   {['White', 'Off-White'].map((color) => {
@@ -148,8 +148,8 @@ export default function ProductDetails() {
                         aria-label={`Select ${color}`}
                         className={`w-7 h-7 transition-all cursor-pointer border ${
                           isSelected
-                            ? 'border-[#1c1c1a] ring-2 ring-[#1c1c1a] ring-offset-2 ring-offset-[#DBD8CF]'
-                            : 'border-[#1c1c1a]/30 hover:border-[#1c1c1a]'
+                            ? 'border-[#F4F4F1] ring-2 ring-[#F4F4F1] ring-offset-2 ring-offset-[#635F58]'
+                            : 'border-[#F4F4F1]/30 hover:border-[#F4F4F1]'
                         }`}
                         style={{ backgroundColor: bg }}
                       />
@@ -160,16 +160,16 @@ export default function ProductDetails() {
 
               {/* Size selection */}
               <div className="mb-6">
-                <div className="flex justify-between items-center mb-2 text-xs text-[#1c1c1a]">
+                <div className="flex justify-between items-center mb-2 text-xs text-[#F4F4F1]">
                   <span className="uppercase tracking-wider">Select Size</span>
-                  <button className="underline text-[#1c1c1a]/60 hover:text-[#1c1c1a] cursor-pointer">
+                  <button className="underline text-[#F4F4F1]/60 hover:text-[#F4F4F1] cursor-pointer">
                     Size Guide
                   </button>
                 </div>
                 <select
                   value={selectedSize}
                   onChange={(e) => setSelectedSize(e.target.value)}
-                  className="w-full border border-[#1c1c1a]/20 px-4 py-2.5 bg-[#DBD8CF] text-xs text-[#1c1c1a] focus:outline-none focus:border-[#1c1c1a] cursor-pointer"
+                  className="w-full border border-[#F4F4F1]/20 px-4 py-2.5 bg-[#635F58] text-xs text-[#F4F4F1] focus:outline-none focus:border-[#F4F4F1] cursor-pointer"
                 >
                   <option value="0">0 (XS)</option>
                   <option value="2">2 (S)</option>
@@ -182,23 +182,23 @@ export default function ProductDetails() {
               {/* Add to cart button */}
               <button
                 onClick={handleAddToCart}
-                className="w-full bg-[#1c1c1a] text-white py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#333330] transition-colors cursor-pointer mb-6"
+                className="w-full bg-[#F4F4F1] text-[#635F58] py-4 text-xs font-medium uppercase tracking-[0.2em] hover:bg-[#eaeae7] transition-colors cursor-pointer mb-6"
               >
                 {added ? 'Added to Bag ✓' : 'Add to Shopping Bag'}
               </button>
 
               {/* Product description */}
-              <p className="text-xs sm:text-sm text-[#1c1c1a]/80 leading-relaxed mb-8">
+              <p className="text-xs sm:text-sm text-[#F4F4F1]/80 leading-relaxed mb-8">
                 Relaxed crewneck top in softly brushed fine cotton with slightly oversized fit and ribbed neckline.
               </p>
 
               {/* Additional information */}
-              <div className="border-t border-[#dcd8cf] divide-y divide-[#dcd8cf] text-xs">
+              <div className="border-t border-[#F4F4F1]/20 divide-y divide-[#F4F4F1]/20 text-xs">
                 <div className="py-3.5">
                   <span className="font-semibold uppercase tracking-wider block mb-1">
                     Fabric & Craft
                   </span>
-                  <p className="text-[#1c1c1a]/70">
+                  <p className="text-[#F4F4F1]/70">
                     100% Handcrafted Organic Cotton. Made by traditional Rajasthani weavers.
                   </p>
                 </div>
@@ -207,7 +207,7 @@ export default function ProductDetails() {
                   <span className="font-semibold uppercase tracking-wider block mb-1">
                     Care Details
                   </span>
-                  <p className="text-[#1c1c1a]/70">Dry clean or gentle hand wash in cold water.</p>
+                  <p className="text-[#F4F4F1]/70">Dry clean or gentle hand wash in cold water.</p>
                 </div>
               </div>
             </div>
@@ -215,16 +215,16 @@ export default function ProductDetails() {
         </div>
 
         {/* Related Products Section */}
-        <div className="mb-20 pt-8 border-t border-[#dcd8cf]">
-          <h2 className="font-serif text-lg uppercase tracking-wider text-[#1c1c1a] mb-8">
+        <div className="mb-20 pt-8 border-t border-[#F4F4F1]/20">
+          <h2 className="font-serif text-lg uppercase tracking-wider text-[#F4F4F1] mb-8">
             You May Also Like
           </h2>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
             {relatedProducts.map((product) => (
               <div key={product.id} className="group">
-                <Link href={`/product/${product.slug}`} className="text-[#1c1c1a]">
-                  <div className="relative aspect-[3/4] mb-3 bg-[#e8e4dc]/40 overflow-hidden">
+                <Link href={`/product/${product.slug}`} className="text-[#F4F4F1]">
+                  <div className="relative aspect-[3/4] mb-3 bg-[#58544e]/40 overflow-hidden">
                     <Image
                       src={product.image}
                       alt={product.name}
@@ -235,10 +235,10 @@ export default function ProductDetails() {
                     />
                   </div>
                   <div className="flex justify-between items-start text-xs">
-                    <h3 className="font-normal text-[#1c1c1a] group-hover:opacity-60 transition-opacity">
+                    <h3 className="font-normal text-[#F4F4F1] group-hover:opacity-60 transition-opacity">
                       {product.name}
                     </h3>
-                    <span className="text-[#1c1c1a]/80 ml-2">₹{product.price.toLocaleString()}</span>
+                    <span className="text-[#F4F4F1]/80 ml-2">₹{product.price.toLocaleString()}</span>
                   </div>
                 </Link>
               </div>

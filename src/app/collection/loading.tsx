@@ -3,11 +3,11 @@ import Footer from '../../../components/Footer';
 
 export default function CollectionLoading() {
   return (
-    <div className="bg-[#DBD8CF] text-[#1c1c1a] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
       <Navbar />
       <main className="pt-36 pb-28 flex-1 flex flex-col items-center justify-center">
-        <div className="w-8 h-8 border-2 border-[#1c1c1a]/20 border-t-[#1c1c1a] rounded-full animate-spin mb-4" />
-        <p className="text-xs uppercase tracking-[0.2em] text-[#1c1c1a]/60">
+        <div className="w-8 h-8 border-2 border-[#F4F4F1]/20 border-t-[#F4F4F1] rounded-full animate-spin mb-4" />
+        <p className="text-xs uppercase tracking-[0.2em] text-[#F4F4F1]/60">
           Loading collection...
         </p>
       </main>
