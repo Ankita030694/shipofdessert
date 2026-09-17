@@ -112,7 +112,7 @@ export default function Philosophy() {
         </section>
 
         {/* Scroll-driven reveal sections */}
-        <div ref={sectionsRef} className="reveal-container relative z-20 bg-[#F4F4F1]">
+        <div ref={sectionsRef} className="reveal-container relative z-20 bg-[#635F58]">
           
           {/* Brand Values Section */}
           <div className="reveal-section mt-8 md:mt-16">
@@ -126,13 +126,13 @@ export default function Philosophy() {
               >
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords("I - Brand Values")}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Order is the shape upon which beauty depends" - Pearl S Buck')}
                     </blockquote>
@@ -209,13 +209,13 @@ export default function Philosophy() {
               <section className="py-8 md:py-12 px-4 md:px-6">
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords('II - Craftsmanship')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"We are what we repeatedly do, Excellence then it is not an act but a habit" - Aristotle (Greece)')}
                     </blockquote>
@@ -239,13 +239,13 @@ export default function Philosophy() {
               <section className="py-8 md:py-12 px-4 md:px-6">
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords('III - Cultural and Historical Foundations')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"To know nothing of what happened before you were born is to remain forever a child" - Cicero (Rome)')}
                     </blockquote>
@@ -269,13 +269,13 @@ export default function Philosophy() {
               <section className="py-8 md:py-12 px-4 md:px-6">
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords('IV - Philosophy of Dress')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Clothing is but a symbol of the soul made visible" - Hazrat Ali (7th century) caliph, Persia')}
                     </blockquote>
@@ -299,13 +299,13 @@ export default function Philosophy() {
               <section className="py-8 md:py-12 px-4 md:px-6">
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords('V - Aesthetic Ethos')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Simplicity is the final achievement. After one has played a vast quantity of notes, it is simplicity that emerges as the crowning reward" - Frédéric Chopin (Poland)')}
                     </blockquote>
@@ -329,13 +329,13 @@ export default function Philosophy() {
               <section className="py-8 md:py-12 px-4 md:px-6">
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords('VI - Legacy and Lineage')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"A man does not plant a tree for himself, he plants it for his Children and his children\'s children" - Cicero (Rome)')}
                     </blockquote>
@@ -363,13 +363,13 @@ export default function Philosophy() {
               <section className="py-8 md:py-12 px-4 md:px-6">
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords('VII - What We Reject')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Give me a place to stand and I will move the earth" - Archimedes (Greece)')}
                     </blockquote>
@@ -397,13 +397,13 @@ export default function Philosophy() {
               <section className="py-8 md:py-12 px-4 md:px-6">
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords('VIII - Philosophy of Time')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Time is a created thing to say I don\'t have time is like saying I don\'t want to" - Lao Tzu (China)')}
                     </blockquote>
@@ -423,13 +423,13 @@ export default function Philosophy() {
               <section className="py-8 md:py-12 px-4 md:px-6">
                 <div className="mx-4 md:mx-auto max-w-4xl">
                   <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#635F58] mt-0 pt-0">
+                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
                       {splitTextIntoWords('IX - The Sacred Textile')}
                     </h2>
-                    <div className="w-20 h-0.5 bg-[#635F58] mx-auto mb-6"></div>
+                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
                   </div>
 
-                  <div className="space-y-4 text-[#635F58]">
+                  <div className="space-y-4 text-[#F4F4F1]">
                     <blockquote className="text-lg md:text-xl italic text-center mb-6">
                       {splitTextIntoWords('"Clothes are the second skin, the first being our flesh" - Proverb from ancient India')}
                     </blockquote>

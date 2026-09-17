@@ -19,14 +19,14 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="bg-[#F4F4F1] text-[#635F58] min-h-screen flex flex-col justify-between">
+    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between">
       <Navbar />
 
       <main className="relative w-full flex-1">
         <h1 className="sr-only">KSHAUM — The Quiet Choice</h1>
 
         {/* Full-Page End-to-End Architectural Hero Visual */}
-        <div className="relative w-full h-[100dvh] overflow-hidden bg-[#F4F4F1]">
+        <div className="relative w-full h-[100dvh] overflow-hidden bg-[#635F58]">
           {/* Desktop Video (Screen width >= 768px) */}
           <video
             autoPlay

@@ -99,7 +99,7 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#F4F4F1] border-b border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
+      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#635F58] border-b border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
         
         {/* Left Section: Desktop Links with Dropdown & Mobile Menu Toggle */}
         <div className="flex items-center">
@@ -107,13 +107,13 @@ const Navbar = () => {
           <button 
             onClick={toggleMenu}
             aria-label="Open Navigation Menu"
-            className="flex lg:hidden items-center py-1.5 px-1 -ml-1 text-[12px] sm:text-[13px] text-[#635F58] font-normal tracking-wide hover:opacity-50 transition-opacity cursor-pointer focus:outline-none"
+            className="flex lg:hidden items-center py-1.5 px-1 -ml-1 text-[12px] sm:text-[13px] text-[#F4F4F1] font-normal tracking-wide hover:opacity-50 transition-opacity cursor-pointer focus:outline-none"
           >
             <span>Menu</span>
           </button>
 
           {/* Desktop Navigation Links with Hover Dropdown (>= lg) */}
-          <div className="hidden lg:flex items-center gap-5 xl:gap-8 text-[12px] xl:text-[13px] text-[#635F58] font-normal">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-8 text-[12px] xl:text-[13px] text-[#F4F4F1] font-normal">
             {navigationLinks.map((item) => (
               <div key={item.title} className="relative group">
                 <Link 
@@ -135,12 +135,12 @@ const Navbar = () => {
                 {/* Dropdown Menu on Hover */}
                 {item.children && (
                   <div className="absolute top-[90%] left-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                    <div className="min-w-[190px] bg-[#F4F4F1] border border-[#635F58]/20 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
+                    <div className="min-w-[190px] bg-[#635F58] border border-[#F4F4F1]/20 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
                       {item.children.map((sub) => (
                         <Link
                           key={sub.title}
                           href={sub.href}
-                          className="text-[12px] tracking-wide text-[#635F58]/80 hover:text-[#635F58] hover:translate-x-1 transition-all whitespace-nowrap block"
+                          className="text-[12px] tracking-wide text-[#F4F4F1]/80 hover:text-[#F4F4F1] hover:translate-x-1 transition-all whitespace-nowrap block"
                         >
                           {sub.title}
                         </Link>
@@ -173,7 +173,7 @@ const Navbar = () => {
         
         {/* Right Section: Mobile (Search + Bag Icon) vs Desktop (Search, Login/Account, Bag) */}
         {/* Mobile View (< lg) */}
-        <div className="flex lg:hidden items-center gap-3 sm:gap-4 text-[#635F58]">
+        <div className="flex lg:hidden items-center gap-3 sm:gap-4 text-[#F4F4F1]">
           <button 
             onClick={toggleSearch}
             aria-label="Search"
@@ -204,7 +204,7 @@ const Navbar = () => {
               />
             </svg>
             {totalCount > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[15px] h-[15px] px-1 bg-[#635F58] text-[#F4F4F1] text-[9px] leading-none rounded-full flex items-center justify-center font-medium">
+              <span className="absolute -top-1 -right-1 min-w-[15px] h-[15px] px-1 bg-[#F4F4F1] text-[#635F58] text-[9px] leading-none rounded-full flex items-center justify-center font-medium">
                 {totalCount}
               </span>
             )}
@@ -212,7 +212,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop View (>= lg): Search, Login / Account, Bag */}
-        <div className="hidden lg:flex items-center gap-6 xl:gap-8 text-[12px] xl:text-[13px] text-[#635F58] font-normal">
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8 text-[12px] xl:text-[13px] text-[#F4F4F1] font-normal">
           <button 
             onClick={toggleSearch}
             className="hover:opacity-50 transition-opacity cursor-pointer focus:outline-none whitespace-nowrap py-4"
@@ -236,18 +236,18 @@ const Navbar = () => {
               </button>
               
               <div className="absolute top-[90%] right-0 pt-2 opacity-0 invisible translate-y-1.5 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-200 ease-out z-50 pointer-events-none group-hover:pointer-events-auto">
-                <div className="min-w-[180px] bg-[#F4F4F1] border border-[#635F58]/20 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
-                  <span className="text-[11px] text-[#635F58]/70 truncate pb-1.5 border-b border-[#635F58]/20">
+                <div className="min-w-[180px] bg-[#635F58] border border-[#F4F4F1]/20 py-3.5 px-5 shadow-2xl flex flex-col gap-2.5">
+                  <span className="text-[11px] text-[#F4F4F1]/70 truncate pb-1.5 border-b border-[#F4F4F1]/20">
                     {session.user.name || session.user.email}
                   </span>
                   {session.user.role === 'admin' && (
-                    <Link href="/admin" className="text-[12px] tracking-wide text-amber-900 hover:text-[#635F58] hover:translate-x-1 transition-all">
+                    <Link href="/admin" className="text-[12px] tracking-wide text-amber-900 hover:text-[#F4F4F1] hover:translate-x-1 transition-all">
                       Admin Dashboard
                     </Link>
                   )}
                   <button
                     onClick={() => signOut({ callbackUrl: '/' })}
-                    className="text-left text-[12px] tracking-wide text-[#635F58]/80 hover:text-[#635F58] hover:translate-x-1 transition-all cursor-pointer"
+                    className="text-left text-[12px] tracking-wide text-[#F4F4F1]/80 hover:text-[#F4F4F1] hover:translate-x-1 transition-all cursor-pointer"
                   >
                     Sign Out
                   </button>
@@ -279,7 +279,7 @@ const Navbar = () => {
 
       {/* Right-Side Full-Height Search Drawer */}
       <div 
-        className={`fixed top-0 right-0 h-screen w-full sm:w-[480px] md:w-[540px] bg-[#F4F4F1] text-[#635F58] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-l border-[#635F58]/20
+        className={`fixed top-0 right-0 h-screen w-full sm:w-[480px] md:w-[540px] bg-[#635F58] text-[#F4F4F1] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-l border-[#F4F4F1]/20
         ${searchOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="p-8 sm:p-12 h-full flex flex-col">
@@ -288,7 +288,7 @@ const Navbar = () => {
             <button 
               onClick={toggleSearch}
               aria-label="Close search"
-              className="p-2 -mr-2 text-[#635F58] hover:opacity-60 transition-opacity cursor-pointer"
+              className="p-2 -mr-2 text-[#F4F4F1] hover:opacity-60 transition-opacity cursor-pointer"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -304,13 +304,13 @@ const Navbar = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="SEARCH"
-              className="w-full text-base sm:text-lg text-[#635F58] placeholder-[#635F58] font-normal uppercase tracking-wider bg-transparent border-b border-[#635F58] pb-3 focus:outline-none"
+              className="w-full text-base sm:text-lg text-[#F4F4F1] placeholder-[#F4F4F1] font-normal uppercase tracking-wider bg-transparent border-b border-[#F4F4F1] pb-3 focus:outline-none"
             />
           </div>
 
           {/* Highlights Section */}
           <div>
-            <h3 className="text-xs font-bold tracking-[0.18em] uppercase text-[#635F58] mb-6">
+            <h3 className="text-xs font-bold tracking-[0.18em] uppercase text-[#F4F4F1] mb-6">
               HIGHLIGHTS
             </h3>
             <ul className="space-y-3.5">
@@ -318,7 +318,7 @@ const Navbar = () => {
                 <li key={item}>
                   <button
                     onClick={() => handleHighlightClick(item)}
-                    className="text-sm sm:text-base text-[#635F58]/85 hover:text-[#635F58] hover:translate-x-1 transition-all text-left font-normal cursor-pointer"
+                    className="text-sm sm:text-base text-[#F4F4F1]/85 hover:text-[#F4F4F1] hover:translate-x-1 transition-all text-left font-normal cursor-pointer"
                   >
                     {item}
                   </button>
@@ -329,11 +329,11 @@ const Navbar = () => {
 
           {/* Search Results Preview */}
           {searchQuery.trim() && (
-            <div className="mt-8 pt-6 border-t border-[#635F58]/20 flex-1 overflow-y-auto">
-              <span className="text-xs text-[#635F58]/60 uppercase tracking-widest block mb-3">
+            <div className="mt-8 pt-6 border-t border-[#F4F4F1]/20 flex-1 overflow-y-auto">
+              <span className="text-xs text-[#F4F4F1]/60 uppercase tracking-widest block mb-3">
                 Results for &quot;{searchQuery}&quot;
               </span>
-              <p className="text-sm text-[#635F58]/70">
+              <p className="text-sm text-[#F4F4F1]/70">
                 Press enter to explore full collection results for &ldquo;{searchQuery}&rdquo;.
               </p>
             </div>
@@ -343,28 +343,28 @@ const Navbar = () => {
 
       {/* Side Navigation Drawer (Left) */}
       <div 
-        className={`fixed top-0 left-0 h-screen w-[85%] sm:w-[50%] md:w-[380px] bg-[#F4F4F1] text-[#635F58] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-r border-[#635F58]/20
+        className={`fixed top-0 left-0 h-screen w-[85%] sm:w-[50%] md:w-[380px] bg-[#635F58] text-[#F4F4F1] transform transition-transform duration-300 ease-in-out z-[70] shadow-2xl flex flex-col justify-between border-r border-[#F4F4F1]/20
         ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         {/* Drawer Header & Close Button */}
         <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(100vh-140px)]">
-          <div className="flex justify-between items-center mb-8 border-b border-[#635F58]/20 pb-4">
+          <div className="flex justify-between items-center mb-8 border-b border-[#F4F4F1]/20 pb-4">
             <span className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] font-semibold">Navigation</span>
             <button 
               onClick={toggleMenu}
-              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#F4F4F1]/50 transition-colors cursor-pointer"
+              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#635F58]/50 transition-colors cursor-pointer"
               aria-label="Close navigation"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="#635F58">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="#F4F4F1">
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
               </svg>
             </button>
           </div>
 
           {/* Main Navigation Links with Mobile Accordion */}
-          <ul className="space-y-4 text-sm sm:text-base font-light text-[#635F58]">
+          <ul className="space-y-4 text-sm sm:text-base font-light text-[#F4F4F1]">
             {navigationLinks.map((item) => (
-              <li key={item.title} className="border-b border-[#635F58]/20/40 pb-3">
+              <li key={item.title} className="border-b border-[#F4F4F1]/20/40 pb-3">
                 <div className="flex items-center justify-between">
                   <Link 
                     href={item.href} 
@@ -376,7 +376,7 @@ const Navbar = () => {
                   {item.children && (
                     <button
                       onClick={() => toggleMobileAccordion(item.title)}
-                      className="p-2 text-[#635F58]/60 hover:text-[#635F58] cursor-pointer"
+                      className="p-2 text-[#F4F4F1]/60 hover:text-[#F4F4F1] cursor-pointer"
                       aria-label={`Expand ${item.title}`}
                     >
                       <svg
@@ -393,13 +393,13 @@ const Navbar = () => {
                 </div>
 
                 {item.children && expandedMobileItem === item.title && (
-                  <ul className="mt-2.5 pl-4 space-y-2 border-l border-[#635F58]/20">
+                  <ul className="mt-2.5 pl-4 space-y-2 border-l border-[#F4F4F1]/20">
                     {item.children.map((sub) => (
                       <li key={sub.title}>
                         <Link
                           href={sub.href}
                           onClick={toggleMenu}
-                          className="text-xs sm:text-sm text-[#635F58]/80 hover:text-[#635F58] block py-1 transition-colors"
+                          className="text-xs sm:text-sm text-[#F4F4F1]/80 hover:text-[#F4F4F1] block py-1 transition-colors"
                         >
                           {sub.title}
                         </Link>
@@ -411,7 +411,7 @@ const Navbar = () => {
             ))}
 
             <li className="pt-2">
-              <Link href="/innercircle" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 text-xs uppercase tracking-widest text-[#635F58]/60">
+              <Link href="/innercircle" onClick={toggleMenu} className="hover:opacity-60 transition-opacity block py-1 text-xs uppercase tracking-widest text-[#F4F4F1]/60">
                 Saved / Inner Circle
               </Link>
             </li>
@@ -419,11 +419,11 @@ const Navbar = () => {
         </div>
 
         {/* Drawer Footer / Account section */}
-        <div className="p-6 sm:p-8 border-t border-[#635F58]/20 bg-[#e6e2d8]/50">
-          <ul className="space-y-2 text-xs sm:text-[13px] text-[#635F58]/80">
+        <div className="p-6 sm:p-8 border-t border-[#F4F4F1]/20 bg-[#524E48]/50">
+          <ul className="space-y-2 text-xs sm:text-[13px] text-[#F4F4F1]/80">
             {session?.user ? (
               <>
-                <li className="text-[#635F58] font-medium text-xs">
+                <li className="text-[#F4F4F1] font-medium text-xs">
                   Signed in as: <span className="font-semibold">{session.user.name || session.user.email}</span>
                 </li>
                 {session.user.role === 'admin' && (
@@ -439,7 +439,7 @@ const Navbar = () => {
                       toggleMenu();
                       signOut({ callbackUrl: '/' });
                     }}
-                    className="text-[#635F58] underline hover:opacity-75 font-medium cursor-pointer"
+                    className="text-[#F4F4F1] underline hover:opacity-75 font-medium cursor-pointer"
                   >
                     Sign Out
                   </button>
@@ -447,13 +447,13 @@ const Navbar = () => {
               </>
             ) : (
               <li>
-                <Link href="/login" onClick={toggleMenu} className="text-[#635F58] underline hover:opacity-75 font-medium">
+                <Link href="/login" onClick={toggleMenu} className="text-[#F4F4F1] underline hover:opacity-75 font-medium">
                   Sign In / Register
                 </Link>
               </li>
             )}
             <li>
-              <Link href="/contact" onClick={toggleMenu} className="text-[#635F58] hover:opacity-75">
+              <Link href="/contact" onClick={toggleMenu} className="text-[#F4F4F1] hover:opacity-75">
                 Customer Care
               </Link>
             </li>

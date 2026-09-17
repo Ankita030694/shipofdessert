@@ -26,14 +26,14 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#F4F4F1] text-[#635F58]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-32 pb-24 px-5 sm:px-8 flex flex-col items-center justify-start">
         <div className="w-full max-w-[440px] mx-auto">
           
           {/* Title: CONTACT */}
-          <h1 className="text-center font-bold text-sm sm:text-base tracking-[0.22em] uppercase text-[#635F58] mb-12 sm:mb-14">
+          <h1 className="text-center font-bold text-sm sm:text-base tracking-[0.22em] uppercase text-[#F4F4F1] mb-12 sm:mb-14">
             CONTACT
           </h1>
 
@@ -41,7 +41,7 @@ export default function ContactPage() {
           <form onSubmit={handleSubmit} className="space-y-7 sm:space-y-8">
             {/* Name */}
             <div>
-              <label htmlFor="contact-name" className="block text-xs sm:text-[13px] font-bold text-[#635F58] mb-2">
+              <label htmlFor="contact-name" className="block text-xs sm:text-[13px] font-bold text-[#F4F4F1] mb-2">
                 Name* :
               </label>
               <input
@@ -51,13 +51,13 @@ export default function ContactPage() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="Name"
-                className="w-full bg-transparent border-b border-[#635F58] pb-2 text-xs sm:text-[13px] text-[#635F58] placeholder-[#635F58]/50 focus:outline-none focus:border-black rounded-none transition-colors"
+                className="w-full bg-transparent border-b border-[#F4F4F1] pb-2 text-xs sm:text-[13px] text-[#F4F4F1] placeholder-[#F4F4F1]/50 focus:outline-none focus:border-black rounded-none transition-colors"
               />
             </div>
 
             {/* Email Address */}
             <div>
-              <label htmlFor="contact-email" className="block text-xs sm:text-[13px] font-bold text-[#635F58] mb-2">
+              <label htmlFor="contact-email" className="block text-xs sm:text-[13px] font-bold text-[#F4F4F1] mb-2">
                 Email Address* :
               </label>
               <input
@@ -67,13 +67,13 @@ export default function ContactPage() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="Email Address"
-                className="w-full bg-transparent border-b border-[#635F58] pb-2 text-xs sm:text-[13px] text-[#635F58] placeholder-[#635F58]/50 focus:outline-none focus:border-black rounded-none transition-colors"
+                className="w-full bg-transparent border-b border-[#F4F4F1] pb-2 text-xs sm:text-[13px] text-[#F4F4F1] placeholder-[#F4F4F1]/50 focus:outline-none focus:border-black rounded-none transition-colors"
               />
             </div>
 
             {/* Subject */}
             <div>
-              <label htmlFor="contact-subject" className="block text-xs sm:text-[13px] font-bold text-[#635F58] mb-2">
+              <label htmlFor="contact-subject" className="block text-xs sm:text-[13px] font-bold text-[#F4F4F1] mb-2">
                 Subject* :
               </label>
               <div className="relative">
@@ -82,34 +82,34 @@ export default function ContactPage() {
                   required
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  className="w-full bg-transparent border-b border-[#635F58] pb-2 pr-8 text-xs sm:text-[13px] text-[#635F58] focus:outline-none focus:border-black appearance-none rounded-none cursor-pointer"
+                  className="w-full bg-transparent border-b border-[#F4F4F1] pb-2 pr-8 text-xs sm:text-[13px] text-[#F4F4F1] focus:outline-none focus:border-black appearance-none rounded-none cursor-pointer"
                 >
                   <option value="" disabled className="text-gray-400">
                     Inquiry Item
                   </option>
-                  <option value="Inquiry Item" className="text-[#635F58]">
+                  <option value="Inquiry Item" className="text-[#F4F4F1]">
                     Inquiry Item
                   </option>
-                  <option value="Product Details & Sizing" className="text-[#635F58]">
+                  <option value="Product Details & Sizing" className="text-[#F4F4F1]">
                     Product Details & Sizing
                   </option>
-                  <option value="Order & Shipping Support" className="text-[#635F58]">
+                  <option value="Order & Shipping Support" className="text-[#F4F4F1]">
                     Order & Shipping Support
                   </option>
-                  <option value="Care for a Lifetime & Repairs" className="text-[#635F58]">
+                  <option value="Care for a Lifetime & Repairs" className="text-[#F4F4F1]">
                     Care for a Lifetime & Repairs
                   </option>
-                  <option value="Bespoke & Atelier Appointment" className="text-[#635F58]">
+                  <option value="Bespoke & Atelier Appointment" className="text-[#F4F4F1]">
                     Bespoke & Atelier Appointment
                   </option>
-                  <option value="Press & Editorial" className="text-[#635F58]">
+                  <option value="Press & Editorial" className="text-[#F4F4F1]">
                     Press & Editorial
                   </option>
-                  <option value="General Inquiries" className="text-[#635F58]">
+                  <option value="General Inquiries" className="text-[#F4F4F1]">
                     General Inquiries
                   </option>
                 </select>
-                <div className="absolute right-0 bottom-2.5 pointer-events-none text-[#635F58]">
+                <div className="absolute right-0 bottom-2.5 pointer-events-none text-[#F4F4F1]">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                   </svg>
@@ -119,7 +119,7 @@ export default function ContactPage() {
 
             {/* Message */}
             <div>
-              <label htmlFor="contact-message" className="block text-xs sm:text-[13px] font-bold text-[#635F58] mb-2.5">
+              <label htmlFor="contact-message" className="block text-xs sm:text-[13px] font-bold text-[#F4F4F1] mb-2.5">
                 Message* :
               </label>
               <textarea
@@ -129,13 +129,13 @@ export default function ContactPage() {
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 placeholder="Message"
-                className="w-full bg-transparent border border-[#635F58]/50 p-3 sm:p-4 text-xs sm:text-[13px] text-[#635F58] placeholder-[#635F58]/50 focus:outline-none focus:border-[#635F58] rounded-none resize-y min-h-[170px] transition-colors"
+                className="w-full bg-transparent border border-[#F4F4F1]/50 p-3 sm:p-4 text-xs sm:text-[13px] text-[#F4F4F1] placeholder-[#F4F4F1]/50 focus:outline-none focus:border-[#F4F4F1] rounded-none resize-y min-h-[170px] transition-colors"
               ></textarea>
             </div>
 
             {/* Submit Notification */}
             {submitted && (
-              <div className="p-3 bg-[#e6e2d8]/40 border border-[#635F58]/20 text-center text-xs text-[#635F58] tracking-wide">
+              <div className="p-3 bg-[#524E48]/40 border border-[#F4F4F1]/20 text-center text-xs text-[#F4F4F1] tracking-wide">
                 Thank you. Your message has been received by the KSHAUM concierge.
               </div>
             )}
@@ -145,7 +145,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 bg-[#635F58] hover:bg-[#524E48] text-[#F4F4F1] text-xs uppercase tracking-[0.25em] font-medium transition-colors cursor-pointer disabled:opacity-50"
+                className="w-full py-3.5 bg-[#F4F4F1] hover:bg-[#e4e4e1] text-[#635F58] text-xs uppercase tracking-[0.25em] font-medium transition-colors cursor-pointer disabled:opacity-50"
               >
                 {loading ? 'Sending...' : 'Submit'}
               </button>

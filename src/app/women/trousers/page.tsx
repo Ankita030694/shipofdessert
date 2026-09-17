@@ -62,28 +62,28 @@ export default function TrousersPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#F4F4F1] text-[#635F58]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-24 sm:pt-32 pb-20 px-4 sm:px-8 max-w-7xl mx-auto w-full">
-        <div className="border-b border-[#635F58]/20 pb-6 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div className="border-b border-[#F4F4F1]/20 pb-6 mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
             <nav aria-label="Breadcrumb" className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] mb-2">
-              <Link href="/women" className="hover:text-[#635F58]">Women</Link> / <span>Trousers</span>
+              <Link href="/women" className="hover:text-[#F4F4F1]">Women</Link> / <span>Trousers</span>
             </nav>
             <h1 className="text-2xl sm:text-3xl font-light tracking-wide uppercase font-serif">
               Trousers
             </h1>
           </div>
-          <span className="text-xs text-[#635F58]/60 uppercase tracking-widest">
+          <span className="text-xs text-[#F4F4F1]/60 uppercase tracking-widest">
             {products.length} {products.length === 1 ? 'Selection' : 'Selections'}
           </span>
         </div>
 
         {loading ? (
           <div className="py-24 text-center">
-            <div className="inline-block w-6 h-6 border-2 border-[#635F58] border-t-transparent rounded-full animate-spin mb-3"></div>
-            <p className="text-xs uppercase tracking-widest text-[#635F58]/60">
+            <div className="inline-block w-6 h-6 border-2 border-[#F4F4F1] border-t-transparent rounded-full animate-spin mb-3"></div>
+            <p className="text-xs uppercase tracking-widest text-[#F4F4F1]/60">
               Loading trousers...
             </p>
           </div>
@@ -92,7 +92,7 @@ export default function TrousersPage() {
             {products.map((item) => (
               <div key={item.id} className="group">
                 <Link href={`/product/${item.slug}`}>
-                  <div className="relative aspect-[3/4] overflow-hidden bg-[#e6e2d8]/50 mb-4">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[#524E48]/50 mb-4">
                     <Image
                       src={item.image || (item.images && item.images[0]) || '/image4.jpg'}
                       alt={item.name}

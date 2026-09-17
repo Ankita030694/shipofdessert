@@ -36,11 +36,11 @@ export default function ArchivesPage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-[#F4F4F1] text-[#635F58]">
+    <div className="min-h-screen flex flex-col justify-between bg-[#635F58] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-32 pb-20 px-4 sm:px-8 max-w-6xl mx-auto w-full">
-        <div className="border-b border-[#635F58]/20 pb-8 mb-12 text-center md:text-left">
+        <div className="border-b border-[#F4F4F1]/20 pb-8 mb-12 text-center md:text-left">
           <span className="text-xs uppercase tracking-[0.25em] text-[#bdb2a1] font-semibold block mb-2">
             Historical Records
           </span>
@@ -51,8 +51,8 @@ export default function ArchivesPage() {
 
         <div className="space-y-16">
           {archiveItems.map((item) => (
-            <div key={item.title} className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-b border-[#635F58]/20 pb-12">
-              <div className="md:col-span-5 relative aspect-[4/3] bg-[#e6e2d8]/50 overflow-hidden">
+            <div key={item.title} className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center border-b border-[#F4F4F1]/20 pb-12">
+              <div className="md:col-span-5 relative aspect-[4/3] bg-[#524E48]/50 overflow-hidden">
                 <Image
                   src={item.image}
                   alt={item.alt}
@@ -63,11 +63,11 @@ export default function ArchivesPage() {
               </div>
               <div className="md:col-span-7 space-y-3">
                 <span className="text-xs font-mono text-[#bdb2a1] block">{item.year}</span>
-                <h2 className="text-xl font-normal uppercase tracking-wider text-[#635F58]">{item.title}</h2>
-                <p className="text-xs sm:text-sm text-[#635F58]/75 leading-relaxed">{item.desc}</p>
+                <h2 className="text-xl font-normal uppercase tracking-wider text-[#F4F4F1]">{item.title}</h2>
+                <p className="text-xs sm:text-sm text-[#F4F4F1]/75 leading-relaxed">{item.desc}</p>
                 <Link
                   href="/collection/the-inheritance-01"
-                  className="inline-block text-xs uppercase tracking-widest text-[#635F58] underline pt-2"
+                  className="inline-block text-xs uppercase tracking-widest text-[#F4F4F1] underline pt-2"
                 >
                   View Archive Dossier
                 </Link>

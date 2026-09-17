@@ -78,51 +78,51 @@ export default function ReturnPolicy() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4F4F1] text-[#635F58]">
+    <div className="min-h-screen flex flex-col bg-[#635F58] text-[#F4F4F1]">
       <Navbar />
 
       <main className="flex-1 pt-28 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Header Section */}
-          <div className="border-b border-[#635F58]/20 pb-10 mb-12 text-center md:text-left">
+          <div className="border-b border-[#F4F4F1]/20 pb-10 mb-12 text-center md:text-left">
             <div className="inline-block uppercase tracking-[0.25em] text-xs font-semibold text-[#bdb2a1] mb-3">
               Customer Services & Orders
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#635F58] mb-4 font-serif">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#F4F4F1] mb-4 font-serif">
               Return Policy
             </h1>
-            <p className="text-base sm:text-lg text-[#635F58]/80 max-w-2xl">
+            <p className="text-base sm:text-lg text-[#F4F4F1]/80 max-w-2xl">
               You may return any item purchased on{' '}
               <a 
                 href="http://www.thekshaum.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="underline font-medium text-[#635F58] hover:opacity-75"
+                className="underline font-medium text-[#F4F4F1] hover:opacity-75"
               >
                 thekshaum.COM
               </a>{' '}
-              within <strong className="font-semibold text-[#635F58]">14 days</strong> of the delivery date.
+              within <strong className="font-semibold text-[#F4F4F1]">14 days</strong> of the delivery date.
             </p>
           </div>
 
           {/* Key Return Policy Highlight Banner */}
-          <div className="bg-[#F4F4F1] p-6 sm:p-8 border border-[#635F58]/15 shadow-xs mb-12">
+          <div className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
               <div>
-                <span className="inline-block text-xs uppercase tracking-widest font-semibold px-2.5 py-1 bg-[#635F58] text-[#F4F4F1] rounded-none mb-2">
+                <span className="inline-block text-xs uppercase tracking-widest font-semibold px-2.5 py-1 bg-[#F4F4F1] text-[#635F58] rounded-none mb-2">
                   14-Day Return Window
                 </span>
-                <h2 className="text-xl font-medium text-[#635F58] font-serif">
+                <h2 className="text-xl font-medium text-[#F4F4F1] font-serif">
                   Hassle-Free Returns & Dedicated Customer Support
                 </h2>
-                <p className="text-sm text-[#635F58]/70 mt-1">
+                <p className="text-sm text-[#F4F4F1]/70 mt-1">
                   Our Customer Care team is here to assist you with every step of your return authorization.
                 </p>
               </div>
               <div className="shrink-0">
                 <Link
                   href="/contact"
-                  className="inline-block bg-[#635F58] text-[#F4F4F1] px-6 py-3 rounded-none text-xs uppercase tracking-widest font-medium hover:bg-[#524E48] transition-colors text-center w-full md:w-auto"
+                  className="inline-block bg-[#F4F4F1] text-[#635F58] px-6 py-3 rounded-none text-xs uppercase tracking-widest font-medium hover:bg-[#333330] transition-colors text-center w-full md:w-auto"
                 >
                   Contact Customer Care
                 </Link>
@@ -133,8 +133,8 @@ export default function ReturnPolicy() {
           {/* Step-by-Step Instructions */}
           <section className="mb-14">
             <div className="flex items-center gap-3 mb-6">
-              <span className="w-8 h-px bg-[#635F58]"></span>
-              <h2 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#635F58]">
+              <span className="w-8 h-px bg-[#F4F4F1]"></span>
+              <h2 className="text-xs uppercase tracking-[0.2em] font-semibold text-[#F4F4F1]">
                 How to Initiate a Return
               </h2>
             </div>
@@ -143,16 +143,16 @@ export default function ReturnPolicy() {
               {steps.map((item) => (
                 <div 
                   key={item.step} 
-                  className="bg-[#F4F4F1] p-6 border border-[#635F58]/15 shadow-xs hover:border-[#635F58]/30 transition-all flex flex-col justify-between"
+                  className="bg-[#635F58] p-6 border border-[#F4F4F1]/15 shadow-xs hover:border-[#F4F4F1]/30 transition-all flex flex-col justify-between"
                 >
                   <div>
-                    <div className="text-2xl font-light font-serif text-[#635F58]/50 mb-3">
+                    <div className="text-2xl font-light font-serif text-[#F4F4F1]/50 mb-3">
                       {item.step}
                     </div>
-                    <h3 className="text-lg font-medium text-[#635F58] mb-2 font-serif">
+                    <h3 className="text-lg font-medium text-[#F4F4F1] mb-2 font-serif">
                       {item.title}
                     </h3>
-                    <p className="text-sm text-[#635F58]/80 leading-relaxed">
+                    <p className="text-sm text-[#F4F4F1]/80 leading-relaxed">
                       {item.description}
                     </p>
                   </div>
@@ -162,92 +162,92 @@ export default function ReturnPolicy() {
           </section>
 
           {/* Return Conditions & Guidelines */}
-          <section className="bg-[#F4F4F1] p-6 sm:p-8 border border-[#635F58]/15 shadow-xs mb-12 space-y-6">
-            <h2 className="text-xl sm:text-2xl font-medium text-[#635F58] font-serif border-b border-[#635F58]/10 pb-3">
+          <section className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12 space-y-6">
+            <h2 className="text-xl sm:text-2xl font-medium text-[#F4F4F1] font-serif border-b border-[#F4F4F1]/10 pb-3">
               Conditions for Return
             </h2>
 
-            <div className="space-y-4 text-base text-[#635F58]/80 leading-relaxed">
+            <div className="space-y-4 text-base text-[#F4F4F1]/80 leading-relaxed">
               <div className="flex items-start gap-3">
-                <span className="mt-1 text-[#635F58] font-bold">•</span>
+                <span className="mt-1 text-[#F4F4F1] font-bold">•</span>
                 <p>
-                  <strong className="text-[#635F58] font-semibold">Original Condition:</strong> The item(s) you wish to return must be in their original, unworn condition with all original tags attached and original packaging included. Otherwise, we will be unable to approve your return and issue a refund.
+                  <strong className="text-[#F4F4F1] font-semibold">Original Condition:</strong> The item(s) you wish to return must be in their original, unworn condition with all original tags attached and original packaging included. Otherwise, we will be unable to approve your return and issue a refund.
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
-                <span className="mt-1 text-[#635F58] font-bold">•</span>
+                <span className="mt-1 text-[#F4F4F1] font-bold">•</span>
                 <p>
-                  <strong className="text-[#635F58] font-semibold">Inspection:</strong> Once your return shipment reaches our warehouse, please allow up to 10 business days for processing. If the item(s) do not meet the conditions detailed above, they will be sent back to you and the return request will be denied.
+                  <strong className="text-[#F4F4F1] font-semibold">Inspection:</strong> Once your return shipment reaches our warehouse, please allow up to 10 business days for processing. If the item(s) do not meet the conditions detailed above, they will be sent back to you and the return request will be denied.
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
-                <span className="mt-1 text-[#635F58] font-bold">•</span>
+                <span className="mt-1 text-[#F4F4F1] font-bold">•</span>
                 <p>
-                  <strong className="text-[#635F58] font-semibold">Non-Refundable Fees:</strong> Please note that original shipping fees are non-refundable.
+                  <strong className="text-[#F4F4F1] font-semibold">Non-Refundable Fees:</strong> Please note that original shipping fees are non-refundable.
                 </p>
               </div>
             </div>
           </section>
 
           {/* Regional Shipping Responsibilities */}
-          <section className="bg-[#F4F4F1] p-6 sm:p-8 border border-[#635F58]/15 shadow-xs mb-12">
-            <div className="flex items-baseline justify-between mb-4 border-b border-[#635F58]/10 pb-3">
-              <h2 className="text-xl sm:text-2xl font-medium text-[#635F58] font-serif">
+          <section className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
+            <div className="flex items-baseline justify-between mb-4 border-b border-[#F4F4F1]/10 pb-3">
+              <h2 className="text-xl sm:text-2xl font-medium text-[#F4F4F1] font-serif">
                 Return Shipping & Covered Regions
               </h2>
             </div>
             
-            <p className="text-base text-[#635F58]/80 leading-relaxed mb-6">
-              <strong className="font-semibold text-[#635F58]">Kshaum takes full responsibility</strong> for the return label and associated shipping costs for orders returning from the following regions:
+            <p className="text-base text-[#F4F4F1]/80 leading-relaxed mb-6">
+              <strong className="font-semibold text-[#F4F4F1]">Kshaum takes full responsibility</strong> for the return label and associated shipping costs for orders returning from the following regions:
             </p>
 
             <div className="flex flex-wrap gap-2 mb-6">
               {eligibleRegions.map((region) => (
                 <span 
                   key={region} 
-                  className="px-3 py-1.5 bg-[#F4F4F1] border border-[#635F58]/20 text-xs font-medium text-[#635F58]"
+                  className="px-3 py-1.5 bg-[#635F58] border border-[#F4F4F1]/20 text-xs font-medium text-[#F4F4F1]"
                 >
                   {region}
                 </span>
               ))}
             </div>
 
-            <div className="bg-[#F4F4F1] border border-[#635F58]/20 p-4 text-sm text-[#635F58] leading-relaxed">
+            <div className="bg-[#635F58] border border-[#F4F4F1]/20 p-4 text-sm text-[#F4F4F1] leading-relaxed">
               <strong>Please Note:</strong> For regions not included in the above list, it is the customer’s full responsibility to arrange the return of their unwanted item(s), upon receiving their Return Authorization (RA) and return instructions from Kshaum Customer Care.
             </div>
           </section>
 
           {/* Refunds & Payment Methods */}
-          <section className="bg-[#F4F4F1] p-6 sm:p-8 border border-[#635F58]/15 shadow-xs mb-12">
-            <h2 className="text-xl sm:text-2xl font-medium text-[#635F58] font-serif border-b border-[#635F58]/10 pb-3 mb-4">
+          <section className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/15 shadow-xs mb-12">
+            <h2 className="text-xl sm:text-2xl font-medium text-[#F4F4F1] font-serif border-b border-[#F4F4F1]/10 pb-3 mb-4">
               Refunds & Processing
             </h2>
 
-            <p className="text-base text-[#635F58]/80 leading-relaxed mb-6">
+            <p className="text-base text-[#F4F4F1]/80 leading-relaxed mb-6">
               Once your return shipment reaches our warehouse, please allow up to 10 business days for your return to be processed and refund issued. Once accepted, we will process your reimbursement and send you a Refund Confirmation email.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               {paymentMethods.map((method) => (
-                <div key={method.name} className="p-4 bg-[#F4F4F1] border border-[#635F58]/15 flex flex-col justify-between">
+                <div key={method.name} className="p-4 bg-[#635F58] border border-[#F4F4F1]/15 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-semibold text-[#635F58] text-sm">{method.name}</h3>
-                    <p className="text-xs text-[#635F58]/60 mb-2">{method.subtitle}</p>
-                    <p className="text-xs text-[#635F58]/80 leading-relaxed">{method.description}</p>
+                    <h3 className="font-semibold text-[#F4F4F1] text-sm">{method.name}</h3>
+                    <p className="text-xs text-[#F4F4F1]/60 mb-2">{method.subtitle}</p>
+                    <p className="text-xs text-[#F4F4F1]/80 leading-relaxed">{method.description}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="border-t border-[#635F58]/10 pt-4 text-sm text-[#635F58]/70 space-y-2">
+            <div className="border-t border-[#F4F4F1]/10 pt-4 text-sm text-[#F4F4F1]/70 space-y-2">
               <p>
                 If you have received a Refund Confirmation email but have not received your funds, please contact your bank or card issuer. If your bank is unable to locate your refund, please contact Customer Care.
               </p>
               <p>
                 For further information on the conditions for exercising your right to return, please see our{' '}
-                <Link href="/privacy-policy" className="text-[#635F58] underline font-medium hover:opacity-75">
+                <Link href="/privacy-policy" className="text-[#F4F4F1] underline font-medium hover:opacity-75">
                   Legal Area & Privacy Policy
                 </Link>.
               </p>
@@ -255,15 +255,15 @@ export default function ReturnPolicy() {
           </section>
 
           {/* Footer Contact Banner */}
-          <div className="text-center border-t border-[#635F58]/15 pt-8 space-y-3">
-            <h3 className="text-lg font-medium text-[#635F58] font-serif">Questions about your Return?</h3>
-            <p className="text-sm text-[#635F58]/70">
+          <div className="text-center border-t border-[#F4F4F1]/15 pt-8 space-y-3">
+            <h3 className="text-lg font-medium text-[#F4F4F1] font-serif">Questions about your Return?</h3>
+            <p className="text-sm text-[#F4F4F1]/70">
               Our Customer Care team is available to assist you with any questions or return authorizations.
             </p>
             <div>
               <a 
                 href="mailto:onlinecustomercare@thekshaum.com" 
-                className="inline-block font-medium underline text-[#635F58] hover:opacity-75 text-sm"
+                className="inline-block font-medium underline text-[#F4F4F1] hover:opacity-75 text-sm"
               >
                 onlinecustomercare@thekshaum.com
               </a>
