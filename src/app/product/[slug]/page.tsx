@@ -512,7 +512,7 @@ export default function ProductDetailPage({
 
             {/* Short Fit Note & Model Stats */}
             {product.fitNote && (
-              <div className="bg-[#635F58]/70 border border-[#F4F4F1]/10 p-3 rounded-xs flex items-center gap-2.5 text-xs text-[#F4F4F1]/80">
+              <div className="bg-[#635F58]/70 p-3 rounded-xs flex items-center gap-2.5 text-xs text-[#F4F4F1]/80">
                 <span className="text-sm">📏</span>
                 <div>
                   <span className="font-medium text-[#F4F4F1]">{product.fitNote}</span>
