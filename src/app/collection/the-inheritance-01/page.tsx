@@ -81,7 +81,7 @@ export default function TheInheritance01Page() {
         </div>
 
         {/* 18 Product Image Gallery */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 lg:gap-x-5">
           {galleryItems.map((item) => (
             <div key={item.id} className="group">
               <Link href="/collection/details">

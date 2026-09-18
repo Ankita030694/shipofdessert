@@ -200,7 +200,7 @@ function WomenContent() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 sm:gap-x-8 lg:gap-x-4 gap-y-4 sm:gap-y-5">
             {currentProducts.map((product) => (
               <div key={product.id} className="group">
                 <Link href={`/product/${product.slug}`} className="block">

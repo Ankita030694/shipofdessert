@@ -220,7 +220,7 @@ export default function ProductDetails() {
             You May Also Like
           </h2>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 sm:gap-8 lg:gap-x-4">
             {relatedProducts.map((product) => (
               <div key={product.id} className="group">
                 <Link href={`/product/${product.slug}`} className="text-[#F4F4F1]">

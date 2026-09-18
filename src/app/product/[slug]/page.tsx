@@ -724,7 +724,7 @@ export default function ProductDetailPage({
               <h2 className="text-xl sm:text-2xl font-serif text-[#F4F4F1]">Complete The Look</h2>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-x-3">
               {product.companionItems.map((item) => (
                 <Link key={item.id} href={`/product/${item.slug}`} className="group block">
                   <div className="relative aspect-[3/4] bg-[#524E48]/40 rounded-xs overflow-hidden mb-2.5">
@@ -759,7 +759,7 @@ export default function ProductDetailPage({
               <h2 className="text-xl sm:text-2xl font-serif text-[#F4F4F1]">You May Also Consider</h2>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 lg:gap-x-3">
               {product.relatedProducts.map((rel) => (
                 <Link key={rel.id} href={`/product/${rel.slug}`} className="group block">
                   <div className="relative aspect-[3/4] bg-[#524E48]/40 rounded-xs overflow-hidden mb-2.5">
