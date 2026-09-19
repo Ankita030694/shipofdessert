@@ -25,7 +25,7 @@ export default function TheQuietChoicePage() {
       title: 'Our Philosophy',
       eyebrow: '01 / ESSENCE',
       description: 'Restraint, permanence, and the architecture of quiet living. Discover the ethos and mindful principles that shape every KSHAUM silhouette.',
-      image: '/image1.jpg',
+      image: '/cover.jpeg',
       href: '/philosophy',
       ctaText: 'Explore Philosophy',
     },
