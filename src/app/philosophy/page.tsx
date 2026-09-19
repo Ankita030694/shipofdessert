@@ -1,466 +1,156 @@
 "use client";
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import React, { useEffect, useRef } from 'react';
-import Navbar from '../../../components/Navbar';
-import Footer from '../../../components/Footer';
+import React from "react";
+import { motion } from "framer-motion";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 
-// Helper function to split text into word spans
-const splitTextIntoWords = (text: string) => {
-  return text.split(' ').map((word, index) => (
-    <span key={index} className="reveal-word">
-      {word}
-    </span>
-  ));
-};
+interface PhilosophySection {
+  title: string;
+  items: {
+    heading: string;
+    text: string;
+  }[];
+}
 
-export default function Philosophy() {
-  const [ref1, inView1] = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-  });
+const philosophySections: PhilosophySection[] = [
+  {
+    title: "Origin of Form",
+    items: [
+      {
+        heading: "Extensions of Thought",
+        text: "Then came the human. The human began to shape the world. A stone became a tool. A wall became a shelter. A vessel held water. A table gathered people around it. Objects were never merely objects. They were extensions of thought.",
+      },
+      {
+        heading: "Ways of Understanding",
+        text: "Architecture became a way of understanding space. Clothing became a way of understanding the body. Art became a way of understanding what could not be explained. Ritual became a way of understanding time. Civilisation was built from these things.",
+      },
+    ],
+  },
+  {
+    title: "The Modern Condition",
+    items: [
+      {
+        heading: "A Louder World",
+        text: "And then, somewhere along the way, we began making everything louder. More information. More images. More objects. More opinions. More signals. The world became increasingly intelligent. And increasingly difficult to hear.",
+      },
+      {
+        heading: "The Step Toward Less",
+        text: "Perhaps the next step is not more. Perhaps it is less. Less noise. Less explanation. Less performance. More attention. More permanence. More physicality. More thought.",
+      },
+    ],
+  },
+  {
+    title: "What Remains",
+    items: [
+      {
+        heading: "Spaces & Objects",
+        text: "A room that makes you stop. An object that makes you wonder. A garment that changes the way you occupy your body. A building that makes technology disappear. A book that remains on a table long after the screen has gone dark.",
+      },
+      {
+        heading: "Beyond Clothing",
+        text: "We are interested in the things that remain when everything unnecessary has been removed. This is why KSHAUM does not begin with clothing. Clothing is only one language. We look at architecture, objects, art, technology, philosophy, culture and the human body as parts of the same world.",
+      },
+    ],
+  },
+  {
+    title: "Future Intelligence",
+    items: [
+      {
+        heading: "Harmony of Opposites",
+        text: "A world where ancient intelligence can meet future intelligence. Where stone can exist beside computation. Where the primitive and the advanced are no longer opposites. Where technology becomes invisible. Where objects regain their weight. Where silence becomes a form of luxury. Where a person does not need to announce who they are.",
+      },
+      {
+        heading: "Silence to Think",
+        text: "We make things for that world. Some are worn. Some are held. Some are inhabited. Some simply exist to make you think. And perhaps that is what an object should do. Not tell you what to think. But leave enough silence for you to think for yourself.",
+      },
+    ],
+  },
+  {
+    title: "The Quiet Choice",
+    items: [
+      {
+        heading: "Belonging to Silence",
+        text: "Because the future does not necessarily belong to those who make the most noise. It may belong to those who can remain entirely themselves within it.",
+      },
+      {
+        heading: "POWER WITHOUT PERFORMANCE",
+        text: "THE QUIET CHOICE",
+      },
+    ],
+  },
+];
 
-  // Refs for scroll-driven animation
-  const sectionsRef = useRef<HTMLDivElement>(null);
-  const revealSectionsRef = useRef<HTMLDivElement[]>([]);
-
-  useEffect(() => {
-    const sections = document.querySelectorAll('.reveal-section');
-    revealSectionsRef.current = Array.from(sections) as HTMLDivElement[];
-
-    let ticking = false;
-
-    const updateScrollProgress = () => {
-      if (ticking) return;
-      ticking = true;
-
-      requestAnimationFrame(() => {
-        const viewportHeight = window.innerHeight;
-
-        revealSectionsRef.current.forEach((section) => {
-          const rect = section.getBoundingClientRect();
-          const sectionHeight = rect.height;
-
-          // Calculate progress based on how much of the tall .reveal-section has been scrolled past.
-          // Progress starts when the top of the section is at the top of the viewport (rect.top <= 0).
-          // The total scrollable distance is the section's height minus the viewport's height.
-          const scrollableDistance = sectionHeight - viewportHeight;
-          
-          // As we scroll down, rect.top becomes negative. We use this to calculate progress.
-          const progress = Math.max(0, Math.min(1, (-rect.top) / scrollableDistance));
-          
-          // Update word opacity based on progress
-          const wordElements = section.querySelectorAll('.reveal-word');
-          wordElements.forEach((wordEl, wordIndex) => {
-            const element = wordEl as HTMLElement;
-            const totalWords = wordElements.length;
-            
-            // Map the overall section progress to individual word progress.
-            const wordProgressStart = wordIndex / totalWords;
-            const wordProgressEnd = (wordIndex + 1) / totalWords;
-            
-            const wordProgress = Math.max(0, Math.min(1, 
-              (progress - wordProgressStart) / (wordProgressEnd - wordProgressStart)
-            ));
-            
-            const opacity = 0.2 + (wordProgress * 0.8);
-            element.style.opacity = opacity.toString();
-          });
-        });
-
-        ticking = false;
-      });
-    };
-
-    window.addEventListener('scroll', updateScrollProgress, { passive: true });
-    window.addEventListener('resize', updateScrollProgress, { passive: true });
-
-    // Initial call
-    updateScrollProgress();
-
-    return () => {
-      window.removeEventListener('scroll', updateScrollProgress);
-      window.removeEventListener('resize', updateScrollProgress);
-    };
-  }, []);
-
+export default function PhilosophyPage() {
   return (
-    <>
+    <div className="bg-[#635F58] text-[#F4F4F1] min-h-screen flex flex-col justify-between selection:bg-[#F4F4F1] selection:text-[#635F58]">
       <Navbar />
-      <main>
-        {/* Hero Section */}
-        <section className="relative h-[100vh] w-full overflow-hidden z-10 mb-8 md:mb-16">
-          <div className="absolute inset-0 ">
-            <Image 
-              src="/hero-philosophy.jpg" 
-              alt="Philosophy Hero" 
-              fill 
-              style={{objectFit: 'cover'}}
-              priority
-            />
-            <div className="absolute inset-0 bg-black/40"></div>
-          </div>
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
-            <h1 className="text-5xl md:text-7xl font-light mb-4 tracking-widest text-center">OUR PHILOSOPHY</h1>
-            <div className="w-20 h-0.5 bg-white"></div>
-            <p className="mt-6 max-w-2xl text-center px-4 text-base md:text-lg">
-              The essence of luxury lies not in opulence, but in the perfect harmony between form and function.
+
+      <main className="flex-1 pt-32 sm:pt-40 md:pt-44 pb-28 sm:pb-36 px-6 sm:px-10 md:px-16 lg:px-24 max-w-5xl mx-auto w-full">
+        {/* Intro / Header Section (2-Column Layout like screenshot) */}
+        <motion.section
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12 pb-14 sm:pb-16"
+        >
+          {/* Left Column: Title & Subtitle */}
+          <div className="md:col-span-5 lg:col-span-4">
+            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#F4F4F1]">
+              KSHAUM
+            </h1>
+            <p className="text-sm sm:text-base text-[#F4F4F1]/60 font-light mt-1 tracking-normal">
+              Philosophy & Manifesto
             </p>
           </div>
-        </section>
 
-        {/* Scroll-driven reveal sections */}
-        <div ref={sectionsRef} className="reveal-container relative z-20 bg-[#635F58]">
-          
-          {/* Brand Values Section */}
-          <div className="reveal-section mt-8 md:mt-16">
-            <div className="reveal-content">
-              <motion.section 
-                ref={ref1}
-                initial={{ opacity: 0, y: 50 }}
-                animate={inView1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                transition={{ duration: 0.8 }}
-                className="py-8 md:py-12 px-4 md:px-6"
-              >
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords("I - Brand Values")}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"Order is the shape upon which beauty depends" - Pearl S Buck')}
-                    </blockquote>
-
-                    <p className="text-base md:text-lg leading-relaxed text-center mb-6">
-                      {splitTextIntoWords('In a world that trades speed for substance, we anchor ourselves in order, discipline and restraint. At KSHAUM our values are not seasonal - they are eternal')}
-                    </p>
-
-                    <div className="text-center mb-4">
-                      <p className="text-base md:text-lg font-medium mb-3">
-                        {splitTextIntoWords('We believe in:')}
-                      </p>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div className="space-y-4">
-                        <div>
-                          <h3 className="font-medium tracking-wide mb-1">
-                            {splitTextIntoWords('QUIET POWER')}
-                          </h3>
-                          <p className="text-sm leading-relaxed">
-                            {splitTextIntoWords('for those who command without noise')}
-                          </p>
-                        </div>
-                        
-                        <div>
-                          <h3 className="font-medium tracking-wide mb-1">
-                            {splitTextIntoWords('LEGACY OVER TREND')}
-                          </h3>
-                          <p className="text-sm leading-relaxed">
-                            {splitTextIntoWords('because what is inherited must outlast what is admired')}
-                          </p>
-                        </div>
-
-                        <div>
-                          <h3 className="font-medium tracking-wide mb-1">
-                            {splitTextIntoWords('CRAFT OVER COMMERCE')}
-                          </h3>
-                          <p className="text-sm leading-relaxed">
-                            {splitTextIntoWords('true beauty can not be rushed')}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div>
-                          <h3 className="font-medium tracking-wide mb-1">
-                            {splitTextIntoWords('MEMORY OVER NOVELTY')}
-                          </h3>
-                          <p className="text-sm leading-relaxed">
-                            {splitTextIntoWords('we dress the future with the dignity of the past')}
-                          </p>
-                        </div>
-
-                        <div>
-                          <h3 className="font-medium tracking-wide mb-1">
-                            {splitTextIntoWords('LINEAGE OVER PERSONA')}
-                          </h3>
-                          <p className="text-sm leading-relaxed">
-                            {splitTextIntoWords('one does not wear KSHAUM to be seen one wears it to belong')}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.section>
-            </div>
-          </div>
-
-          {/* Craftsmanship Section */}
-          <div className="reveal-section">
-            <div className="reveal-content">
-              <section className="py-8 md:py-12 px-4 md:px-6">
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords('II - Craftsmanship')}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"We are what we repeatedly do, Excellence then it is not an act but a habit" - Aristotle (Greece)')}
-                    </blockquote>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('At KSHAUM we use only what breathes with body and listens to soul. Linen, cotton, silk - fibers that hold frequency absorb intention and age with nobility. In Ayurveda these are "JEEVAN VASTRA" life bearing cloth.')}
-                    </p>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('Craftsmanship is sacred. To craft is to create eternity in a Moment. In Sanskrit it is called "SHILPA" the art and discipline that binds Spirit to form.')}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          {/* Cultural and Historical Foundations */}
-          <div className="reveal-section">
-            <div className="reveal-content">
-              <section className="py-8 md:py-12 px-4 md:px-6">
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords('III - Cultural and Historical Foundations')}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"To know nothing of what happened before you were born is to remain forever a child" - Cicero (Rome)')}
-                    </blockquote>
-
-                    <div className="space-y-3 text-base md:text-lg leading-relaxed">
-                      <p>{splitTextIntoWords('We do not draw from mood-boards')}</p>
-                      <p>{splitTextIntoWords('We draw from empires.')}</p>
-                      <p>{splitTextIntoWords('We believe civilisation is couture')}</p>
-                      <p>{splitTextIntoWords('To wear our garments is to walk with dignity of dynasties.')}</p>
-                      <p>{splitTextIntoWords('We invoke the Sanskrit principle of "KAAL CHAKRA" - The wheel of time where fashion is not seasonal but cyclical sacred and eternal.')}</p>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          {/* Philosophy of Dress */}
-          <div className="reveal-section">
-            <div className="reveal-content">
-              <section className="py-8 md:py-12 px-4 md:px-6">
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords('IV - Philosophy of Dress')}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"Clothing is but a symbol of the soul made visible" - Hazrat Ali (7th century) caliph, Persia')}
-                    </blockquote>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('At KSHAUM attire is not decoration - it is declaration. They belong to those who carry burden without display grace without audience.')}
-                    </p>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('We dress to be remembered by descendants.')}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          {/* Aesthetic Ethos */}
-          <div className="reveal-section">
-            <div className="reveal-content">
-              <section className="py-8 md:py-12 px-4 md:px-6">
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords('V - Aesthetic Ethos')}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"Simplicity is the final achievement. After one has played a vast quantity of notes, it is simplicity that emerges as the crowning reward" - Frédéric Chopin (Poland)')}
-                    </blockquote>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('In the ancient Chinese concept of "wu wei - effortless action" We find our direction - effort that disappears and mastery that whispers.')}
-                    </p>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('No logos no faces not noise. We do not chase the eye we rest in the mind.')}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          {/* Legacy and Lineage */}
-          <div className="reveal-section">
-            <div className="reveal-content">
-              <section className="py-8 md:py-12 px-4 md:px-6">
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords('VI - Legacy and Lineage')}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"A man does not plant a tree for himself, he plants it for his Children and his children\'s children" - Cicero (Rome)')}
-                    </blockquote>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('We design for the house the heir and the history yet to be written. KSHAUM belongs to the families who build slowly, suffer quietly, and endure without applause. Those who know that luxury is not ownership - it is inheritance.')}
-                    </p>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('In Sanskrit there\'s word "VANSHA" - a sacred line of ancestry. We clothe Vansha bearing those who understand that their life is part of longer thread. Every stitch we make is for the preservation of name, honour and continuity.')}
-                    </p>
-
-                    <p className="text-base md:text-lg leading-relaxed font-medium">
-                      {splitTextIntoWords('Because in the end style fades but houses remains.')}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          {/* What We Reject */}
-          <div className="reveal-section">
-            <div className="reveal-content">
-              <section className="py-8 md:py-12 px-4 md:px-6">
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords('VII - What We Reject')}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"Give me a place to stand and I will move the earth" - Archimedes (Greece)')}
-                    </blockquote>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('We have chosen our place now we draw the line. We refuse the theatric of trend, the hollowness of hype and the tyranny of relevance.')}
-                    </p>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('DHARMA - a personal law even when the world tempts disloyalty our is dharma is creation of restraint.')}
-                    </p>
-
-                    <p className="text-base md:text-lg leading-relaxed font-medium">
-                      {splitTextIntoWords('Let others chase the wind - We will build the mountain. The house kneels to no season no crowd no noise it bows only to craft, culture and continuity.')}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          {/* Philosophy of Time */}
-          <div className="reveal-section">
-            <div className="reveal-content">
-              <section className="py-8 md:py-12 px-4 md:px-6">
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords('VIII - Philosophy of Time')}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"Time is a created thing to say I don\'t have time is like saying I don\'t want to" - Lao Tzu (China)')}
-                    </blockquote>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('We craft for the moment that matter the years that define legacy and the generations that inherit. Because true luxury is not bought today to be forgotten tomorrow, but lived as heritage.')}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-          {/* The Sacred Textile */}
-          <div className="reveal-section">
-            <div className="reveal-content">
-              <section className="py-8 md:py-12 px-4 md:px-6">
-                <div className="mx-4 md:mx-auto max-w-4xl">
-                  <div className="text-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-light tracking-[0.1em] md:tracking-[0.2em] mb-4 uppercase text-[#F4F4F1] mt-0 pt-0">
-                      {splitTextIntoWords('IX - The Sacred Textile')}
-                    </h2>
-                    <div className="w-20 h-0.5 bg-[#F4F4F1] mx-auto mb-6"></div>
-                  </div>
-
-                  <div className="space-y-4 text-[#F4F4F1]">
-                    <blockquote className="text-lg md:text-xl italic text-center mb-6">
-                      {splitTextIntoWords('"Clothes are the second skin, the first being our flesh" - Proverb from ancient India')}
-                    </blockquote>
-
-                    <p className="text-base md:text-lg leading-relaxed">
-                      {splitTextIntoWords('In Vedic philosophy natural fabrics are considered "SATTVIC" - pure harmonious and elevating to the human aura. They resonate with the body\'s own frequency creating a symphony of balance between wearer and garment.')}
-                    </p>
-
-                    <p className="text-base md:text-lg leading-relaxed font-medium">
-                      {splitTextIntoWords('To wear KSHAUM is to wrap oneself in history, energy and sanctity.')}
-                    </p>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Final Quote Section */}
-        <section className="py-12 md:py-16 px-4 bg-black text-white text-center">
-          <div className="mx-4 md:mx-auto max-w-4xl">
-            <p className="text-xl md:text-3xl font-light italic">
-              "In the end, style fades but houses remain."
+          {/* Right Column: Lead Narrative */}
+          <div className="md:col-span-7 lg:col-span-8">
+            <p className="text-sm sm:text-base md:text-lg text-[#F4F4F1]/85 leading-relaxed font-light">
+              <span className="font-medium text-[#F4F4F1] uppercase tracking-wide">
+                First came the world.
+              </span>{" "}
+              Before the object, there was matter. Stone. Water. Light. Shadow. Air.
+              Before anyone named them, they simply existed.
             </p>
-            <div className="w-20 h-0.5 bg-white mx-auto my-4"></div>
-            <p className="uppercase tracking-widest">KSHAUM</p>
           </div>
-        </section>
+        </motion.section>
+
+        {/* Content Sections (Divider + 2-Column Item Grid) */}
+        {philosophySections.map((section, sIndex) => (
+          <motion.section
+            key={section.title}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: sIndex * 0.05, ease: [0.16, 1, 0.3, 1] }}
+            className="border-t border-[#F4F4F1]/15 py-12 sm:py-16 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12"
+          >
+            {/* Left Column: Section Title */}
+            <div className="md:col-span-5 lg:col-span-4">
+              <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-[#F4F4F1]">
+                {section.title}
+              </h2>
+            </div>
+
+            {/* Right Column: Stacked Items with Title & Description */}
+            <div className="md:col-span-7 lg:col-span-8 space-y-8 sm:space-y-10">
+              {section.items.map((item, iIndex) => (
+                <div key={iIndex} className="group">
+                  <h3 className="text-base sm:text-lg font-medium tracking-tight text-[#F4F4F1] mb-1.5">
+                    {item.heading}
+                  </h3>
+                  <p className="text-sm sm:text-base text-[#F4F4F1]/75 leading-relaxed font-light">
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        ))}
       </main>
+
       <Footer />
-    </>
+    </div>
   );
 }
