@@ -34,7 +34,7 @@ export default function CartPage() {
               </span>
               <button
                 onClick={clearCart}
-                className="underline text-[#F4F4F1]/60 hover:text-red-400 uppercase tracking-wider text-[11px] cursor-pointer"
+                className="underline text-[#F4F4F1]/60 hover:text-[#F4F4F1] uppercase tracking-wider text-[11px] cursor-pointer transition-colors"
               >
                 Clear Bag
               </button>
@@ -148,7 +148,7 @@ export default function CartPage() {
 
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="text-[11px] uppercase tracking-wider text-red-400 hover:underline cursor-pointer"
+                        className="text-[11px] uppercase tracking-wider text-[#F4F4F1]/70 hover:text-[#F4F4F1] hover:underline cursor-pointer transition-colors"
                       >
                         Remove
                       </button>
@@ -174,7 +174,7 @@ export default function CartPage() {
 
                 <div className="flex justify-between text-[#F4F4F1]/70">
                   <span>Shipping & Delivery</span>
-                  <span className="uppercase text-[10px] tracking-wider text-emerald-300 font-semibold bg-emerald-900/30 px-2 py-0.5 border border-emerald-500/30">
+                  <span className="uppercase text-[10px] tracking-wider text-[#F4F4F1] font-medium bg-[#524E48]/50 px-2.5 py-0.5 border border-[#F4F4F1]/20">
                     Complimentary
                   </span>
                 </div>

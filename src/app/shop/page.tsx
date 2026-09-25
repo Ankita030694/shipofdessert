@@ -22,7 +22,7 @@ interface Product {
   inStock?: boolean;
 }
 
-const CATEGORIES = ['All', 'Tops', 'Dresses', 'Skirts', 'Pants', 'Footwear'];
+const CATEGORIES = ['All', 'Tops', 'Dresses', 'Skirts', 'Pants'];
 
 function ShopContent() {
   const searchParams = useSearchParams();

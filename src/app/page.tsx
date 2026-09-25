@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -27,19 +28,17 @@ export default function Home() {
 
         {/* Full-Page End-to-End Architectural Hero Visual */}
         <div className="relative w-full h-[100dvh] overflow-hidden bg-[#635F58]">
-          {/* Desktop Video (Screen width >= 768px) */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="hidden md:block w-full h-full object-cover filter brightness-[0.96]"
-            aria-label="KSHAUM architectural desktop campaign video"
-          >
-            <source src="/Kshaum%20Desktop.webm" type="video/webm" />
-            <source src="/Kshaum Desktop.webm" type="video/webm" />
-          </video>
+          {/* Desktop Hero Visual (Screen width >= 768px) */}
+          <div className="hidden md:block relative w-full h-full">
+            <Image
+              src="/IMG_9602.JPG.jpeg"
+              alt="KSHAUM — The Quiet Choice Campaign"
+              fill
+              priority
+              className="object-cover filter brightness-[0.96]"
+              sizes="100vw"
+            />
+          </div>
 
           {/* Mobile Video (Screen width < 768px) */}
           <video

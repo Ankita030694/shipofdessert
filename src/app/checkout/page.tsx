@@ -181,7 +181,7 @@ export default function CheckoutPage() {
                       1. Contact Information
                     </h2>
                     {session?.user ? (
-                      <span className="text-[11px] text-emerald-300 font-medium">
+                      <span className="text-[11px] text-[#F4F4F1]/90 font-medium">
                         ✓ Signed in as {session.user.name || session.user.email}
                       </span>
                     ) : (
@@ -377,7 +377,7 @@ export default function CheckoutPage() {
                             </span>
                           </div>
                         </div>
-                        <span className="text-[10px] uppercase font-bold text-emerald-300 bg-emerald-900/30 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                        <span className="text-[10px] uppercase font-medium text-[#F4F4F1] bg-[#524E48]/50 px-2 py-0.5 rounded-full border border-[#F4F4F1]/20">
                           Instant Placement
                         </span>
                       </div>
@@ -495,7 +495,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex justify-between">
                     <span>Express Domestic Shipping</span>
-                    <span className="text-emerald-300 font-semibold uppercase text-[11px]">
+                    <span className="text-[#F4F4F1] font-medium uppercase text-[11px]">
                       Complimentary (Free)
                     </span>
                   </div>

@@ -18,10 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/archives`, priority: 0.7, changeFrequency: 'monthly' as const },
     { url: `${baseUrl}/contact`, priority: 0.7, changeFrequency: 'monthly' as const },
     { url: `${baseUrl}/shipping`, priority: 0.5, changeFrequency: 'monthly' as const },
-    { url: `${baseUrl}/returns-refunds`, priority: 0.5, changeFrequency: 'monthly' as const },
+    { url: `${baseUrl}/return-policy`, priority: 0.5, changeFrequency: 'monthly' as const },
+    { url: `${baseUrl}/faq`, priority: 0.6, changeFrequency: 'monthly' as const },
     { url: `${baseUrl}/privacy-policy`, priority: 0.5, changeFrequency: 'monthly' as const },
+    { url: `${baseUrl}/terms-and-conditions`, priority: 0.5, changeFrequency: 'monthly' as const },
+    { url: `${baseUrl}/accessibility`, priority: 0.5, changeFrequency: 'monthly' as const },
     { url: `${baseUrl}/cookie-policy`, priority: 0.5, changeFrequency: 'monthly' as const },
-    { url: `${baseUrl}/terms-conditions`, priority: 0.5, changeFrequency: 'monthly' as const },
   ];
 
   return routes.map((route) => ({

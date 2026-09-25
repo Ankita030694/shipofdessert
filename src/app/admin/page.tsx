@@ -159,7 +159,7 @@ export interface AdminOrder {
   updatedAt: string;
 }
 
-const DEFAULT_CATEGORIES = ['Sets', 'Tops', 'Dresses', 'Skirts', 'Pants', 'Footwear', 'Accessories'];
+const DEFAULT_CATEGORIES = ['Sets', 'Tops', 'Dresses', 'Skirts', 'Pants', 'Accessories'];
 const DEFAULT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 export default function AdminPage() {

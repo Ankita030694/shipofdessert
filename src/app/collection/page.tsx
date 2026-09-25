@@ -29,7 +29,7 @@ interface Product {
   setPieces?: SetPieces;
 }
 
-const CATEGORIES = ['All', 'Sets', 'Tops', 'Dresses', 'Skirts', 'Pants', 'Footwear'];
+const CATEGORIES = ['All', 'Sets', 'Tops', 'Dresses', 'Skirts', 'Pants'];
 
 function CollectionContent() {
   const searchParams = useSearchParams();

@@ -28,7 +28,6 @@ const WOMEN_CATEGORIES = [
   { label: 'Skirts', value: 'Skirts' },
   { label: 'Tops', value: 'Tops' },
   { label: 'Trousers', value: 'Pants' },
-  { label: 'Footwear', value: 'Footwear' },
 ];
 
 function WomenContent() {

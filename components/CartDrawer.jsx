@@ -96,7 +96,7 @@ export default function CartDrawer() {
                         >
                           {item.name}
                         </Link>
-                        <span className="text-xs font-medium whitespace-nowrap">
+                        <span className="text-xs font-serif font-medium whitespace-nowrap text-[#F4F4F1]">
                           ₹{(item.price * item.quantity).toLocaleString()}
                         </span>
                       </div>
@@ -114,15 +114,15 @@ export default function CartDrawer() {
                       <div className="flex items-center border border-[#F4F4F1]/20 bg-[#635F58]">
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="px-2.5 py-0.5 text-xs hover:bg-stone-100 transition-colors cursor-pointer"
+                          className="px-2.5 py-0.5 text-xs text-[#F4F4F1] hover:bg-[#524E48] transition-colors cursor-pointer"
                           title="Decrease quantity"
                         >
                           −
                         </button>
-                        <span className="px-2.5 text-xs font-mono">{item.quantity}</span>
+                        <span className="px-2.5 text-xs font-mono text-[#F4F4F1]">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="px-2.5 py-0.5 text-xs hover:bg-stone-100 transition-colors cursor-pointer"
+                          className="px-2.5 py-0.5 text-xs text-[#F4F4F1] hover:bg-[#524E48] transition-colors cursor-pointer"
                           title="Increase quantity"
                         >
                           +
@@ -131,7 +131,7 @@ export default function CartDrawer() {
 
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="text-[11px] uppercase tracking-wider text-red-700 hover:underline cursor-pointer"
+                        className="text-[11px] uppercase tracking-wider text-[#F4F4F1]/70 hover:text-[#F4F4F1] hover:underline cursor-pointer transition-colors"
                       >
                         Remove
                       </button>
@@ -149,12 +149,12 @@ export default function CartDrawer() {
             <div className="space-y-1.5 text-xs">
               <div className="flex justify-between text-[#F4F4F1]/70">
                 <span>Shipping</span>
-                <span className="uppercase text-[10px] tracking-wider text-emerald-800 font-semibold">
+                <span className="uppercase text-[10px] tracking-wider text-[#F4F4F1] font-medium">
                   Complimentary
                 </span>
               </div>
               <div className="flex justify-between items-baseline pt-1 border-t border-[#F4F4F1]/20">
-                <span className="font-serif uppercase tracking-wider text-xs font-semibold">
+                <span className="font-serif uppercase tracking-wider text-xs font-semibold text-[#F4F4F1]">
                   Subtotal
                 </span>
                 <span className="font-serif text-base font-semibold text-[#F4F4F1]">

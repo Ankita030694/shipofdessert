@@ -99,17 +99,29 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Header */}
-      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-[#635F58] border-b border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
+      <nav className="fixed top-0 left-0 w-full h-14 md:h-16 bg-transparent md:bg-[#635F58] border-b border-transparent md:border-black/[0.04] flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 z-40 transition-all">
         
         {/* Left Section: Desktop Links with Dropdown & Mobile Menu Toggle */}
         <div className="flex items-center">
           {/* Mobile Menu Toggle (< lg) */}
           <button 
             onClick={toggleMenu}
-            aria-label="Open Navigation Menu"
-            className="flex lg:hidden items-center py-1.5 px-1 -ml-1 text-[12px] sm:text-[13px] text-[#F4F4F1] font-normal tracking-wide hover:opacity-50 transition-opacity cursor-pointer focus:outline-none"
+            aria-label={isOpen ? "Close Navigation Menu" : "Open Navigation Menu"}
+            className="flex lg:hidden items-center gap-2 py-1.5 px-1 -ml-1 text-[13px] sm:text-[14px] text-[#F4F4F1] font-normal tracking-wide hover:opacity-70 transition-opacity cursor-pointer focus:outline-none"
           >
-            <span>Menu</span>
+            <svg 
+              className="w-4 h-3.5 sm:w-4.5 sm:h-4 text-[#F4F4F1]" 
+              viewBox="0 0 18 12" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="1.2"
+              strokeLinecap="round"
+            >
+              <line x1="0" y1="1" x2="18" y2="1" />
+              <line x1="0" y1="6" x2="18" y2="6" />
+              <line x1="0" y1="11" x2="18" y2="11" />
+            </svg>
+            <span className="font-light tracking-wide">Menu</span>
           </button>
 
           {/* Desktop Navigation Links with Hover Dropdown (>= lg) */}
@@ -171,15 +183,15 @@ const Navbar = () => {
           </Link>
         </div>
         
-        {/* Right Section: Mobile (Search + Bag Icon) vs Desktop (Search, Login/Account, Bag) */}
+        {/* Right Section: Mobile (Search + Bag with Count) vs Desktop (Search, Login/Account, Bag) */}
         {/* Mobile View (< lg) */}
         <div className="flex lg:hidden items-center gap-3 sm:gap-4 text-[#F4F4F1]">
           <button 
             onClick={toggleSearch}
             aria-label="Search"
-            className="p-1.5 hover:opacity-50 transition-opacity cursor-pointer focus:outline-none"
+            className="p-1 hover:opacity-60 transition-opacity cursor-pointer focus:outline-none"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-4.5 sm:h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.4}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
           </button>
@@ -187,7 +199,7 @@ const Navbar = () => {
           <button 
             onClick={handleCartToggle}
             aria-label="Shopping Bag"
-            className="p-1.5 hover:opacity-50 transition-opacity cursor-pointer focus:outline-none relative flex items-center justify-center"
+            className="flex items-center gap-1.5 p-1 hover:opacity-60 transition-opacity cursor-pointer focus:outline-none text-[#F4F4F1]"
           >
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
@@ -195,19 +207,17 @@ const Navbar = () => {
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor" 
-              strokeWidth={1.5}
+              strokeWidth={1.3}
             >
               <path 
                 strokeLinecap="round" 
                 strokeLinejoin="round" 
-                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" 
+                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.189-.578-1.119-1.243l1.263-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" 
               />
             </svg>
-            {totalCount > 0 && (
-              <span className="absolute -top-1 -right-1 min-w-[15px] h-[15px] px-1 bg-[#F4F4F1] text-[#635F58] text-[9px] leading-none rounded-full flex items-center justify-center font-medium">
-                {totalCount}
-              </span>
-            )}
+            <span className="text-[12px] sm:text-[13px] font-light tracking-tight">
+              ({totalCount || 0})
+            </span>
           </button>
         </div>
 
@@ -348,7 +358,7 @@ const Navbar = () => {
       >
         {/* Drawer Header & Close Button */}
         <div className="p-6 sm:p-8 overflow-y-auto max-h-[calc(100vh-140px)]">
-          <div className="flex justify-between items-center mb-8 border-b border-[#F4F4F1]/20 pb-4">
+          <div className="flex justify-between items-center mb-6">
             <span className="text-xs uppercase tracking-[0.2em] text-[#bdb2a1] font-semibold">Navigation</span>
             <button 
               onClick={toggleMenu}
@@ -362,14 +372,14 @@ const Navbar = () => {
           </div>
 
           {/* Main Navigation Links with Mobile Accordion */}
-          <ul className="space-y-4 text-sm sm:text-base font-light text-[#F4F4F1]">
+          <ul className="space-y-3.5 text-sm sm:text-base font-light text-[#F4F4F1]">
             {navigationLinks.map((item) => (
-              <li key={item.title} className="border-b border-[#F4F4F1]/20/40 pb-3">
+              <li key={item.title}>
                 <div className="flex items-center justify-between">
                   <Link 
                     href={item.href} 
                     onClick={toggleMenu} 
-                    className="hover:opacity-60 transition-opacity font-normal"
+                    className="hover:opacity-60 transition-opacity font-normal py-1 block"
                   >
                     {item.title}
                   </Link>
@@ -393,7 +403,7 @@ const Navbar = () => {
                 </div>
 
                 {item.children && expandedMobileItem === item.title && (
-                  <ul className="mt-2.5 pl-4 space-y-2 border-l border-[#F4F4F1]/20">
+                  <ul className="mt-2 pl-4 space-y-2 border-l border-[#F4F4F1]/20">
                     {item.children.map((sub) => (
                       <li key={sub.title}>
                         <Link
@@ -419,7 +429,7 @@ const Navbar = () => {
         </div>
 
         {/* Drawer Footer / Account section */}
-        <div className="p-6 sm:p-8 border-t border-[#F4F4F1]/20 bg-[#524E48]/50">
+        <div className="p-6 sm:p-8 bg-[#524E48]/50">
           <ul className="space-y-2 text-xs sm:text-[13px] text-[#F4F4F1]/80">
             {session?.user ? (
               <>

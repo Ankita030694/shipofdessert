@@ -150,17 +150,22 @@ const Footer = () => {
           <div className="col-span-6 md:col-span-2 lg:col-span-2">
             <ul className="space-y-3 text-xs sm:text-[13px] text-[#F4F4F1] font-normal">
               <li>
-                <Link href="/contact" className="hover:opacity-50 transition-opacity">
+                <Link href="/faq" className="hover:opacity-50 transition-opacity">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/legal-privacy" className="hover:opacity-50 transition-opacity">
-                  Legal &amp; Privacy
+                <Link href="/privacy-policy" className="hover:opacity-50 transition-opacity">
+                  Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/privacy-policy" className="hover:opacity-50 transition-opacity">
+                <Link href="/terms-and-conditions" className="hover:opacity-50 transition-opacity">
+                  Terms &amp; Conditions
+                </Link>
+              </li>
+              <li>
+                <Link href="/accessibility" className="hover:opacity-50 transition-opacity">
                   Accessibility
                 </Link>
               </li>
@@ -282,6 +287,11 @@ const Footer = () => {
               </Link>
             </div>
             <div>
+              <Link href="/faq" className="hover:opacity-60 transition-opacity">
+                FAQ
+              </Link>
+            </div>
+            <div>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
                 Instagram
               </a>
@@ -305,17 +315,17 @@ const Footer = () => {
               </Link>
             </div>
             <div>
-              <Link href="/contact" className="hover:opacity-60 transition-opacity">
-                FAQ
-              </Link>
-            </div>
-            <div>
-              <Link href="/legal-privacy" className="hover:opacity-60 transition-opacity">
-                Legal &amp; Privacy
-              </Link>
-            </div>
-            <div>
               <Link href="/privacy-policy" className="hover:opacity-60 transition-opacity">
+                Privacy Policy
+              </Link>
+            </div>
+            <div>
+              <Link href="/terms-and-conditions" className="hover:opacity-60 transition-opacity">
+                Terms &amp; Conditions
+              </Link>
+            </div>
+            <div>
+              <Link href="/accessibility" className="hover:opacity-60 transition-opacity">
                 Accessibility
               </Link>
             </div>
