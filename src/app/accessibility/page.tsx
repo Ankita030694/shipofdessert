@@ -4,62 +4,15 @@ import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 
 export default function AccessibilityPage() {
-  const sections = [
-    {
-      id: 'commitment',
-      number: '1',
-      title: 'Our Commitment to Accessibility',
-      content:
-        'KSHAUM believes that considered design and understated elegance must be accessible to everyone. We are committed to digital inclusion, ensuring that individuals with diverse abilities, including those who rely on assistive technologies, can effortlessly explore our garments, learn about our craftsmanship, and purchase with autonomy and dignity.',
-    },
-    {
-      id: 'standards',
-      number: '2',
-      title: 'Conformance Standards',
-      content:
-        'We actively work to align our digital experience with the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA standards. These internationally recognized guidelines outline best practices for making web content accessible to individuals with visual, auditory, cognitive, and motor impairments.',
-    },
-    {
-      id: 'measures',
-      number: '3',
-      title: 'Measures Taken to Support Accessibility',
-      content: 'Across our digital platform, we implement the following ongoing measures:',
-      items: [
-        'Semantic HTML markup to facilitate seamless navigation with screen readers.',
-        'Accessible color contrast ratios tailored for clear legibility against our signature palette.',
-        'Text alternatives (descriptive alt text) for campaign imagery, lookbooks, and garment details.',
-        'Full keyboard accessibility across navigation menus, drawers, bag interactions, and checkout flows.',
-        'Visible focus states and logical tab order for assistive navigation.',
-        'Responsive layout scaling that adapts smoothly across mobile, tablet, and desktop viewports up to 200% zoom without loss of functionality.',
-        'ARIA landmarks, labels, and roles to clearly announce interactive state transitions.'
-      ],
-    },
-    {
-      id: 'ongoing-effort',
-      number: '4',
-      title: 'Ongoing Evaluation & Improvement',
-      content:
-        'Accessibility is an ongoing discipline, not a finite milestone. We continually evaluate our platform through automated testing, manual keyboard navigation audits, and assistive technology assessments as new features, collections, and editorial narratives are unveiled.',
-    },
-    {
-      id: 'third-party',
-      number: '5',
-      title: 'Third-Party Content & Integrations',
-      content:
-        'While we strive to ensure all aspects of the KSHAUM experience conform to our standards, certain third-party integrations (such as external payment gateways or courier tracking portals) are managed by independent service providers. We actively advocate for accessibility conformance with all our external partners.',
-    },
-    {
-      id: 'feedback-support',
-      number: '6',
-      title: 'Assistance & Feedback',
-      content:
-        'If you encounter any difficulty accessing content, navigating our site, or completing a transaction, our Client Concierge is at your service to assist you personally with product descriptions, ordering, or sizing guidance.',
-      contactDetails: {
-        email: 'onlinecustomercare@thekshaum.com',
-        hours: 'Monday – Saturday, 10:00 – 19:00 IST',
-        subject: 'Accessibility Assistance Request',
-      },
-    },
+  const approachPoints = [
+    'Clear and consistent navigation',
+    'Readable typography and well-structured content',
+    'Meaningful text alternatives for images where appropriate',
+    'Clearly labelled links, buttons and form fields',
+    'Appropriate colour contrast and visual clarity',
+    'Keyboard-friendly interaction where possible',
+    'A shopping experience that is usable across different screen sizes and devices',
+    'Clear product, sizing, shipping and returns information',
   ];
 
   return (
@@ -67,96 +20,85 @@ export default function AccessibilityPage() {
       <Navbar />
 
       <main className="flex-1 pt-32 sm:pt-36 pb-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {/* Header Section */}
           <div className="border-b border-[#F4F4F1]/20 pb-10 mb-12 text-center md:text-left">
             <span className="text-xs uppercase tracking-[0.28em] text-[#bdb2a1] font-semibold block mb-3">
-              Customer Services &amp; Inclusion
+              Customer Services &amp; Inclusivity
             </span>
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.14em] uppercase font-serif mb-4 text-[#F4F4F1]">
               Accessibility Statement
             </h1>
-            <p className="text-xs sm:text-sm text-[#F4F4F1]/80 max-w-2xl font-light leading-relaxed">
-              KSHAUM is committed to providing a digital environment that is welcoming, dignified, and universally accessible to all individuals.
-            </p>
-            <div className="mt-4 text-[11px] uppercase tracking-widest text-[#bdb2a1]">
-              Last updated: 2026
+            <div className="text-[11px] uppercase tracking-widest text-[#bdb2a1]">
+              Last updated: September 2026
             </div>
           </div>
 
-          {/* Quick Notice Card */}
-          <div className="bg-[#635F58] p-6 sm:p-8 border border-[#F4F4F1]/20 mb-12 rounded-none">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-5 h-px bg-[#bdb2a1]"></span>
-              <span className="text-xs uppercase tracking-[0.22em] text-[#bdb2a1] font-medium">
-                Our Standards
-              </span>
-            </div>
-            <p className="text-xs sm:text-sm text-[#F4F4F1]/90 leading-relaxed font-light">
-              We continually enhance our site to meet or exceed{' '}
-              <strong className="font-medium text-[#F4F4F1]">
-                WCAG 2.1 Level AA
-              </strong>{' '}
-              guidelines. If you require specialized assistance or accommodation while browsing, our concierge is prepared to guide you through your acquisition.
+          {/* Statement Introduction */}
+          <div className="space-y-6 text-sm sm:text-base text-[#F4F4F1]/90 leading-relaxed font-light mb-12">
+            <p>
+              At Kshaum, we believe thoughtful design should be accessible to as many people as possible.
+            </p>
+            <p>
+              We are committed to making the Kshaum website easier to navigate, understand and use, regardless of the device, technology or method used to access it.
+            </p>
+            <p>
+              We continuously work to improve the accessibility and usability of our digital experience, including our product pages, navigation, content, forms and online shopping experience.
             </p>
           </div>
 
-          {/* Statement Sections */}
-          <div className="space-y-12">
-            {sections.map((section) => (
-              <section key={section.id} id={section.id} className="scroll-mt-32">
-                <div className="flex items-baseline gap-3 mb-4">
-                  <span className="text-xs font-mono text-[#bdb2a1]">
-                    {section.number}.
-                  </span>
-                  <h2 className="text-sm sm:text-base uppercase tracking-wider font-medium text-[#F4F4F1]">
-                    {section.title}
-                  </h2>
-                </div>
+          {/* Our Approach Section */}
+          <section className="mb-14 p-6 sm:p-8 bg-[#58544e]/50 border border-[#F4F4F1]/15">
+            <h2 className="text-lg sm:text-xl uppercase tracking-wider font-medium text-[#F4F4F1] mb-4">
+              Our approach
+            </h2>
+            <p className="text-xs sm:text-sm text-[#F4F4F1]/85 mb-4 font-light">
+              We aim to provide:
+            </p>
+            <ul className="space-y-2.5 pl-5 list-disc text-xs sm:text-sm text-[#F4F4F1]/85 font-light leading-relaxed mb-6">
+              {approachPoints.map((point, index) => (
+                <li key={index}>{point}</li>
+              ))}
+            </ul>
+            <p className="text-xs sm:text-sm text-[#F4F4F1]/85 font-light leading-relaxed border-t border-[#F4F4F1]/15 pt-4">
+              Accessibility is an ongoing process. As the Kshaum website and digital experience develop, we will continue to identify areas for improvement and make changes where reasonably possible.
+            </p>
+          </section>
 
-                <div className="pl-6 border-l border-[#F4F4F1]/15 space-y-4 text-xs sm:text-sm text-[#F4F4F1]/85 leading-relaxed font-light">
-                  <p>{section.content}</p>
+          {/* Need Assistance Section */}
+          <section className="p-6 sm:p-8 border border-[#F4F4F1]/20 bg-[#635F58] space-y-4">
+            <h2 className="text-lg sm:text-xl uppercase tracking-wider font-medium text-[#F4F4F1]">
+              Need assistance?
+            </h2>
+            <p className="text-xs sm:text-sm text-[#F4F4F1]/90 font-light leading-relaxed">
+              If you have difficulty accessing any part of the Kshaum website, completing a purchase, understanding product information or using any of our digital services, please{' '}
+              <Link href="/contact" className="underline hover:text-white transition-colors">
+                contact us
+              </Link>.
+            </p>
+            <p className="text-xs sm:text-sm text-[#F4F4F1]/90 font-light leading-relaxed">
+              Tell us which page or feature you were trying to use and, where possible, what difficulty you encountered. We will make reasonable efforts to assist you and improve the experience.
+            </p>
 
-                  {section.items && (
-                    <ul className="list-disc pl-5 space-y-2 mt-3 text-[#F4F4F1]/80">
-                      {section.items.map((item, idx) => (
-                        <li key={idx} className="leading-relaxed">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+            <div className="pt-4 flex flex-wrap gap-4 items-center">
+              <Link
+                href="/contact"
+                className="inline-block bg-[#F4F4F1] text-[#635F58] hover:bg-[#e4e4e1] text-xs uppercase tracking-[0.2em] font-medium py-3 px-6 transition-colors"
+              >
+                Contact Concierge
+              </Link>
+              <a
+                href="mailto:onlinecustomercare@thekshaum.com?subject=Accessibility%20Assistance%20Request"
+                className="inline-block border border-[#F4F4F1]/40 text-[#F4F4F1] hover:border-[#F4F4F1] text-xs uppercase tracking-[0.2em] font-medium py-3 px-6 transition-colors"
+              >
+                Email Support
+              </a>
+            </div>
+          </section>
 
-                  {section.contactDetails && (
-                    <div className="mt-6 p-6 bg-[#524e48]/40 border border-[#F4F4F1]/20 space-y-3">
-                      <p className="font-medium text-[#F4F4F1]">Concierge Contact:</p>
-                      <ul className="space-y-1.5 text-xs text-[#F4F4F1]/80">
-                        <li>
-                          Email:{' '}
-                          <a
-                            href={`mailto:${section.contactDetails.email}?subject=${encodeURIComponent(
-                              section.contactDetails.subject
-                            )}`}
-                            className="underline hover:opacity-75 font-normal text-[#F4F4F1]"
-                          >
-                            {section.contactDetails.email}
-                          </a>
-                        </li>
-                        <li>Hours: {section.contactDetails.hours}</li>
-                      </ul>
-                      <div className="pt-2">
-                        <Link
-                          href="/contact"
-                          className="inline-block bg-[#F4F4F1] text-[#635F58] hover:bg-[#e4e4e1] text-xs uppercase tracking-[0.2em] font-medium py-2.5 px-6 transition-colors"
-                        >
-                          Contact Concierge
-                        </Link>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </section>
-            ))}
+          {/* Footer Note */}
+          <div className="mt-8 text-xs text-[#bdb2a1] italic">
+            Last updated: September 2026
           </div>
 
           {/* Bottom Navigation Links */}

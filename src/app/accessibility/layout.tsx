@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Accessibility Statement — KSHAUM",
-  description: "Learn about KSHAUM's commitment to digital accessibility, inclusive design, and conformance with WCAG 2.1 Level AA standards.",
+  title: "Accessibility Statement — Kshaum",
+  description: "At Kshaum, we believe thoughtful design should be accessible to as many people as possible. Learn about our approach to digital accessibility and how to contact us for assistance.",
   alternates: {
     canonical: "https://thekshaum.com/accessibility",
   },
   openGraph: {
-    title: "Accessibility Statement — KSHAUM",
-    description: "Learn about KSHAUM's commitment to digital accessibility, inclusive design, and conformance with WCAG 2.1 Level AA standards.",
+    title: "Accessibility Statement — Kshaum",
+    description: "At Kshaum, we believe thoughtful design should be accessible to as many people as possible. Learn about our approach to digital accessibility and how to contact us for assistance.",
     url: "https://thekshaum.com/accessibility",
-    siteName: "KSHAUM",
+    siteName: "Kshaum",
     type: "website",
   },
 };

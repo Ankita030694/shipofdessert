@@ -9,343 +9,326 @@ interface FAQItem {
   id: string;
   category: string;
   question: string;
-  answer: React.ReactNode;
+  answerText: string;
+  answerNode: React.ReactNode;
 }
 
 const FAQ_DATA: FAQItem[] = [
-  // 1. Orders & Pre-Orders
+  // 1. About Kshaum
   {
-    id: 'orders-how-to-order',
-    category: 'Orders & Pre-Orders',
-    question: 'How do I place an order or pre-order on KSHAUM?',
-    answer: (
-      <>
-        To acquire a piece, select your preferred size and silhouette and proceed through our discreet checkout. For select archival releases or upcoming designs available on pre-order, the estimated dispatch date is clearly detailed on the garment page. Your piece and fabric allocation are reserved immediately upon order confirmation.
-      </>
+    id: 'what-is-kshaum',
+    category: 'About Kshaum',
+    question: 'What is Kshaum?',
+    answerText:
+      'Kshaum is a contemporary fashion house from India, creating modern clothing, objects and spaces through a distinct design language. Our world extends from fashion into objects, architecture, art, design, culture and ideas.\n\nOur clothing collections for women and men focus on refined everyday wardrobe essentials, contemporary silhouettes, considered materials and enduring design.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Kshaum is a contemporary fashion house from India, creating modern clothing, objects and spaces through a distinct design language. Our world extends from fashion into objects, architecture, art, design, culture and ideas.
+        </p>
+        <p>
+          Our clothing collections for women and men focus on refined everyday wardrobe essentials, contemporary silhouettes, considered materials and enduring design.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'orders-modifications',
-    category: 'Orders & Pre-Orders',
-    question: 'Can I modify or cancel my order after it has been placed?',
-    answer: (
-      <>
-        Because our fulfillment team and atelier prepare orders promptly, modifications or cancellations can only be accommodated within 2 hours of placement. Please contact our{' '}
-        <Link href="/contact" className="underline hover:opacity-75 transition-opacity">
-          Client Concierge
-        </Link>{' '}
-        immediately with your order number.
-      </>
+    id: 'what-kind-of-clothing',
+    category: 'About Kshaum',
+    question: 'What kind of clothing does Kshaum make?',
+    answerText:
+      'Kshaum creates contemporary clothing for women and men, including everyday wardrobe essentials such as shirts, tops, tanks, trousers, skirts, dresses, jackets and other modern fashion pieces.\n\nOur approach combines clean silhouettes, thoughtful proportions, quality fabrics and considered construction to create clothing designed for everyday life.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Kshaum creates contemporary clothing for women and men, including everyday wardrobe essentials such as shirts, tops, tanks, trousers, skirts, dresses, jackets and other modern fashion pieces.
+        </p>
+        <p>
+          Our approach combines clean silhouettes, thoughtful proportions, quality fabrics and considered construction to create clothing designed for everyday life.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'orders-preorder-billing',
-    category: 'Orders & Pre-Orders',
-    question: 'When is payment collected for pre-order pieces?',
-    answer: (
-      <>
-        Pre-orders are billed in full at the time of purchase. This secures rare textile allotments, artisanal handloom capacity, and dedicated atelier scheduling for your piece.
-      </>
+    id: 'is-kshaum-luxury',
+    category: 'About Kshaum',
+    question: 'Is Kshaum a luxury fashion brand?',
+    answerText:
+      'Kshaum is a contemporary fashion house focused on quality, design and longevity. We create premium clothing using carefully considered materials and construction, while keeping the collection rooted in pieces people can genuinely wear and live in.\n\nRather than following seasonal trends, Kshaum focuses on modern wardrobe pieces with a lasting point of view.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Kshaum is a contemporary fashion house focused on quality, design and longevity. We create premium clothing using carefully considered materials and construction, while keeping the collection rooted in pieces people can genuinely wear and live in.
+        </p>
+        <p>
+          Rather than following seasonal trends, Kshaum focuses on modern wardrobe pieces with a lasting point of view.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'orders-dispatch-notification',
-    category: 'Orders & Pre-Orders',
-    question: 'How will I be informed when my order or pre-order dispatches?',
-    answer: (
-      <>
-        Once your piece undergoes final hand inspection and departs our atelier, you will receive an archival dispatch notification via email and SMS containing your live courier tracking link.
-      </>
-    ),
-  },
-
-  // 2. Shipping
-  {
-    id: 'shipping-rates-timelines',
-    category: 'Shipping',
-    question: 'What are your shipping rates and delivery timelines?',
-    answer: (
-      <>
-        We provide complimentary express delivery on all orders globally. Standard domestic shipments within India arrive within 2–4 business days from dispatch. Visit our{' '}
-        <Link href="/shipping" className="underline hover:opacity-75 transition-opacity">
-          Shipping &amp; Delivery guide
-        </Link>{' '}
-        for comprehensive details.
-      </>
+    id: 'is-kshaum-for-women-or-men',
+    category: 'About Kshaum',
+    question: 'Is Kshaum for women or men?',
+    answerText:
+      'Kshaum creates contemporary fashion for both women and men.\n\nOur collections are designed around versatile wardrobe pieces that can move naturally between work, travel, everyday life and evening.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>Kshaum creates contemporary fashion for both women and men.</p>
+        <p>
+          Our collections are designed around versatile wardrobe pieces that can move naturally between work, travel, everyday life and evening.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'shipping-packaging',
-    category: 'Shipping',
-    question: 'How are KSHAUM garments packaged for shipment?',
-    answer: (
-      <>
-        Every garment is folded in an unbleached organic cotton breathable dust bag and housed in climate-resilient, 100% recyclable archival presentation boxes to safeguard natural fibers from transit friction and moisture.
-      </>
-    ),
-  },
-  {
-    id: 'shipping-tracking',
-    category: 'Shipping',
-    question: 'How can I track my shipment?',
-    answer: (
-      <>
-        As soon as your parcel is handed over to our logistics partners (DHL Express, FedEx Priority, or Blue Dart), you will receive automated tracking credentials via email and text message.
-      </>
-    ),
-  },
-
-  // 3. Returns
-  {
-    id: 'returns-policy',
-    category: 'Returns',
-    question: 'What is your return policy and window?',
-    answer: (
-      <>
-        We welcome returns within 14 calendar days of delivery. Garments must be in pristine, unworn, unwashed condition with all original security tags, spare buttons, and presentation packaging attached. Read our full{' '}
-        <Link href="/return-policy" className="underline hover:opacity-75 transition-opacity">
-          Return Policy
-        </Link>.
-      </>
-    ),
-  },
-  {
-    id: 'returns-initiation',
-    category: 'Returns',
-    question: 'How do I initiate a return?',
-    answer: (
-      <>
-        You may initiate a return directly through our{' '}
-        <Link href="/start-return" className="underline hover:opacity-75 transition-opacity">
-          Start a Return portal
-        </Link>{' '}
-        or by contacting our concierge. Once approved, you will receive an insured prepaid shipping label and instructions for courier pickup.
-      </>
-    ),
-  },
-  {
-    id: 'returns-refund-timing',
-    category: 'Returns',
-    question: 'When will I receive my refund?',
-    answer: (
-      <>
-        Once your return is received and inspected by our atelier team (usually within 2–3 business days of arrival), approved refunds are credited back to your original payment method within 5–10 business days.
-      </>
+    id: 'where-is-kshaum-from',
+    category: 'About Kshaum',
+    question: 'Where is Kshaum from?',
+    answerText:
+      'Kshaum is an India-founded contemporary fashion house with a global outlook.\n\nOur perspective begins in India, while our design language is intended for a modern international audience. Kshaum ships clothing worldwide.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>Kshaum is an India-founded contemporary fashion house with a global outlook.</p>
+        <p>
+          Our perspective begins in India, while our design language is intended for a modern international audience. Kshaum ships clothing worldwide.
+        </p>
+      </div>
     ),
   },
 
-  // 4. Exchanges
+  // 2. Craft & Fabrics
   {
-    id: 'exchanges-process',
-    category: 'Exchanges',
-    question: 'Can I exchange my piece for a different size or silhouette?',
-    answer: (
-      <>
-        Yes. We offer complimentary size exchanges subject to batch availability. If you require a different size or wish to switch silhouettes, please initiate an exchange request within 14 days of receipt via our concierge.
-      </>
+    id: 'where-are-kshaum-clothes-made',
+    category: 'Craft & Fabrics',
+    question: 'Where are Kshaum clothes made?',
+    answerText:
+      'Kshaum clothing is produced through carefully selected manufacturing partners, with close attention to fabric quality, construction, finishing and consistency.\n\nThe country of manufacture and specific product information are provided where relevant on each product page.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Kshaum clothing is produced through carefully selected manufacturing partners, with close attention to fabric quality, construction, finishing and consistency.
+        </p>
+        <p>
+          The country of manufacture and specific product information are provided where relevant on each product page.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'exchanges-unavailable-size',
-    category: 'Exchanges',
-    question: 'What happens if my preferred exchange size is out of stock?',
-    answer: (
-      <>
-        Because our garments are created in limited archival quantities, should your requested size be unavailable, our atelier can either tailor a piece if fabric reserves permit, or issue a full refund to your original payment method.
-      </>
-    ),
-  },
-
-  // 5. Sizing
-  {
-    id: 'sizing-fit-philosophy',
-    category: 'Sizing',
-    question: 'How do KSHAUM silhouettes fit?',
-    answer: (
-      <>
-        Our garments are shaped by architectural restraint, featuring natural ease, fluid lines, and generous proportions. Detailed garment dimensions and model height/measurements are available on each individual product page.
-      </>
+    id: 'what-fabrics-does-kshaum-use',
+    category: 'Craft & Fabrics',
+    question: 'What fabrics does Kshaum use?',
+    answerText:
+      'Kshaum favours natural and organic fabrics and fibres where appropriate, selected for their quality, texture, comfort, performance and longevity.\n\nWe believe fabric is an essential part of good design. Each Kshaum product page provides its specific fabric composition and care information.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Kshaum favours natural and organic fabrics and fibres where appropriate, selected for their quality, texture, comfort, performance and longevity.
+        </p>
+        <p>
+          We believe fabric is an essential part of good design. Each Kshaum product page provides its specific fabric composition and care information.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'sizing-between-sizes',
-    category: 'Sizing',
-    question: 'What size should I select if I am between sizes?',
-    answer: (
-      <>
-        Due to our relaxed tailoring and fluid drape, we recommend choosing your regular size for an intentionally effortless silhouette. If you prefer a closer structure, you may consider sizing down or consulting our concierge.
-      </>
-    ),
-  },
-  {
-    id: 'sizing-styling-advice',
-    category: 'Sizing',
-    question: 'Do you offer personalized fit consultations?',
-    answer: (
-      <>
-        Our client advisors are delighted to assist with personal sizing recommendations across trousers, dresses, tops, and sets. Simply reach out through our{' '}
-        <Link href="/contact" className="underline hover:opacity-75 transition-opacity">
-          Contact page
-        </Link>{' '}
-        with your measurements.
-      </>
+    id: 'why-organic-natural-fabrics',
+    category: 'Craft & Fabrics',
+    question: 'Why does Kshaum use organic and natural fabrics?',
+    answerText:
+      'We choose natural and organic materials because how a garment feels, moves and ages matters as much as how it looks.\n\nOur approach to fabric selection considers comfort, durability, texture, construction and the intended life of each garment. We aim to create clothing that remains relevant beyond a single season.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          We choose natural and organic materials because how a garment feels, moves and ages matters as much as how it looks.
+        </p>
+        <p>
+          Our approach to fabric selection considers comfort, durability, texture, construction and the intended life of each garment. We aim to create clothing that remains relevant beyond a single season.
+        </p>
+      </div>
     ),
   },
 
-  // 6. Payment
+  // 3. Sizing & Fit
   {
-    id: 'payment-methods',
-    category: 'Payment',
-    question: 'What payment methods do you accept?',
-    answer: (
-      <>
-        We accept all major credit and debit cards (Visa, MasterCard, American Express), Apple Pay, Net Banking, and verified international payment systems. All transactions are secured with bank-grade 256-bit encryption.
-      </>
+    id: 'how-do-kshaum-clothes-fit',
+    category: 'Sizing & Fit',
+    question: 'How do Kshaum clothes fit?',
+    answerText:
+      'Kshaum uses different silhouettes and fits across its collections, from fitted and structured pieces to relaxed and fluid shapes.\n\nEvery product page includes information about the fit, measurements and size guide to help you choose the right size.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Kshaum uses different silhouettes and fits across its collections, from fitted and structured pieces to relaxed and fluid shapes.
+        </p>
+        <p>
+          Every product page includes information about the fit, measurements and size guide to help you choose the right size.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'payment-cod',
-    category: 'Payment',
-    question: 'Is Cash on Delivery (COD) available?',
-    answer: (
-      <>
-        Cash on Delivery is supported for select domestic orders within India up to standard courier threshold limits. Eligible pin codes will automatically display COD at checkout.
-      </>
-    ),
-  },
-  {
-    id: 'payment-taxes-transparency',
-    category: 'Payment',
-    question: 'Are taxes and duties included in the displayed price?',
-    answer: (
-      <>
-        Yes. All product prices on KSHAUM are transparent and inclusive of applicable goods and services taxes. There are no surprise fees or undisclosed processing charges at payment.
-      </>
-    ),
-  },
-
-  // 7. International Orders
-  {
-    id: 'intl-destinations',
-    category: 'International Orders',
-    question: 'Which countries does KSHAUM ship to?',
-    answer: (
-      <>
-        We dispatch worldwide to over 50 destinations, including the United States, United Kingdom, European Union, UAE, Canada, Australia, Singapore, and Japan via DHL Express and FedEx Priority.
-      </>
-    ),
-  },
-  {
-    id: 'intl-duties-taxes',
-    category: 'International Orders',
-    question: 'Are customs duties and import taxes included for international orders?',
-    answer: (
-      <>
-        Yes. All international consignments are delivered on a Delivered Duty Paid (DDP) basis wherever available. Import duties and clearances are handled in advance, ensuring no unexpected customs charges upon delivery at your door.
-      </>
-    ),
-  },
-  {
-    id: 'intl-delivery-time',
-    category: 'International Orders',
-    question: 'What is the international delivery timeline?',
-    answer: (
-      <>
-        International orders generally arrive within 4–7 business days following dispatch, depending on destination airport clearance and local transit infrastructure.
-      </>
+    id: 'how-do-i-choose-my-size',
+    category: 'Sizing & Fit',
+    question: 'How do I choose my Kshaum size?',
+    answerText:
+      'Use the size guide provided on each product page and compare the measurements with a garment you already own where possible.\n\nIf you are between sizes or need help choosing a size, our team can assist you before you place your order.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Use the size guide provided on each product page and compare the measurements with a garment you already own where possible.
+        </p>
+        <p>
+          If you are between sizes or need help choosing a size, our team can assist you before you place your order.
+        </p>
+      </div>
     ),
   },
 
-  // 8. Made-to-Order Information
+  // 4. Shipping & Delivery
   {
-    id: 'mto-philosophy',
-    category: 'Made-to-Order Information',
-    question: 'What is the KSHAUM Made-to-Order process?',
-    answer: (
-      <>
-        To preserve rare handloom textiles and eliminate excess inventory, select archival silhouettes and tailored garments are crafted only upon order confirmation. Each commission is cut and assembled by master tailors with generational expertise.
-      </>
+    id: 'where-does-kshaum-ship',
+    category: 'Shipping & Delivery',
+    question: 'Where does Kshaum ship?',
+    answerText:
+      'Kshaum offers international shipping as well as shipping across India.\n\nAvailable destinations, shipping methods and applicable delivery charges are calculated at checkout.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>Kshaum offers international shipping as well as shipping across India.</p>
+        <p>Available destinations, shipping methods and applicable delivery charges are calculated at checkout.</p>
+      </div>
     ),
   },
   {
-    id: 'mto-timelines',
-    category: 'Made-to-Order Information',
-    question: 'What is the production timeframe for Made-to-Order pieces?',
-    answer: (
-      <>
-        Made-to-order pieces require 10–14 business days of dedicated handcrafting, meticulous seam finishing, and quality inspection before entering express dispatch.
-      </>
+    id: 'does-kshaum-ship-internationally',
+    category: 'Shipping & Delivery',
+    question: 'Does Kshaum ship internationally?',
+    answerText:
+      'Yes. Kshaum ships internationally.\n\nInternational delivery options and estimated delivery times vary by destination and are displayed during checkout.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>Yes. Kshaum ships internationally.</p>
+        <p>
+          International delivery options and estimated delivery times vary by destination and are displayed during checkout.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'mto-customization',
-    category: 'Made-to-Order Information',
-    question: 'Can Made-to-Order garments be tailored to custom lengths?',
-    answer: (
-      <>
-        Yes. For made-to-order items, our atelier can accommodate custom hem lengths and sleeve adjustments. Please select &quot;Bespoke &amp; Atelier Appointment&quot; on our{' '}
-        <Link href="/contact" className="underline hover:opacity-75 transition-opacity">
-          Contact page
-        </Link>{' '}
-        prior to ordering.
-      </>
+    id: 'how-long-delivery-takes',
+    category: 'Shipping & Delivery',
+    question: 'How long does Kshaum delivery take?',
+    answerText:
+      'Delivery times depend on your location, product availability and shipping method.\n\nAn estimated delivery timeline is provided during checkout before you complete your order.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>Delivery times depend on your location, product availability and shipping method.</p>
+        <p>An estimated delivery timeline is provided during checkout before you complete your order.</p>
+      </div>
+    ),
+  },
+  {
+    id: 'are-customs-duties-included',
+    category: 'Shipping & Delivery',
+    question: 'Are customs duties included in international orders?',
+    answerText:
+      'International orders may be subject to customs duties, import taxes or other charges imposed by the destination country.\n\nThese charges vary by country and, where applicable, are the responsibility of the customer.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          International orders may be subject to customs duties, import taxes or other charges imposed by the destination country.
+        </p>
+        <p>These charges vary by country and, where applicable, are the responsibility of the customer.</p>
+      </div>
     ),
   },
 
-  // 9. Customer Support
+  // 5. Orders, Returns & Contact
   {
-    id: 'support-contact-channels',
-    category: 'Customer Support',
-    question: 'How can I connect with the KSHAUM Client Concierge?',
-    answer: (
-      <>
-        Our Client Concierge is available Monday through Saturday, 10:00 – 19:00 IST. You can message us via our{' '}
-        <Link href="/contact" className="underline hover:opacity-75 transition-opacity">
-          Contact Form
-        </Link>{' '}
-        or email directly at{' '}
-        <a href="mailto:onlinecustomercare@thekshaum.com" className="underline hover:opacity-75">
-          onlinecustomercare@thekshaum.com
-        </a>.
-      </>
+    id: 'can-i-return-or-exchange',
+    category: 'Orders & Returns',
+    question: 'Can I return or exchange Kshaum clothing?',
+    answerText:
+      'Eligible Kshaum products can be returned or exchanged according to our Returns & Exchanges Policy.\n\nPlease review the policy before placing your order, as eligibility and conditions may vary for certain products.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Eligible Kshaum products can be returned or exchanged according to our{' '}
+          <Link href="/return-policy" className="underline hover:text-white transition-colors">
+            Returns &amp; Exchanges Policy
+          </Link>.
+        </p>
+        <p>
+          Please review the policy before placing your order, as eligibility and conditions may vary for certain products.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'support-lifetime-care',
-    category: 'Customer Support',
-    question: 'What is the Lifetime Care and Restoration service?',
-    answer: (
-      <>
-        Every direct acquisition creates a private Ownership Record, granting access to our permanent garment care service. Our master tailors provide complimentary inspection, seam restoration, and hem repairs throughout the lifetime of the piece. Discover more on our{' '}
-        <Link href="/care" className="underline hover:opacity-75 transition-opacity">
-          Care for a Lifetime page
-        </Link>.
-      </>
+    id: 'can-i-cancel-or-change-order',
+    category: 'Orders & Returns',
+    question: 'Can I cancel or change my Kshaum order?',
+    answerText:
+      'If you need to change or cancel an order, contact us as soon as possible.\n\nWe will make every reasonable effort to accommodate your request, although changes may not be possible once an order has entered processing, production or dispatch.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          If you need to change or cancel an order,{' '}
+          <Link href="/contact" className="underline hover:text-white transition-colors">
+            contact us
+          </Link>{' '}
+          as soon as possible.
+        </p>
+        <p>
+          We will make every reasonable effort to accommodate your request, although changes may not be possible once an order has entered processing, production or dispatch.
+        </p>
+      </div>
     ),
   },
   {
-    id: 'support-response-time',
-    category: 'Customer Support',
-    question: 'How quickly does concierge support respond?',
-    answer: (
-      <>
-        We endeavor to review and reply to all written correspondence within 1 business day. For urgent order modifications within our 2-hour window, please mark your message &quot;Urgent Order Inquiry&quot;.
-      </>
+    id: 'how-can-i-track-order',
+    category: 'Orders & Returns',
+    question: 'How can I track my Kshaum order?',
+    answerText:
+      'Once your order has been dispatched, you will receive order tracking information through the contact details provided at checkout.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          Once your order has been dispatched, you will receive order tracking information through the contact details provided at checkout.
+        </p>
+      </div>
+    ),
+  },
+  {
+    id: 'how-can-i-contact-kshaum',
+    category: 'Orders & Returns',
+    question: 'How can I contact Kshaum?',
+    answerText:
+      'For questions about Kshaum clothing, sizing, fabrics, orders, shipping or returns, please contact our customer support team through the details provided on our Contact page.\n\nIf you are uncertain about a piece or your size, we would rather you ask before ordering.',
+    answerNode: (
+      <div className="space-y-3">
+        <p>
+          For questions about Kshaum clothing, sizing, fabrics, orders, shipping or returns, please contact our customer support team through the details provided on our{' '}
+          <Link href="/contact" className="underline hover:text-white transition-colors">
+            Contact page
+          </Link>.
+        </p>
+        <p>
+          If you are uncertain about a piece or your size, we would rather you ask before ordering.
+        </p>
+      </div>
     ),
   },
 ];
 
 const CATEGORIES = [
   'All',
-  'Orders & Pre-Orders',
-  'Shipping',
-  'Returns',
-  'Exchanges',
-  'Sizing',
-  'Payment',
-  'International Orders',
-  'Made-to-Order Information',
-  'Customer Support',
+  'About Kshaum',
+  'Craft & Fabrics',
+  'Sizing & Fit',
+  'Shipping & Delivery',
+  'Orders & Returns',
 ];
 
 export default function FAQPage() {
@@ -364,9 +347,10 @@ export default function FAQPage() {
 
       const query = searchQuery.toLowerCase();
       const questionMatch = item.question.toLowerCase().includes(query);
+      const answerMatch = item.answerText.toLowerCase().includes(query);
       const categoryMatch = item.category.toLowerCase().includes(query);
 
-      return questionMatch || categoryMatch;
+      return questionMatch || answerMatch || categoryMatch;
     });
   }, [selectedCategory, searchQuery]);
 
@@ -383,7 +367,7 @@ export default function FAQPage() {
       name: item.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.question,
+        text: item.answerText,
       },
     })),
   };
@@ -402,13 +386,13 @@ export default function FAQPage() {
         {/* Header Section */}
         <div className="border-b border-[#F4F4F1]/20 pb-10 mb-10 text-center">
           <span className="text-xs uppercase tracking-[0.28em] text-[#bdb2a1] font-medium block mb-3">
-            Customer Services &amp; Concierge
+            Customer Care &amp; Support
           </span>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light tracking-[0.14em] uppercase font-serif mb-4 text-[#F4F4F1]">
             Frequently Asked Questions
           </h1>
           <p className="text-xs sm:text-sm text-[#F4F4F1]/80 max-w-xl mx-auto font-light leading-relaxed">
-            Essential information regarding orders, pre-orders, shipping, returns, exchanges, sizing, payment, international delivery, made-to-order craft, and customer support.
+            Find answers to common questions about Kshaum, our collections, fabrics, sizing, international shipping, delivery, and orders.
           </p>
         </div>
 
@@ -433,7 +417,7 @@ export default function FAQPage() {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search across orders, shipping, returns, sizing, payment..."
+              placeholder="Search across questions, fabrics, sizing, shipping..."
               className="w-full bg-transparent text-xs sm:text-sm text-[#F4F4F1] placeholder-[#F4F4F1]/50 focus:outline-none"
             />
             {searchQuery && (
@@ -501,7 +485,7 @@ export default function FAQPage() {
 
                   {isExpanded && (
                     <div className="mt-4 pt-2 text-xs sm:text-sm text-[#F4F4F1]/85 leading-relaxed font-light">
-                      <div className="max-w-3xl space-y-2">{item.answer}</div>
+                      <div className="max-w-3xl">{item.answerNode}</div>
                     </div>
                   )}
                 </div>
@@ -526,55 +510,7 @@ export default function FAQPage() {
           )}
         </div>
 
-        {/* Quick Navigation Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-16 pt-8 border-t border-[#F4F4F1]/20">
-          <Link
-            href="/care"
-            className="p-6 bg-[#635F58] border border-[#F4F4F1]/20 hover:border-[#F4F4F1]/50 transition-colors group block"
-          >
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] block mb-2">
-              Ownership Benefit
-            </span>
-            <h3 className="text-sm uppercase tracking-wider font-medium text-[#F4F4F1] mb-2 group-hover:translate-x-1 transition-transform">
-              Lifetime Care &rarr;
-            </h3>
-            <p className="text-xs text-[#F4F4F1]/75 font-light leading-relaxed">
-              Explore our repair and restoration service for registered garments.
-            </p>
-          </Link>
-
-          <Link
-            href="/shipping"
-            className="p-6 bg-[#635F58] border border-[#F4F4F1]/20 hover:border-[#F4F4F1]/50 transition-colors group block"
-          >
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] block mb-2">
-              Global Logistics
-            </span>
-            <h3 className="text-sm uppercase tracking-wider font-medium text-[#F4F4F1] mb-2 group-hover:translate-x-1 transition-transform">
-              Shipping &amp; Duties &rarr;
-            </h3>
-            <p className="text-xs text-[#F4F4F1]/75 font-light leading-relaxed">
-              Complimentary worldwide delivery on Delivered Duty Paid (DDP) terms.
-            </p>
-          </Link>
-
-          <Link
-            href="/return-policy"
-            className="p-6 bg-[#635F58] border border-[#F4F4F1]/20 hover:border-[#F4F4F1]/50 transition-colors group block"
-          >
-            <span className="text-[10px] uppercase tracking-[0.25em] text-[#bdb2a1] block mb-2">
-              Client Protection
-            </span>
-            <h3 className="text-sm uppercase tracking-wider font-medium text-[#F4F4F1] mb-2 group-hover:translate-x-1 transition-transform">
-              Return Policy &rarr;
-            </h3>
-            <p className="text-xs text-[#F4F4F1]/75 font-light leading-relaxed">
-              14-day return window with insured prepaid return logistics.
-            </p>
-          </Link>
-        </div>
-
-        {/* Concierge Assistance Banner */}
+        {/* Still Have Questions Banner */}
         <div className="mt-14 bg-[#F4F4F1] text-[#635F58] p-8 sm:p-12 text-center rounded-none shadow-sm">
           <span className="text-xs uppercase tracking-[0.28em] text-[#8c857b] font-medium block mb-2">
             Personalized Assistance
@@ -583,7 +519,7 @@ export default function FAQPage() {
             Still Have a Question?
           </h2>
           <p className="text-xs sm:text-sm text-[#635F58]/85 max-w-lg mx-auto font-light leading-relaxed mb-6">
-            Our client advisors are available to assist with sizing advice, custom orders, pre-order timelines, and order assistance.
+            For questions about Kshaum clothing, sizing, fabrics, orders, shipping or returns, please contact our customer support team.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
@@ -591,7 +527,7 @@ export default function FAQPage() {
               href="/contact"
               className="w-full sm:w-auto inline-block bg-[#635F58] text-[#F4F4F1] hover:bg-[#524e48] text-xs uppercase tracking-[0.22em] font-medium py-3 px-8 transition-colors"
             >
-              Contact Concierge
+              Contact Support
             </Link>
             <a
               href="mailto:onlinecustomercare@thekshaum.com"
@@ -602,8 +538,8 @@ export default function FAQPage() {
           </div>
 
           <div className="mt-8 pt-6 border-t border-[#635F58]/15 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#635F58]/70 gap-2">
-            <span>Hours: Monday – Saturday, 10:00 – 19:00 IST</span>
-            <span className="font-serif italic">KSHAUM — The Quiet Choice</span>
+            <span>Customer Support</span>
+            <span className="font-serif italic">Kshaum — Contemporary Design</span>
           </div>
         </div>
       </main>

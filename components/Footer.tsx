@@ -120,12 +120,30 @@ const Footer = () => {
             <ul className="space-y-3 text-xs sm:text-[13px] text-[#F4F4F1] font-normal">
               <li>
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/thekshaum?stkn=bHJ5cmExb2huOGxo&utm_source=qr"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:opacity-50 transition-opacity"
+                  className="inline-flex items-center gap-2 hover:opacity-50 transition-opacity"
+                  aria-label="KSHAUM on Instagram"
                 >
-                  Instagram
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-3.5 h-3.5 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                  <span>Instagram</span>
                 </a>
               </li>
               <li>
@@ -292,8 +310,31 @@ const Footer = () => {
               </Link>
             </div>
             <div>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-60 transition-opacity">
-                Instagram
+              <a
+                href="https://www.instagram.com/thekshaum?stkn=bHJ5cmExb2huOGxo&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 hover:opacity-60 transition-opacity"
+                aria-label="KSHAUM on Instagram"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-3.5 h-3.5 shrink-0"
+                  aria-hidden="true"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                <span>Instagram</span>
               </a>
             </div>
           </div>

@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions — KSHAUM",
-  description: "Find answers regarding orders and pre-orders, shipping, returns, exchanges, sizing, payment, international orders, made-to-order craftsmanship, and customer support.",
+  title: "Frequently Asked Questions — Kshaum",
+  description: "Find answers regarding Kshaum clothing, our design philosophy, organic and natural fabrics, sizing, shipping, international delivery, and customer care.",
   alternates: {
     canonical: "https://thekshaum.com/faq",
   },
   openGraph: {
-    title: "Frequently Asked Questions — KSHAUM",
-    description: "Find answers regarding orders and pre-orders, shipping, returns, exchanges, sizing, payment, international orders, made-to-order craftsmanship, and customer support.",
+    title: "Frequently Asked Questions — Kshaum",
+    description: "Find answers regarding Kshaum clothing, our design philosophy, organic and natural fabrics, sizing, shipping, international delivery, and customer care.",
     url: "https://thekshaum.com/faq",
-    siteName: "KSHAUM",
+    siteName: "Kshaum",
     type: "website",
   },
 };

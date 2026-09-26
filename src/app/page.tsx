@@ -27,11 +27,11 @@ export default function Home() {
         <h1 className="sr-only">KSHAUM — The Quiet Choice</h1>
 
         {/* Full-Page End-to-End Architectural Hero Visual */}
-        <div className="relative w-full h-[100dvh] overflow-hidden bg-[#635F58]">
-          {/* Desktop Hero Visual (Screen width >= 768px) */}
+        <div className="relative w-full h-[100dvh] overflow-hidden bg-[#201F1B]">
+          {/* Desktop Hero Visual (Screen width >= 768px) - 16:9 Image */}
           <div className="hidden md:block relative w-full h-full">
             <Image
-              src="/IMG_9602.JPG.jpeg"
+              src="/hero-desktop.jpg"
               alt="KSHAUM — The Quiet Choice Campaign"
               fill
               priority
@@ -40,19 +40,17 @@ export default function Home() {
             />
           </div>
 
-          {/* Mobile Video (Screen width < 768px) */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            className="block md:hidden w-full h-full object-cover filter brightness-[0.96]"
-            aria-label="KSHAUM architectural mobile campaign video"
-          >
-            <source src="/KSHAUM%20mobile%20.webm" type="video/webm" />
-            <source src="/KSHAUM mobile .webm" type="video/webm" />
-          </video>
+          {/* Mobile Hero Visual (Screen width < 768px) - 9:16 Image */}
+          <div className="block md:hidden relative w-full h-full">
+            <Image
+              src="/hero-mobile.jpg"
+              alt="KSHAUM — The Quiet Choice Mobile Campaign"
+              fill
+              priority
+              className="object-cover filter brightness-[0.96]"
+              sizes="100vw"
+            />
+          </div>
         </div>
       </main>
 
