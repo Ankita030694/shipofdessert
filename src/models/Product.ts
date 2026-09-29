@@ -259,6 +259,10 @@ const ProductSchema = new Schema<IProduct>(
   }
 );
 
+// Compound indexes for optimal catalog filtering and sorting
+ProductSchema.index({ category: 1, createdAt: -1 });
+ProductSchema.index({ 'setPieces.isSet': 1, createdAt: -1 });
+
 // Auto-generate slug helper
 export function generateSlug(name: string): string {
   return name

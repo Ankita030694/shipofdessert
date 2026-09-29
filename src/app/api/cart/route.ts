@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import connectToDatabase from '@/lib/mongodb';
 import Cart, { ICartItem } from '@/models/Cart';
 import { auth } from '@/auth';
+import { RouteTimingTracker } from '@/lib/db-logger';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,24 +18,44 @@ async function getCartIdentifier(request: NextRequest) {
 
 // GET /api/cart - Fetch current user's or guest's cart
 export async function GET(request: NextRequest) {
+  const tracker = new RouteTimingTracker('src/app/api/cart/route.ts', 'GET /api/cart');
   try {
-    await connectToDatabase();
-    const { userId, sessionId } = await getCartIdentifier(request);
+    await tracker.measure(20, 'await connectToDatabase()', () => connectToDatabase(), () => ({
+      readyState: mongoose.connection.readyState,
+    }));
+
+    const { userId, sessionId } = await tracker.measure(21, 'getCartIdentifier() [auth + header]', () => getCartIdentifier(request), (res) => ({
+      isUser: Boolean(res.userId),
+      sessionId: res.sessionId || 'none',
+    }));
 
     if (!userId && !sessionId) {
+      tracker.finish(25, { reason: 'No userId or sessionId' });
       return NextResponse.json({ success: true, data: { items: [], totalCount: 0, subtotal: 0 } });
     }
 
     const query = userId ? { userId } : { sessionId };
-    const cart = await Cart.findOne(query).lean();
+    const cart = await tracker.measure(28, 'Cart.findOne(query).lean()', () => Cart.findOne(query).lean(), (res) => ({
+      found: Boolean(res),
+      itemsCount: res?.items?.length || 0,
+      query: JSON.stringify(query),
+    }));
 
     if (!cart || !cart.items || cart.items.length === 0) {
+      const totalDur = tracker.finish(35, { itemsCount: 0 });
       return NextResponse.json({
         success: true,
         data: { items: [], totalCount: 0, subtotal: 0 },
+        _debugTimings: tracker.getDebugPayload(query),
+      }, {
+        headers: {
+          'Server-Timing': tracker.getServerTimingHeader(),
+          'X-Response-Time': `${totalDur.toFixed(2)}ms`,
+        },
       });
     }
 
+    const tMapStart = performance.now();
     const items = cart.items.map((item) => ({
       id: item._id ? item._id.toString() : `${item.slug}-${item.size}-${item.color}`,
       productId: item.productId?.toString(),
@@ -48,6 +70,12 @@ export async function GET(request: NextRequest) {
 
     const totalCount = items.reduce((acc, item) => acc + item.quantity, 0);
     const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+    tracker.record(49, 'cart.items.map(computeTotals)', performance.now() - tMapStart, { count: items.length });
+
+    const totalDur = tracker.finish(52, {
+      totalCount,
+      subtotal,
+    });
 
     return NextResponse.json({
       success: true,
@@ -56,6 +84,12 @@ export async function GET(request: NextRequest) {
         items,
         totalCount,
         subtotal,
+      },
+      _debugTimings: tracker.getDebugPayload(query),
+    }, {
+      headers: {
+        'Server-Timing': tracker.getServerTimingHeader(),
+        'X-Response-Time': `${totalDur.toFixed(2)}ms`,
       },
     });
   } catch (error: unknown) {
