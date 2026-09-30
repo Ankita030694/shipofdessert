@@ -1,13 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
+import mongoose from 'mongoose';
 import connectToDatabase from '@/lib/mongodb';
 import Product, { generateSlug } from '@/models/Product';
+import { RouteTimingTracker } from '@/lib/db-logger';
 
 export const dynamic = 'force-dynamic';
 
 // GET /api/products - List products with rich filtering, searching, sorting & pagination
 export async function GET(request: NextRequest) {
+  const tracker = new RouteTimingTracker('src/app/api/products/route.ts', 'GET /api/products');
   try {
-    await connectToDatabase();
+    await tracker.measure(10, 'await connectToDatabase()', () => connectToDatabase(), () => ({
+      readyState: mongoose.connection.readyState,
+    }));
 
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
@@ -68,15 +73,61 @@ export async function GET(request: NextRequest) {
       sortOptions = { name: 1 };
     }
 
-    const [total, products] = await Promise.all([
-      Product.countDocuments(query),
-      Product.find(query)
-        .sort(sortOptions)
-        .skip(skip)
-        .limit(limit)
-        .lean(),
+    // Execute queries in parallel while measuring individual lines
+    const tCountStart = performance.now();
+    const countPromise = Product.countDocuments(query).then((total) => {
+      const dur = performance.now() - tCountStart;
+      tracker.record(72, 'Product.countDocuments(query)', dur, {
+        matched: total,
+        filter: JSON.stringify(query),
+      });
+      return total;
+    });
+
+    const tFindStart = performance.now();
+    const findPromise = Product.find(query)
+      .select({
+        name: 1,
+        slug: 1,
+        description: 1,
+        price: 1,
+        compareAtPrice: 1,
+        currency: 1,
+        category: 1,
+        collectionName: 1,
+        image: 1,
+        images: { $slice: 1 }, // Only 1 image needed for catalog grid, eliminates multiple MBs of base64
+        colors: 1,
+        sizes: 1,
+        inStock: 1,
+        stockQuantity: 1,
+        featured: 1,
+        setPieces: 1,
+        rating: 1,
+        reviewsCount: 1,
+        createdAt: 1,
+      })
+      .sort(sortOptions)
+      .skip(skip)
+      .limit(limit)
+      .lean()
+      .then((docs) => {
+        const dur = performance.now() - tFindStart;
+        const estSizeBytes = JSON.stringify(docs).length;
+        tracker.record(73, 'Product.find(query).select().sort().skip().limit().lean()', dur, {
+          returned: docs.length,
+          sizeKB: (estSizeBytes / 1024).toFixed(1) + ' KB',
+          sizeMB: (estSizeBytes / (1024 * 1024)).toFixed(2) + ' MB',
+        });
+        return { docs, estSizeBytes };
+      });
+
+    const [total, { docs: products, estSizeBytes: findSizeBytes }] = await Promise.all([
+      countPromise,
+      findPromise,
     ]);
 
+    const tMapStart = performance.now();
     const formatted = products.map((p) => ({
       id: p._id.toString(),
       name: p.name,
@@ -88,7 +139,7 @@ export async function GET(request: NextRequest) {
       category: p.category,
       collectionName: p.collectionName,
       images: p.images,
-      image: p.images[0] || '/image1.jpg',
+      image: (p.images && p.images[0]) || (p as unknown as { image?: string }).image || '/image1.jpg',
       classifiedImages: p.classifiedImages || [],
       setPieces: p.setPieces || {
         isSet: p.category?.toLowerCase() === 'sets',
@@ -131,6 +182,15 @@ export async function GET(request: NextRequest) {
 
       createdAt: p.createdAt ? new Date(p.createdAt).toISOString() : new Date().toISOString(),
     }));
+    tracker.record(80, 'products.map(formatResponse)', performance.now() - tMapStart, {
+      count: formatted.length,
+    });
+
+    const totalDurationMs = tracker.finish(135, {
+      totalProducts: formatted.length,
+      category: category || 'All',
+      findSizeMB: (findSizeBytes / (1024 * 1024)).toFixed(2) + ' MB',
+    });
 
     return NextResponse.json({
       success: true,
@@ -139,6 +199,13 @@ export async function GET(request: NextRequest) {
       page,
       totalPages: Math.ceil(total / limit) || 1,
       data: formatted,
+      _debugTimings: tracker.getDebugPayload({ category, sort, page, limit }),
+    }, {
+      headers: {
+        'Server-Timing': tracker.getServerTimingHeader(),
+        'X-Response-Time': `${totalDurationMs.toFixed(2)}ms`,
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+      },
     });
   } catch (error: unknown) {
     console.error('API GET /api/products error:', error);

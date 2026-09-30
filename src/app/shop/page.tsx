@@ -22,31 +22,37 @@ interface Product {
   inStock?: boolean;
 }
 
-const CATEGORIES = ['All', 'Tops', 'Dresses', 'Skirts', 'Pants'];
+const CATEGORIES = ['All', 'Sets', 'Tops', 'Dresses', 'Skirts', 'Pants'];
 
 function ShopContent() {
   const searchParams = useSearchParams();
   const urlCategory = searchParams.get('category');
   const urlSearch = searchParams.get('search');
+  const testProdApi = searchParams.get('testProdApi') === 'true';
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  // Initialize with URL category to avoid redundant initial 'All' fetch
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => {
+    if (urlCategory) {
+      const matched = CATEGORIES.find(
+        (c) => c.toLowerCase() === urlCategory.toLowerCase()
+      );
+      return matched || urlCategory;
+    }
+    return 'All';
+  });
   const [sortOption, setSortOption] = useState<string>('newest');
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12;
 
-  // Sync category from URL if present
+  // Sync category from URL if changed dynamically
   useEffect(() => {
     if (urlCategory) {
       const matched = CATEGORIES.find(
         (c) => c.toLowerCase() === urlCategory.toLowerCase()
       );
-      if (matched) {
-        setSelectedCategory(matched);
-      } else {
-        setSelectedCategory(urlCategory);
-      }
+      setSelectedCategory(matched || urlCategory);
     } else {
       setSelectedCategory('All');
     }
@@ -70,24 +76,91 @@ function ShopContent() {
         }
 
         const queryString = params.toString();
-        const url = queryString ? `/api/products?${queryString}` : '/api/products';
+        const baseEndpoint = testProdApi
+          ? 'https://shipofdessert.vercel.app/api/products'
+          : '/api/products';
+        const url = queryString ? `${baseEndpoint}?${queryString}` : baseEndpoint;
         
+        const fetchStart = performance.now();
+        console.log(
+          `%c[ShopContent: src/app/shop/page.tsx:L75]%c Requesting products from %c${url}%c (Category: ${selectedCategory}${testProdApi ? ' [HOSTED VERCEL PROD API]' : ''})`,
+          'color: #f59e0b; font-weight: bold;',
+          'color: inherit;',
+          'color: #3b82f6; font-weight: bold;',
+          'color: inherit;'
+        );
+
         const res = await fetch(url);
+        const fetchDur = performance.now() - fetchStart;
         const data = await res.json();
+        const payloadBytes = JSON.stringify(data).length;
+        const payloadMB = (payloadBytes / (1024 * 1024)).toFixed(2);
+
+        // Rich browser console log grouping
+        console.group(
+          `%c🛒 [Shop Page DB Timing Debug] %c${url}%c (%c${fetchDur.toFixed(1)}ms%c | %c${payloadMB} MB%c)`,
+          'color: #3b82f6; font-weight: bold;',
+          'color: #8b5cf6; font-weight: bold;',
+          'color: #3b82f6;',
+          'color: #10b981; font-weight: bold;',
+          'color: #3b82f6;',
+          payloadBytes > 1000000 ? 'color: #ef4444; font-weight: bold;' : 'color: #10b981;',
+          'color: #3b82f6;'
+        );
+
+        console.log(
+          `%c[Client Fetch Timing]%c URL: ${url}\n` +
+          `• Client Roundtrip: ${fetchDur.toFixed(2)}ms\n` +
+          `• Payload Size: ${payloadMB} MB (${payloadBytes.toLocaleString()} bytes)\n` +
+          `• Products Count: ${data.data?.length || 0} / Total: ${data.total || 0}`,
+          'color: #3b82f6; font-weight: bold;',
+          'color: inherit;'
+        );
+
+        if (payloadBytes > 1000000) {
+          console.warn(
+            `⚠️ [PAYLOAD BOTTLENECK] Response size is ${payloadMB} MB for only ${data.data?.length} products! ` +
+            `Raw base64 images stored in MongoDB are transmitted over the network and parsed on every request.`
+          );
+        }
+
+        if (data._debugTimings?.steps) {
+          console.log(
+            `%c[Server Line-by-Line DB Execution Breakdown] %c${data._debugTimings.file}:`,
+            'color: #ec4899; font-weight: bold;',
+            'color: #f59e0b;'
+          );
+          console.table(
+            data._debugTimings.steps.map((s: { line: number; code: string; durationMs: number; details?: Record<string, unknown> }) => ({
+              'Line Number': s.line,
+              'Code Executed': s.code,
+              'Duration': `${s.durationMs.toFixed(2)} ms`,
+              'Details': s.details ? JSON.stringify(s.details) : '-',
+            }))
+          );
+        }
+
+        const serverTimingHeader = res.headers.get('server-timing');
+        if (serverTimingHeader) {
+          console.log('%c[Server-Timing Header]:%c ' + serverTimingHeader, 'color: #10b981; font-weight: bold;', 'color: inherit;');
+        }
+
+        console.groupEnd();
+
         if (data.success) {
           setProducts(data.data || []);
         } else {
           setProducts([]);
         }
       } catch (err) {
-        console.error('Failed to load shop products:', err);
+        console.error('[ShopContent: src/app/shop/page.tsx:L83] Failed to load shop products:', err);
         setProducts([]);
       } finally {
         setLoading(false);
       }
     }
     loadProducts();
-  }, [selectedCategory, urlSearch, sortOption]);
+  }, [selectedCategory, urlSearch, sortOption, testProdApi]);
 
   // Pagination calculation
   const totalPages = Math.ceil(products.length / productsPerPage) || 1;

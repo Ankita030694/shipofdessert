@@ -109,11 +109,43 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         localStorage.removeItem(LOCAL_STORAGE_KEY);
       }
 
+      const cartFetchStart = performance.now();
       const res = await fetch(`/api/cart?sessionId=${sessionId}`, {
         headers: { 'x-session-id': sessionId },
       });
+      const cartFetchDur = performance.now() - cartFetchStart;
 
       const data = await res.json();
+
+      console.groupCollapsed(
+        `%c🛍️ [CartContext DB Timing Debug] %c/api/cart?sessionId=${sessionId.substring(0, 12)}...%c (%c${cartFetchDur.toFixed(1)}ms%c)`,
+        'color: #06b6d4; font-weight: bold;',
+        'color: #8b5cf6; font-weight: bold;',
+        'color: #06b6d4;',
+        'color: #10b981; font-weight: bold;',
+        'color: #06b6d4;'
+      );
+      console.log(
+        `%c[Client: src/context/CartContext.tsx:L112]%c Request completed in ${cartFetchDur.toFixed(2)}ms. Items: ${data.data?.items?.length || 0}`,
+        'color: #888;',
+        'color: inherit;'
+      );
+      if (data._debugTimings?.steps) {
+        console.log(
+          `%c[Server Line-by-Line DB Execution Breakdown] %c${data._debugTimings.file}:`,
+          'color: #ec4899; font-weight: bold;',
+          'color: #06b6d4;'
+        );
+        console.table(
+          data._debugTimings.steps.map((s: { line: number; code: string; durationMs: number; details?: Record<string, unknown> }) => ({
+            'Line Number': s.line,
+            'Code Executed': s.code,
+            'Duration': `${s.durationMs.toFixed(2)} ms`,
+            'Details': s.details ? JSON.stringify(s.details) : '-',
+          }))
+        );
+      }
+      console.groupEnd();
 
       if (res.ok && data.success && data.data?.items) {
         if (data.data.items.length > 0) {

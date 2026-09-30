@@ -15,13 +15,16 @@ declare global {
   var mongoose: MongooseCache | undefined;
 }
 
-let cached: MongooseCache = global.mongoose || { conn: null, promise: null };
+let cached: MongooseCache = global.mongoose as MongooseCache;
 
 if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
+import { logServerDbTiming } from '@/lib/db-logger';
+
 async function connectToDatabase(): Promise<typeof mongoose> {
+  const start = performance.now();
   const uri = process.env.MONGODB_URI;
 
   if (!uri) {
@@ -30,6 +33,11 @@ async function connectToDatabase(): Promise<typeof mongoose> {
 
   // If already connected and ready, reuse connection
   if (cached.conn && mongoose.connection.readyState === 1) {
+    const dur = performance.now() - start;
+    logServerDbTiming('src/lib/mongodb.ts', 33, 'connectToDatabase() [Cache Hit]', dur, {
+      readyState: mongoose.connection.readyState,
+      db: mongoose.connection.name,
+    });
     return cached.conn;
   }
 
@@ -43,6 +51,10 @@ async function connectToDatabase(): Promise<typeof mongoose> {
     const opts = {
       bufferCommands: false,
       serverSelectionTimeoutMS: 5000,
+      maxPoolSize: 10,
+      minPoolSize: 1,
+      socketTimeoutMS: 20000,
+      family: 4, // force IPv4 to prevent IPv6 DNS fallback delays in Vercel
     };
 
     cached.promise = mongoose.connect(uri, opts).then((mongooseInstance) => {
@@ -52,9 +64,19 @@ async function connectToDatabase(): Promise<typeof mongoose> {
 
   try {
     cached.conn = await cached.promise;
+    const dur = performance.now() - start;
+    logServerDbTiming('src/lib/mongodb.ts', 48, 'connectToDatabase() [New Connection Established]', dur, {
+      readyState: mongoose.connection.readyState,
+      db: mongoose.connection.name,
+      host: mongoose.connection.host,
+    });
   } catch (e) {
     cached.promise = null;
     cached.conn = null;
+    const dur = performance.now() - start;
+    logServerDbTiming('src/lib/mongodb.ts', 55, 'connectToDatabase() [Connection Failed]', dur, {
+      error: e instanceof Error ? e.message : String(e),
+    });
     throw e;
   }
 

@@ -199,8 +199,70 @@ export default function ProductDetailPage({
     async function fetchProduct() {
       try {
         setLoading(true);
-        const res = await fetch(`/api/products/${slug}`);
+        const searchParams = new URLSearchParams(window.location.search);
+        const testProdApi = searchParams.get('testProdApi') === 'true';
+        const baseEndpoint = testProdApi
+          ? `https://shipofdessert.vercel.app/api/products/${slug}`
+          : `/api/products/${slug}`;
+
+        const fetchStart = performance.now();
+        console.log(
+          `%c[ProductDetail: src/app/product/[slug]/page.tsx:L202]%c Fetching product details for "${slug}" from %c${baseEndpoint}`,
+          'color: #f59e0b; font-weight: bold;',
+          'color: inherit;',
+          'color: #3b82f6; font-weight: bold;'
+        );
+
+        const res = await fetch(baseEndpoint);
+        const fetchDur = performance.now() - fetchStart;
         const data = await res.json();
+        const payloadBytes = JSON.stringify(data).length;
+        const payloadKB = (payloadBytes / 1024).toFixed(1);
+
+        console.group(
+          `%c👗 [Product Detail DB Timing Debug] %c/api/products/${slug}%c (%c${fetchDur.toFixed(1)}ms%c | %c${payloadKB} KB%c)`,
+          'color: #3b82f6; font-weight: bold;',
+          'color: #8b5cf6; font-weight: bold;',
+          'color: #3b82f6;',
+          'color: #10b981; font-weight: bold;',
+          'color: #3b82f6;',
+          payloadBytes > 800000 ? 'color: #ef4444; font-weight: bold;' : 'color: #10b981;',
+          'color: #3b82f6;'
+        );
+
+        console.log(
+          `%c[Client Fetch Timing]%c Slug: ${slug}\n` +
+          `• Client Roundtrip: ${fetchDur.toFixed(2)}ms\n` +
+          `• Payload Size: ${payloadKB} KB (${payloadBytes.toLocaleString()} bytes)\n` +
+          `• Images Count: ${data.data?.images?.length || 0}\n` +
+          `• Related Products: ${data.data?.relatedProducts?.length || 0}`,
+          'color: #3b82f6; font-weight: bold;',
+          'color: inherit;'
+        );
+
+        if (data._debugTimings?.steps) {
+          console.log(
+            `%c[Server Line-by-Line DB Execution Breakdown] %c${data._debugTimings.file}:`,
+            'color: #ec4899; font-weight: bold;',
+            'color: #f59e0b;'
+          );
+          console.table(
+            data._debugTimings.steps.map((s: { line: number; code: string; durationMs: number; details?: Record<string, unknown> }) => ({
+              'Line Number': s.line,
+              'Code Executed': s.code,
+              'Duration': `${s.durationMs.toFixed(2)} ms`,
+              'Details': s.details ? JSON.stringify(s.details) : '-',
+            }))
+          );
+        }
+
+        const serverTimingHeader = res.headers.get('server-timing');
+        if (serverTimingHeader) {
+          console.log('%c[Server-Timing Header]:%c ' + serverTimingHeader, 'color: #10b981; font-weight: bold;', 'color: inherit;');
+        }
+
+        console.groupEnd();
+
         if (data.success && data.data) {
           setProduct(data.data);
           if (data.data.colors && data.data.colors.length > 0) {
@@ -211,7 +273,7 @@ export default function ProductDetailPage({
           }
         }
       } catch (err) {
-        console.error('Error loading product:', err);
+        console.error('[ProductDetail: src/app/product/[slug]/page.tsx:L214] Error loading product:', err);
       } finally {
         setLoading(false);
       }
