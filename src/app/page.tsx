@@ -27,7 +27,7 @@ export default function Home() {
         <h1 className="sr-only">KSHAUM — The Quiet Choice</h1>
 
         {/* Full-Page End-to-End Architectural Hero Visual */}
-        <div className="relative w-full h-[100dvh] overflow-hidden bg-[#201F1B]">
+        <div className="relative w-full h-[100dvh] md:h-[120dvh] overflow-hidden bg-[#201F1B]">
           {/* Desktop Hero Visual (Screen width >= 768px) - 16:9 Image */}
           <div className="hidden md:block relative w-full h-full">
             <Image
