@@ -47,7 +47,7 @@ export default function Home() {
               alt="KSHAUM — The Quiet Choice Mobile Campaign"
               fill
               priority
-              className="object-cover filter brightness-[0.96]"
+              className="object-cover scale-[3.2] filter brightness-[0.96]"
               sizes="100vw"
             />
           </div>
