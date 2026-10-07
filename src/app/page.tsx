@@ -31,11 +31,11 @@ export default function Home() {
           {/* Desktop Hero Visual (Screen width >= 768px) - 16:9 Image */}
           <div className="hidden md:block relative w-full h-full">
             <Image
-              src="/hero-desktop.jpg"
+              src="/IMG_9744.PNG"
               alt="KSHAUM — The Quiet Choice Campaign"
               fill
               priority
-              className="object-cover filter brightness-[0.96]"
+              className="object-cover object-top filter brightness-[1]"
               sizes="100vw"
             />
           </div>
@@ -47,7 +47,7 @@ export default function Home() {
               alt="KSHAUM — The Quiet Choice Mobile Campaign"
               fill
               priority
-              className="object-cover scale-[1] filter brightness-[0.96]"
+              className="object-cover object-top scale-[1] filter brightness-[0.96]"
               sizes="100vw"
             />
           </div>
