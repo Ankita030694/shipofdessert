@@ -43,11 +43,11 @@ export default function Home() {
           {/* Mobile Hero Visual (Screen width < 768px) - 9:16 Image */}
           <div className="block md:hidden relative w-full h-full">
             <Image
-              src="/hero-mobile.jpg"
+              src="/IMG_9744.PNG"
               alt="KSHAUM — The Quiet Choice Mobile Campaign"
               fill
               priority
-              className="object-cover scale-[3.2] filter brightness-[0.96]"
+              className="object-cover scale-[1] filter brightness-[0.96]"
               sizes="100vw"
             />
           </div>

@@ -1,6 +1,4 @@
-# KSHAUM — The Quiet Choice
-
-KSHAUM is a contemporary fashion house shaped by restraint, considered design, and a quieter approach to dressing.
+# Ship of Desserts
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
