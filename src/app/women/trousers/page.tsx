@@ -21,20 +21,7 @@ interface Product {
   inStock?: boolean;
 }
 
-const FALLBACK_TROUSERS = [
-  {
-    id: '1',
-    name: 'Alfidis Pant in Cotton',
-    slug: 'alfidis-pant-in-cotton',
-    price: 1390,
-    currency: 'INR',
-    image: '/image4.jpg',
-    images: ['/image4.jpg', '/image2.jpg'],
-    colors: ['Brown', 'Ecru', 'Black'],
-    category: 'Pants',
-    collectionName: 'The Inheritance 01',
-  },
-];
+
 
 export default function TrousersPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -49,11 +36,11 @@ export default function TrousersPage() {
         if (data.success && data.data && data.data.length > 0) {
           setProducts(data.data);
         } else {
-          setProducts(FALLBACK_TROUSERS);
+          setProducts([]);
         }
       } catch (err) {
         console.error('Failed to load trousers:', err);
-        setProducts(FALLBACK_TROUSERS);
+        setProducts([]);
       } finally {
         setLoading(false);
       }

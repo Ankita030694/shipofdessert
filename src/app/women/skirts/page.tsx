@@ -21,32 +21,7 @@ interface Product {
   inStock?: boolean;
 }
 
-const FALLBACK_SKIRTS = [
-  {
-    id: '1',
-    name: 'Fluted Silk Crepe Skirt',
-    slug: 'fluted-silk-crepe-skirt',
-    price: 1280,
-    currency: 'INR',
-    image: '/image3.jpg',
-    images: ['/image3.jpg'],
-    colors: ['Stone', 'Slate'],
-    category: 'Skirts',
-    collectionName: 'The Inheritance 01',
-  },
-  {
-    id: '2',
-    name: 'A-Line Raw Silk Midi Skirt',
-    slug: 'a-line-raw-silk-midi-skirt',
-    price: 1350,
-    currency: 'INR',
-    image: '/image1.jpg',
-    images: ['/image1.jpg'],
-    colors: ['Ecru', 'Sand'],
-    category: 'Skirts',
-    collectionName: 'The Inheritance 01',
-  },
-];
+
 
 export default function SkirtsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -61,11 +36,11 @@ export default function SkirtsPage() {
         if (data.success && data.data && data.data.length > 0) {
           setProducts(data.data);
         } else {
-          setProducts(FALLBACK_SKIRTS);
+          setProducts([]);
         }
       } catch (err) {
         console.error('Failed to load skirts:', err);
-        setProducts(FALLBACK_SKIRTS);
+        setProducts([]);
       } finally {
         setLoading(false);
       }

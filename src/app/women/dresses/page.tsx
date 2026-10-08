@@ -21,44 +21,7 @@ interface Product {
   inStock?: boolean;
 }
 
-const FALLBACK_DRESSES = [
-  {
-    id: '1',
-    name: 'Gathered Silk Dress',
-    slug: 'gathered-silk-dress',
-    price: 1650,
-    currency: 'INR',
-    image: '/image1.jpg',
-    images: ['/image1.jpg'],
-    colors: ['Stone', 'Ecru'],
-    category: 'Dresses',
-    collectionName: 'The Inheritance 01',
-  },
-  {
-    id: '2',
-    name: 'Pleated Linen Slip Dress',
-    slug: 'pleated-linen-slip-dress',
-    price: 1420,
-    currency: 'INR',
-    image: '/image2.jpg',
-    images: ['/image2.jpg'],
-    colors: ['White', 'Sand'],
-    category: 'Dresses',
-    collectionName: 'The Inheritance 01',
-  },
-  {
-    id: '3',
-    name: 'Structured Wool Column Dress',
-    slug: 'structured-wool-column-dress',
-    price: 1890,
-    currency: 'INR',
-    image: '/image3.jpg',
-    images: ['/image3.jpg'],
-    colors: ['Black', 'Slate'],
-    category: 'Dresses',
-    collectionName: 'The Inheritance 01',
-  },
-];
+
 
 export default function DressesPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -73,11 +36,11 @@ export default function DressesPage() {
         if (data.success && data.data && data.data.length > 0) {
           setProducts(data.data);
         } else {
-          setProducts(FALLBACK_DRESSES);
+          setProducts([]);
         }
       } catch (err) {
         console.error('Failed to load dresses:', err);
-        setProducts(FALLBACK_DRESSES);
+        setProducts([]);
       } finally {
         setLoading(false);
       }
